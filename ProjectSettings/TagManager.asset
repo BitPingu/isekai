@@ -13,8 +13,8 @@ TagManager:
   - UI
   - 
   - 
-  - FOVMain
-  - FOVSecondary
+  - 
+  - 
   - 
   - 
   - 
@@ -38,18 +38,15 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Default
-    uniqueID: 0
-    locked: 0
-  - name: Ground
-    uniqueID: 3397987399
+  - name: Land
+    uniqueID: 3427601457
     locked: 0
   - name: Water
-    uniqueID: 2010811187
+    uniqueID: 2876230131
     locked: 0
-  - name: Player & Objects
-    uniqueID: 189069807
+  - name: Object
+    uniqueID: 3575553177
     locked: 0
-  - name: User Interface
-    uniqueID: 89964207
+  - name: Default
+    uniqueID: 0
     locked: 0

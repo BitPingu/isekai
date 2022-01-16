@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cee1975f65098404194f6f2f8ffccc60, type: 3}
+  m_Name: TestTileData
+  m_EditorClassIdentifier: 
+  Tiles:
+  - tile: {fileID: 11400000, guid: 25e8a32bb811f9346a988f7ab8a6623f, type: 2}
+    walkingSpeed: 3
+  - tile: {fileID: 11400000, guid: 6ee9c4c95646f7243aa45e7747dbdd27, type: 2}
+    walkingSpeed: 5
+  - tile: {fileID: 11400000, guid: f29f935cc2688a44294af1a7d6c442a0, type: 2}
+    walkingSpeed: 5
+  - tile: {fileID: 11400000, guid: 64ca6cdbec1e789469fcd61b8eb87fe3, type: 2}
+    walkingSpeed: 5
+  - tile: {fileID: 11400000, guid: b1000599ac522a34d808d8df313882b3, type: 2}
+    walkingSpeed: 5
