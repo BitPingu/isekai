@@ -13,13 +13,15 @@ MonoBehaviour:
   m_Name: TestTileData
   m_EditorClassIdentifier: 
   Tiles:
-  - tile: {fileID: 11400000, guid: 25e8a32bb811f9346a988f7ab8a6623f, type: 2}
-    walkingSpeed: 3
-  - tile: {fileID: 11400000, guid: 6ee9c4c95646f7243aa45e7747dbdd27, type: 2}
-    walkingSpeed: 5
-  - tile: {fileID: 11400000, guid: f29f935cc2688a44294af1a7d6c442a0, type: 2}
-    walkingSpeed: 5
-  - tile: {fileID: 11400000, guid: 64ca6cdbec1e789469fcd61b8eb87fe3, type: 2}
-    walkingSpeed: 5
-  - tile: {fileID: 11400000, guid: b1000599ac522a34d808d8df313882b3, type: 2}
-    walkingSpeed: 5
+  - tile: {fileID: 11400000, guid: e60b8b46216de9a47a1cbc755ca3aeaa, type: 2}
+    obstruction: 1
+  - tile: {fileID: 11400000, guid: e561454d0bf2f7047a1f6d51605dbf90, type: 2}
+    obstruction: 0
+  - tile: {fileID: 11400000, guid: eb3b81c3db1436b4ea720b53fdc00f8a, type: 2}
+    obstruction: 0
+  - tile: {fileID: 11400000, guid: d56a0eb22ac237143a7224dd8766796d, type: 2}
+    obstruction: 0
+  - tile: {fileID: 11400000, guid: aef3b7b4ec5271f45b075a87aa31131e, type: 2}
+    obstruction: 0
+  - tile: {fileID: 11400000, guid: be26f05b9364bfd45b0ea59c6a7e1345, type: 2}
+    obstruction: 0

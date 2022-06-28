@@ -14,7 +14,7 @@ public class TileGrid : MonoBehaviour
     class GroundTiles
     {
         public GroundTileType TileType;
-        public Texture2D Texture;
+        public Sprite Sprite;
         public Color Color;
         public TileBase tile;
     }
@@ -23,7 +23,7 @@ public class TileGrid : MonoBehaviour
     class ObjectTiles
     {
         public ObjectTileType TileType;
-        public Texture2D Texture;
+        public Sprite Sprite;
         public Color Color;
         public Tile tile;
     }
@@ -73,9 +73,12 @@ public class TileGrid : MonoBehaviour
         {
             // Don't make a tile for empty
             if (tiletype.TileType == 0) continue;
-            
-            // Create tile scriptable object
-            var tile = tiletype.tile == null ? CreateTile(tiletype.Color, tiletype.Texture) : tiletype.tile;
+
+            // If we have a custom tile, use it otherwise create a new tile
+            var tile = tiletype.tile == null ?
+                CreateTile(tiletype.Color, tiletype.Sprite) :
+                tiletype.tile;
+            //tile.colliderType = Tile.ColliderType.Sprite;
 
             // Add to dictionary by key int value, value Tile
             dictionary.Add((int)tiletype.TileType, tile);
@@ -87,8 +90,11 @@ public class TileGrid : MonoBehaviour
             // Don't make a tile for empty
             if (tiletype.TileType == 0) continue;
 
-            // Create tile scriptable object
-            var tile = tiletype.tile == null ? CreateTile(tiletype.Color, tiletype.Texture) : tiletype.tile;
+            // If we have a custom tile, use it otherwise create a new tile
+            var tile = tiletype.tile == null ? 
+                CreateTile(tiletype.Color, tiletype.Sprite) : 
+                tiletype.tile;
+            //tile.colliderType = Tile.ColliderType.Sprite;
 
             // Add to dictionary by key int value, value Tile
             dictionary.Add((int)tiletype.TileType, tile);
@@ -97,22 +103,21 @@ public class TileGrid : MonoBehaviour
         return dictionary;
     }
 
-    private Tile CreateTile(Color color, Texture2D texture)
+    private Tile CreateTile(Color color, Sprite sprite)
     {
         // If not specified, create empty one for the color instead
         bool setColor = false;
+        Texture2D texture = sprite == null ? null : sprite.texture;
         if (texture == null)
         {
             setColor = true;
-            texture = new Texture2D(TileSize, TileSize);
+            // Created sprites do not support custom physics shape
+            texture = new Texture2D(TileSize, TileSize)
+            {
+                filterMode = FilterMode.Point
+            };
+            sprite = Sprite.Create(texture, new Rect(0, 0, TileSize, TileSize), new Vector2(0.5f, 0.5f), TileSize);
         }
-
-        // Use Point mode to get the most quality
-        texture.filterMode = FilterMode.Point;
-
-        // Create sprite with the texture passed along
-        var sprite = Sprite.Create(texture, new Rect(0, 0, TileSize, TileSize), new Vector2(0.5f, 0.5f), TileSize);
-
 
         // Create a scriptable object instance of type Tile (inherits from TileBase)
         var tile = ScriptableObject.CreateInstance<Tile>();

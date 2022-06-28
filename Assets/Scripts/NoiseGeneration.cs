@@ -63,19 +63,6 @@ public class NoiseGeneration : AlgorithmBase
                     // If the height is smaller or equal then use this tiletype
                     if (height <= TileTypes[i].Height)
                     {
-                        if ((int)TileTypes[i].GroundTile == 1)
-                        {
-                            // Separate water into another layer for collision
-                            //water.x.Add(x);
-                            //water.y.Add(y);
-                            //water.value.Add((int)TileTypes[i].GroundTile);
-                            //break;
-                        }
-                        else
-                        {
-                            //tilemap.SetTile(x, y, (int)TileTypes[i].GroundTile);
-                            //break;
-                        }
                         tilemap.SetTile(x, y, (int)TileTypes[i].GroundTile);
                         break;
                     }

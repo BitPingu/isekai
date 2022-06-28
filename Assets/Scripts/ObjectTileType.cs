@@ -4,5 +4,8 @@ public enum ObjectTileType
     Empty = 0,
     Tree = 2001,
     Grass = 2002,
-    Shimmer = 2003
+    Flower = 2003,
+    Bush = 2004,
+    Stone = 2005,
+    Shimmer = 2006
 }

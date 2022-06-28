@@ -41,9 +41,6 @@ TagManager:
   - name: Land
     uniqueID: 3427601457
     locked: 0
-  - name: Water
-    uniqueID: 2876230131
-    locked: 0
   - name: Object
     uniqueID: 3575553177
     locked: 0

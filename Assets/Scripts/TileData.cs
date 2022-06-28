@@ -12,6 +12,6 @@ public class TileData : ScriptableObject
     public class TileInfo
     {
         public TileBase tile;
-        public float walkingSpeed;
+        public bool obstruction;
     }
 }

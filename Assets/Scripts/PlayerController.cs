@@ -3,26 +3,24 @@ using UnityEngine.Tilemaps;
 
 public class PlayerController : MonoBehaviour
 {
-
-    public float moveSpeed = 5f;
+    public float maxSpeed;
+    private float moveSpeed;
 
     public Rigidbody2D rb;
     public Animator animator;
     public SpriteRenderer sprite;
 
-    Vector2 movement;
+    private Vector2 movement;
 
-    private MapManager mapManager;
-
-    private void Awake()
-    {
-        mapManager = FindObjectOfType<MapManager>();
-    }
+    [SerializeField]
+    private TileInteraction tile;
 
     void Update()
     {
         // Get speed from current tile
-        moveSpeed = mapManager.GetTileWalkingSpeed(transform.position);
+        moveSpeed = maxSpeed;
+        if (tile.tileObstruction(transform.position))
+            moveSpeed = maxSpeed - 2;
 
         // Input
         movement.x = Input.GetAxisRaw("Horizontal");

@@ -5,8 +5,7 @@ using UnityEngine.Tilemaps;
 public enum TilemapType
 {
     Ground,
-    Object,
-    Water
+    Object
 }
 public class TilemapStructure : MonoBehaviour
 {
@@ -17,7 +16,7 @@ public class TilemapStructure : MonoBehaviour
     [HideInInspector]
     public int Width, Height;
 
-    private int[] _tiles;
+    public int[] _tiles;
     private Tilemap _graphicMap;
 
     [HideInInspector]

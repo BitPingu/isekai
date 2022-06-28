@@ -1,31 +1,34 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu]
+[CreateAssetMenu(fileName = "PoissonDiscSampling", menuName = "Algorithms/PoissonDiscSampling")]
 public class PoissonDiscSampling : ScriptableObject
 {
+    public float radius = 1;
+    public Vector2 regionSize = Vector2.one;
+    public int rejectionSamples = 30;
 
-    public List<Vector2> GeneratePoints(float radius, Vector2 sampleRegionSize, int numSamplesBeforeRejection = 30)
+    public List<Vector2> GeneratePoints()
     {
         float cellSize = radius / Mathf.Sqrt(2);
 
-        int[,] grid = new int[Mathf.CeilToInt(sampleRegionSize.x / cellSize), Mathf.CeilToInt(sampleRegionSize.y / cellSize)];
+        int[,] grid = new int[Mathf.CeilToInt(regionSize.x / cellSize), Mathf.CeilToInt(regionSize.y / cellSize)];
         List<Vector2> points = new List<Vector2>();
         List<Vector2> spawnPoints = new List<Vector2>();
 
-        spawnPoints.Add(sampleRegionSize / 2);
+        spawnPoints.Add(regionSize / 2);
         while (spawnPoints.Count > 0)
         {
             int spawnIndex = Random.Range(0, spawnPoints.Count);
             Vector2 spawnCentre = spawnPoints[spawnIndex];
             bool candidateAccepted = false;
 
-            for (int i=0; i<numSamplesBeforeRejection; i++)
+            for (int i=0; i<rejectionSamples; i++)
             {
                 float angle = Random.value * Mathf.PI * 2;
                 Vector2 dir = new Vector2(Mathf.Sin(angle), Mathf.Cos(angle));
                 Vector2 candidate = spawnCentre + dir * Random.Range(radius, 2 * radius);
-                if (IsValid(candidate, sampleRegionSize, cellSize, radius, points, grid))
+                if (IsValid(candidate, regionSize, cellSize, radius, points, grid))
                 {
                     points.Add(candidate);
                     spawnPoints.Add(candidate);
@@ -42,9 +45,9 @@ public class PoissonDiscSampling : ScriptableObject
         return points;
     }
 
-    private bool IsValid(Vector2 candidate, Vector2 sampleRegionSize, float cellSize, float radius, List<Vector2> points, int[,] grid)
+    private bool IsValid(Vector2 candidate, Vector2 regionSize, float cellSize, float radius, List<Vector2> points, int[,] grid)
     {
-        if (candidate.x >= 0 && candidate.x < sampleRegionSize.x && candidate.y >= 0 && candidate.y < sampleRegionSize.y)
+        if (candidate.x >= 0 && candidate.x < regionSize.x && candidate.y >= 0 && candidate.y < regionSize.y)
         {
             int cellX = (int)(candidate.x / cellSize);
             int cellY = (int)(candidate.y / cellSize);
@@ -72,16 +75,4 @@ public class PoissonDiscSampling : ScriptableObject
         }
         return false;
     }
-
-    /*private bool checkTile(Vector2 point)
-    {
-        if (map.GetTile(map.WorldToCell(point)) == validTile) 
-        {
-            return true;
-        } 
-        else
-        {
-            return false;
-        }
-    }*/
 }
