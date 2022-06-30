@@ -56,26 +56,55 @@
     <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\PoissonDiscSampling.cs" />
-    <Compile Include="Assets\Scripts\Noise.cs" />
-    <Compile Include="Assets\Scripts\CameraController.cs" />
-    <Compile Include="Assets\Scripts\TileGrid.cs" />
-    <Compile Include="Assets\Scripts\TileInteraction.cs" />
-    <Compile Include="Assets\Scripts\ObjectGeneration.cs" />
-    <Compile Include="Assets\Scripts\PlayerSpawner.cs" />
-    <Compile Include="Assets\Scripts\ObjectTileType.cs" />
-    <Compile Include="Assets\Scripts\AdvancedRuleTile.cs" />
-    <Compile Include="Assets\Scripts\TileData.cs" />
-    <Compile Include="Assets\Scripts\EnemySpawner.cs" />
-    <Compile Include="Assets\Scripts\NoiseGeneration.cs" />
-    <Compile Include="Assets\Scripts\DayAndNightCycle.cs" />
-    <Compile Include="Assets\Scripts\TilemapStructure.cs" />
-    <Compile Include="Assets\Scripts\CellularAutomata.cs" />
-    <Compile Include="Assets\Scripts\IWorldGen.cs" />
-    <Compile Include="Assets\Scripts\GroundTileType.cs" />
-    <Compile Include="Assets\Scripts\PlayerController.cs" />
-    <Compile Include="Assets\Scripts\AlgorithmBase.cs" />
-    <Compile Include="Assets\Scripts\EnemyMovement.cs" />
+    <Compile Include="Assets\Scripts\Algorithms\PoissonDiscSampling.cs" />
+    <Compile Include="Assets\Scripts\Helpers\Noise.cs" />
+    <Compile Include="Assets\Scripts\Helpers\CameraController.cs" />
+    <Compile Include="Assets\Scripts\Tilemaps\TileGrid.cs" />
+    <Compile Include="Assets\Scripts\Helpers\TilemapHelper.cs" />
+    <Compile Include="Assets\Scripts\Algorithms\ObjectGeneration.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerSpawner.cs" />
+    <Compile Include="Assets\Scripts\Tilemaps\ObjectTileType.cs" />
+    <Compile Include="Assets\Scripts\Helpers\AdvancedRuleTile.cs" />
+    <Compile Include="Assets\Scripts\Enemy\EnemyMovement.cs" />
+    <Compile Include="Assets\Scripts\Enemy\EnemySpawner.cs" />
+    <Compile Include="Assets\Scripts\Algorithms\NoiseGeneration.cs" />
+    <Compile Include="Assets\Scripts\Helpers\DayAndNightCycle.cs" />
+    <Compile Include="Assets\Scripts\Enemy\EnemyTypes.cs" />
+    <Compile Include="Assets\Scripts\Tilemaps\TileTypes.cs" />
+    <Compile Include="Assets\Scripts\Tilemaps\TilemapStructure.cs" />
+    <Compile Include="Assets\Scripts\Algorithms\CellularAutomata.cs" />
+    <Compile Include="Assets\Scripts\Tilemaps\GroundTileType.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\Algorithms\AlgorithmBase.cs" />
+    <Compile Include="Assets\Scripts\WorldData.cs" />
+    <Compile Include="Assets\Scripts\SaveSystem.cs" />
+    <Compile Include="Assets\Scripts\UI\PauseMenu.cs" />
+    <Compile Include="Assets\Scripts\UI\MainMenu.cs" />
+    <Compile Include="Assets\Scripts\PlayerData.cs" />
+    <Compile Include="Assets\Scripts\AllData.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
+    <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
+    <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
+    <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_Sprite.shader" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
