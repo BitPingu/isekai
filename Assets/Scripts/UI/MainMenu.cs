@@ -18,10 +18,16 @@ public class MainMenu : MonoBehaviour
             // Show load game button
             transform.GetChild(0).gameObject.SetActive(true);
         }
+
+        // Play theme
+        FindObjectOfType<AudioManager>().Play("Theme");
     }
 
     public void PlayGame ()
     {
+        // Stop theme
+        FindObjectOfType<AudioManager>().Stop();
+
         // Change to Game Scene from queue
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }

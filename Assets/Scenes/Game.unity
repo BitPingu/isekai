@@ -1323,7 +1323,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be9e2dc82f974b040b5815ec1a9994ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pauseMenuUI: {fileID: 1783704421}
   player: {fileID: 1493488779}
   world: {fileID: 842743447}
   dayNight: {fileID: 1551174833}
@@ -1871,7 +1870,7 @@ MonoBehaviour:
   days: 0
   timePerDay: 500
   ratePerDay: 0.002
-  time: 0
+  time: 50
   isDay: 0
 --- !u!1 &1613550254
 GameObject:

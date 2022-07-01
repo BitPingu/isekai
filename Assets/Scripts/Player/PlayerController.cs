@@ -42,8 +42,11 @@ public class PlayerController : MonoBehaviour
             moveSpeed = maxSpeed - 2;
 
         // Input
-        movement.x = Input.GetAxisRaw("Horizontal");
-        movement.y = Input.GetAxisRaw("Vertical");
+        if (!PauseMenu.GameIsPaused)
+        {
+            movement.x = Input.GetAxisRaw("Horizontal");
+            movement.y = Input.GetAxisRaw("Vertical");
+        }
 
         // Flip sprite based on horizontal movement
         if (movement.x > 0)

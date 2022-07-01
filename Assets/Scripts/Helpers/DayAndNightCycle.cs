@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
 
@@ -20,8 +18,8 @@ public class DayAndNightCycle : MonoBehaviour
     // Getter method
     public int Days => days;
 
-    public float time;
-    private bool canChangeDay = true;
+    public float time; // Default start time is 50
+    private bool canChangeDay;
     public bool isDay;
 
     // Call other functions when day changes
@@ -42,11 +40,26 @@ public class DayAndNightCycle : MonoBehaviour
             if (isDay)
             {
                 DayTime();
+
+                // Play overworld day
+                FindObjectOfType<AudioManager>().Play("Overworld Day");
             }
             else
             {
                 NightTime();
+
+                // Play overworld night
+                FindObjectOfType<AudioManager>().Play("Overworld Night");
             }
+        }
+        else
+        {
+            // New game
+            DayTime();
+            isDay = true;
+
+            // Play overworld day
+            FindObjectOfType<AudioManager>().Play("Overworld Day");
         }
     }
 
@@ -56,28 +69,42 @@ public class DayAndNightCycle : MonoBehaviour
         if (time > timePerDay)
             time = 0;
 
+        // Stop overworld night (fade)
+        if ((int)time == timePerDay - 5)
+            FindObjectOfType<AudioManager>().FadeOut();
+
         // Day time
         if (time == 0)
         {
             DayTime(); // Call delegate (and any methods tied to it)
             isDay = true;
-            Debug.Log("from cycle: " + isDay);
+
+            // Play overworld day (fade)
+            FindObjectOfType<AudioManager>().FadeIn("Overworld Day");
         }
 
         // Prevent day ticker from increasing multiple times
         if ((int)time == ((timePerDay / 2) + 5) && canChangeDay)
         {
             // Night time
-            canChangeDay = false;
             NightTime(); // Call delegate (and any methods tied to it)
             isDay = false;
+            canChangeDay = false;
             days++;
+
+            // Play overworld night (fade)
+            FindObjectOfType<AudioManager>().FadeIn("Overworld Night");
         }
 
-        // Change day in middle of cycle
+        // Enable day change
         if ((int)time == (timePerDay / 2))
+        {
             canChangeDay = true;
 
+            // Stop overworld day (fade)
+            FindObjectOfType<AudioManager>().FadeOut();
+        }
+        
         // Tie time to frame rate
         time += Time.deltaTime;
 
