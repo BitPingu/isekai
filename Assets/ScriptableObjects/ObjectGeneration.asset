@@ -13,21 +13,24 @@ MonoBehaviour:
   m_Name: ObjectGeneration
   m_EditorClassIdentifier: 
   objectSelection:
-  - obj: 2005
-    spawnOnGrounds: 02000000
-    spawnChancePerCell: 10
   - obj: 2004
     spawnOnGrounds: 02000000
-    spawnChancePerCell: 20
-  - obj: 2003
+    spawnChancePerCell: 10
+  - obj: 2005
     spawnOnGrounds: 02000000
+    spawnChancePerCell: 20
+  - obj: 2006
+    spawnOnGrounds: 02000000
+    spawnChancePerCell: 20
+  - obj: 2007
+    spawnOnGrounds: 03000000
     spawnChancePerCell: 20
   - obj: 2002
     spawnOnGrounds: 02000000
     spawnChancePerCell: 30
+  - obj: 2003
+    spawnOnGrounds: 01000000
+    spawnChancePerCell: 30
   - obj: 2001
     spawnOnGrounds: 02000000
     spawnChancePerCell: 65
-  - obj: 2006
-    spawnOnGrounds: 01000000
-    spawnChancePerCell: 30

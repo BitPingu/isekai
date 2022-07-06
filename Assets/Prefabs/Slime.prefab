@@ -168,5 +168,6 @@ MonoBehaviour:
   currentPos: {x: 0, y: 0}
   currentTile: 0
   grid: {fileID: 0}
+  walkTime: 1
   minWaitTime: 3
   maxWaitTime: 5

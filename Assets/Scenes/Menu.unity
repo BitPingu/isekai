@@ -1006,6 +1006,20 @@ MonoBehaviour:
     pitch: 1
     loop: 1
     source: {fileID: 0}
+  - name: Village Day
+    clip: {fileID: 8300000, guid: 7c9c20ef929837640920dbdd8da879b5, type: 3}
+    maxVolume: 0
+    volume: 0.162
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: Village Night
+    clip: {fileID: 8300000, guid: 9f62d470c195ec548a200f4c3bc891e2, type: 3}
+    maxVolume: 0
+    volume: 0.162
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
 --- !u!4 &485202925
 Transform:
   m_ObjectHideFlags: 0

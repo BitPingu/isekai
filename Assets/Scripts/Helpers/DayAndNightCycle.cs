@@ -27,8 +27,22 @@ public class DayAndNightCycle : MonoBehaviour
     public OnDayChanged DayTime;
     public OnDayChanged NightTime;
 
-    public void Awake()
+    [SerializeField]
+    private GameObject player;
+
+    [SerializeField]
+    private int currentTile;
+    [SerializeField]
+    private int savedTile;
+    [SerializeField]
+    private TileGrid grid;
+    private TilemapStructure groundMap;
+
+    private void Awake()
     {
+        // Retrieve tilemap component
+        groundMap = grid.GetTilemap(TilemapType.Ground);
+
         if (MainMenu.loadGame)
         {
             // Load world data
@@ -40,16 +54,10 @@ public class DayAndNightCycle : MonoBehaviour
             if (isDay)
             {
                 DayTime();
-
-                // Play overworld day
-                FindObjectOfType<AudioManager>().Play("Overworld Day");
             }
             else
             {
                 NightTime();
-
-                // Play overworld night
-                FindObjectOfType<AudioManager>().Play("Overworld Night");
             }
         }
         else
@@ -57,21 +65,18 @@ public class DayAndNightCycle : MonoBehaviour
             // New game
             DayTime();
             isDay = true;
-
-            // Play overworld day
-            FindObjectOfType<AudioManager>().Play("Overworld Day");
         }
     }
 
-    public void Update()
+    private void Update()
     {
         // Reset time for new day
         if (time > timePerDay)
             time = 0;
 
-        // Stop overworld night (fade)
+        // Stop night music (fade)
         if ((int)time == timePerDay - 5)
-            FindObjectOfType<AudioManager>().FadeOut();
+            FindObjectOfType<AudioManager>().FadeOut(700f);
 
         // Day time
         if (time == 0)
@@ -79,8 +84,8 @@ public class DayAndNightCycle : MonoBehaviour
             DayTime(); // Call delegate (and any methods tied to it)
             isDay = true;
 
-            // Play overworld day (fade)
-            FindObjectOfType<AudioManager>().FadeIn("Overworld Day");
+            // Play day music (fade)
+            DayMusic();
         }
 
         // Prevent day ticker from increasing multiple times
@@ -92,8 +97,8 @@ public class DayAndNightCycle : MonoBehaviour
             canChangeDay = false;
             days++;
 
-            // Play overworld night (fade)
-            FindObjectOfType<AudioManager>().FadeIn("Overworld Night");
+            // Play night music (fade)
+            NightMusic();
         }
 
         // Enable day change
@@ -101,8 +106,8 @@ public class DayAndNightCycle : MonoBehaviour
         {
             canChangeDay = true;
 
-            // Stop overworld day (fade)
-            FindObjectOfType<AudioManager>().FadeOut();
+            // Stop day music (fade)
+            FindObjectOfType<AudioManager>().FadeOut(700f);
         }
         
         // Tie time to frame rate
@@ -110,5 +115,72 @@ public class DayAndNightCycle : MonoBehaviour
 
         // Pick color from gradient based on value from 0-1
         light.GetComponent<Light2D>().color = lightColor.Evaluate(time * ratePerDay);
+
+        // Get current tile from player position
+        currentTile = groundMap.GetTile((int)player.transform.position.x, (int)player.transform.position.y);
+        if (currentTile == (int)GroundTileType.Land && savedTile != (int)GroundTileType.Land)
+        {
+            // Play overworld music
+            savedTile = (int)GroundTileType.Land;
+            FindObjectOfType<AudioManager>().Stop();
+            //FindObjectOfType<AudioManager>().FadeOut(1f);
+            if (time >= 0 && time < ((timePerDay / 2) + 5))
+            {
+                // Day overworld music
+                DayMusic();
+            }
+            else
+            {
+                // Night overworld music
+                NightMusic();
+            }
+        }
+        if (currentTile == (int)GroundTileType.Village && savedTile != (int)GroundTileType.Village)
+        {
+            // Play village music
+            savedTile = (int)GroundTileType.Village;
+            FindObjectOfType<AudioManager>().Stop();
+            //FindObjectOfType<AudioManager>().FadeOut(1f);
+            if (time >= 0 && time < ((timePerDay / 2) + 5))
+            {
+                // Day village music
+                DayMusic();
+            }
+            else
+            {
+                // Night village music
+                NightMusic();
+            }
+        }
+    }
+
+    private void DayMusic()
+    {
+        // Get current tile from player position
+        currentTile = groundMap.GetTile((int)player.transform.position.x, (int)player.transform.position.y);
+        switch (currentTile)
+        {
+            case (int)GroundTileType.Land:
+                FindObjectOfType<AudioManager>().FadeIn("Overworld Day", 1f);
+                break;
+            case (int)GroundTileType.Village:
+                FindObjectOfType<AudioManager>().FadeIn("Village Day", 1f);
+                break;
+        }
+    }
+
+    private void NightMusic()
+    {
+        // Get current tile from player position
+        currentTile = groundMap.GetTile((int)player.transform.position.x, (int)player.transform.position.y);
+        switch (currentTile)
+        {
+            case (int)GroundTileType.Land:
+                FindObjectOfType<AudioManager>().FadeIn("Overworld Night", 1f);
+                break;
+            case (int)GroundTileType.Village:
+                FindObjectOfType<AudioManager>().FadeIn("Village Night", 1f);
+                break;
+        }
     }
 }

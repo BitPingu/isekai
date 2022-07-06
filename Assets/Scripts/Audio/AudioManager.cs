@@ -51,8 +51,9 @@ public class AudioManager : MonoBehaviour
             Debug.LogWarning("Sound: " + name + " not found");
             return;
         }
-        
+
         // Play sound
+        s.volume = s.maxVolume;
         s.source.Play();
     }
 
@@ -62,7 +63,7 @@ public class AudioManager : MonoBehaviour
         s.source.Stop();
     }
 
-    public void FadeIn(string name)
+    public void FadeIn(string name, float FadeTime)
     {
         // Find sound to play
         s = Array.Find(sounds, sound => sound.name == name);
@@ -75,13 +76,13 @@ public class AudioManager : MonoBehaviour
         }
 
         // Fade in chosen sound
-        StartCoroutine(AudioFade.FadeIn(s, 5f));
+        StartCoroutine(AudioFade.FadeIn(s, FadeTime));
     }
 
-    public void FadeOut()
+    public void FadeOut(float FadeTime)
     {
         // Fade out current sound
-        StartCoroutine(AudioFade.FadeOut(s, 700f));
+        StartCoroutine(AudioFade.FadeOut(s, FadeTime));
     }
 
     public void Dampen()
