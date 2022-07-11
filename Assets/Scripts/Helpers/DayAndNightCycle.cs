@@ -28,21 +28,18 @@ public class DayAndNightCycle : MonoBehaviour
     public OnDayChanged NightTime;
 
     [SerializeField]
-    private GameObject player;
-
-    [SerializeField]
-    private int currentTile;
-    [SerializeField]
-    private int savedTile;
-    [SerializeField]
-    private TileGrid grid;
-    private TilemapStructure groundMap;
+    private PlayerController player;
 
     private void Awake()
     {
-        // Retrieve tilemap component
-        groundMap = grid.GetTilemap(TilemapType.Ground);
+        // Attach delegates
+        DayTime += DayMusic;
+        NightTime += NightMusic;
+        player.GTileChange += ChangeBgMusic;
+    }
 
+    private void Start()
+    {
         if (MainMenu.loadGame)
         {
             // Load world data
@@ -63,7 +60,7 @@ public class DayAndNightCycle : MonoBehaviour
         else
         {
             // New game
-            DayTime();
+            DayTime(); // Call delegate (and any methods tied to it)
             isDay = true;
         }
     }
@@ -83,9 +80,6 @@ public class DayAndNightCycle : MonoBehaviour
         {
             DayTime(); // Call delegate (and any methods tied to it)
             isDay = true;
-
-            // Play day music (fade)
-            DayMusic();
         }
 
         // Prevent day ticker from increasing multiple times
@@ -96,9 +90,6 @@ public class DayAndNightCycle : MonoBehaviour
             isDay = false;
             canChangeDay = false;
             days++;
-
-            // Play night music (fade)
-            NightMusic();
         }
 
         // Enable day change
@@ -115,50 +106,32 @@ public class DayAndNightCycle : MonoBehaviour
 
         // Pick color from gradient based on value from 0-1
         light.GetComponent<Light2D>().color = lightColor.Evaluate(time * ratePerDay);
+    }
 
-        // Get current tile from player position
-        currentTile = groundMap.GetTile((int)player.transform.position.x, (int)player.transform.position.y);
-        if (currentTile == (int)GroundTileType.Land && savedTile != (int)GroundTileType.Land)
+    private void ChangeBgMusic()
+    {
+        // Prevent music change when near water
+        if (player.prevGTile == (int)GroundTileType.Water || player.currentGTile == (int)GroundTileType.Water)
+            return;
+
+        // Stop current music
+        FindObjectOfType<AudioManager>().Stop();
+
+        // Play day/night music
+        if (isDay)
         {
-            // Play overworld music
-            savedTile = (int)GroundTileType.Land;
-            FindObjectOfType<AudioManager>().Stop();
-            //FindObjectOfType<AudioManager>().FadeOut(1f);
-            if (time >= 0 && time < ((timePerDay / 2) + 5))
-            {
-                // Day overworld music
-                DayMusic();
-            }
-            else
-            {
-                // Night overworld music
-                NightMusic();
-            }
+            DayMusic();
         }
-        if (currentTile == (int)GroundTileType.Village && savedTile != (int)GroundTileType.Village)
+        else
         {
-            // Play village music
-            savedTile = (int)GroundTileType.Village;
-            FindObjectOfType<AudioManager>().Stop();
-            //FindObjectOfType<AudioManager>().FadeOut(1f);
-            if (time >= 0 && time < ((timePerDay / 2) + 5))
-            {
-                // Day village music
-                DayMusic();
-            }
-            else
-            {
-                // Night village music
-                NightMusic();
-            }
+            NightMusic();
         }
     }
 
     private void DayMusic()
     {
         // Get current tile from player position
-        currentTile = groundMap.GetTile((int)player.transform.position.x, (int)player.transform.position.y);
-        switch (currentTile)
+        switch (player.currentGTile)
         {
             case (int)GroundTileType.Land:
                 FindObjectOfType<AudioManager>().FadeIn("Overworld Day", 1f);
@@ -172,8 +145,7 @@ public class DayAndNightCycle : MonoBehaviour
     private void NightMusic()
     {
         // Get current tile from player position
-        currentTile = groundMap.GetTile((int)player.transform.position.x, (int)player.transform.position.y);
-        switch (currentTile)
+        switch (player.currentGTile)
         {
             case (int)GroundTileType.Land:
                 FindObjectOfType<AudioManager>().FadeIn("Overworld Night", 1f);

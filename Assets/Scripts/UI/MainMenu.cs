@@ -25,9 +25,6 @@ public class MainMenu : MonoBehaviour
 
     public void PlayGame ()
     {
-        // Stop theme
-        FindObjectOfType<AudioManager>().Stop();
-
         // Change to Game Scene from queue
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }

@@ -3,24 +3,20 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    public Sound[] sounds;
-    private Sound s;
-
-    public static AudioManager instance;
+    public Sound[] bgSounds, soundFx;
+    public Sound bg, sf;
 
     private void Awake()
     {
-        // Only one instance of audio manager
-        if (instance == null)
-            instance = this;
-        else
-        {
-            Destroy(gameObject);
-        }
+        // Add sound components to bgSounds
+        AddComponents(bgSounds);
 
-        // Persist through scenes
-        DontDestroyOnLoad(gameObject);
+        // Add sound components to soundFx
+        AddComponents(soundFx);
+    }
 
+    private void AddComponents(Sound[] sounds)
+    {
         // Loop through each sound
         foreach (Sound s in sounds)
         {
@@ -33,67 +29,81 @@ public class AudioManager : MonoBehaviour
             s.source.volume = s.volume;
             s.source.pitch = s.pitch;
             s.source.loop = s.loop;
+            s.source.outputAudioMixerGroup = s.group; // Link to audio mixer
         }
     }
 
-    public void Update()
+    public void PlayFx (string name)
     {
-        //Debug.Log(s.source.volume + ": " + s.source.isPlaying);
-    }
-    public void Play (string name)
-    {
-        // Find sound to play
-        s = Array.Find(sounds, sound => sound.name == name);
+        // Find sound fx to play
+        sf = Array.Find(soundFx, sound => sound.name == name);
 
-        // Sound not found
-        if (s == null)
+        // Sound fx not found
+        if (sf == null)
         {
-            Debug.LogWarning("Sound: " + name + " not found");
+            Debug.LogWarning("Sound fx: " + name + " not found");
             return;
         }
 
-        // Play sound
-        s.volume = s.maxVolume;
-        s.source.Play();
+        // Play sound fx
+        sf.volume = sf.maxVolume;
+        sf.source.Play();
+    }
+
+    public void Play (string name)
+    {
+        // Find bg sound to play
+        bg = Array.Find(bgSounds, sound => sound.name == name);
+
+        // Bg sound not found
+        if (bg == null)
+        {
+            Debug.LogWarning("Bg sound: " + name + " not found");
+            return;
+        }
+
+        // Play bg sound
+        bg.volume = bg.maxVolume;
+        bg.source.Play();
     }
 
     public void Stop()
     {
         // Stop sound
-        s.source.Stop();
+        bg.source.Stop();
     }
 
     public void FadeIn(string name, float FadeTime)
     {
         // Find sound to play
-        s = Array.Find(sounds, sound => sound.name == name);
+        bg = Array.Find(bgSounds, sound => sound.name == name);
 
         // Sound not found
-        if (s == null)
+        if (bg == null)
         {
             Debug.LogWarning("Sound: " + name + " not found");
             return;
         }
 
         // Fade in chosen sound
-        StartCoroutine(AudioFade.FadeIn(s, FadeTime));
+        StartCoroutine(AudioFade.FadeIn(bg, FadeTime));
     }
 
     public void FadeOut(float FadeTime)
     {
         // Fade out current sound
-        StartCoroutine(AudioFade.FadeOut(s, FadeTime));
+        StartCoroutine(AudioFade.FadeOut(bg, FadeTime));
     }
 
     public void Dampen()
     {
         // Lower sound volume
-        s.source.volume *= .5f;
+        bg.source.volume *= .5f;
     }
 
     public void UnDampen()
     {
         // Increase sound volume
-        s.source.volume *= 2f;
+        bg.source.volume *= 2f;
     }
 }

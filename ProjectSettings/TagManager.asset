@@ -15,8 +15,8 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
+  - FogMain
+  - FogSecondary
   - 
   - 
   - 
@@ -45,6 +45,9 @@ TagManager:
     locked: 0
   - name: Object
     uniqueID: 3575553177
+    locked: 0
+  - name: Fog
+    uniqueID: 3774541981
     locked: 0
   - name: Default
     uniqueID: 0

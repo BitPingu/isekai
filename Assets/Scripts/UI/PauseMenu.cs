@@ -1,70 +1,55 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-    // Keep track of if game is paused
-    public static bool GameIsPaused = false;
-
     [SerializeField]
-    private GameObject player, world, dayNight;
+    private GameObject menuManager, player, world, dayNight;
 
     // Update is called once per frame
     private void Update()
     {
-        // Esc to pause
+        // Esc to resume
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (GameIsPaused)
-            {
-                // Resume game from pause 
-                Resume();
-            }
-            else
-            {
-                // Pause game
-                Pause();
-            }
+            ResumeFromClick();
         }
     }
 
-    public void Resume ()
+    public void ResumeFromClick ()
     {
-        // Resume time
-        Time.timeScale = 1f;
+        // Resume game from pause 
+        MenuManager.Resume();
 
-        // Resume sound
-        FindObjectOfType<AudioManager>().UnDampen();
+        // Enable menu manager
+        menuManager.SetActive(true);
 
         // Disable pause menu
-        transform.GetChild(0).gameObject.SetActive(false);
-        GameIsPaused = false;
-    }
-
-    public void Pause ()
-    {
-        // Freeze time
-        Time.timeScale = 0f;
-
-        // Lower sound
-        FindObjectOfType<AudioManager>().Dampen();
-
-        // Enable pause menu
-        transform.GetChild(0).gameObject.SetActive(true);
-        GameIsPaused = true;
+        gameObject.SetActive(false);
     }
 
     public void Save()
     {
         // Save game
         Debug.Log("Saving game...");
+
+        // Save player data
         PlayerController playerData = player.GetComponent<PlayerController>();
+
+        // Save world data
         TileGrid worldData = world.GetComponent<TileGrid>();
         DayAndNightCycle dayNightData = dayNight.GetComponent<DayAndNightCycle>();
-        SaveSystem.SaveAllData(playerData, worldData, dayNightData);
+        
+        // Save fog data
+        world.GetComponentInChildren<FogData>().GetClearFog();
+        FogData fogData = worldData.GetComponentInChildren<FogData>();
+
+        // Save all data
+        SaveSystem.SaveAllData(playerData, worldData, dayNightData, fogData);
     }
 
-    public void LoadMenu()
+    public void Quit()
     {
         // Resume time
         Time.timeScale = 1f;
@@ -73,7 +58,7 @@ public class PauseMenu : MonoBehaviour
         FindObjectOfType<AudioManager>().Stop();
 
         // Resume game from pause 
-        Resume();
+        MenuManager.Resume();
 
         // Return to main menu
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);

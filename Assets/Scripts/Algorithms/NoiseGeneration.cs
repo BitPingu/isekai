@@ -16,7 +16,7 @@ public class NoiseGeneration : AlgorithmBase
     public bool applyIslandGradient;
 
     [Serializable]
-    class NoiseValues
+    private class NoiseValues
     {
         [Range(0f, 1f)]
         public float height;

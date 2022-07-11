@@ -5,7 +5,8 @@ using UnityEngine.Tilemaps;
 public enum TilemapType
 {
     Ground,
-    Object
+    Object,
+    Fog
 }
 
 public class TilemapStructure : MonoBehaviour
@@ -201,8 +202,7 @@ public class TilemapStructure : MonoBehaviour
                     var coord = new Vector2Int(x, y);
                     if (!dirtyCoords.Contains(coord))
                         dirtyCoords.Add(coord);
-                }
-
+                }  
                 if (updateTilemap)
                     UpdateTile(x, y);
             }

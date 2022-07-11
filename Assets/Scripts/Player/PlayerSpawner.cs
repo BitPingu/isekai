@@ -3,13 +3,13 @@ using UnityEngine;
 public class PlayerSpawner : MonoBehaviour
 {
     private Vector3Int spawnPoint;
-
     private int currentTile;
+
     [SerializeField]
     private TileGrid grid;
     private TilemapStructure groundMap;
 
-    void Awake()
+    private void Awake()
     {
         if (MainMenu.loadGame)
         {
