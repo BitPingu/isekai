@@ -31,9 +31,6 @@ public class PauseMenu : MonoBehaviour
 
     public void Save()
     {
-        // Save game
-        Debug.Log("Saving game...");
-
         // Save player data
         PlayerController playerData = player.GetComponent<PlayerController>();
 

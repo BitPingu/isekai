@@ -3,7 +3,7 @@ using UnityEngine;
 public class MapMenu : MonoBehaviour
 {
     [SerializeField]
-    private GameObject menuManager;
+    private GameObject menuManager, enemies, villagers;
 
     // Update is called once per frame
     private void Update()
@@ -19,6 +19,10 @@ public class MapMenu : MonoBehaviour
 
             // Enable menu manager
             menuManager.SetActive(true);
+
+            // Enable NPCs
+            enemies.SetActive(true);
+            villagers.SetActive(true);
 
             // Disable map 
             gameObject.SetActive(false);

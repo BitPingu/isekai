@@ -6,7 +6,7 @@ public class MenuManager : MonoBehaviour
     public static bool openMenu = false;
 
     [SerializeField]
-    private GameObject pauseMenuUI, mapUI;
+    private GameObject pauseMenuUI, mapUI, enemies, villagers;
 
     // Update is called once per frame
     private void Update()
@@ -35,6 +35,10 @@ public class MenuManager : MonoBehaviour
 
             // Enable map
             mapUI.SetActive(true);
+
+            // Disable NPCs
+            enemies.SetActive(false);
+            villagers.SetActive(false);
 
             // Disable menu manager
             gameObject.SetActive(false);

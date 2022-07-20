@@ -1,12 +1,16 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.IO;
+using UnityEngine.Audio;
 
 public class MainMenu : MonoBehaviour
 {
     public static bool loadGame;
 
-    public void Awake()
+    [SerializeField]
+    private OptionsMenu options;
+
+    private void Awake()
     {
         // Do not load save data
         loadGame = false;
@@ -17,6 +21,24 @@ public class MainMenu : MonoBehaviour
         {
             // Show load game button
             transform.GetChild(0).gameObject.SetActive(true);
+        }
+    }
+
+    private void Start()
+    {
+        if (PlayerPrefs.HasKey("bgmVolume"))
+        {
+            // Apply saved settings
+            options.SetBgmVolume(PlayerPrefs.GetFloat("bgmVolume"));
+            options.SetSfxVolume(PlayerPrefs.GetFloat("sfxVolume"));
+            options.SetQuality(PlayerPrefs.GetInt("quality"));
+            options.SetSavedResolution(PlayerPrefs.GetInt("resolution"));
+            
+        }
+        else
+        {
+            // Apply default settings
+            options.ResetSettings();
         }
 
         // Play theme
@@ -38,7 +60,6 @@ public class MainMenu : MonoBehaviour
 
     public void QuitGame ()
     {
-        Debug.Log("QUIT");
         Application.Quit();
     }
 }
