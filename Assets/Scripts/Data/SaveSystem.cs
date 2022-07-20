@@ -8,7 +8,7 @@ public static class SaveSystem
     public static AllData gameData;
 
     // Can be called anywhere without an instance
-    public static void SaveAllData (PlayerController player, TileGrid world, DayAndNightCycle dayNight, FogData fog)
+    public static void SaveAllData (PlayerController player, TileGrid world, DayAndNightCycle dayNight, FogData fog, DungeonData dungeon)
     {
         // Create binary file to save to
         BinaryFormatter formatter = new BinaryFormatter();
@@ -17,7 +17,7 @@ public static class SaveSystem
 
         // Create game data
         PlayerData playerData = new PlayerData(player);
-        WorldData worldData = new WorldData(world, dayNight, fog);
+        WorldData worldData = new WorldData(world, dayNight, fog, dungeon);
 
         // Combine game data
         AllData allData = new AllData();

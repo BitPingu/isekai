@@ -42,8 +42,12 @@ public class PauseMenu : MonoBehaviour
         world.GetComponentInChildren<FogData>().GetClearFog();
         FogData fogData = worldData.GetComponentInChildren<FogData>();
 
+        // Save dungeon data
+        world.GetComponentInChildren<DungeonData>().GetDungeon();
+        DungeonData dungeonData = worldData.GetComponentInChildren<DungeonData>();
+
         // Save all data
-        SaveSystem.SaveAllData(playerData, worldData, dayNightData, fogData);
+        SaveSystem.SaveAllData(playerData, worldData, dayNightData, fogData, dungeonData);
     }
 
     public void Quit()
