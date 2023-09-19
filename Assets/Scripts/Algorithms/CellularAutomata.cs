@@ -9,7 +9,7 @@ public class CellularAutomata : AlgorithmBase
     [Tooltip("If this is checked, ReplacedBy will have no effect.")]
     public bool replaceByDominantTile;
 
-    public ObjectTileType targetTile, replacedBy;
+    public FoilageTileType targetTile, replacedBy;
 
     public override void Apply(TilemapStructure tilemap)
     {

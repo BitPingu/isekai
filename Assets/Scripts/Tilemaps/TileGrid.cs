@@ -5,14 +5,20 @@ using UnityEngine.Tilemaps;
 
 public class TileGrid : MonoBehaviour
 {
-    public int width, height;
-    public int tileSize, seed;
-    public bool randomize;
+    public WorldData world;
+    public int width, height, seed;
+
+    [SerializeField]
+    private int tileSize;
+    [SerializeField]
+    private bool randomize;
 
     [SerializeField]
     private TileTypes.GroundTiles[] groundTileTypes;
     [SerializeField]
-    private TileTypes.ObjectTiles[] objectTileTypes;
+    private TileTypes.FoilageTiles[] foilageTileTypes;
+    [SerializeField]
+    private TileTypes.BuildingTiles[] buildingTileTypes;
 
     private Dictionary<int, TileBase> tiles;
     private Dictionary<TilemapType, TilemapStructure> tilemaps;
@@ -22,8 +28,7 @@ public class TileGrid : MonoBehaviour
         if (MainMenu.loadGame)
         {
             // Load world data
-            WorldData data = SaveSystem.LoadWorld();
-            seed = data.seed;
+            seed = SaveSystem.LoadWorld().savedSeed;
         }
         else if (randomize)
         {
@@ -78,7 +83,8 @@ public class TileGrid : MonoBehaviour
 
         // Add all tilesets
         AddTileSet(tiles, groundTileTypes);
-        AddTileSet(tiles, objectTileTypes);
+        AddTileSet(tiles, foilageTileTypes);
+        AddTileSet(tiles, buildingTileTypes);
     }
 
     // Adds a new tileset to the dictionary

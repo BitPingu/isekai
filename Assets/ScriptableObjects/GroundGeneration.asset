@@ -21,7 +21,5 @@ MonoBehaviour:
   tileTypes:
   - height: 0.3
     groundTile: 1
-  - height: 0.8
-    groundTile: 2
   - height: 1
-    groundTile: 3
+    groundTile: 2

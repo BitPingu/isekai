@@ -47,42 +47,48 @@
   <PropertyGroup>
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <UnityProjectGenerator>Package</UnityProjectGenerator>
-    <UnityProjectGeneratorVersion>2.0.14</UnityProjectGeneratorVersion>
+    <UnityProjectGeneratorVersion>2.0.18</UnityProjectGeneratorVersion>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
     <UnityVersion>2020.3.25f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
+    <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\UI\MainMenu.cs" />
     <Compile Include="Assets\Scripts\Algorithms\PoissonDiscSampling.cs" />
-    <Compile Include="Assets\Scripts\Helpers\Noise.cs" />
+    <Compile Include="Assets\Scripts\World\Buildings\BuildingTypes.cs" />
+    <Compile Include="Assets\Scripts\Algorithms\Helpers\Noise.cs" />
     <Compile Include="Assets\Scripts\Data\AllData.cs" />
-    <Compile Include="Assets\Scripts\UI\MenuManager.cs" />
+    <Compile Include="Assets\Scripts\Algorithms\VoronoiGeneration.cs" />
+    <Compile Include="Assets\Scripts\UI\MenuController.cs" />
     <Compile Include="Assets\Scripts\NPC\VillagerTypes.cs" />
     <Compile Include="Assets\Scripts\Tilemaps\TileGrid.cs" />
-    <Compile Include="Assets\Scripts\Helpers\TilemapHelper.cs" />
+    <Compile Include="Assets\Scripts\Algorithms\Helpers\TilemapHelper.cs" />
+    <Compile Include="Assets\Scripts\Data\FogData.cs" />
     <Compile Include="Assets\Scripts\Algorithms\ObjectGeneration.cs" />
-    <Compile Include="Assets\Scripts\Player\PlayerSpawner.cs" />
-    <Compile Include="Assets\Scripts\Tilemaps\ObjectTileType.cs" />
+    <Compile Include="Assets\Scripts\Tilemaps\FoilageTileType.cs" />
     <Compile Include="Assets\Scripts\UI\MapIconLocator.cs" />
     <Compile Include="Assets\Scripts\Data\SaveSystem.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerData.cs" />
-    <Compile Include="Assets\Scripts\Helpers\AdvancedRuleTile.cs" />
-    <Compile Include="Assets\Scripts\Algorithms\DungeonSpawner.cs" />
+    <Compile Include="Assets\Scripts\Tilemaps\AdvancedRuleTile.cs" />
+    <Compile Include="Assets\Scripts\Algorithms\BuildingSpawner.cs" />
     <Compile Include="Assets\Scripts\UI\OptionsMenu.cs" />
+    <Compile Include="Assets\Scripts\Algorithms\InsideGeneration.cs" />
     <Compile Include="Assets\Scripts\UI\MapMenu.cs" />
     <Compile Include="Assets\Scripts\Audio\AudioManager.cs" />
     <Compile Include="Assets\Scripts\Algorithms\FogGeneration.cs" />
     <Compile Include="Assets\Scripts\UI\PauseMenu.cs" />
     <Compile Include="Assets\Scripts\NPC\EnemyMovement.cs" />
     <Compile Include="Assets\Scripts\NPC\VillagerSpawner.cs" />
+    <Compile Include="Assets\Scripts\Data\BuildingData.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerPosition.cs" />
     <Compile Include="Assets\Scripts\NPC\EnemySpawner.cs" />
+    <Compile Include="Assets\Scripts\Algorithms\ExitGen.cs" />
     <Compile Include="Assets\Scripts\Algorithms\NoiseGeneration.cs" />
-    <Compile Include="Assets\Scripts\Helpers\DayAndNightCycle.cs" />
-    <Compile Include="Assets\Scripts\Helpers\WorldLocator.cs" />
+    <Compile Include="Assets\Scripts\World\DayAndNightCycle.cs" />
+    <Compile Include="Assets\Scripts\Algorithms\Helpers\WorldLocator.cs" />
     <Compile Include="Assets\Scripts\Audio\AudioFade.cs" />
     <Compile Include="Assets\Scripts\Audio\Sound.cs" />
     <Compile Include="Assets\Scripts\Data\WorldData.cs" />
@@ -92,9 +98,8 @@
     <Compile Include="Assets\Scripts\Algorithms\CellularAutomata.cs" />
     <Compile Include="Assets\Scripts\Tilemaps\GroundTileType.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\Tilemaps\BuildingTileType.cs" />
     <Compile Include="Assets\Scripts\Algorithms\AlgorithmBase.cs" />
-    <Compile Include="Assets\Scripts\Data\FogData.cs" />
-    <Compile Include="Assets\Scripts\Data\DungeonData.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

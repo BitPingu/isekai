@@ -3,13 +3,13 @@ using UnityEngine;
 
 public class FogData : MonoBehaviour
 {
-    private TilemapStructure tilemap;
-    private BoundsInt fogBounds;
-    private HashSet<Vector2Int> clearFogCoords;
     public List<int> clearFogCoordsX, clearFogCoordsY;
 
     [SerializeField]
-    private PlayerController player;
+    private PlayerPosition player;
+
+    private BoundsInt fogBounds;
+    private TilemapStructure tilemap;
 
     private void Awake()
     {
@@ -40,26 +40,17 @@ public class FogData : MonoBehaviour
     // Retrieves coordinates with no fog
     public void GetClearFog()
     {
-        clearFogCoords = new HashSet<Vector2Int>();
-
         for (int x=0; x<tilemap.width; x++)
         {
             for (int y=0; y<tilemap.height; y++)
             {
                 // Only add unique coords (using hashset)
                 if (tilemap.GetTile(x, y) == (int)GroundTileType.Empty)
-                    clearFogCoords.Add(new Vector2Int(x, y));
+                {
+                    clearFogCoordsX.Add(x);
+                    clearFogCoordsY.Add(y);
+                }
             }
-        }
-
-        // Separate coords into lists for serialization
-        clearFogCoordsX = new List<int>();
-        clearFogCoordsY = new List<int>();
-
-        foreach (var coord in clearFogCoords)
-        {
-            clearFogCoordsX.Add(coord.x);
-            clearFogCoordsY.Add(coord.y);
         }
     }
 }

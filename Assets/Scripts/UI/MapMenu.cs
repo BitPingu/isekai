@@ -15,7 +15,7 @@ public class MapMenu : MonoBehaviour
             FindObjectOfType<AudioManager>().PlayFx("Close");
 
             // Resume game from pause 
-            MenuManager.Resume();
+            MenuController.Resume();
 
             // Enable menu manager
             menuManager.SetActive(true);

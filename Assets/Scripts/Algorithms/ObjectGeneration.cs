@@ -11,7 +11,7 @@ public class ObjectGeneration : AlgorithmBase
     [Serializable]
     class ObjectConfiguration
     {
-        public ObjectTileType obj;
+        public FoilageTileType obj;
         public GroundTileType[] spawnOnGrounds;
         [Range(0, 100)]
         public int spawnChancePerCell;

@@ -91,7 +91,7 @@ public class EnemySpawner : MonoBehaviour
             if (currentTile == (int)GroundTileType.Land)
             {
                 // Spawn enemy at spawnPoint
-                GameObject newEnemy = Instantiate(enemy, spawnPoint, Quaternion.identity);
+                GameObject newEnemy = Instantiate(enemy, spawnPoint + new Vector3(.5f, .5f), Quaternion.identity);
                 newEnemy.transform.parent = gameObject.transform;
             }
         }

@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
+using UnityEngine.SceneManagement;
 
 public class DayAndNightCycle : MonoBehaviour
 {
@@ -28,7 +29,7 @@ public class DayAndNightCycle : MonoBehaviour
     public OnDayChanged NightTime;
 
     [SerializeField]
-    private PlayerController player;
+    private PlayerPosition player;
 
     private void Awake()
     {
@@ -43,9 +44,8 @@ public class DayAndNightCycle : MonoBehaviour
         if (MainMenu.loadGame)
         {
             // Load world data
-            WorldData data = SaveSystem.LoadWorld();
-            time = data.time;
-            isDay = data.isDay;
+            time = SaveSystem.LoadWorld().savedTime;
+            isDay = SaveSystem.LoadWorld().savedIsDay;
 
             // Call delegates
             if (isDay)
@@ -131,28 +131,34 @@ public class DayAndNightCycle : MonoBehaviour
     private void DayMusic()
     {
         // Get current tile from player position
-        switch (player.currentGTile)
+        if (player.currentGTile == (int)GroundTileType.Land && SceneManager.GetActiveScene().buildIndex == 1)
         {
-            case (int)GroundTileType.Land:
-                FindObjectOfType<AudioManager>().FadeIn("Overworld Day", 1f);
-                break;
-            case (int)GroundTileType.Village:
-                FindObjectOfType<AudioManager>().FadeIn("Village Day", 1f);
-                break;
+            FindObjectOfType<AudioManager>().FadeIn("Overworld Day", 1f);
+        }
+        else if (player.currentGTile == (int)GroundTileType.Land && SceneManager.GetActiveScene().buildIndex == 2)
+        {
+            FindObjectOfType<AudioManager>().FadeIn("Village Day", 1f);
+        }
+        else if (player.currentGTile == (int)GroundTileType.Land && SceneManager.GetActiveScene().buildIndex == 3)
+        {
+            FindObjectOfType<AudioManager>().FadeIn("Dungeon", 1f);
         }
     }
 
     private void NightMusic()
     {
         // Get current tile from player position
-        switch (player.currentGTile)
+        if (player.currentGTile == (int)GroundTileType.Land && SceneManager.GetActiveScene().buildIndex == 1)
         {
-            case (int)GroundTileType.Land:
-                FindObjectOfType<AudioManager>().FadeIn("Overworld Night", 1f);
-                break;
-            case (int)GroundTileType.Village:
-                FindObjectOfType<AudioManager>().FadeIn("Village Night", 1f);
-                break;
+            FindObjectOfType<AudioManager>().FadeIn("Overworld Night", 1f);
+        }
+        else if (player.currentGTile == (int)GroundTileType.Land && SceneManager.GetActiveScene().buildIndex == 2)
+        {
+            FindObjectOfType<AudioManager>().FadeIn("Village Night", 1f);
+        }
+        else if (player.currentGTile == (int)GroundTileType.Land && SceneManager.GetActiveScene().buildIndex == 3)
+        {
+            FindObjectOfType<AudioManager>().FadeIn("Dungeon", 1f);
         }
     }
 }

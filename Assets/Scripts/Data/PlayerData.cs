@@ -1,15 +1,12 @@
-
 [System.Serializable]
 public class PlayerData
 {
-    public int[] savedPos;
+    public int savedPosX, savedPosY;
 
     // Constructor
-    public PlayerData (PlayerController player)
+    public PlayerData(PlayerPosition position)
     {
-        // Store player data in variables
-        savedPos = new int[2];
-        savedPos[0] = player.currentPos.x;
-        savedPos[1] = player.currentPos.y;
+        savedPosX = position.currentPos.x;
+        savedPosY = position.currentPos.y;
     }
 }

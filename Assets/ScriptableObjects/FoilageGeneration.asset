@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f5061511709a827458f1aa31c684b347, type: 3}
-  m_Name: ObjectGeneration
+  m_Name: FoilageGeneration
   m_EditorClassIdentifier: 
   objectSelection:
   - obj: 2004
@@ -21,9 +21,6 @@ MonoBehaviour:
     spawnChancePerCell: 20
   - obj: 2006
     spawnOnGrounds: 02000000
-    spawnChancePerCell: 20
-  - obj: 2007
-    spawnOnGrounds: 03000000
     spawnChancePerCell: 20
   - obj: 2002
     spawnOnGrounds: 02000000

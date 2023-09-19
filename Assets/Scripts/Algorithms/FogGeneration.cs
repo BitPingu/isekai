@@ -19,9 +19,8 @@ public class FogGeneration : AlgorithmBase
         if (MainMenu.loadGame)
         {
             // Load fog data
-            WorldData data = SaveSystem.LoadWorld();
-            List<int> clearFogCoordsX = data.clearFogCoordsX;
-            List<int> clearFogCoordsY = data.clearFogCoordsY;
+            List<int> clearFogCoordsX = SaveSystem.LoadWorld().savedClearFogCoordsX;
+            List<int> clearFogCoordsY = SaveSystem.LoadWorld().savedClearFogCoordsY;
 
             // Combine lists
             HashSet<Vector2Int> clearFogCoords = new HashSet<Vector2Int>();

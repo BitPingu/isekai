@@ -1,11 +1,21 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
     [SerializeField]
-    private GameObject menuManager, player, world, dayNight;
+    private GameObject menuManager;
+
+    [SerializeField]
+    private PlayerPosition position;
+    [SerializeField]
+    private TileGrid grid;
+    [SerializeField]
+    private DayAndNightCycle dayNight;
+    [SerializeField]
+    private FogData fog;
+    [SerializeField]
+    private BuildingData building;
 
     // Update is called once per frame
     private void Update()
@@ -20,7 +30,7 @@ public class PauseMenu : MonoBehaviour
     public void ResumeFromClick ()
     {
         // Resume game from pause 
-        MenuManager.Resume();
+        MenuController.Resume();
 
         // Enable menu manager
         menuManager.SetActive(true);
@@ -31,23 +41,8 @@ public class PauseMenu : MonoBehaviour
 
     public void Save()
     {
-        // Save player data
-        PlayerController playerData = player.GetComponent<PlayerController>();
-
-        // Save world data
-        TileGrid worldData = world.GetComponent<TileGrid>();
-        DayAndNightCycle dayNightData = dayNight.GetComponent<DayAndNightCycle>();
-        
-        // Save fog data
-        world.GetComponentInChildren<FogData>().GetClearFog();
-        FogData fogData = worldData.GetComponentInChildren<FogData>();
-
-        // Save dungeon data
-        world.GetComponentInChildren<DungeonData>().GetDungeon();
-        DungeonData dungeonData = worldData.GetComponentInChildren<DungeonData>();
-
         // Save all data
-        SaveSystem.SaveAllData(playerData, worldData, dayNightData, fogData, dungeonData);
+        SaveSystem.SaveAllData(position, grid, dayNight, fog, building);
     }
 
     public void Quit()
@@ -59,7 +54,7 @@ public class PauseMenu : MonoBehaviour
         FindObjectOfType<AudioManager>().Stop();
 
         // Resume game from pause 
-        MenuManager.Resume();
+        MenuController.Resume();
 
         // Return to main menu
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);

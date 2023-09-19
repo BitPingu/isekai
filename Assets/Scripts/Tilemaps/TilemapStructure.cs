@@ -5,7 +5,7 @@ using UnityEngine.Tilemaps;
 public enum TilemapType
 {
     Ground,
-    Object,
+    Overworld,
     Fog
 }
 
@@ -71,6 +71,8 @@ public class TilemapStructure : MonoBehaviour
 
         // Get ScriptableObject that matches this type and insert it
         grid.GetTileCache().TryGetValue(typeOfTile, out TileBase tile); // Default return null if not found
+
+        // Update tilemap
         graphicMap.SetTile(new Vector3Int(x, y, 0), tile);
         graphicMap.RefreshTile(new Vector3Int(x, y, 0));
     }
@@ -95,6 +97,8 @@ public class TilemapStructure : MonoBehaviour
                 dirtyCoords.Remove(positions[i]);
             }
         }
+
+        // Update tilemap
         graphicMap.SetTiles(positionsArray, tilesArray);
         foreach (var position in positionsArray)
             graphicMap.RefreshTile(position);
@@ -124,6 +128,8 @@ public class TilemapStructure : MonoBehaviour
 
         // Clear all dirty coordinates
         dirtyCoords.Clear();
+
+        // Update tilemap
         graphicMap.SetTiles(positionsArray, tilesArray);
         graphicMap.RefreshAllTiles();
     }

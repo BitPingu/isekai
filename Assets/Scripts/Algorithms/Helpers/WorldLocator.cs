@@ -2,12 +2,11 @@ using UnityEngine;
 
 public class WorldLocator : MonoBehaviour
 {
+    public TileGrid grid;
+
     private Vector3 newPosition;
     private float centerX;
     private float centerY;
-
-    [SerializeField]
-    private TileGrid grid;
 
     private void LateUpdate()
     {

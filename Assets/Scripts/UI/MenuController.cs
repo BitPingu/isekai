@@ -1,18 +1,20 @@
 using UnityEngine;
 
-public class MenuManager : MonoBehaviour
+public class MenuController : MonoBehaviour
 {
     // Keep track of if a menu is opened
     public static bool openMenu = false;
 
     [SerializeField]
     private GameObject pauseMenuUI, mapUI, enemies, villagers;
+    [SerializeField]
+    private KeyCode pauseKey, mapKey;
 
     // Update is called once per frame
     private void Update()
     {
         // Esc to pause
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(pauseKey))
         {
             // Pause game
             Pause();
@@ -25,7 +27,7 @@ public class MenuManager : MonoBehaviour
         }
 
         // M to map
-        if (Input.GetKeyDown(KeyCode.M))
+        if (Input.GetKeyDown(mapKey))
         {
             // Play sound fx
             FindObjectOfType<AudioManager>().PlayFx("Open");

@@ -4,6 +4,5 @@ public enum GroundTileType
     Empty = 0,
     Water = 1,
     Land = 2,
-    Village = 3,
-    Fog = 4
+    Fog = 3
 }

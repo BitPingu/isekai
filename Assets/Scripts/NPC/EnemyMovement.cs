@@ -18,7 +18,7 @@ public class EnemyMovement : MonoBehaviour
     private int currentTile;
     [SerializeField]
     private TileGrid grid;
-    private TilemapStructure objectMap;
+    private TilemapStructure overworldMap;
 
     private bool isMoving;
     [SerializeField]
@@ -40,7 +40,7 @@ public class EnemyMovement : MonoBehaviour
 
         // Retrieve tilemap component
         grid = FindObjectOfType<TileGrid>();
-        objectMap = grid.GetTilemap(TilemapType.Object);
+        overworldMap = grid.GetTilemap(TilemapType.Overworld);
 
         // Set counters
         waitCounter = waitTime;
@@ -57,11 +57,11 @@ public class EnemyMovement : MonoBehaviour
         currentPos = Vector2Int.FloorToInt(transform.position);
 
         // Get current tile from enemy position
-        currentTile = objectMap.GetTile(currentPos.x, currentPos.y);
+        currentTile = overworldMap.GetTile(currentPos.x, currentPos.y);
 
         // Get speed from current tile
         moveSpeed = maxSpeed;
-        if (currentTile == (int)ObjectTileType.Tree)
+        if (currentTile == (int)FoilageTileType.Tree)
             moveSpeed = maxSpeed - 2;
 
         if (moveSpeed <= 0)

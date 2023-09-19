@@ -1,4 +1,4 @@
-public enum ObjectTileType
+public enum FoilageTileType
 {
     /* 2001 - 3000 */
     Empty = 0,
@@ -7,7 +7,5 @@ public enum ObjectTileType
     Shimmer = 2003,
     Flower = 2004,
     Bush = 2005,
-    Stone = 2006,
-    House = 2007,
-    Dungeon = 2008
+    Stone = 2006
 }

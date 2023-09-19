@@ -2,6 +2,12 @@
 [System.Serializable]
 public class AllData
 {
-    public PlayerData playerData;
-    public WorldData worldData;
+    public PlayerData player;
+    public WorldData world;
+
+    public AllData(PlayerData p, WorldData w)
+    {
+        player = p;
+        world = w;
+    }
 }

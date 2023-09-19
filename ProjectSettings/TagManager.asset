@@ -40,14 +40,14 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Land
+  - name: Ground
     uniqueID: 3427601457
     locked: 0
-  - name: Object
+  - name: Overworld
     uniqueID: 3575553177
     locked: 0
   - name: Fog
-    uniqueID: 3774541981
+    uniqueID: 1260850791
     locked: 0
   - name: Default
     uniqueID: 0

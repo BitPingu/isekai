@@ -1,25 +1,25 @@
 using System.Collections.Generic;
-using UnityEngine;
 
 [System.Serializable]
 public class WorldData
 {
-    public int seed;
-    public float time;
-    public bool isDay;
-    public List<int> clearFogCoordsX, clearFogCoordsY;
-    public List<int> dungeonCoordsX, dungeonCoordsY;
+    public int savedSeed;
+    public float savedTime;
+    public bool savedIsDay;
+    public List<int> savedClearFogCoordsX, savedClearFogCoordsY, savedVillageCoordsX, savedVillageCoordsY, savedDungeonCoordsX, savedDungeonCoordsY;
 
     // Constructor
-    public WorldData (TileGrid world, DayAndNightCycle dayNight, FogData fog, DungeonData dungeon)
+    public WorldData (TileGrid grid, DayAndNightCycle dayNight, FogData fog, BuildingData building)
     {
-        // Store world data in variables
-        seed = world.seed;
-        time = dayNight.time;
-        isDay = dayNight.isDay;
-        clearFogCoordsX = fog.clearFogCoordsX;
-        clearFogCoordsY = fog.clearFogCoordsY;
-        dungeonCoordsX = dungeon.dungeonCoordsX;
-        dungeonCoordsY = dungeon.dungeonCoordsY;
+        savedSeed = grid.seed;
+        savedTime = dayNight.time;
+        savedIsDay = dayNight.isDay;
+        fog.GetClearFog();
+        savedClearFogCoordsX = fog.clearFogCoordsX;
+        savedClearFogCoordsY = fog.clearFogCoordsY;
+        savedVillageCoordsX = building.villageCoordsX;
+        savedVillageCoordsY = building.villageCoordsY;
+        savedDungeonCoordsX = building.dungeonCoordsX;
+        savedDungeonCoordsY = building.dungeonCoordsY;
     }
 }
