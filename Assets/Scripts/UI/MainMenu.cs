@@ -9,6 +9,7 @@ public class MainMenu : MonoBehaviour
 
     private void Awake()
     {
+        Destroy(GameObject.Find("Menu"));
         // Check if new game
         string path = Application.persistentDataPath + "/saveData.isekai";
         if (File.Exists(path))
@@ -41,12 +42,15 @@ public class MainMenu : MonoBehaviour
 
     public void PlayGame ()
     {
+        // Play sound fx
+        FindObjectOfType<AudioManager>().PlayFx("Button");
         // Change to Game Scene from queue
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void NewGame ()
     {
+        FindObjectOfType<AudioManager>().Stop();
         // Set temp vars
         TempData.newGame = true;
         init(true);
@@ -54,6 +58,7 @@ public class MainMenu : MonoBehaviour
 
     public void LoadGame ()
     {
+        FindObjectOfType<AudioManager>().Stop();
         // Set temp vars
         TempData.newGame = false;
         init(true);
@@ -63,6 +68,9 @@ public class MainMenu : MonoBehaviour
 
     public void QuitGame ()
     {
+        // Play sound fx
+        FindObjectOfType<AudioManager>().PlayFx("Button");
+        
         Application.Quit();
     }
 

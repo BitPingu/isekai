@@ -6,9 +6,24 @@ public class MenuController : MonoBehaviour
     public static bool openMenu = false;
 
     [SerializeField]
-    private GameObject pauseMenuUI, mapUI, enemies, villagers;
+    private GameObject pauseMenuUI, mapUI;
     [SerializeField]
     private KeyCode pauseKey, mapKey;
+
+    private static MenuController menu;
+
+    private void Awake()
+    {
+        if (menu == null)
+        {
+            menu = this;
+        } else {
+            Destroy(gameObject.transform.parent.gameObject);
+            return;
+        }
+
+        DontDestroyOnLoad(gameObject.transform.parent.gameObject);
+    }
 
     // Update is called once per frame
     private void Update()
@@ -37,10 +52,6 @@ public class MenuController : MonoBehaviour
 
             // Enable map
             mapUI.SetActive(true);
-
-            // Disable NPCs
-            enemies.SetActive(false);
-            villagers.SetActive(false);
 
             // Disable menu manager
             gameObject.SetActive(false);

@@ -45,14 +45,12 @@ public class DayAndNightCycle : MonoBehaviour
         {
             if (TempData.newGame)
             {
-                Debug.Log("new time");
                 // New game
                 time = 50;
                 isDay = true;
             }
             else
             {
-                Debug.Log("load time");
                 // Load world data
                 SaveData saveData = SaveSystem.Load();
                 time = saveData.saveTime;
@@ -64,7 +62,6 @@ public class DayAndNightCycle : MonoBehaviour
         }
         else
         {
-            Debug.Log("state time");
             time = TempData.tempTime;
             isDay = TempData.tempIsDay;
         }
@@ -72,12 +69,10 @@ public class DayAndNightCycle : MonoBehaviour
         // Call delegates (and any methods tied to it)
         if (isDay)
         {
-            Debug.Log("load day");
             DayTime();
         }
         else
         {
-            Debug.Log("load night");
             NightTime();
         }
     }

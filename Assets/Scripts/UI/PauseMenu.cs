@@ -12,12 +12,22 @@ public class PauseMenu : MonoBehaviour
         // Esc to resume
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            ResumeFromClick();
+            // Resume game from pause 
+            MenuController.Resume();
+
+            // Enable menu manager
+            menuManager.SetActive(true);
+
+            // Disable pause menu
+            gameObject.SetActive(false);
         }
     }
 
     public void ResumeFromClick ()
     {
+        // Play sound fx
+        FindObjectOfType<AudioManager>().PlayFx("Button");
+
         // Resume game from pause 
         MenuController.Resume();
 
@@ -30,12 +40,19 @@ public class PauseMenu : MonoBehaviour
 
     public void Save()
     {
+        // Play sound fx
+        FindObjectOfType<AudioManager>().PlayFx("Button");
+
         // Save all data
         SaveSystem.Save();
     }
 
     public void Quit()
     {
+        // Play sound fx
+        Debug.Log("soundexit");
+        FindObjectOfType<AudioManager>().PlayFx("Button");
+
         // Resume time
         Time.timeScale = 1f;
 
@@ -46,6 +63,6 @@ public class PauseMenu : MonoBehaviour
         MenuController.Resume();
 
         // Return to main menu
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+        SceneManager.LoadScene(0);
     }
 }

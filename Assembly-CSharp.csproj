@@ -64,8 +64,8 @@
   <ItemGroup>
     <Compile Include="Assets/Scripts/UI/MainMenu.cs" />
     <Compile Include="Assets/Scripts/Algorithms/PoissonDiscSampling.cs" />
-    <Compile Include="Assets/Scripts/World/Buildings/BuildingTypes.cs" />
     <Compile Include="Assets/Scripts/Algorithms/Helpers/Noise.cs" />
+    <Compile Include="Assets/Scripts/Data/SaveData.cs" />
     <Compile Include="Assets/Scripts/Algorithms/VoronoiGeneration.cs" />
     <Compile Include="Assets/Scripts/UI/MenuController.cs" />
     <Compile Include="Assets/Scripts/NPC/VillagerTypes.cs" />
@@ -102,9 +102,8 @@
     <Compile Include="Assets/Scripts/Tilemaps/GroundTileType.cs" />
     <Compile Include="Assets/Scripts/Player/PlayerController.cs" />
     <Compile Include="Assets/Scripts/Tilemaps/BuildingTileType.cs" />
-    <Compile Include="Assets/Scripts/Algorithms/AlgorithmBase.cs" />
     <Compile Include="Assets/Scripts/Data/TempData.cs" />
-    <Compile Include="Assets/Scripts/Data/SaveData.cs" />
+    <Compile Include="Assets/Scripts/Algorithms/AlgorithmBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/TextMesh Pro/Shaders/TMPro.cginc" />
@@ -890,9 +889,9 @@
   <ItemGroup>
     <ProjectReference Include="Unity.2D.Tilemap.Extras.csproj" />
     <ProjectReference Include="Unity.InternalAPIEngineBridge.001.csproj" />
+    <ProjectReference Include="Unity.2D.Animation.Editor.csproj" />
     <ProjectReference Include="Unity.2D.PixelPerfect.csproj" />
     <ProjectReference Include="Unity.RenderPipelines.Universal.Shaders.csproj" />
-    <ProjectReference Include="Unity.2D.Animation.Editor.csproj" />
     <ProjectReference Include="Unity.RenderPipelines.Universal.Runtime.csproj" />
     <ProjectReference Include="PsdPlugin.csproj" />
     <ProjectReference Include="Unity.2D.Tilemap.Editor.csproj" />

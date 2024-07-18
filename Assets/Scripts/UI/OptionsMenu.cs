@@ -25,6 +25,9 @@ public class OptionsMenu : MonoBehaviour
 
     public void SaveSettings ()
     {
+        // Play sound fx
+        FindObjectOfType<AudioManager>().PlayFx("Button");
+
         // Save player prefs
         PlayerPrefs.SetFloat(bgmVolume, bgmVolumeSlider.value);
         PlayerPrefs.SetFloat(sfxVolume, sfxVolumeSlider.value);
@@ -35,6 +38,9 @@ public class OptionsMenu : MonoBehaviour
 
     public void ResetSettings ()
     {
+        // Play sound fx
+        FindObjectOfType<AudioManager>().PlayFx("Button");
+        
         // Reset player prefs
         SetDefaultVolume();
         SetDefaultQuality();
