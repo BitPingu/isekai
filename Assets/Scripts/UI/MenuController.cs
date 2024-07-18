@@ -17,7 +17,9 @@ public class MenuController : MonoBehaviour
         if (menu == null)
         {
             menu = this;
-        } else {
+        } 
+        else 
+        {
             Destroy(gameObject.transform.parent.gameObject);
             return;
         }

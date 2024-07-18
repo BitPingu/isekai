@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -55,7 +54,7 @@ public class PlayerController : MonoBehaviour
         // Interactable check
         if (Input.GetKeyDown(interactKey))
         {
-            EnterBuilding();
+            position.EnterBuilding();
         }
     }
 
@@ -77,45 +76,6 @@ public class PlayerController : MonoBehaviour
         else
         {
             moveSpeed = maxSpeed;
-        }
-    }
-
-    // Change scene based on current tile
-    private void EnterBuilding()
-    {
-        switch (position.currentOTile)
-        {
-            case (int)BuildingTileType.House:
-                FindObjectOfType<AudioManager>().Stop();
-                if (SceneManager.GetActiveScene().buildIndex == 1) 
-                {
-                    TempData.tempSpawnPoint = new Vector3(position.currentPos.x, position.currentPos.y);
-                    Debug.Log("Enter Village");
-                    SceneManager.LoadScene("Village");
-                }
-                else
-                {
-                    Debug.Log("Exit Village");
-                    SceneManager.LoadScene("Overworld");
-                }
-                break;
-            case (int)BuildingTileType.Dungeon:
-                FindObjectOfType<AudioManager>().Stop();
-                if (SceneManager.GetActiveScene().buildIndex == 1)
-                {
-                    TempData.tempSpawnPoint = new Vector3(position.currentPos.x, position.currentPos.y);
-                    Debug.Log("Enter Dungeon");
-                    SceneManager.LoadScene("Dungeon");
-                }
-                else
-                {
-                    Debug.Log("Exit Dungeon");
-                    SceneManager.LoadScene("Overworld");
-                }
-                break;
-            default:
-                Debug.Log("No interactable tile!");
-                break;
         }
     }
 }

@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class WorldLocator : MonoBehaviour
 {
-    public TileGrid grid;
-
     private Vector3 newPosition;
     private float centerX;
     private float centerY;
@@ -11,8 +9,8 @@ public class WorldLocator : MonoBehaviour
     private void LateUpdate()
     {
         // Calculate center 
-        centerX = grid.width / 2;
-        centerY = grid.height / 2;
+        centerX = TempData.tempWidth / 2;
+        centerY = TempData.tempHeight / 2;
         newPosition = new Vector3(centerX, centerY, transform.position.z);
 
         // Align in center of the world

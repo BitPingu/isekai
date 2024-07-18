@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [CreateAssetMenu(fileName = "FogGeneration", menuName = "Algorithms/FogGeneration")]
 public class FogGeneration : AlgorithmBase
 {
-    public List<int> clearFogCoordsX;
-    public List<int> clearFogCoordsY;
+    public List<int> clearFogCoordsX = new List<int>();
+    public List<int> clearFogCoordsY = new List<int>();
     public override void Apply(TilemapStructure tilemap)
     {
         // Generate new fog
@@ -45,22 +46,30 @@ public class FogGeneration : AlgorithmBase
         else
         {
             // Load fog data
-            List<int> clearFogCoordsX = TempData.tempFog.clearFogCoordsX;
-            List<int> clearFogCoordsY = TempData.tempFog.clearFogCoordsY;
-
-            // Combine lists
-            HashSet<Vector2Int> clearFogCoords = new HashSet<Vector2Int>();
-            var combinedCoords = clearFogCoordsX.Zip(clearFogCoordsY, (x, y) => new { xCoord = x, yCoord = y });
-            foreach (var coord in combinedCoords)
+            if (SceneManager.GetActiveScene().buildIndex == 1)
             {
-                clearFogCoords.Add(new Vector2Int(coord.xCoord, coord.yCoord));
-            }
+                List<int> clearFogCoordsX = TempData.tempFog.clearFogCoordsX;
+                List<int> clearFogCoordsY = TempData.tempFog.clearFogCoordsY;
 
-            // Load no fog tiles
-            foreach (var coord in clearFogCoords)
-            {
-                tilemap.SetTile(coord.x, coord.y, (int)GroundTileType.Empty, setDirty: false);
+                // Combine lists
+                HashSet<Vector2Int> clearFogCoords = new HashSet<Vector2Int>();
+                var combinedCoords = clearFogCoordsX.Zip(clearFogCoordsY, (x, y) => new { xCoord = x, yCoord = y });
+                foreach (var coord in combinedCoords)
+                {
+                    clearFogCoords.Add(new Vector2Int(coord.xCoord, coord.yCoord));
+                }
+
+                // Load no fog tiles
+                foreach (var coord in clearFogCoords)
+                {
+                    tilemap.SetTile(coord.x, coord.y, (int)GroundTileType.Empty, setDirty: false);
+                }
             }
+            // else
+            // {
+            //     List<int> clearFogCoordsX = TempData.tempFog2.clearFogCoordsX;
+            //     List<int> clearFogCoordsY = TempData.tempFog2.clearFogCoordsY;
+            // }
         }
     }
 }

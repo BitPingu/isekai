@@ -41,6 +41,8 @@ public class TileGrid : MonoBehaviour
                 }
                 TempData.tempSeed = seed;
                 TempData.initSeed = false;
+                TempData.tempWidth = width;
+                TempData.tempHeight = height;
             }
             else
             {
@@ -69,6 +71,11 @@ public class TileGrid : MonoBehaviour
         {
             tilemap.Initialize();
         }
+    }
+
+    private void Start()
+    {
+        FindObjectOfType<PlayerPosition>().SceneChange(); // Call delegate (and any methods tied to it)
     }
 
     // Returns all cached shared tiles available to be placed on tilemap

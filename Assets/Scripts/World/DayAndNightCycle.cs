@@ -28,15 +28,11 @@ public class DayAndNightCycle : MonoBehaviour
     public OnDayChanged DayTime;
     public OnDayChanged NightTime;
 
-    [SerializeField]
-    private PlayerPosition player;
-
     private void Awake()
     {
         // Attach delegates
         DayTime += DayMusic;
         NightTime += NightMusic;
-        player.GTileChange += ChangeBgMusic;
     }
 
     private void Start()
@@ -123,26 +119,6 @@ public class DayAndNightCycle : MonoBehaviour
 
         // Pick color from gradient based on value from 0-1
         light.GetComponent<Light2D>().color = lightColor.Evaluate(time * ratePerDay);
-    }
-
-    private void ChangeBgMusic()
-    {
-        // Prevent music change when near water
-        if (player.prevGTile == (int)GroundTileType.Water || player.currentGTile == (int)GroundTileType.Water)
-            return;
-
-        // Stop current music
-        FindObjectOfType<AudioManager>().Stop();
-
-        // Play day/night music
-        if (isDay)
-        {
-            DayMusic();
-        }
-        else
-        {
-            NightMusic();
-        }
     }
 
     private void DayMusic()

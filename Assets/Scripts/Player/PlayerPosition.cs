@@ -11,8 +11,14 @@ public class PlayerPosition : MonoBehaviour
     public int dominantTile;
 
     // Call other functions when player position changes
-    public delegate void OnPosChanged();
-    public OnPosChanged PosChange;
+    public delegate void OnPosChange();
+    public OnPosChange PosChange;
+
+    // Call other functions when scene changes
+    public delegate void OnSaveTemp();
+    public OnSaveTemp SaveTemp;
+    public delegate void OnSceneChange();
+    public OnSceneChange SceneChange;
 
     // Call other functions when tile types change
     public delegate void OnGTileChange();
@@ -21,24 +27,59 @@ public class PlayerPosition : MonoBehaviour
     public OnOTileChange OTileChange;
 
     [SerializeField]
-    private TileGrid grid;
-    [SerializeField]
     private Vector3 spawnPoint;
 
     private TilemapStructure groundMap, overworldMap;
     private List<KeyValuePair<Vector2Int, int>> neighbours;
 
+    public static PlayerPosition player;
+
     private void Awake()
     {
-        // Retrieve tilemap components
-        groundMap = grid.GetTilemap(TilemapType.Ground);
-        overworldMap = grid.GetTilemap(TilemapType.Overworld);
+        if (player == null)
+        {
+            player = this;
+        } 
+        else 
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        DontDestroyOnLoad(gameObject);
 
         // Attach delegates
         PosChange += CheckPosition;
         PosChange += OTileSound;
         PosChange += CheckNearby;
-        
+        SceneChange += RetrieveTilemap;
+        SceneChange += Spawn;
+    }
+
+    private void Update()
+    {
+        // Retrieve coordinates of player
+        currentPos = Vector2Int.FloorToInt(transform.position);
+        TempData.tempPos = new Vector3(currentPos.x, currentPos.y);
+
+        // Position check
+        if (currentPos != prevPos)
+        {
+            PosChange(); // Call delegate (and any methods tied to it)
+            prevPos = currentPos;
+        }
+    }
+
+    private void RetrieveTilemap()
+    {
+        // Retrieve tilemap components
+        groundMap = FindObjectOfType<TileGrid>().GetTilemap(TilemapType.Ground);
+        overworldMap = FindObjectOfType<TileGrid>().GetTilemap(TilemapType.Overworld);
+    }
+
+    // Generates a random spawn point
+    private void Spawn()
+    {
         if (SceneManager.GetActiveScene().buildIndex == 1)
         {
             if (TempData.initSpawn)
@@ -46,7 +87,20 @@ public class PlayerPosition : MonoBehaviour
                 if (TempData.newGame)
                 {
                     // Generate initial spawn point
-                    spawnPoint = GenerateSpawnPoint();
+                    int xCoord, yCoord, currentTile;
+                    do
+                    {
+                        // Choose random spawn point
+                        xCoord = Random.Range(0, TempData.tempWidth);
+                        yCoord = Random.Range(0, TempData.tempHeight);
+
+                        // Check tile
+                        currentTile = groundMap.GetTile(xCoord, yCoord);
+                    }
+                    while (currentTile != (int)GroundTileType.Land);
+
+                    // Generate spawn point
+                    spawnPoint = new Vector3(xCoord, yCoord);
                 }
                 else
                 {
@@ -66,12 +120,9 @@ public class PlayerPosition : MonoBehaviour
         else if (SceneManager.GetActiveScene().buildIndex == 2 || SceneManager.GetActiveScene().buildIndex == 3)
         {
             // Dungeon or village spawn
-            spawnPoint = new Vector3(grid.width / 2, 0.5f);
+            spawnPoint = new Vector3(10 / 2, 0.5f);
         }
-    }
 
-    private void Start()
-    {
         // Set spawn point
         spawnPoint.x += .5f;
         spawnPoint.y += .5f;
@@ -86,43 +137,6 @@ public class PlayerPosition : MonoBehaviour
         PosChange();
     }
 
-    private void Update()
-    {
-        // Retrieve coordinates of player
-        currentPos = Vector2Int.FloorToInt(transform.position);
-        TempData.tempPos = new Vector3(currentPos.x, currentPos.y);
-
-        // Position check
-        if (currentPos != prevPos)
-        {
-            PosChange(); // Call delegate (and any methods tied to it)
-            prevPos = currentPos;
-        }
-    }
-
-    // Generates a random spawn point
-    private Vector3 GenerateSpawnPoint()
-    {
-        int xCoord, yCoord, currentTile;
-
-        // Retrieve tilemap component
-        groundMap = grid.GetTilemap(TilemapType.Ground);
-
-        do
-        {
-            // Choose random spawn point
-            xCoord = Random.Range(0, grid.width);
-            yCoord = Random.Range(0, grid.height);
-
-            // Check tile
-            currentTile = groundMap.GetTile(xCoord, yCoord);
-        }
-        while (currentTile != (int)GroundTileType.Land);
-
-        // Generate spawn point
-        return new Vector3(xCoord, yCoord);
-    }
-
     // Looks at current position
     private void CheckPosition()
     {
@@ -133,7 +147,7 @@ public class PlayerPosition : MonoBehaviour
         // Ground tile check
         if (currentGTile != prevGTile)
         {
-            GTileChange();
+            // GTileChange();
             prevGTile = currentGTile;
         }
 
@@ -142,6 +156,49 @@ public class PlayerPosition : MonoBehaviour
         {
             OTileChange();
             prevOTile = currentOTile;
+        }
+    }
+
+    // Change scene based on current tile
+    public void EnterBuilding()
+    {
+        switch (currentOTile)
+        {
+            case (int)BuildingTileType.House:
+                FindObjectOfType<AudioManager>().Stop();
+                if (SceneManager.GetActiveScene().buildIndex == 1) 
+                {
+                    TempData.tempSpawnPoint = new Vector3(currentPos.x, currentPos.y);
+                    SaveTemp();
+                    Debug.Log("Enter Village");
+                    SceneManager.LoadScene("Village");
+                }
+                else
+                {
+                    TempData.tempFog2 = FindObjectOfType<FogData>();;
+                    Debug.Log("Exit Village");
+                    SceneManager.LoadScene("Overworld");
+                }
+                break;
+            case (int)BuildingTileType.Dungeon:
+                FindObjectOfType<AudioManager>().Stop();
+                if (SceneManager.GetActiveScene().buildIndex == 1)
+                {
+                    TempData.tempSpawnPoint = new Vector3(currentPos.x, currentPos.y);
+                    SaveTemp();
+                    Debug.Log("Enter Dungeon");
+                    SceneManager.LoadScene("Dungeon");
+                }
+                else
+                {
+                    TempData.tempFog2 = FindObjectOfType<FogData>();;
+                    Debug.Log("Exit Dungeon");
+                    SceneManager.LoadScene("Overworld");
+                }
+                break;
+            default:
+                Debug.Log("No interactable tile!");
+                break;
         }
     }
 

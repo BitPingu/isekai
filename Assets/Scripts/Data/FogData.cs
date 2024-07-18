@@ -4,27 +4,38 @@ using UnityEngine.SceneManagement;
 
 public class FogData : MonoBehaviour
 {
-    public List<int> clearFogCoordsX, clearFogCoordsY;
-
-    [SerializeField]
-    private PlayerPosition player;
+    public List<int> clearFogCoordsX = new List<int>();
+    public List<int> clearFogCoordsY = new List<int>();
 
     private BoundsInt fogBounds;
+    [SerializeField]
     private TilemapStructure tilemap;
+    private PlayerPosition player;
 
     private void Awake()
     {
-        // Retrieve tilemap component
+        // Retrieve tilemap and player components
         tilemap = GetComponent<TilemapStructure>();
-
-        // Attach delegates
-        player.PosChange += ClearFog;
+        player = FindObjectOfType<PlayerPosition>();
 
         if (TempData.initFog)
         {
-            TempData.tempFog = this; 
             TempData.initFog = false;
         }
+    }
+
+    private void OnEnable()
+    {
+        // Attach delegates
+        player.PosChange += ClearFog;
+        player.SaveTemp += SaveFog;
+    }
+
+    private void OnDisable()
+    {
+        // Detatch delegates
+        player.PosChange -= ClearFog;
+        player.SaveTemp -= SaveFog;
     }
 
     // Looks at area around player in a 10x10 square and clears fog
@@ -42,29 +53,26 @@ public class FogData : MonoBehaviour
                 tilemap.SetTile(x, y, (int)GroundTileType.Empty, true);
             }
         }
-
-        if (SceneManager.GetActiveScene().buildIndex == 1)
-        {
-            GetClearFog();
-            TempData.tempFog = this;
-        }
     }
 
-
     // Retrieves coordinates with no fog
-    public void GetClearFog()
+    public void SaveFog()
     {
-        for (int x=0; x<tilemap.width; x++)
+        if (SceneManager.GetActiveScene().buildIndex == 1)
         {
-            for (int y=0; y<tilemap.height; y++)
+            for (int x=0; x<tilemap.width; x++)
             {
-                // Only add unique coords (using hashset)
-                if (tilemap.GetTile(x, y) == (int)GroundTileType.Empty)
+                for (int y=0; y<tilemap.height; y++)
                 {
-                    clearFogCoordsX.Add(x);
-                    clearFogCoordsY.Add(y);
+                    // Only add unique coords (using hashset)
+                    if (tilemap.GetTile(x, y) == (int)GroundTileType.Empty)
+                    {
+                        clearFogCoordsX.Add(x);
+                        clearFogCoordsY.Add(y);
+                    }
                 }
             }
+            TempData.tempFog = this;
         }
     }
 }
