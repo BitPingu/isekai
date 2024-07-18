@@ -1,20 +1,14 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.IO;
-using UnityEngine.Audio;
 
 public class MainMenu : MonoBehaviour
 {
-    public static bool loadGame;
-
     [SerializeField]
     private OptionsMenu options;
 
     private void Awake()
     {
-        // Do not load save data
-        loadGame = false;
-
         // Check if new game
         string path = Application.persistentDataPath + "/saveData.isekai";
         if (File.Exists(path))
@@ -51,15 +45,33 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
+    public void NewGame ()
+    {
+        // Set temp vars
+        TempData.newGame = true;
+        init(true);
+    }
+
     public void LoadGame ()
     {
+        // Set temp vars
+        TempData.newGame = false;
+        init(true);
         // Load save data
-        SaveSystem.LoadAllData();
-        loadGame = true;
+        SaveSystem.Load();
     }
 
     public void QuitGame ()
     {
         Application.Quit();
+    }
+
+    private void init (bool cond)
+    {
+        TempData.initSpawn = cond;
+        TempData.initSeed = cond;
+        TempData.initTime = cond;
+        TempData.initFog = cond;
+        TempData.initBuilding = cond;
     }
 }

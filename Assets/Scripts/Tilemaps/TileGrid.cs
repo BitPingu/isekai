@@ -5,7 +5,6 @@ using UnityEngine.Tilemaps;
 
 public class TileGrid : MonoBehaviour
 {
-    public WorldData world;
     public int width, height, seed;
 
     [SerializeField]
@@ -25,15 +24,28 @@ public class TileGrid : MonoBehaviour
 
     private void Awake ()
     {
-        if (MainMenu.loadGame)
+        if (randomize)
         {
-            // Load world data
-            seed = SaveSystem.LoadWorld().savedSeed;
-        }
-        else if (randomize)
-        {
-            // Randomize seed
-            seed = UnityEngine.Random.Range(-100000, 100000);
+            if (TempData.initSeed)
+            {
+                if (TempData.newGame)
+                {
+                    // Generate init seed
+                    seed = UnityEngine.Random.Range(-100000, 100000);
+                }
+                else
+                {
+                    // Load world data
+                    SaveData saveData = SaveSystem.Load();
+                    seed = saveData.saveSeed;
+                }
+                TempData.tempSeed = seed;
+                TempData.initSeed = false;
+            }
+            else
+            {
+                seed = TempData.tempSeed;
+            }
         }
 
         InitializeTiles();

@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,6 +14,12 @@ public class BuildingData : MonoBehaviour
 
         GetVillage();
         GetDungeon();
+
+        if (TempData.initBuilding)
+        {
+            TempData.tempBuilding = this;
+            TempData.initBuilding = false;
+        }
     }
 
     // Retrieves coordinates with village entrances

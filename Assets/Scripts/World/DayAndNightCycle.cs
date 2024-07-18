@@ -13,7 +13,7 @@ public class DayAndNightCycle : MonoBehaviour
     [SerializeField]
     private int days;
 
-    public int timePerDay;
+    public int timePerDay; // default is 500
     public float ratePerDay;
 
     // Getter method
@@ -41,27 +41,44 @@ public class DayAndNightCycle : MonoBehaviour
 
     private void Start()
     {
-        if (MainMenu.loadGame)
+        if (TempData.initTime)
         {
-            // Load world data
-            time = SaveSystem.LoadWorld().savedTime;
-            isDay = SaveSystem.LoadWorld().savedIsDay;
-
-            // Call delegates
-            if (isDay)
+            if (TempData.newGame)
             {
-                DayTime();
+                Debug.Log("new time");
+                // New game
+                time = 50;
+                isDay = true;
             }
             else
             {
-                NightTime();
+                Debug.Log("load time");
+                // Load world data
+                SaveData saveData = SaveSystem.Load();
+                time = saveData.saveTime;
+                isDay = saveData.saveIsDay;
             }
+            TempData.tempTime = time;
+            TempData.tempIsDay = isDay;
+            TempData.initTime = false;
         }
         else
         {
-            // New game
-            DayTime(); // Call delegate (and any methods tied to it)
-            isDay = true;
+            Debug.Log("state time");
+            time = TempData.tempTime;
+            isDay = TempData.tempIsDay;
+        }
+
+        // Call delegates (and any methods tied to it)
+        if (isDay)
+        {
+            Debug.Log("load day");
+            DayTime();
+        }
+        else
+        {
+            Debug.Log("load night");
+            NightTime();
         }
     }
 
@@ -72,37 +89,42 @@ public class DayAndNightCycle : MonoBehaviour
             time = 0;
 
         // Stop night music (fade)
-        if ((int)time == timePerDay - 5)
-            FindObjectOfType<AudioManager>().FadeOut(700f);
+        if ((int)time == timePerDay - 10)
+            FindObjectOfType<AudioManager>().FadeOut(800f);
 
         // Day time
         if (time == 0)
         {
+            Debug.Log("it's a new day!");
+            FindObjectOfType<AudioManager>().Stop();
             DayTime(); // Call delegate (and any methods tied to it)
             isDay = true;
-        }
-
-        // Prevent day ticker from increasing multiple times
-        if ((int)time == ((timePerDay / 2) + 5) && canChangeDay)
-        {
-            // Night time
-            NightTime(); // Call delegate (and any methods tied to it)
-            isDay = false;
-            canChangeDay = false;
+            TempData.tempIsDay = isDay;
             days++;
         }
 
-        // Enable day change
-        if ((int)time == (timePerDay / 2))
-        {
+        // Stop day music (fade)
+        if ((int)time == (timePerDay / 2) - 10)
+            FindObjectOfType<AudioManager>().FadeOut(800f);
+
+        // Prevent multiple day changes
+        if ((int)time == (timePerDay / 2) - 1)
             canChangeDay = true;
 
-            // Stop day music (fade)
-            FindObjectOfType<AudioManager>().FadeOut(700f);
+        // Night time
+        if ((int)time == (timePerDay / 2) && canChangeDay)
+        {
+            Debug.Log("night");
+            FindObjectOfType<AudioManager>().Stop();
+            NightTime(); // Call delegate (and any methods tied to it)
+            isDay = false;
+            TempData.tempIsDay = isDay;
+            canChangeDay = false;
         }
         
         // Tie time to frame rate
         time += Time.deltaTime;
+        TempData.tempTime = time;
 
         // Pick color from gradient based on value from 0-1
         light.GetComponent<Light2D>().color = lightColor.Evaluate(time * ratePerDay);
@@ -131,15 +153,15 @@ public class DayAndNightCycle : MonoBehaviour
     private void DayMusic()
     {
         // Get current tile from player position
-        if (player.currentGTile == (int)GroundTileType.Land && SceneManager.GetActiveScene().buildIndex == 1)
+        if (SceneManager.GetActiveScene().buildIndex == 1)
         {
             FindObjectOfType<AudioManager>().FadeIn("Overworld Day", 1f);
         }
-        else if (player.currentGTile == (int)GroundTileType.Land && SceneManager.GetActiveScene().buildIndex == 2)
+        else if (SceneManager.GetActiveScene().buildIndex == 2)
         {
             FindObjectOfType<AudioManager>().FadeIn("Village Day", 1f);
         }
-        else if (player.currentGTile == (int)GroundTileType.Land && SceneManager.GetActiveScene().buildIndex == 3)
+        else if (SceneManager.GetActiveScene().buildIndex == 3)
         {
             FindObjectOfType<AudioManager>().FadeIn("Dungeon", 1f);
         }
@@ -148,15 +170,15 @@ public class DayAndNightCycle : MonoBehaviour
     private void NightMusic()
     {
         // Get current tile from player position
-        if (player.currentGTile == (int)GroundTileType.Land && SceneManager.GetActiveScene().buildIndex == 1)
+        if (SceneManager.GetActiveScene().buildIndex == 1)
         {
             FindObjectOfType<AudioManager>().FadeIn("Overworld Night", 1f);
         }
-        else if (player.currentGTile == (int)GroundTileType.Land && SceneManager.GetActiveScene().buildIndex == 2)
+        else if (SceneManager.GetActiveScene().buildIndex == 2)
         {
             FindObjectOfType<AudioManager>().FadeIn("Village Night", 1f);
         }
-        else if (player.currentGTile == (int)GroundTileType.Land && SceneManager.GetActiveScene().buildIndex == 3)
+        else if (SceneManager.GetActiveScene().buildIndex == 3)
         {
             FindObjectOfType<AudioManager>().FadeIn("Dungeon", 1f);
         }

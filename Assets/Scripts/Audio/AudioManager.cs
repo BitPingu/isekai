@@ -63,14 +63,24 @@ public class AudioManager : MonoBehaviour
         }
 
         // Play bg sound
-        bg.volume = bg.maxVolume;
-        bg.source.Play();
+        if (!bg.source.isPlaying)
+        {
+            bg.volume = bg.maxVolume;
+            bg.source.Play();
+        }
+        else
+        {
+            Debug.Log("There is already music playing");
+        }
     }
 
     public void Stop()
     {
         // Stop sound
-        bg.source.Stop();
+        if (bg != null && bg.source.isPlaying)
+        {
+            bg.source.Stop();
+        }
     }
 
     public void FadeIn(string name, float FadeTime)
@@ -86,24 +96,34 @@ public class AudioManager : MonoBehaviour
         }
 
         // Fade in chosen sound
-        StartCoroutine(AudioFade.FadeIn(bg, FadeTime));
+        if (!bg.source.isPlaying)
+        {
+            StartCoroutine(AudioFade.FadeIn(bg, FadeTime));
+        }
+        else
+        {
+            Debug.Log("There is already music playing");
+        }
     }
 
     public void FadeOut(float FadeTime)
     {
         // Fade out current sound
-        StartCoroutine(AudioFade.FadeOut(bg, FadeTime));
+        if (bg != null && bg.source.isPlaying)
+            StartCoroutine(AudioFade.FadeOut(bg, FadeTime));
     }
 
     public void Dampen()
     {
         // Lower sound volume
-        bg.source.volume *= .5f;
+        if (bg != null && bg.source.isPlaying)
+            bg.source.volume *= .5f;
     }
 
     public void UnDampen()
     {
         // Increase sound volume
-        bg.source.volume *= 2f;
+        if (bg != null && bg.source.isPlaying)
+            bg.source.volume *= 2f;
     }
 }

@@ -6,17 +6,6 @@ public class PauseMenu : MonoBehaviour
     [SerializeField]
     private GameObject menuManager;
 
-    [SerializeField]
-    private PlayerPosition position;
-    [SerializeField]
-    private TileGrid grid;
-    [SerializeField]
-    private DayAndNightCycle dayNight;
-    [SerializeField]
-    private FogData fog;
-    [SerializeField]
-    private BuildingData building;
-
     // Update is called once per frame
     private void Update()
     {
@@ -42,7 +31,7 @@ public class PauseMenu : MonoBehaviour
     public void Save()
     {
         // Save all data
-        SaveSystem.SaveAllData(position, grid, dayNight, fog, building);
+        SaveSystem.Save();
     }
 
     public void Quit()

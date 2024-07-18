@@ -5,6 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "FogGeneration", menuName = "Algorithms/FogGeneration")]
 public class FogGeneration : AlgorithmBase
 {
+    public List<int> clearFogCoordsX;
+    public List<int> clearFogCoordsY;
     public override void Apply(TilemapStructure tilemap)
     {
         // Generate new fog
@@ -16,11 +18,35 @@ public class FogGeneration : AlgorithmBase
             }
         }
 
-        if (MainMenu.loadGame)
+        if (TempData.initFog)
+        {
+            if (!TempData.newGame)
+            {
+                // Load fog data
+                SaveData saveData = SaveSystem.Load();
+                clearFogCoordsX = saveData.saveClearFogCoordsX;
+                clearFogCoordsY = saveData.saveClearFogCoordsY;
+
+                // Combine lists
+                HashSet<Vector2Int> clearFogCoords = new HashSet<Vector2Int>();
+                var combinedCoords = clearFogCoordsX.Zip(clearFogCoordsY, (x, y) => new { xCoord = x, yCoord = y });
+                foreach (var coord in combinedCoords)
+                {
+                    clearFogCoords.Add(new Vector2Int(coord.xCoord, coord.yCoord));
+                }
+
+                // Load no fog tiles
+                foreach (var coord in clearFogCoords)
+                {
+                    tilemap.SetTile(coord.x, coord.y, (int)GroundTileType.Empty, setDirty: false);
+                }
+            }
+        }
+        else
         {
             // Load fog data
-            List<int> clearFogCoordsX = SaveSystem.LoadWorld().savedClearFogCoordsX;
-            List<int> clearFogCoordsY = SaveSystem.LoadWorld().savedClearFogCoordsY;
+            List<int> clearFogCoordsX = TempData.tempFog.clearFogCoordsX;
+            List<int> clearFogCoordsY = TempData.tempFog.clearFogCoordsY;
 
             // Combine lists
             HashSet<Vector2Int> clearFogCoords = new HashSet<Vector2Int>();

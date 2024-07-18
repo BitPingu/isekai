@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FogData : MonoBehaviour
 {
@@ -18,6 +19,12 @@ public class FogData : MonoBehaviour
 
         // Attach delegates
         player.PosChange += ClearFog;
+
+        if (TempData.initFog)
+        {
+            TempData.tempFog = this; 
+            TempData.initFog = false;
+        }
     }
 
     // Looks at area around player in a 10x10 square and clears fog
@@ -35,7 +42,14 @@ public class FogData : MonoBehaviour
                 tilemap.SetTile(x, y, (int)GroundTileType.Empty, true);
             }
         }
+
+        if (SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            GetClearFog();
+            TempData.tempFog = this;
+        }
     }
+
 
     // Retrieves coordinates with no fog
     public void GetClearFog()

@@ -27,11 +27,9 @@ public class PlayerPosition : MonoBehaviour
 
     private TilemapStructure groundMap, overworldMap;
     private List<KeyValuePair<Vector2Int, int>> neighbours;
-    private int xCoord, yCoord, currentTile;
 
     private void Awake()
     {
-        Debug.Log("After Scene: " + SceneManager.GetActiveScene().buildIndex);
         // Retrieve tilemap components
         groundMap = grid.GetTilemap(TilemapType.Ground);
         overworldMap = grid.GetTilemap(TilemapType.Overworld);
@@ -40,20 +38,34 @@ public class PlayerPosition : MonoBehaviour
         PosChange += CheckPosition;
         PosChange += OTileSound;
         PosChange += CheckNearby;
-
-        if (MainMenu.loadGame)
+        
+        if (SceneManager.GetActiveScene().buildIndex == 1)
         {
-            // Load player position
-            spawnPoint.x = SaveSystem.LoadPlayer().savedPosX + .5f;
-            spawnPoint.y = SaveSystem.LoadPlayer().savedPosY + .5f;
-        }
-        else if (SceneManager.GetActiveScene().buildIndex == 1)
-        {
-            // Generate spawn point
-            GenerateSpawnPoint();
+            if (TempData.initSpawn)
+            {
+                if (TempData.newGame)
+                {
+                    // Generate initial spawn point
+                    spawnPoint = GenerateSpawnPoint();
+                }
+                else
+                {
+                    // Load player position
+                    SaveData saveData = SaveSystem.Load();
+                    spawnPoint.x = saveData.saveSpawnPoint[0];
+                    spawnPoint.y = saveData.saveSpawnPoint[1];
+                    spawnPoint.z = saveData.saveSpawnPoint[2];
+                }
+                TempData.initSpawn = false;
+            }
+            else
+            {
+                spawnPoint = TempData.tempSpawnPoint;
+            }
         }
         else if (SceneManager.GetActiveScene().buildIndex == 2 || SceneManager.GetActiveScene().buildIndex == 3)
         {
+            // Dungeon or village spawn
             spawnPoint = new Vector3(grid.width / 2, 0.5f);
         }
     }
@@ -61,6 +73,8 @@ public class PlayerPosition : MonoBehaviour
     private void Start()
     {
         // Set spawn point
+        spawnPoint.x += .5f;
+        spawnPoint.y += .5f;
         transform.position = spawnPoint;
         prevPos = currentPos = Vector2Int.FloorToInt(transform.position);
 
@@ -76,6 +90,7 @@ public class PlayerPosition : MonoBehaviour
     {
         // Retrieve coordinates of player
         currentPos = Vector2Int.FloorToInt(transform.position);
+        TempData.tempPos = new Vector3(currentPos.x, currentPos.y);
 
         // Position check
         if (currentPos != prevPos)
@@ -86,8 +101,10 @@ public class PlayerPosition : MonoBehaviour
     }
 
     // Generates a random spawn point
-    private void GenerateSpawnPoint()
+    private Vector3 GenerateSpawnPoint()
     {
+        int xCoord, yCoord, currentTile;
+
         // Retrieve tilemap component
         groundMap = grid.GetTilemap(TilemapType.Ground);
 
@@ -103,7 +120,7 @@ public class PlayerPosition : MonoBehaviour
         while (currentTile != (int)GroundTileType.Land);
 
         // Generate spawn point
-        spawnPoint = new Vector3(xCoord + .5f, yCoord + .5f);
+        return new Vector3(xCoord, yCoord);
     }
 
     // Looks at current position

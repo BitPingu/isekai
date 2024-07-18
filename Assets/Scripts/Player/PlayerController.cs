@@ -15,17 +15,6 @@ public class PlayerController : MonoBehaviour
     private PlayerPosition position;
     private float moveSpeed;
 
-
-
-    [SerializeField]
-    private TileGrid grid;
-    [SerializeField]
-    private DayAndNightCycle dayNight;
-    [SerializeField]
-    private FogData fog;
-    [SerializeField]
-    private BuildingData building;
-
     private void Awake()
     {
         // Retrieve components of player
@@ -94,42 +83,38 @@ public class PlayerController : MonoBehaviour
     // Change scene based on current tile
     private void EnterBuilding()
     {
-        MainMenu.loadGame = false;
-        Debug.Log("Before Scene: " + SceneManager.GetActiveScene().buildIndex);
-
         switch (position.currentOTile)
         {
             case (int)BuildingTileType.House:
+                FindObjectOfType<AudioManager>().Stop();
                 if (SceneManager.GetActiveScene().buildIndex == 1) 
                 {
+                    TempData.tempSpawnPoint = new Vector3(position.currentPos.x, position.currentPos.y);
                     Debug.Log("Enter Village");
-                    SaveSystem.SaveAllData(position, grid, dayNight, fog, building);
                     SceneManager.LoadScene("Village");
                 }
                 else
                 {
                     Debug.Log("Exit Village");
-                    SaveSystem.LoadAllData();
-                    MainMenu.loadGame = true;
                     SceneManager.LoadScene("Overworld");
                 }
                 break;
             case (int)BuildingTileType.Dungeon:
+                FindObjectOfType<AudioManager>().Stop();
                 if (SceneManager.GetActiveScene().buildIndex == 1)
                 {
+                    TempData.tempSpawnPoint = new Vector3(position.currentPos.x, position.currentPos.y);
                     Debug.Log("Enter Dungeon");
-                    SaveSystem.SaveAllData(position, grid, dayNight, fog, building);
                     SceneManager.LoadScene("Dungeon");
                 }
                 else
                 {
                     Debug.Log("Exit Dungeon");
-                    SaveSystem.LoadAllData();
-                    MainMenu.loadGame = true;
                     SceneManager.LoadScene("Overworld");
                 }
                 break;
             default:
+                Debug.Log("No interactable tile!");
                 break;
         }
     }
