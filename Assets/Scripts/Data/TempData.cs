@@ -4,6 +4,7 @@ public class TempData : MonoBehaviour
 {
     public static bool newGame;
     public static bool initSpawn;
+    public static Vector3 tempWorldSpawn;
     public static Vector3 tempSpawnPoint;
     public static Vector3 tempPos;
     public static bool initSeed;

@@ -84,7 +84,7 @@
     <Compile Include="Assets/Scripts/Audio/AudioManager.cs" />
     <Compile Include="Assets/Scripts/Algorithms/FogGeneration.cs" />
     <Compile Include="Assets/Scripts/UI/PauseMenu.cs" />
-    <Compile Include="Assets/Scripts/NPC/EnemyMovement.cs" />
+    <Compile Include="Assets/Scripts/NPC/NPCMovement.cs" />
     <Compile Include="Assets/Scripts/NPC/VillagerSpawner.cs" />
     <Compile Include="Assets/Scripts/Data/BuildingData.cs" />
     <Compile Include="Assets/Scripts/Player/PlayerPosition.cs" />
@@ -104,6 +104,8 @@
     <Compile Include="Assets/Scripts/Tilemaps/BuildingTileType.cs" />
     <Compile Include="Assets/Scripts/Data/TempData.cs" />
     <Compile Include="Assets/Scripts/Algorithms/AlgorithmBase.cs" />
+    <Compile Include="Assets/Scripts/NPC/ElfPosition.cs" />
+    <Compile Include="Assets/Scripts/NPC/EnemyType.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/TextMesh Pro/Shaders/TMPro.cginc" />

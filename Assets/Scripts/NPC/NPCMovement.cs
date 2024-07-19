@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyMovement : MonoBehaviour
+public class NPCMovement : MonoBehaviour
 {
-    public float maxSpeed;
+    public float maxSpeed; // default is 3f 3 3 2
     private float moveSpeed;
     private Vector2 movement;
 
@@ -16,20 +16,18 @@ public class EnemyMovement : MonoBehaviour
     private Vector2Int currentPos;
     [SerializeField]
     private int currentTile;
-    [SerializeField]
-    private TileGrid grid;
     private TilemapStructure overworldMap;
 
     private bool isMoving;
     [SerializeField]
-    private float walkTime; // default is 1f
+    private float walkTime; // default is 1f 1 .5 1
     private float walkCounter;
     private float waitTime;
     private float waitCounter;
     [SerializeField]
-    private float minWaitTime;
+    private float minWaitTime; // default is 3f
     [SerializeField]
-    private float maxWaitTime;
+    private float maxWaitTime; // default is 5f
 
     private void Awake()
     {
@@ -39,8 +37,7 @@ public class EnemyMovement : MonoBehaviour
         animator = GetComponent<Animator>();
 
         // Retrieve tilemap component
-        grid = FindObjectOfType<TileGrid>();
-        overworldMap = grid.GetTilemap(TilemapType.Overworld);
+        overworldMap = FindObjectOfType<TileGrid>().GetTilemap(TilemapType.Overworld);
 
         // Set counters
         waitCounter = waitTime;

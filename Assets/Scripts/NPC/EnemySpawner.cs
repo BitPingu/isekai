@@ -7,16 +7,14 @@ public class EnemySpawner : MonoBehaviour
     private EnemyTypes.EnemyData[] enemies;
     [SerializeField]
     private PoissonDiscSampling algorithm;
-    [SerializeField]
-    private List<Vector2> points;
+    private List<Vector2> points = new List<Vector2>();
     [SerializeField]
     private float displayRadius = 1;
 
     private Vector3Int spawnPoint;
 
     private int currentTile;
-    [SerializeField]
-    private TileGrid grid;
+
     private TilemapStructure groundMap;
 
     public DayAndNightCycle dayNight;
@@ -24,38 +22,38 @@ public class EnemySpawner : MonoBehaviour
     private void Awake()
     {
         // Retrieve tilemap component
-        groundMap = grid.GetTilemap(TilemapType.Ground);
+        groundMap = FindObjectOfType<TileGrid>().GetTilemap(TilemapType.Ground);
 
         // Attach delegates
         dayNight.DayTime += dayEnemies;
         dayNight.NightTime += nightEnemies;
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawWireCube(algorithm.regionSize / 2, algorithm.regionSize);
-        if (points != null)
-        {
-            foreach (Vector2 point in points)
-            {
-                Gizmos.DrawSphere(point, displayRadius);
-            }
-        }
-    }
+    // private void OnDrawGizmos()
+    // {
+    //     Gizmos.DrawWireCube(algorithm.regionSize / 2, algorithm.regionSize);
+    //     if (points != null)
+    //     {
+    //         foreach (Vector2 point in points)
+    //         {
+    //             Gizmos.DrawSphere(point, displayRadius);
+    //         }
+    //     }
+    // }
 
     private void dayEnemies()
     {
         points.Clear();
         despawnEnemies();
-        foreach (EnemyTypes.EnemyData enemyType in enemies)
+        foreach (EnemyTypes.EnemyData enemy in enemies)
         {
-            if (!enemyType.nightEnemy)
+            if (!enemy.nightEnemy)
             {
                 // Determine spawn points using Poisson Disc Sampling
                 points = algorithm.GeneratePoints();
 
                 // Spawn day enemies
-                spawnEnemy(enemyType.enemy);
+                spawnEnemy(enemy);
             }
         }
     }
@@ -64,20 +62,20 @@ public class EnemySpawner : MonoBehaviour
     {
         points.Clear();
         despawnEnemies();
-        foreach (EnemyTypes.EnemyData enemyType in enemies)
+        foreach (EnemyTypes.EnemyData enemy in enemies)
         {
-            if (enemyType.nightEnemy)
+            if (enemy.nightEnemy)
             {
                 // Determine spawn points using Poisson Disc Sampling
                 points = algorithm.GeneratePoints();
 
                 // Spawn night enemies
-                spawnEnemy(enemyType.enemy);
+                spawnEnemy(enemy);
             }
         }
     }
 
-    private void spawnEnemy(GameObject enemy)
+    private void spawnEnemy(EnemyTypes.EnemyData enemy)
     {
         foreach (Vector2 point in points)
         {
@@ -90,14 +88,52 @@ public class EnemySpawner : MonoBehaviour
             // Check valid tile
             if (currentTile == (int)GroundTileType.Land)
             {
+                // Instantiate enemy
+                EnemyTypes newEnemyData = new EnemyTypes(enemy.gameObject, enemy.type, point, enemy.nightEnemy);
                 // Spawn enemy at spawnPoint
-                GameObject newEnemy = Instantiate(enemy, spawnPoint + new Vector3(.5f, .5f), Quaternion.identity);
-                newEnemy.transform.parent = gameObject.transform;
+                GameObject childEnemy = Instantiate(newEnemyData.gameObject, newEnemyData.spawnPoint + new Vector3(.5f, .5f), Quaternion.identity);
+                childEnemy.transform.parent = gameObject.transform;
+            }
+            else
+            {
+                // Debug.Log("enemy couldn't spawn :(");
             }
         }
     }
 
-    private void despawnEnemies()
+    public void spawnEnemy(string type, Vector3 spawnPoint, bool flipX)
+    {
+        // Check tile
+        currentTile = groundMap.GetTile(Mathf.FloorToInt(spawnPoint.x), Mathf.FloorToInt(spawnPoint.y));
+
+        // Check valid tile
+        if (currentTile != (int)GroundTileType.Land)
+        {
+            Debug.Log("enemy couldn't spawn :(");
+            return;
+        }
+
+        // Get enemy
+        foreach (EnemyTypes.EnemyData enemy in enemies)
+        {
+            if (enemy.type.Equals(type))
+            {
+                // Instantiate enemy
+                EnemyTypes newEnemyData = new EnemyTypes(enemy.gameObject, type, spawnPoint, enemy.nightEnemy);
+                // Spawn enemy at spawnPoint
+                GameObject childEnemy = Instantiate(newEnemyData.gameObject, newEnemyData.spawnPoint + new Vector3(.5f, .5f), Quaternion.identity);
+                childEnemy.tag = "SpecialEnemy";
+                childEnemy.GetComponent<NPCMovement>().enabled = false;
+                childEnemy.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+                childEnemy.GetComponent<SpriteRenderer>().flipX = flipX;
+                childEnemy.GetComponent<Animator>().SetBool("Attack", true);
+                childEnemy.transform.parent = gameObject.transform;
+                break;
+            }
+        }
+    }
+
+    public void despawnEnemies()
     {
         var clones = GameObject.FindGameObjectsWithTag("Enemy");
         foreach (var clone in clones)

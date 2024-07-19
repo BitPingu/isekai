@@ -6,7 +6,7 @@ SpriteAtlas:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: New Sprite Atlas
+  m_Name: TilegapFix
   m_EditorData:
     serializedVersion: 2
     textureSettings:
@@ -193,5 +193,5 @@ SpriteAtlas:
   - plains-objects-tileset_3
   - plains-objects-tileset_2
   m_RenderDataMap: {}
-  m_Tag: New Sprite Atlas
+  m_Tag: TilegapFix
   m_IsVariant: 0

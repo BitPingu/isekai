@@ -101,6 +101,7 @@ public class PlayerPosition : MonoBehaviour
 
                     // Generate spawn point
                     spawnPoint = new Vector3(xCoord, yCoord);
+                    TempData.tempWorldSpawn = spawnPoint;
                 }
                 else
                 {
