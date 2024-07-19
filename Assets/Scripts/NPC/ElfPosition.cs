@@ -11,6 +11,8 @@ public class ElfPosition : MonoBehaviour
 
     private PlayerPosition player;
 
+    private bool inDanger;
+
     private void Awake()
     {
         // Retrieve tilemap and player components
@@ -18,7 +20,9 @@ public class ElfPosition : MonoBehaviour
         player = FindObjectOfType<PlayerPosition>();
 
         // Attacked by slime
-        Jump();
+        inDanger = true;
+        GetComponent<Animator>().SetBool("Jump", true);
+        GetComponent<PartyMovement>().enabled = false;
     }
     
     private void OnEnable()
@@ -33,9 +37,11 @@ public class ElfPosition : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.name == "Player")
+        if (inDanger && collision.gameObject.name == "Player")
         {
+            inDanger = false;
             GetComponent<Animator>().SetBool("Jump", false);
+            GetComponent<PartyMovement>().enabled = true;
             Debug.Log("hit");
         }
     }
@@ -43,23 +49,17 @@ public class ElfPosition : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (player.transform.position.x - transform.position.x > 0)
+        if (inDanger)
         {
-            GetComponent<SpriteRenderer>().flipX = false;
+            if (player.transform.position.x - transform.position.x > 0)
+            {
+                GetComponent<SpriteRenderer>().flipX = false;
+            }
+            else
+            {
+                GetComponent<SpriteRenderer>().flipX = true;
+            }
         }
-        else
-        {
-            GetComponent<SpriteRenderer>().flipX = true;
-        }
-    }
-
-    private void Jump()
-    {
-        // only enabling the line below makes it so you can push
-        // GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
-
-        GetComponent<Animator>().SetBool("Jump", true);
     }
 
     // Generates a random spawn point

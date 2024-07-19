@@ -2108,7 +2108,7 @@ GameObject:
   - component: {fileID: 6051531619161849258}
   - component: {fileID: 6051531619161849265}
   - component: {fileID: 6051531619161849266}
-  - component: {fileID: 6051531619161849267}
+  - component: {fileID: 6051531619161849269}
   m_Layer: 0
   m_Name: Elf
   m_TagString: Untagged
@@ -2148,24 +2148,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoint: {x: 0, y: 0, z: 0}
---- !u!114 &6051531619161849267
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6051531619161849264}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8cd1741089fd14b459d0a8ac63abadad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxSpeed: 3
-  currentPos: {x: 0, y: 0}
-  currentTile: 0
-  walkTime: 1
-  minWaitTime: 3
-  maxWaitTime: 5
 --- !u!50 &6051531619161849268
 Rigidbody2D:
   serializedVersion: 4
@@ -2183,10 +2165,26 @@ Rigidbody2D:
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &6051531619161849269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6051531619161849264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3059076701d0840afa9c4114eabd0f76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxSpeed: 5
+  minDistance: 1.55
+  currentPos: {x: 0, y: 0}
+  currentTile: 0
 --- !u!4 &6051531619161849270
 Transform:
   m_ObjectHideFlags: 0

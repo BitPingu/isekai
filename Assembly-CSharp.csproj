@@ -81,6 +81,7 @@
     <Compile Include="Assets/Scripts/UI/OptionsMenu.cs" />
     <Compile Include="Assets/Scripts/Algorithms/InsideGeneration.cs" />
     <Compile Include="Assets/Scripts/UI/MapMenu.cs" />
+    <Compile Include="Assets/Scripts/NPC/EnemyType.cs" />
     <Compile Include="Assets/Scripts/Audio/AudioManager.cs" />
     <Compile Include="Assets/Scripts/Algorithms/FogGeneration.cs" />
     <Compile Include="Assets/Scripts/UI/PauseMenu.cs" />
@@ -103,9 +104,9 @@
     <Compile Include="Assets/Scripts/Player/PlayerController.cs" />
     <Compile Include="Assets/Scripts/Tilemaps/BuildingTileType.cs" />
     <Compile Include="Assets/Scripts/Data/TempData.cs" />
-    <Compile Include="Assets/Scripts/Algorithms/AlgorithmBase.cs" />
     <Compile Include="Assets/Scripts/NPC/ElfPosition.cs" />
-    <Compile Include="Assets/Scripts/NPC/EnemyType.cs" />
+    <Compile Include="Assets/Scripts/Algorithms/AlgorithmBase.cs" />
+    <Compile Include="Assets/Scripts/NPC/PartyMovement.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/TextMesh Pro/Shaders/TMPro.cginc" />
