@@ -1371,7 +1371,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6051531619059624799, guid: 12442fc3ad8dfae4394f6933d0291586, type: 3}
   m_PrefabInstance: {fileID: 6051531617834581963}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 6051531617834581964}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4d64c92ba47e4554d95c35ebffc3537a, type: 3}
@@ -1991,18 +1991,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: World
       objectReference: {fileID: 0}
-    - target: {fileID: 725286824534967813, guid: b1d4d0c234ecf6b43b26f0e51520c30c, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 725286824534967838, guid: b1d4d0c234ecf6b43b26f0e51520c30c, type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 1493488788}
-    - target: {fileID: 725286824810590555, guid: b1d4d0c234ecf6b43b26f0e51520c30c, type: 3}
-      propertyPath: m_Name
-      value: WorldTime
-      objectReference: {fileID: 0}
     - target: {fileID: 725286824810590558, guid: b1d4d0c234ecf6b43b26f0e51520c30c, type: 3}
       propertyPath: player
       value: 
@@ -2011,6 +2003,14 @@ PrefabInstance:
       propertyPath: elf
       value: 
       objectReference: {fileID: 6051531619161849264}
+    - target: {fileID: 4342877996399030421, guid: b1d4d0c234ecf6b43b26f0e51520c30c, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 6051531617834581964}
+    - target: {fileID: 4342877996399030421, guid: b1d4d0c234ecf6b43b26f0e51520c30c, type: 3}
+      propertyPath: spawner
+      value: 
+      objectReference: {fileID: 1512219760}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b1d4d0c234ecf6b43b26f0e51520c30c, type: 3}
 --- !u!1001 &6051531617834581963
@@ -2070,6 +2070,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12442fc3ad8dfae4394f6933d0291586, type: 3}
+--- !u!1 &6051531617834581964 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6051531619059624768, guid: 12442fc3ad8dfae4394f6933d0291586, type: 3}
+  m_PrefabInstance: {fileID: 6051531617834581963}
+  m_PrefabAsset: {fileID: 0}
 --- !u!61 &6051531619161849258
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2117,7 +2122,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!95 &6051531619161849265
 Animator:
   serializedVersion: 3
@@ -2151,6 +2156,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnPoint: {x: 0, y: 0, z: 0}
   maxDistance: 3.5
+  inDanger: 0
   prevPos: {x: 0, y: 0}
   currentPos: {x: 0, y: 0}
   prevGTile: 0

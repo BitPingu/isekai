@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour
         // Interactable check
         if (Input.GetKeyDown(interactKey))
         {
-            position.EnterBuilding();
+            FindObjectOfType<WorldEvents>().EnterBuilding(position);
         }
     }
 

@@ -303,6 +303,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0894ca4783021458b8ece2fde73b7152, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  elf: {fileID: 0}
 --- !u!1 &725286824534967813
 GameObject:
   m_ObjectHideFlags: 0
@@ -455,7 +456,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clearFogCoordsX: 
   clearFogCoordsY: 
-  tilemap: {fileID: 0}
 --- !u!1 &725286824561060681
 GameObject:
   m_ObjectHideFlags: 0
@@ -688,7 +688,7 @@ GameObject:
   - component: {fileID: 725286824810590552}
   - component: {fileID: 725286824810590558}
   m_Layer: 0
-  m_Name: Global Light 2D
+  m_Name: WorldTime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

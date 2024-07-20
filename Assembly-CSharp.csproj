@@ -67,6 +67,7 @@
     <Compile Include="Assets/Scripts/Algorithms/Helpers/Noise.cs" />
     <Compile Include="Assets/Scripts/Data/SaveData.cs" />
     <Compile Include="Assets/Scripts/Algorithms/VoronoiGeneration.cs" />
+    <Compile Include="Assets/Scripts/World/WorldEvents.cs" />
     <Compile Include="Assets/Scripts/UI/MenuController.cs" />
     <Compile Include="Assets/Scripts/NPC/VillagerTypes.cs" />
     <Compile Include="Assets/Scripts/NPC/EnemyData.cs" />
@@ -108,7 +109,6 @@
     <Compile Include="Assets/Scripts/Data/TempData.cs" />
     <Compile Include="Assets/Scripts/NPC/ElfPosition.cs" />
     <Compile Include="Assets/Scripts/Algorithms/AlgorithmBase.cs" />
-    <Compile Include="Assets/Scripts/World/WorldEvents.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/TextMesh Pro/Shaders/TMPro.cginc" />

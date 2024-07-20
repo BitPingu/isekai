@@ -79,8 +79,7 @@ public class TileGrid : MonoBehaviour
 
     private void Start()
     {
-        FindObjectOfType<PlayerPosition>().SceneChange();
-        Debug.Log("world gen");
+        // FindObjectOfType<PlayerPosition>().SceneChange();
         WorldGen(); // Finish world gen
     }
 

@@ -8,18 +8,14 @@ public class FogData : MonoBehaviour
     public List<int> clearFogCoordsY = new List<int>();
 
     private BoundsInt fogBounds;
-    [SerializeField]
     private TilemapStructure tilemap;
     private PlayerPosition player;
-    private WorldEvents world;
 
     private void Awake()
     {
         // Retrieve tilemap and player components
         tilemap = GetComponent<TilemapStructure>();
         player = FindObjectOfType<PlayerPosition>();
-        world = GetComponentInParent<WorldEvents>();
-        // Debug.Log("getworld:" + world);
 
         if (TempData.initFog)
         {
@@ -31,16 +27,12 @@ public class FogData : MonoBehaviour
     {
         // Attach delegates
         player.PosChange += ClearFog;
-        world = GetComponentInParent<WorldEvents>();
-        player.SaveTemp += SaveFog;
     }
 
     private void OnDisable()
     {
         // Detatch delegates
         player.PosChange -= ClearFog;
-        world = GetComponentInParent<WorldEvents>();
-        player.SaveTemp -= SaveFog;
     }
 
     // Looks at area around player in a 10x10 square and clears fog

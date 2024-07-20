@@ -14,12 +14,6 @@ public class PlayerPosition : MonoBehaviour
     public delegate void OnPosChange();
     public OnPosChange PosChange;
 
-    // Call other functions when scene changes
-    public delegate void OnSaveTemp();
-    public OnSaveTemp SaveTemp;
-    public delegate void OnSceneChange();
-    public OnSceneChange SceneChange;
-
     // Call other functions when tile types change
     public delegate void OnGTileChange();
     public OnGTileChange GTileChange;
@@ -52,8 +46,6 @@ public class PlayerPosition : MonoBehaviour
         PosChange += CheckPosition;
         PosChange += OTileSound;
         PosChange += CheckNearby;
-        SceneChange += RetrieveTilemap;
-        SceneChange += Spawn;
     }
 
     private void Update()
@@ -78,8 +70,9 @@ public class PlayerPosition : MonoBehaviour
     }
 
     // Generates a random spawn point
-    private void Spawn()
+    public void Spawn()
     {
+        RetrieveTilemap();
         if (SceneManager.GetActiveScene().buildIndex == 1)
         {
             if (TempData.initSpawn)
@@ -155,49 +148,6 @@ public class PlayerPosition : MonoBehaviour
         {
             OTileChange();
             prevOTile = currentOTile;
-        }
-    }
-
-    // Change scene based on current tile
-    public void EnterBuilding()
-    {
-        switch (currentOTile)
-        {
-            case (int)BuildingTileType.House:
-                FindObjectOfType<AudioManager>().Stop();
-                if (SceneManager.GetActiveScene().buildIndex == 1) 
-                {
-                    TempData.tempSpawnPoint = new Vector3(currentPos.x + .5f, currentPos.y + .4f);
-                    SaveTemp();
-                    Debug.Log("Enter Village");
-                    SceneManager.LoadScene("Village");
-                }
-                else
-                {
-                    TempData.tempFog2 = FindObjectOfType<FogData>();;
-                    Debug.Log("Exit Village");
-                    SceneManager.LoadScene("Overworld");
-                }
-                break;
-            case (int)BuildingTileType.Dungeon:
-                FindObjectOfType<AudioManager>().Stop();
-                if (SceneManager.GetActiveScene().buildIndex == 1)
-                {
-                    TempData.tempSpawnPoint = new Vector3(currentPos.x + .5f, currentPos.y + .4f);
-                    SaveTemp();
-                    Debug.Log("Enter Dungeon");
-                    SceneManager.LoadScene("Dungeon");
-                }
-                else
-                {
-                    TempData.tempFog2 = FindObjectOfType<FogData>();;
-                    Debug.Log("Exit Dungeon");
-                    SceneManager.LoadScene("Overworld");
-                }
-                break;
-            default:
-                Debug.Log("No interactable tile!");
-                break;
         }
     }
 

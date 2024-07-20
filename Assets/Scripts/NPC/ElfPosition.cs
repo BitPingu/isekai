@@ -5,15 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class ElfPosition : MonoBehaviour
 {
-    [SerializeField]
-    private Vector3 spawnPoint;
+    public Vector3 spawnPoint;
     private TilemapStructure groundMap, overworldMap;
 
+    // [SerializeField]
     private PlayerPosition player;
     [SerializeField]
     private float maxDistance; // default is 3.5f
 
-    private bool inDanger;
+    public bool inDanger;
     
     public Vector2Int prevPos;
     public Vector2Int currentPos;
@@ -33,34 +33,13 @@ public class ElfPosition : MonoBehaviour
     private void Awake()
     {
         // Retrieve tilemap and player components
-        groundMap = FindObjectOfType<TileGrid>().GetTilemap(TilemapType.Ground);
         player = FindObjectOfType<PlayerPosition>();
+        // groundMap = FindObjectOfType<TileGrid>().GetTilemap(TilemapType.Ground);
 
-        // Attacked by slime
-        if (TempData.tempDays == 0)
-        {
-            inDanger = true;
-            GetComponent<Animator>().SetBool("Jump", true);
-            GetComponent<PartyMovement>().enabled = false;
-            RetrieveTilemap();
-        }
-    }
-    
-    private void OnEnable()
-    {
         // Attach delegates
-        player.SceneChange += Spawn;
         // player.SceneChange += RetrieveTilemap;
         PosChange += CheckPosition;
         PosChange += OTileSound;
-    }
-
-    private void OnDisable()
-    {
-        player.SceneChange -= Spawn;
-        // player.SceneChange -= RetrieveTilemap;
-        PosChange -= CheckPosition;
-        PosChange -= OTileSound;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -89,18 +68,6 @@ public class ElfPosition : MonoBehaviour
             }
         }
 
-        if (inDanger && TempData.tempTime >= 60f)
-        {
-            // relese enemy
-            GameObject enemy = GameObject.FindGameObjectWithTag("SpecialEnemy");
-            enemy.tag = "Enemy";
-            enemy.GetComponent<NPCMovement>().enabled = true;
-            enemy.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
-            enemy.GetComponent<Animator>().SetBool("Attack", false);
-            Debug.Log("death");
-            Destroy(gameObject);
-        }
-
         // Retrieve coordinates
         currentPos = Vector2Int.FloorToInt(transform.position);
         TempData.tempPos = new Vector3(currentPos.x, currentPos.y);
@@ -121,45 +88,38 @@ public class ElfPosition : MonoBehaviour
     }
 
     // Generates a random spawn point
-    private void Spawn()
+    public void Spawn()
     {
-        if (SceneManager.GetActiveScene().buildIndex == 1)
+        RetrieveTilemap();
+        // Generate initial spawn point
+        float xCoord, yCoord, currentTile;
+        Vector3 worldSpawn = TempData.tempWorldSpawn;
+        do
         {
-            // Generate initial spawn point
-            float xCoord, yCoord, currentTile;
-            Vector3 worldSpawn = TempData.tempWorldSpawn;
-            do
-            {
-                // Choose random spawn point
-                xCoord = Random.Range(worldSpawn.x-5, worldSpawn.x+5);
-                yCoord = Random.Range(worldSpawn.y-5, worldSpawn.y+5);
+            // Choose random spawn point
+            xCoord = Random.Range(worldSpawn.x-5, worldSpawn.x+5);
+            yCoord = Random.Range(worldSpawn.y-5, worldSpawn.y+5);
 
-                // Check tile
-                currentTile = groundMap.GetTile((int)xCoord, (int)yCoord);
-            }
-            while (currentTile != (int)GroundTileType.Land);
-
-            // Generate spawn point
-            spawnPoint = new Vector3(xCoord, yCoord);
-
-            // Set spawn point
-            transform.position = spawnPoint;
-            prevPos = currentPos = Vector2Int.FloorToInt(transform.position);
-
-            // Retrieve spawn point tile
-            prevGTile = currentGTile = groundMap.GetTile(currentPos.x, currentPos.y);
-            prevOTile = currentOTile = overworldMap.GetTile(currentPos.x, currentPos.y);
-
-            // Spawn enemy
-            if (groundMap.GetTile((int)xCoord+1, (int)yCoord) == (int)GroundTileType.Land)
-            {
-                FindObjectOfType<EnemySpawner>().spawnEnemy("Slime", new Vector3(xCoord+1, yCoord), true);
-            }
-            else if (groundMap.GetTile((int)xCoord-1, (int)yCoord) == (int)GroundTileType.Land)
-            {
-                FindObjectOfType<EnemySpawner>().spawnEnemy("Slime", new Vector3(xCoord-1, yCoord), false);
-            }
+            // Check tile
+            currentTile = groundMap.GetTile((int)xCoord, (int)yCoord);
         }
+        while (currentTile != (int)GroundTileType.Land);
+
+        // Generate spawn point
+        spawnPoint = new Vector3(xCoord, yCoord);
+
+        // Set spawn point
+        transform.position = spawnPoint;
+        prevPos = currentPos = Vector2Int.FloorToInt(transform.position);
+
+        // Retrieve spawn point tile
+        prevGTile = currentGTile = groundMap.GetTile(currentPos.x, currentPos.y);
+        prevOTile = currentOTile = overworldMap.GetTile(currentPos.x, currentPos.y);
+
+        // Attacked by slime
+        inDanger = true;
+        GetComponent<Animator>().SetBool("Jump", true);
+        GetComponent<PartyMovement>().enabled = false;
     }
 
     // Looks at current position
