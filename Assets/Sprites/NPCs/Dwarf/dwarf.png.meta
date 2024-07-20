@@ -1,19 +1,19 @@
 fileFormatVersion: 2
-guid: f4a217ef9484b420bbacee5aa2c5d353
+guid: 2ebf422698c7f4c749dd13dc994c49b5
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4334783836991956000
-    second: player_0
+      213: 5402251393668616626
+    second: dwarf_0
   - first:
-      213: 7388399842426930641
-    second: player_1
+      213: -6417199148838126955
+    second: dwarf_1
   - first:
-      213: 6757282713640645180
-    second: player_2
+      213: 6440818723165312323
+    second: dwarf_2
   - first:
-      213: -6781412095145881161
-    second: player_3
+      213: 1012925747849251103
+    second: dwarf_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -103,7 +103,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: player_0
+      name: dwarf_0
       rect:
         serializedVersion: 2
         x: 0
@@ -117,14 +117,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 024a20edeee382c30800000000000000
-      internalID: 4334783836991956000
+      spriteID: 2b11afa2507a8fa40800000000000000
+      internalID: 5402251393668616626
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: player_1
+      name: dwarf_1
       rect:
         serializedVersion: 2
         x: 16
@@ -138,14 +138,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1d5c862e28ed88660800000000000000
-      internalID: 7388399842426930641
+      spriteID: 59a7098bf5781f6a0800000000000000
+      internalID: -6417199148838126955
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: player_2
+      name: dwarf_2
       rect:
         serializedVersion: 2
         x: 32
@@ -159,14 +159,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c32307193d0b6cd50800000000000000
-      internalID: 6757282713640645180
+      spriteID: 34514f8f082626950800000000000000
+      internalID: 6440818723165312323
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: player_3
+      name: dwarf_3
       rect:
         serializedVersion: 2
         x: 48
@@ -180,8 +180,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7b1da4101a593e1a0800000000000000
-      internalID: -6781412095145881161
+      spriteID: f19c668d992ae0e00800000000000000
+      internalID: 1012925747849251103
       vertices: []
       indices: 
       edges: []

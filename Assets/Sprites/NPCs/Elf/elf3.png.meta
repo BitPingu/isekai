@@ -1,13 +1,13 @@
 fileFormatVersion: 2
-guid: 7c53bc4d003064feb857b9519e4c3e9c
+guid: f9b3d19a28ebd46db9a68dc11f2bf596
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2148590346420482952
-    second: elf2_0
+      213: 4513257294284057525
+    second: elf3_0
   - first:
-      213: 1278956700811547374
-    second: elf2_1
+      213: -5715203852086702604
+    second: elf3_1
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -97,10 +97,10 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: elf2_0
+      name: elf3_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 32
         y: 0
         width: 16
         height: 16
@@ -111,17 +111,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 883f93e498351dd10800000000000000
-      internalID: 2148590346420482952
+      spriteID: 5bbedbdc89f42ae30800000000000000
+      internalID: 4513257294284057525
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: elf2_1
+      name: elf3_1
       rect:
         serializedVersion: 2
-        x: 16
+        x: 48
         y: 0
         width: 16
         height: 16
@@ -132,8 +132,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ee25afad754cfb110800000000000000
-      internalID: 1278956700811547374
+      spriteID: 4fd8d6180648fa0b0800000000000000
+      internalID: -5715203852086702604
       vertices: []
       indices: 
       edges: []

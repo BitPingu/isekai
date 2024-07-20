@@ -1,19 +1,16 @@
 fileFormatVersion: 2
-guid: f4a217ef9484b420bbacee5aa2c5d353
+guid: cff3763e6808240c1813918d50ee0317
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4334783836991956000
-    second: player_0
+      213: -6084711936022183385
+    second: campfire_0
   - first:
-      213: 7388399842426930641
-    second: player_1
+      213: 4050951396788438689
+    second: campfire_1
   - first:
-      213: 6757282713640645180
-    second: player_2
-  - first:
-      213: -6781412095145881161
-    second: player_3
+      213: -8012128868543324901
+    second: campfire_2
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -103,7 +100,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: player_0
+      name: campfire_0
       rect:
         serializedVersion: 2
         x: 0
@@ -117,14 +114,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 024a20edeee382c30800000000000000
-      internalID: 4334783836991956000
+      spriteID: 72281dc7bb2ce8ba0800000000000000
+      internalID: -6084711936022183385
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: player_1
+      name: campfire_1
       rect:
         serializedVersion: 2
         x: 16
@@ -138,14 +135,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1d5c862e28ed88660800000000000000
-      internalID: 7388399842426930641
+      spriteID: 1a682ff15ded73830800000000000000
+      internalID: 4050951396788438689
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: player_2
+      name: campfire_2
       rect:
         serializedVersion: 2
         x: 32
@@ -159,29 +156,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c32307193d0b6cd50800000000000000
-      internalID: 6757282713640645180
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: player_3
-      rect:
-        serializedVersion: 2
-        x: 48
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7b1da4101a593e1a0800000000000000
-      internalID: -6781412095145881161
+      spriteID: b1d92df7e333fc090800000000000000
+      internalID: -8012128868543324901
       vertices: []
       indices: 
       edges: []
