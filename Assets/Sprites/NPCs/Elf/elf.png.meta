@@ -1,7 +1,19 @@
 fileFormatVersion: 2
-guid: 998b84bff9c5842f78c907620e6d3978
+guid: 2db41360d9f8b47289233d89bd3002f9
 TextureImporter:
   internalIDToNameTable:
+  - first:
+      213: -6839991127036961168
+    second: elf 1_0
+  - first:
+      213: -1627487448795688532
+    second: elf 1_1
+  - first:
+      213: -6432967338108863501
+    second: elf 1_2
+  - first:
+      213: -4428766943728948160
+    second: elf 1_3
   - first:
       213: -1367291550803677559
     second: elf_0

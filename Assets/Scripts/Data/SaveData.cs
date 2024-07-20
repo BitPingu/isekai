@@ -6,6 +6,7 @@ public class SaveData
 {
     public float[] saveSpawnPoint;
     public int saveSeed;
+    public int saveDays;
     public float saveTime;
     public bool saveIsDay;
     public List<int> saveClearFogCoordsX;
@@ -25,6 +26,7 @@ public class SaveData
 
         saveSeed = TempData.tempSeed;
 
+        saveDays = TempData.tempDays;
         saveTime = TempData.tempTime;
         saveIsDay = TempData.tempIsDay;
 

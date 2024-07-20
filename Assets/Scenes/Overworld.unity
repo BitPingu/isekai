@@ -1999,10 +1999,18 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1493488788}
+    - target: {fileID: 725286824810590555, guid: b1d4d0c234ecf6b43b26f0e51520c30c, type: 3}
+      propertyPath: m_Name
+      value: WorldTime
+      objectReference: {fileID: 0}
     - target: {fileID: 725286824810590558, guid: b1d4d0c234ecf6b43b26f0e51520c30c, type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 1493488788}
+    - target: {fileID: 4342877996399030421, guid: b1d4d0c234ecf6b43b26f0e51520c30c, type: 3}
+      propertyPath: elf
+      value: 
+      objectReference: {fileID: 6051531619161849264}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b1d4d0c234ecf6b43b26f0e51520c30c, type: 3}
 --- !u!1001 &6051531617834581963
@@ -2015,10 +2023,6 @@ PrefabInstance:
     - target: {fileID: 6051531619059624768, guid: 12442fc3ad8dfae4394f6933d0291586, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 6051531619059624768, guid: 12442fc3ad8dfae4394f6933d0291586, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6051531619059624774, guid: 12442fc3ad8dfae4394f6933d0291586, type: 3}
       propertyPath: m_RootOrder
@@ -2063,14 +2067,6 @@ PrefabInstance:
     - target: {fileID: 6051531619059624774, guid: 12442fc3ad8dfae4394f6933d0291586, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6051531619059624775, guid: 12442fc3ad8dfae4394f6933d0291586, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 4334783836991956000, guid: f4a217ef9484b420bbacee5aa2c5d353, type: 3}
-    - target: {fileID: 6051531619059624775, guid: 12442fc3ad8dfae4394f6933d0291586, type: 3}
-      propertyPath: m_WasSpriteAssigned
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12442fc3ad8dfae4394f6933d0291586, type: 3}
@@ -2252,7 +2248,7 @@ SpriteRenderer:
   m_SortingLayerID: -719414119
   m_SortingLayer: -2
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1367291550803677559, guid: 998b84bff9c5842f78c907620e6d3978, type: 3}
+  m_Sprite: {fileID: -1367291550803677559, guid: 2db41360d9f8b47289233d89bd3002f9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

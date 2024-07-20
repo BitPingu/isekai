@@ -14,7 +14,6 @@ public class ElfPosition : MonoBehaviour
     private float maxDistance; // default is 3.5f
 
     private bool inDanger;
-    private float inDangerTime;
     
     public Vector2Int prevPos;
     public Vector2Int currentPos;
@@ -38,11 +37,13 @@ public class ElfPosition : MonoBehaviour
         player = FindObjectOfType<PlayerPosition>();
 
         // Attacked by slime
-        inDanger = true;
-        inDangerTime = 10f;
-        GetComponent<Animator>().SetBool("Jump", true);
-        GetComponent<PartyMovement>().enabled = false;
-        RetrieveTilemap();
+        if (TempData.tempDays == 0)
+        {
+            inDanger = true;
+            GetComponent<Animator>().SetBool("Jump", true);
+            GetComponent<PartyMovement>().enabled = false;
+            RetrieveTilemap();
+        }
     }
     
     private void OnEnable()
@@ -86,10 +87,9 @@ public class ElfPosition : MonoBehaviour
             {
                 GetComponent<SpriteRenderer>().flipX = true;
             }
-            inDangerTime -= Time.deltaTime; 
         }
 
-        if (inDangerTime <= 0f)
+        if (inDanger && TempData.tempTime >= 60f)
         {
             // relese enemy
             GameObject enemy = GameObject.FindGameObjectWithTag("SpecialEnemy");

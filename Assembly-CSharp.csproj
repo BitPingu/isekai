@@ -69,6 +69,7 @@
     <Compile Include="Assets/Scripts/Algorithms/VoronoiGeneration.cs" />
     <Compile Include="Assets/Scripts/UI/MenuController.cs" />
     <Compile Include="Assets/Scripts/NPC/VillagerTypes.cs" />
+    <Compile Include="Assets/Scripts/NPC/EnemyData.cs" />
     <Compile Include="Assets/Scripts/Tilemaps/TileGrid.cs" />
     <Compile Include="Assets/Scripts/Algorithms/Helpers/TilemapHelper.cs" />
     <Compile Include="Assets/Scripts/Data/FogData.cs" />
@@ -79,6 +80,7 @@
     <Compile Include="Assets/Scripts/Tilemaps/AdvancedRuleTile.cs" />
     <Compile Include="Assets/Scripts/Algorithms/BuildingSpawner.cs" />
     <Compile Include="Assets/Scripts/UI/OptionsMenu.cs" />
+    <Compile Include="Assets/Scripts/NPC/PartyMovement.cs" />
     <Compile Include="Assets/Scripts/Algorithms/InsideGeneration.cs" />
     <Compile Include="Assets/Scripts/UI/MapMenu.cs" />
     <Compile Include="Assets/Scripts/Audio/AudioManager.cs" />
@@ -99,15 +101,14 @@
     <Compile Include="Assets/Scripts/Tilemaps/TileTypes.cs" />
     <Compile Include="Assets/Scripts/Tilemaps/TilemapStructure.cs" />
     <Compile Include="Assets/Scripts/Algorithms/CellularAutomata.cs" />
+    <Compile Include="Assets/Scripts/NPC/EnemyPosition.cs" />
     <Compile Include="Assets/Scripts/Tilemaps/GroundTileType.cs" />
     <Compile Include="Assets/Scripts/Player/PlayerController.cs" />
     <Compile Include="Assets/Scripts/Tilemaps/BuildingTileType.cs" />
     <Compile Include="Assets/Scripts/Data/TempData.cs" />
     <Compile Include="Assets/Scripts/NPC/ElfPosition.cs" />
     <Compile Include="Assets/Scripts/Algorithms/AlgorithmBase.cs" />
-    <Compile Include="Assets/Scripts/NPC/PartyMovement.cs" />
-    <Compile Include="Assets/Scripts/NPC/EnemyPosition.cs" />
-    <Compile Include="Assets/Scripts/NPC/EnemyData.cs" />
+    <Compile Include="Assets/Scripts/World/WorldEvents.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/TextMesh Pro/Shaders/TMPro.cginc" />

@@ -11,12 +11,15 @@ public class FogData : MonoBehaviour
     [SerializeField]
     private TilemapStructure tilemap;
     private PlayerPosition player;
+    private WorldEvents world;
 
     private void Awake()
     {
         // Retrieve tilemap and player components
         tilemap = GetComponent<TilemapStructure>();
         player = FindObjectOfType<PlayerPosition>();
+        world = GetComponentInParent<WorldEvents>();
+        // Debug.Log("getworld:" + world);
 
         if (TempData.initFog)
         {
@@ -28,6 +31,7 @@ public class FogData : MonoBehaviour
     {
         // Attach delegates
         player.PosChange += ClearFog;
+        world = GetComponentInParent<WorldEvents>();
         player.SaveTemp += SaveFog;
     }
 
@@ -35,6 +39,7 @@ public class FogData : MonoBehaviour
     {
         // Detatch delegates
         player.PosChange -= ClearFog;
+        world = GetComponentInParent<WorldEvents>();
         player.SaveTemp -= SaveFog;
     }
 

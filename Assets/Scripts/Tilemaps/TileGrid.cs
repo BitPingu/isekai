@@ -22,6 +22,10 @@ public class TileGrid : MonoBehaviour
     private Dictionary<int, TileBase> tiles;
     private Dictionary<TilemapType, TilemapStructure> tilemaps;
 
+    // Call other functions when world gen finishes
+    public delegate void OnWorldGen();
+    public OnWorldGen WorldGen;
+
     private void Awake ()
     {
         if (randomize)
@@ -75,7 +79,9 @@ public class TileGrid : MonoBehaviour
 
     private void Start()
     {
-        FindObjectOfType<PlayerPosition>().SceneChange(); // Call delegate (and any methods tied to it)
+        FindObjectOfType<PlayerPosition>().SceneChange();
+        Debug.Log("world gen");
+        WorldGen(); // Finish world gen
     }
 
     // Returns all cached shared tiles available to be placed on tilemap

@@ -10,15 +10,10 @@ public class DayAndNightCycle : MonoBehaviour
     [SerializeField]
     private GameObject light;
 
-    [SerializeField]
-    private int days;
-
     public int timePerDay; // default is 500
     public float ratePerDay;
 
-    // Getter method
-    public int Days => days;
-
+    public int days;
     public float time; // Default start time is 50
     private bool canChangeDay;
     public bool isDay;
@@ -28,11 +23,18 @@ public class DayAndNightCycle : MonoBehaviour
     public OnDayChanged DayTime;
     public OnDayChanged NightTime;
 
-    private void Awake()
+    private void OnEnable()
     {
         // Attach delegates
         DayTime += DayMusic;
         NightTime += NightMusic;
+    }
+
+    private void OnDisable()
+    {
+        // Detatch delegates
+        DayTime -= DayMusic;
+        NightTime -= NightMusic;
     }
 
     private void Start()
@@ -42,6 +44,7 @@ public class DayAndNightCycle : MonoBehaviour
             if (TempData.newGame)
             {
                 // New game
+                days = 0;
                 time = 50;
                 isDay = true;
             }
@@ -49,9 +52,11 @@ public class DayAndNightCycle : MonoBehaviour
             {
                 // Load world data
                 SaveData saveData = SaveSystem.Load();
+                days = saveData.saveDays;
                 time = saveData.saveTime;
                 isDay = saveData.saveIsDay;
             }
+            TempData.tempDays = days;
             TempData.tempTime = time;
             TempData.tempIsDay = isDay;
             TempData.initTime = false;

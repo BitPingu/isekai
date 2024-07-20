@@ -167,7 +167,7 @@ public class PlayerPosition : MonoBehaviour
                 FindObjectOfType<AudioManager>().Stop();
                 if (SceneManager.GetActiveScene().buildIndex == 1) 
                 {
-                    TempData.tempSpawnPoint = new Vector3(currentPos.x, currentPos.y);
+                    TempData.tempSpawnPoint = new Vector3(currentPos.x + .5f, currentPos.y + .4f);
                     SaveTemp();
                     Debug.Log("Enter Village");
                     SceneManager.LoadScene("Village");
@@ -183,7 +183,7 @@ public class PlayerPosition : MonoBehaviour
                 FindObjectOfType<AudioManager>().Stop();
                 if (SceneManager.GetActiveScene().buildIndex == 1)
                 {
-                    TempData.tempSpawnPoint = new Vector3(currentPos.x, currentPos.y);
+                    TempData.tempSpawnPoint = new Vector3(currentPos.x + .5f, currentPos.y + .4f);
                     SaveTemp();
                     Debug.Log("Enter Dungeon");
                     SceneManager.LoadScene("Dungeon");

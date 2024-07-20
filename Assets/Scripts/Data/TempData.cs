@@ -11,6 +11,7 @@ public class TempData : MonoBehaviour
     public static int tempSeed;
     public static int tempWidth;
     public static int tempHeight;
+    public static int tempDays;
     public static bool initTime;
     public static float tempTime;
     public static bool tempIsDay;

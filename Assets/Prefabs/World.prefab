@@ -189,6 +189,7 @@ GameObject:
   - component: {fileID: 725286824512390000}
   - component: {fileID: 725286824512390003}
   - component: {fileID: 725286824512390002}
+  - component: {fileID: 4342877996399030421}
   m_Layer: 0
   m_Name: World
   m_TagString: Untagged
@@ -238,16 +239,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ead40b9c0831a041ba64b31583f36b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  world:
-    savedSeed: 0
-    savedTime: 0
-    savedIsDay: 0
-    savedClearFogCoordsX: 
-    savedClearFogCoordsY: 
-    savedVillageCoordsX: 
-    savedVillageCoordsY: 
-    savedDungeonCoordsX: 
-    savedDungeonCoordsY: 
   width: 100
   height: 100
   seed: 0
@@ -300,6 +291,18 @@ MonoBehaviour:
     color: {r: 0, g: 0, b: 0, a: 0}
     tile: {fileID: 11400000, guid: 2896e2eb2a2a5b04c9def46105316871, type: 2}
     tileType: 4002
+--- !u!114 &4342877996399030421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 725286824512390013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0894ca4783021458b8ece2fde73b7152, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &725286824534967813
 GameObject:
   m_ObjectHideFlags: 0
@@ -452,7 +455,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clearFogCoordsX: 
   clearFogCoordsY: 
-  player: {fileID: 0}
+  tilemap: {fileID: 0}
 --- !u!1 &725286824561060681
 GameObject:
   m_ObjectHideFlags: 0
@@ -788,9 +791,8 @@ MonoBehaviour:
     m_NumColorKeys: 8
     m_NumAlphaKeys: 2
   light: {fileID: 725286824810590555}
-  days: 0
   timePerDay: 500
   ratePerDay: 0.002
+  days: 0
   time: 50
   isDay: 0
-  player: {fileID: 0}
