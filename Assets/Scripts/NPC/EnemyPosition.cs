@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class ElfPosition : MonoBehaviour
+public class EnemyPosition : MonoBehaviour
 {
     [SerializeField]
     private Vector3 spawnPoint;
@@ -12,9 +11,6 @@ public class ElfPosition : MonoBehaviour
     private PlayerPosition player;
     [SerializeField]
     private float maxDistance; // default is 3.5f
-
-    private bool inDanger;
-    private float inDangerTime;
     
     public Vector2Int prevPos;
     public Vector2Int currentPos;
@@ -34,21 +30,16 @@ public class ElfPosition : MonoBehaviour
     private void Awake()
     {
         // Retrieve tilemap and player components
-        groundMap = FindObjectOfType<TileGrid>().GetTilemap(TilemapType.Ground);
+        RetrieveTilemap();
         player = FindObjectOfType<PlayerPosition>();
 
-        // Attacked by slime
-        inDanger = true;
-        inDangerTime = 10f;
-        GetComponent<Animator>().SetBool("Jump", true);
-        GetComponent<PartyMovement>().enabled = false;
-        RetrieveTilemap();
+        // Get spawn point
+        spawnPoint = transform.position;
     }
     
     private void OnEnable()
     {
         // Attach delegates
-        player.SceneChange += Spawn;
         // player.SceneChange += RetrieveTilemap;
         PosChange += CheckPosition;
         PosChange += OTileSound;
@@ -56,7 +47,6 @@ public class ElfPosition : MonoBehaviour
 
     private void OnDisable()
     {
-        player.SceneChange -= Spawn;
         // player.SceneChange -= RetrieveTilemap;
         PosChange -= CheckPosition;
         PosChange -= OTileSound;
@@ -64,11 +54,8 @@ public class ElfPosition : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (inDanger && collision.gameObject.name == "Player")
+        if (collision.gameObject.name == "Player")
         {
-            inDanger = false;
-            GetComponent<Animator>().SetBool("Jump", false);
-            GetComponent<PartyMovement>().enabled = true;
             Debug.Log("hit");
         }
     }
@@ -76,8 +63,10 @@ public class ElfPosition : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (inDanger)
+        // look at player when nearby and (chase it?)
+        if (GetComponent<EnemyData>().isHostile && CheckPlayer())
         {
+            // Debug.Log("I see u");
             if (player.transform.position.x - transform.position.x > 0)
             {
                 GetComponent<SpriteRenderer>().flipX = false;
@@ -86,19 +75,6 @@ public class ElfPosition : MonoBehaviour
             {
                 GetComponent<SpriteRenderer>().flipX = true;
             }
-            inDangerTime -= Time.deltaTime; 
-        }
-
-        if (inDangerTime <= 0f)
-        {
-            // relese enemy
-            GameObject enemy = GameObject.FindGameObjectWithTag("SpecialEnemy");
-            enemy.tag = "Enemy";
-            enemy.GetComponent<NPCMovement>().enabled = true;
-            enemy.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
-            enemy.GetComponent<Animator>().SetBool("Attack", false);
-            Debug.Log("death");
-            Destroy(gameObject);
         }
 
         // Retrieve coordinates
@@ -118,48 +94,6 @@ public class ElfPosition : MonoBehaviour
         // Retrieve tilemap components
         groundMap = FindObjectOfType<TileGrid>().GetTilemap(TilemapType.Ground);
         overworldMap = FindObjectOfType<TileGrid>().GetTilemap(TilemapType.Overworld);
-    }
-
-    // Generates a random spawn point
-    private void Spawn()
-    {
-        if (SceneManager.GetActiveScene().buildIndex == 1)
-        {
-            // Generate initial spawn point
-            float xCoord, yCoord, currentTile;
-            Vector3 worldSpawn = TempData.tempWorldSpawn;
-            do
-            {
-                // Choose random spawn point
-                xCoord = Random.Range(worldSpawn.x-5, worldSpawn.x+5);
-                yCoord = Random.Range(worldSpawn.y-5, worldSpawn.y+5);
-
-                // Check tile
-                currentTile = groundMap.GetTile((int)xCoord, (int)yCoord);
-            }
-            while (currentTile != (int)GroundTileType.Land);
-
-            // Generate spawn point
-            spawnPoint = new Vector3(xCoord, yCoord);
-
-            // Set spawn point
-            transform.position = spawnPoint;
-            prevPos = currentPos = Vector2Int.FloorToInt(transform.position);
-
-            // Retrieve spawn point tile
-            prevGTile = currentGTile = groundMap.GetTile(currentPos.x, currentPos.y);
-            prevOTile = currentOTile = overworldMap.GetTile(currentPos.x, currentPos.y);
-
-            // Spawn enemy
-            if (groundMap.GetTile((int)xCoord+1, (int)yCoord) == (int)GroundTileType.Land)
-            {
-                FindObjectOfType<EnemySpawner>().spawnEnemy("Slime", new Vector3(xCoord+1, yCoord), true);
-            }
-            else if (groundMap.GetTile((int)xCoord-1, (int)yCoord) == (int)GroundTileType.Land)
-            {
-                FindObjectOfType<EnemySpawner>().spawnEnemy("Slime", new Vector3(xCoord-1, yCoord), false);
-            }
-        }
     }
 
     // Looks at current position

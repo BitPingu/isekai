@@ -50,7 +50,6 @@ public class PauseMenu : MonoBehaviour
     public void Quit()
     {
         // Play sound fx
-        Debug.Log("soundexit");
         FindObjectOfType<AudioManager>().PlayFx("Button");
 
         // Resume time

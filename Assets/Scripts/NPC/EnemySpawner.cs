@@ -4,14 +4,14 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField]
-    private EnemyTypes.EnemyData[] enemies;
+    private EnemyTypes[] enemies;
     [SerializeField]
     private PoissonDiscSampling algorithm;
     private List<Vector2> points = new List<Vector2>();
     [SerializeField]
     private float displayRadius = 1;
 
-    private Vector3Int spawnPoint;
+    private Vector3 spawnPoint;
 
     private int currentTile;
 
@@ -45,7 +45,7 @@ public class EnemySpawner : MonoBehaviour
     {
         points.Clear();
         despawnEnemies();
-        foreach (EnemyTypes.EnemyData enemy in enemies)
+        foreach (EnemyTypes enemy in enemies)
         {
             if (!enemy.nightEnemy)
             {
@@ -62,7 +62,7 @@ public class EnemySpawner : MonoBehaviour
     {
         points.Clear();
         despawnEnemies();
-        foreach (EnemyTypes.EnemyData enemy in enemies)
+        foreach (EnemyTypes enemy in enemies)
         {
             if (enemy.nightEnemy)
             {
@@ -75,23 +75,21 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    private void spawnEnemy(EnemyTypes.EnemyData enemy)
+    private void spawnEnemy(EnemyTypes enemy)
     {
         foreach (Vector2 point in points)
         {
             // Create new spawn point from list
-            spawnPoint = new Vector3Int(Mathf.FloorToInt(point.x), Mathf.FloorToInt(point.y), 0);
+            spawnPoint = new Vector3(point.x, point.y, 0);
 
             // Check tile
-            currentTile = groundMap.GetTile(spawnPoint.x, spawnPoint.y);
+            currentTile = groundMap.GetTile((int)spawnPoint.x, (int)spawnPoint.y);
 
             // Check valid tile
             if (currentTile == (int)GroundTileType.Land)
             {
-                // Instantiate enemy
-                EnemyTypes newEnemyData = new EnemyTypes(enemy.gameObject, enemy.type, point, enemy.nightEnemy);
-                // Spawn enemy at spawnPoint
-                GameObject childEnemy = Instantiate(newEnemyData.gameObject, newEnemyData.spawnPoint + new Vector3(.5f, .5f), Quaternion.identity);
+                // Instantiate and spawn enemy
+                GameObject childEnemy = Instantiate(enemy.gameObject, spawnPoint, Quaternion.identity);
                 childEnemy.transform.parent = gameObject.transform;
             }
             else
@@ -114,20 +112,21 @@ public class EnemySpawner : MonoBehaviour
         }
 
         // Get enemy
-        foreach (EnemyTypes.EnemyData enemy in enemies)
+        foreach (EnemyTypes enemy in enemies)
         {
-            if (enemy.type.Equals(type))
+            if (enemy.gameObject.name.Equals(type))
             {
-                // Instantiate enemy
-                EnemyTypes newEnemyData = new EnemyTypes(enemy.gameObject, type, spawnPoint, enemy.nightEnemy);
-                // Spawn enemy at spawnPoint
-                GameObject childEnemy = Instantiate(newEnemyData.gameObject, newEnemyData.spawnPoint + new Vector3(.5f, .5f), Quaternion.identity);
+                // Instantiate and spawn enemy
+                GameObject childEnemy = Instantiate(enemy.gameObject, spawnPoint, Quaternion.identity);
+                childEnemy.transform.parent = gameObject.transform;
+                // childEnemy.GetComponent<EnemyData>().set(spawnPoint);
+
+                // Assign special values
                 childEnemy.tag = "SpecialEnemy";
                 childEnemy.GetComponent<NPCMovement>().enabled = false;
                 childEnemy.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
                 childEnemy.GetComponent<SpriteRenderer>().flipX = flipX;
                 childEnemy.GetComponent<Animator>().SetBool("Attack", true);
-                childEnemy.transform.parent = gameObject.transform;
                 break;
             }
         }

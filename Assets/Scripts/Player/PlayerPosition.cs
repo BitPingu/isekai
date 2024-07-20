@@ -87,15 +87,15 @@ public class PlayerPosition : MonoBehaviour
                 if (TempData.newGame)
                 {
                     // Generate initial spawn point
-                    int xCoord, yCoord, currentTile;
+                    float xCoord, yCoord, currentTile;
                     do
                     {
                         // Choose random spawn point
-                        xCoord = Random.Range(0, TempData.tempWidth);
-                        yCoord = Random.Range(0, TempData.tempHeight);
+                        xCoord = Random.Range(0f, TempData.tempWidth);
+                        yCoord = Random.Range(0f, TempData.tempHeight);
 
                         // Check tile
-                        currentTile = groundMap.GetTile(xCoord, yCoord);
+                        currentTile = groundMap.GetTile((int)xCoord, (int)yCoord);
                     }
                     while (currentTile != (int)GroundTileType.Land);
 
@@ -125,8 +125,6 @@ public class PlayerPosition : MonoBehaviour
         }
 
         // Set spawn point
-        spawnPoint.x += .5f;
-        spawnPoint.y += .5f;
         transform.position = spawnPoint;
         prevPos = currentPos = Vector2Int.FloorToInt(transform.position);
 

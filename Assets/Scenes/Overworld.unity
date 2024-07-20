@@ -1408,11 +1408,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemies:
   - gameObject: {fileID: 7751972130982338795, guid: 4486c96cc070cd94faa4215f00d41e46, type: 3}
-    type: Slime
     spawnPoint: {x: 0, y: 0, z: 0}
     nightEnemy: 0
   - gameObject: {fileID: 7751972130982338795, guid: b23810bbe30eae941839d06f0b03b79f, type: 3}
-    type: Zombie
     spawnPoint: {x: 0, y: 0, z: 0}
     nightEnemy: 1
   algorithm: {fileID: 11400000, guid: 94ffa57e431c95d43851725aa0782f7b, type: 2}
@@ -2148,6 +2146,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoint: {x: 0, y: 0, z: 0}
+  maxDistance: 3.5
+  prevPos: {x: 0, y: 0}
+  currentPos: {x: 0, y: 0}
+  prevGTile: 0
+  prevOTile: 0
+  currentGTile: 0
+  currentOTile: 0
 --- !u!50 &6051531619161849268
 Rigidbody2D:
   serializedVersion: 4
