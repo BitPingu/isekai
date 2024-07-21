@@ -11,6 +11,7 @@ public class MainMenu : MonoBehaviour
     {
         // Destroy leftover game objects
         Destroy(GameObject.Find("Player"));
+        Destroy(GameObject.Find("Elf"));
         Destroy(GameObject.Find("Menu"));
 
         // Check if new game
@@ -79,10 +80,12 @@ public class MainMenu : MonoBehaviour
 
     private void init (bool cond)
     {
-        TempData.initSpawn = cond;
+        TempData.initPlayerSpawn = cond;
+        TempData.initElfSpawn = cond;
         TempData.initSeed = cond;
         TempData.initTime = cond;
         TempData.initFog = cond;
         TempData.initBuilding = cond;
+        TempData.initElf = cond;
     }
 }

@@ -2,11 +2,12 @@ using UnityEngine;
 
 public class TempData : MonoBehaviour
 {
+    // init vars are set in mainmenu
     public static bool newGame;
-    public static bool initSpawn;
-    public static Vector3 tempWorldSpawn;
-    public static Vector3 tempSpawnPoint;
-    public static Vector3 tempPos;
+    public static bool initPlayerSpawn;
+    public static Vector3 tempPlayerStartingSpawn;
+    public static Vector3 tempPlayerBuildingSpawn;
+    public static Vector3 tempPlayerPos;
     public static bool initSeed;
     public static int tempSeed;
     public static int tempWidth;
@@ -20,4 +21,10 @@ public class TempData : MonoBehaviour
     public static FogData tempFog2;
     public static bool initBuilding;
     public static BuildingData tempBuilding;
+
+    public static bool initElf;
+    public static bool initElfSpawn;
+    public static Vector3 tempElfStartingSpawn;
+    public static Vector3 tempElfPos;
+    public static bool elfSaved;
 }

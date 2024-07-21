@@ -4,7 +4,8 @@ using UnityEngine;
 [System.Serializable]
 public class SaveData
 {
-    public float[] saveSpawnPoint;
+    public float[] savePlayerPos;
+    public float[] saveElfPos;
     public int saveSeed;
     public int saveDays;
     public float saveTime;
@@ -19,10 +20,15 @@ public class SaveData
 
     public SaveData ()
     {
-        saveSpawnPoint = new float[3];
-        saveSpawnPoint[0] = TempData.tempPos.x;
-        saveSpawnPoint[1] = TempData.tempPos.y;
-        saveSpawnPoint[2] = TempData.tempPos.z;
+        savePlayerPos = new float[3];
+        savePlayerPos[0] = TempData.tempPlayerPos.x;
+        savePlayerPos[1] = TempData.tempPlayerPos.y;
+        savePlayerPos[2] = TempData.tempPlayerPos.z;
+
+        saveElfPos = new float[3];
+        saveElfPos[0] = TempData.tempElfPos.x;
+        saveElfPos[1] = TempData.tempElfPos.y;
+        saveElfPos[2] = TempData.tempElfPos.z;
 
         saveSeed = TempData.tempSeed;
 

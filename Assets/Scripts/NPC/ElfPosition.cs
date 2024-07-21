@@ -8,12 +8,8 @@ public class ElfPosition : MonoBehaviour
     public Vector3 spawnPoint;
     private TilemapStructure groundMap, overworldMap;
 
-    // [SerializeField]
-    private PlayerPosition player;
     [SerializeField]
     private float maxDistance; // default is 3.5f
-
-    public bool inDanger;
     
     public Vector2Int prevPos;
     public Vector2Int currentPos;
@@ -30,35 +26,50 @@ public class ElfPosition : MonoBehaviour
     public delegate void OnOTileChange();
     public OnOTileChange OTileChange;
 
+    public static ElfPosition elf;
+
     private void Awake()
     {
-        // Retrieve tilemap and player components
-        player = FindObjectOfType<PlayerPosition>();
-        // groundMap = FindObjectOfType<TileGrid>().GetTilemap(TilemapType.Ground);
+        if (TempData.elfSaved)
+        {
+            if (elf == null)
+            {
+                elf = this;
+            } 
+            else 
+            {
+                Destroy(gameObject);
+                return;
+            }
+
+            DontDestroyOnLoad(gameObject);
+        }
 
         // Attach delegates
-        // player.SceneChange += RetrieveTilemap;
         PosChange += CheckPosition;
         PosChange += OTileSound;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (inDanger && collision.gameObject.name == "Player")
+        if (!TempData.elfSaved && collision.gameObject.name == "Player")
         {
-            inDanger = false;
+            // Move to worldevents
+            TempData.elfSaved = true;
+            TempData.initElf = false;
+            GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
             GetComponent<Animator>().SetBool("Jump", false);
             GetComponent<PartyMovement>().enabled = true;
-            Debug.Log("hit");
+            DontDestroyOnLoad(gameObject);
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (inDanger)
+        if (!TempData.elfSaved)
         {
-            if (player.transform.position.x - transform.position.x > 0)
+            if (FindObjectOfType<PlayerPosition>().transform.position.x - transform.position.x > 0)
             {
                 GetComponent<SpriteRenderer>().flipX = false;
             }
@@ -70,7 +81,7 @@ public class ElfPosition : MonoBehaviour
 
         // Retrieve coordinates
         currentPos = Vector2Int.FloorToInt(transform.position);
-        TempData.tempPos = new Vector3(currentPos.x, currentPos.y);
+        TempData.tempElfPos = new Vector3(transform.position.x, transform.position.y);
 
         // Position check
         if (currentPos != prevPos)
@@ -88,25 +99,103 @@ public class ElfPosition : MonoBehaviour
     }
 
     // Generates a random spawn point
-    public void Spawn()
+    public void Spawn(bool initialSpawn, int scene)
     {
         RetrieveTilemap();
-        // Generate initial spawn point
-        float xCoord, yCoord, currentTile;
-        Vector3 worldSpawn = TempData.tempWorldSpawn;
-        do
+        switch (scene)
         {
-            // Choose random spawn point
-            xCoord = Random.Range(worldSpawn.x-5, worldSpawn.x+5);
-            yCoord = Random.Range(worldSpawn.y-5, worldSpawn.y+5);
+            case 1:
+                if (!TempData.elfSaved)
+                {
+                    // Not saved yet
+                    // Debug.Log("elf in danger");
+                    if (initialSpawn)
+                    {
+                        // Debug.Log("new elf");
+                        // Coming from main menu
+                        if (TempData.newGame)
+                        {
+                            // Generate initial spawn point
+                            float xCoord, yCoord, currentTile;
+                            // Get player spawn
+                            Vector3 worldSpawn = TempData.tempPlayerStartingSpawn;
+                            do
+                            {
+                                // Choose random spawn point
+                                xCoord = Random.Range(worldSpawn.x-5, worldSpawn.x+5);
+                                yCoord = Random.Range(worldSpawn.y-5, worldSpawn.y+5);
 
-            // Check tile
-            currentTile = groundMap.GetTile((int)xCoord, (int)yCoord);
+                                // Check tile
+                                currentTile = groundMap.GetTile((int)xCoord, (int)yCoord);
+                            }
+                            while (currentTile != (int)GroundTileType.Land);
+
+                            // Generate spawn point
+                            spawnPoint = new Vector3(xCoord, yCoord);
+                            TempData.tempElfStartingSpawn = spawnPoint;
+                        }
+                        else
+                        {
+                            // Debug.Log("load unsaved elf");
+                            // Load unsaved elf position
+                            SaveData saveData = SaveSystem.Load();
+                            spawnPoint.x = saveData.saveElfPos[0];
+                            spawnPoint.y = saveData.saveElfPos[1];
+                            spawnPoint.z = saveData.saveElfPos[2];
+                        }
+                    }
+                    else
+                    {
+                        // Debug.Log("notsaved, going to spawn");
+                        // Stay at spawn point
+                        spawnPoint = TempData.tempElfStartingSpawn;
+                    }
+                    // Attacked by slime
+                    GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+                    GetComponent<Animator>().SetBool("Jump", true);
+                    GetComponent<PartyMovement>().enabled = false;
+                }
+                else
+                {
+                    // saved
+                    // Debug.Log("elf not in danger woot woot");
+                    if (initialSpawn)
+                    {
+                        // Debug.Log("new elf");
+                        // Coming from main menu
+                        if (TempData.newGame)
+                        {
+                            // Debug.Log("load elf");
+                            // Load elf position
+                            SaveData saveData = SaveSystem.Load();
+                            spawnPoint.x = saveData.saveElfPos[0];
+                            spawnPoint.y = saveData.saveElfPos[1];
+                            spawnPoint.z = saveData.saveElfPos[2];
+                        }
+                        else
+                        {
+                            // Debug.Log("saved, going to player");
+                            spawnPoint = TempData.tempPlayerPos;
+                        }
+                    }
+                    else
+                    {
+                        // Debug.Log("saved2, going to player");
+                        spawnPoint = TempData.tempPlayerPos;
+                    }
+                }
+                break;
+            case 2:
+            case 3:
+                // Dungeon or village spawn
+                // Debug.Log("building, going to player");
+                spawnPoint = TempData.tempPlayerPos;
+                break;
+            default:
+                Debug.Log("elf cannot spawn!");
+                break;
+            
         }
-        while (currentTile != (int)GroundTileType.Land);
-
-        // Generate spawn point
-        spawnPoint = new Vector3(xCoord, yCoord);
 
         // Set spawn point
         transform.position = spawnPoint;
@@ -115,11 +204,6 @@ public class ElfPosition : MonoBehaviour
         // Retrieve spawn point tile
         prevGTile = currentGTile = groundMap.GetTile(currentPos.x, currentPos.y);
         prevOTile = currentOTile = overworldMap.GetTile(currentPos.x, currentPos.y);
-
-        // Attacked by slime
-        inDanger = true;
-        GetComponent<Animator>().SetBool("Jump", true);
-        GetComponent<PartyMovement>().enabled = false;
     }
 
     // Looks at current position
@@ -147,7 +231,7 @@ public class ElfPosition : MonoBehaviour
     private bool CheckPlayer()
     {
         // Calculate current distance from player
-        float distance = Vector3.Distance(player.transform.position, transform.position);
+        float distance = Vector3.Distance(FindObjectOfType<PlayerPosition>().transform.position, transform.position);
 
         if (distance < maxDistance)
         {

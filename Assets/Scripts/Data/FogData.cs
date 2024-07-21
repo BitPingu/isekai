@@ -50,6 +50,7 @@ public class FogData : MonoBehaviour
                 tilemap.SetTile(x, y, (int)GroundTileType.Empty, true);
             }
         }
+        SaveFog();
     }
 
     // Retrieves coordinates with no fog

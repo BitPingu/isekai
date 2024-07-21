@@ -79,7 +79,6 @@ public class EnemyPosition : MonoBehaviour
 
         // Retrieve coordinates
         currentPos = Vector2Int.FloorToInt(transform.position);
-        TempData.tempPos = new Vector3(currentPos.x, currentPos.y);
 
         // Position check
         if (currentPos != prevPos)
