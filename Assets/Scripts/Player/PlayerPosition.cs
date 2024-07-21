@@ -109,7 +109,7 @@ public class PlayerPosition : MonoBehaviour
                 }
                 else
                 {
-                    // Still in game
+                    // Still in game (exiting from building)
                     spawnPoint = TempData.tempPlayerBuildingSpawn;
                 }
                 break;

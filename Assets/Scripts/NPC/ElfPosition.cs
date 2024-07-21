@@ -158,28 +158,19 @@ public class ElfPosition : MonoBehaviour
                 else
                 {
                     // saved
-                    // Debug.Log("elf not in danger woot woot");
                     if (initialSpawn)
                     {
-                        // Debug.Log("new elf");
-                        // Coming from main menu
-                        if (TempData.newGame)
-                        {
-                            // Debug.Log("load elf");
-                            // Load elf position
-                            SaveData saveData = SaveSystem.Load();
-                            spawnPoint.x = saveData.saveElfPos[0];
-                            spawnPoint.y = saveData.saveElfPos[1];
-                            spawnPoint.z = saveData.saveElfPos[2];
-                        }
-                        else
-                        {
-                            // Debug.Log("saved, going to player");
-                            spawnPoint = TempData.tempPlayerPos;
-                        }
+                        // Coming from main menu (only possible when load)
+                        // Debug.Log("load elf");
+                        // Load elf position
+                        SaveData saveData = SaveSystem.Load();
+                        spawnPoint.x = saveData.saveElfPos[0];
+                        spawnPoint.y = saveData.saveElfPos[1];
+                        spawnPoint.z = saveData.saveElfPos[2];
                     }
                     else
                     {
+                        // exiting from building
                         // Debug.Log("saved2, going to player");
                         spawnPoint = TempData.tempPlayerPos;
                     }
