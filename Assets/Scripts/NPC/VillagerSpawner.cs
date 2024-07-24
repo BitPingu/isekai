@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class VillagerSpawner : MonoBehaviour
 {
-    [SerializeField]
-    private VillagerTypes.VillagerData[] villagers;
 
     private int currentTile;
     [SerializeField]

@@ -59,6 +59,7 @@ public class ElfPosition : MonoBehaviour
             Vector3 iconPos = new Vector3(transform.position.x, transform.position.y + 1);
             newIcon = Instantiate(icon, iconPos, Quaternion.identity);
             newIcon.transform.parent = gameObject.transform;
+            newIcon.GetComponent<EventIconData>().SetIcon("Event");
         }
     }
 
@@ -78,7 +79,6 @@ public class ElfPosition : MonoBehaviour
 
             if (CheckPlayer())
             {
-                // Debug.Log("hi");
                 // FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
                 newIcon.SetActive(true);
             }

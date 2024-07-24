@@ -54,9 +54,9 @@ public class PlayerController : MonoBehaviour
         animator.SetFloat("Speed", movement.sqrMagnitude);
 
         // Interactable check
-        if (currentCol != null && Input.GetKeyDown(interactKey))
+        if (Input.GetKeyDown(interactKey))
         {
-            FindObjectOfType<WorldEvents>().EnterBuilding(currentCol.gameObject.name, position);
+            FindObjectOfType<WorldEvents>().EnterBuilding();
         }
     }
 

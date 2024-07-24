@@ -144,7 +144,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c96ed5dd2d1ba0a4f9e1735e83f83b61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  villageCoordsX: 
-  villageCoordsY: 
-  dungeonCoordsX: 
-  dungeonCoordsY: 
+  maxDistance: 0.5
+  icon: {fileID: 4896040726258886826, guid: 5e6d5117116a74371a0979b40584be49, type: 3}

@@ -69,7 +69,6 @@
     <Compile Include="Assets/Scripts/Algorithms/VoronoiGeneration.cs" />
     <Compile Include="Assets/Scripts/World/WorldEvents.cs" />
     <Compile Include="Assets/Scripts/UI/MenuController.cs" />
-    <Compile Include="Assets/Scripts/NPC/VillagerTypes.cs" />
     <Compile Include="Assets/Scripts/NPC/EnemyData.cs" />
     <Compile Include="Assets/Scripts/Tilemaps/TileGrid.cs" />
     <Compile Include="Assets/Scripts/Algorithms/Helpers/TilemapHelper.cs" />
@@ -98,7 +97,6 @@
     <Compile Include="Assets/Scripts/Algorithms/Helpers/WorldLocator.cs" />
     <Compile Include="Assets/Scripts/Audio/AudioFade.cs" />
     <Compile Include="Assets/Scripts/Audio/Sound.cs" />
-    <Compile Include="Assets/Scripts/NPC/EnemyTypes.cs" />
     <Compile Include="Assets/Scripts/Tilemaps/TileTypes.cs" />
     <Compile Include="Assets/Scripts/Tilemaps/TilemapStructure.cs" />
     <Compile Include="Assets/Scripts/Algorithms/CellularAutomata.cs" />
@@ -111,7 +109,7 @@
     <Compile Include="Assets/Scripts/Algorithms/AlgorithmBase.cs" />
     <Compile Include="Assets/Scripts/UI/DialogueManager.cs" />
     <Compile Include="Assets/Scripts/UI/Dialogue.cs" />
-    <Compile Include="Assets/Scripts/UI/EventIconLocator.cs" />
+    <Compile Include="Assets/Scripts/UI/EventIconData.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/TextMesh Pro/Shaders/TMPro.cginc" />

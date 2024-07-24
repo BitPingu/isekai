@@ -5880,6 +5880,14 @@ MonoBehaviour:
     loop: 0
     group: {fileID: 24300002, guid: 4d2993b2a1eb0d64b8a08bdd86612bc7, type: 2}
     source: {fileID: 0}
+  - name: Enter
+    clip: {fileID: 8300000, guid: 2def1d1ffed404946b1467b63a68a863, type: 3}
+    maxVolume: 0
+    volume: 0.461
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: 4d2993b2a1eb0d64b8a08bdd86612bc7, type: 2}
+    source: {fileID: 0}
   bg:
     name: 
     clip: {fileID: 0}

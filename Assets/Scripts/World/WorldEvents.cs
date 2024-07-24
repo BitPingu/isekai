@@ -56,7 +56,6 @@ public class WorldEvents : MonoBehaviour
 
     private void StartEvents()
     {
-        Debug.Log("start world events");
         // Spawn player
         FindObjectOfType<PlayerPosition>().Spawn(TempData.initPlayerSpawn, SceneManager.GetActiveScene().buildIndex);
         if (TempData.initPlayerSpawn)
@@ -112,13 +111,28 @@ public class WorldEvents : MonoBehaviour
         }
     }
 
-    // Change scene based on current tile
-    public void EnterBuilding(string building, PlayerPosition position)
+    // Change scene based on nearby building to enter (via active icon)
+    public void EnterBuilding()
     {
-        if (building.Contains("Village"))
+        PlayerPosition position = FindObjectOfType<PlayerPosition>();
+        GameObject building;
+        string buildingToEnter;
+        if (GameObject.FindWithTag("Event"))
+        {
+            building = GameObject.FindWithTag("Event").transform.parent.gameObject;
+            buildingToEnter = building.name;
+            Debug.Log("enter building at " + building.transform.position);
+        }
+        else
+        {
+            buildingToEnter = "";
+        }
+
+        if (buildingToEnter.Contains("Village"))
         {
             // Stop current music  
             FindObjectOfType<AudioManager>().Stop();
+            FindObjectOfType<AudioManager>().PlayFx("Enter");
             if (SceneManager.GetActiveScene().buildIndex == 1) 
             {
                 // Enter house
@@ -132,10 +146,11 @@ public class WorldEvents : MonoBehaviour
                 SceneManager.LoadScene("Overworld");
             }
         }
-        else if (building.Contains("Dungeon"))
+        else if (buildingToEnter.Contains("Dungeon"))
         {
             // Stop current music  
             FindObjectOfType<AudioManager>().Stop();
+            FindObjectOfType<AudioManager>().PlayFx("Enter");
             if (SceneManager.GetActiveScene().buildIndex == 1)
             {
                 // Enter dungeon

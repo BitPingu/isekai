@@ -47,7 +47,6 @@ public class BuildingSpawner : AlgorithmBase
         {
             if (TempData.newGame)
             {
-                Debug.Log("new building");
                 // Determine spawn points using Poisson Disc Sampling
                 List<Vector2> listPoints = algorithm.GeneratePoints();
 
