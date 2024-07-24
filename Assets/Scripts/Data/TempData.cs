@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class TempData : MonoBehaviour
@@ -20,7 +21,8 @@ public class TempData : MonoBehaviour
     public static FogData tempFog;
     public static FogData tempFog2;
     public static bool initBuilding;
-    public static BuildingData tempBuilding;
+    public static List<Vector3> tempVillages;
+    public static List<Vector3> tempDungeons;
 
     public static bool initElf;
     public static bool initElfSpawn;

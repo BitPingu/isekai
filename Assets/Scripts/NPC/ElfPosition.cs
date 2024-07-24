@@ -54,28 +54,16 @@ public class ElfPosition : MonoBehaviour
         PosChange += OTileSound;
 
         // Set event icon
-        Vector3 iconPos = new Vector3(transform.position.x, transform.position.y + 1);
-        newIcon = Instantiate(icon, iconPos, Quaternion.identity);
-        newIcon.transform.parent = gameObject.transform;
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (!TempData.elfSaved && collision.gameObject.name == "Player")
+        if (!TempData.elfSaved)
         {
-            // Move to worldevents
-            newIcon.SetActive(false);
-            TempData.elfSaved = true;
-            TempData.initElf = false;
-            GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
-            GetComponent<Animator>().SetBool("Jump", false);
-            GetComponent<PartyMovement>().enabled = true;
-            DontDestroyOnLoad(gameObject);
+            Vector3 iconPos = new Vector3(transform.position.x, transform.position.y + 1);
+            newIcon = Instantiate(icon, iconPos, Quaternion.identity);
+            newIcon.transform.parent = gameObject.transform;
         }
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (!TempData.elfSaved)
         {
@@ -109,6 +97,21 @@ public class ElfPosition : MonoBehaviour
         {
             PosChange(); // Call delegate (and any methods tied to it)
             prevPos = currentPos;
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (!TempData.elfSaved && collision.gameObject.name == "Player")
+        {
+            // Move to worldevents
+            newIcon.SetActive(false);
+            TempData.elfSaved = true;
+            TempData.initElf = false;
+            GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+            GetComponent<Animator>().SetBool("Jump", false);
+            GetComponent<PartyMovement>().enabled = true;
+            DontDestroyOnLoad(gameObject);
         }
     }
 

@@ -16,8 +16,6 @@ public class TileGrid : MonoBehaviour
     private TileTypes.GroundTiles[] groundTileTypes;
     [SerializeField]
     private TileTypes.FoilageTiles[] foilageTileTypes;
-    [SerializeField]
-    private TileTypes.BuildingTiles[] buildingTileTypes;
 
     private Dictionary<int, TileBase> tiles;
     private Dictionary<TilemapType, TilemapStructure> tilemaps;
@@ -80,6 +78,37 @@ public class TileGrid : MonoBehaviour
     private void Start()
     {
         WorldGen(); // Finish world gen
+        if (TempData.initBuilding)
+        {
+            GetBuildingData();
+            TempData.initBuilding = false;
+        }
+    }
+
+    private void GetBuildingData()
+    {
+        GameObject[] buildings = GameObject.FindGameObjectsWithTag("Building");
+        List<Vector3> vils = new List<Vector3>();
+        List<Vector3> duns = new List<Vector3>();
+
+        foreach (GameObject building in buildings)
+        {
+            if (building.name.Contains("Village"))
+            {
+                vils.Add(new Vector3((int)building.transform.position.x, (int)building.transform.position.y));
+            }
+            else if (building.name.Contains("Dungeon"))
+            {
+                duns.Add(new Vector3((int)building.transform.position.x, (int)building.transform.position.y));
+            }
+            else
+            {
+                Debug.Log("unable to get building data!");
+            }
+        }
+
+        TempData.tempVillages = vils;
+        TempData.tempDungeons = duns;
     }
 
     // Returns all cached shared tiles available to be placed on tilemap
@@ -107,7 +136,6 @@ public class TileGrid : MonoBehaviour
         // Add all tilesets
         AddTileSet(tiles, groundTileTypes);
         AddTileSet(tiles, foilageTileTypes);
-        AddTileSet(tiles, buildingTileTypes);
     }
 
     // Adds a new tileset to the dictionary

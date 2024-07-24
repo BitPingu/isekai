@@ -14,3 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildingType: 4002
   algorithm: {fileID: 11400000, guid: 0c139ebf0ef8a534e8a3790b8b90187b, type: 2}
+  building: {fileID: 6904338341474015277, guid: de29fd5f8fea240cbab726b95cd07468, type: 3}
+  villageCoordsX: 
+  villageCoordsY: 
+  dungeonCoordsX: 
+  dungeonCoordsY: 

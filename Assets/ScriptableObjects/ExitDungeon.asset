@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc28174a027db4a4e89abf616a24c851, type: 3}
   m_Name: ExitDungeon
   m_EditorClassIdentifier: 
-  buildingType: 4002
+  exit: {fileID: 6904338341474015277, guid: de29fd5f8fea240cbab726b95cd07468, type: 3}

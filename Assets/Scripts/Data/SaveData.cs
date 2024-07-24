@@ -39,9 +39,24 @@ public class SaveData
         saveClearFogCoordsX = TempData.tempFog.clearFogCoordsX;
         saveClearFogCoordsY = TempData.tempFog.clearFogCoordsY;
 
-        saveVillageCoordsX = TempData.tempBuilding.villageCoordsX;
-        saveVillageCoordsY = TempData.tempBuilding.villageCoordsY;
-        saveDungeonCoordsX = TempData.tempBuilding.dungeonCoordsX;
-        saveDungeonCoordsY = TempData.tempBuilding.dungeonCoordsY;
+        List<int> vilsX = new List<int>();
+        List<int> vilsY = new List<int>();
+        foreach (Vector3 village in TempData.tempVillages)
+        {
+            vilsX.Add((int)village.x);
+            vilsY.Add((int)village.y);
+        }
+        saveVillageCoordsX = vilsX;
+        saveVillageCoordsY = vilsY;
+
+        List<int> dunsX = new List<int>();
+        List<int> dunsY = new List<int>();
+        foreach (Vector3 dungeon in TempData.tempDungeons)
+        {
+            dunsX.Add((int)dungeon.x);
+            dunsY.Add((int)dungeon.y);
+        }
+        saveDungeonCoordsX = dunsX;
+        saveDungeonCoordsY = dunsY;
     }
 }

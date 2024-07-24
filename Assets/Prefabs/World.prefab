@@ -304,6 +304,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   elf: {fileID: 0}
+  spawner: {fileID: 0}
 --- !u!1 &725286824534967813
 GameObject:
   m_ObjectHideFlags: 0
@@ -469,7 +470,6 @@ GameObject:
   - component: {fileID: 725286824561060684}
   - component: {fileID: 725286824561060674}
   - component: {fileID: 725286824561060687}
-  - component: {fileID: 725286824561060672}
   m_Layer: 0
   m_Name: OverworldMap
   m_TagString: Untagged
@@ -660,22 +660,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e3db38857dfcabb4d87aaa6710c58cbc, type: 2}
   - {fileID: 11400000, guid: e1c5b1203380ded408929396ced8b112, type: 2}
   - {fileID: 11400000, guid: 60bdb7766b86a9c40b4a6c4912f5d1ca, type: 2}
---- !u!114 &725286824561060672
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 725286824561060681}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c96ed5dd2d1ba0a4f9e1735e83f83b61, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  villageCoordsX: 
-  villageCoordsY: 
-  dungeonCoordsX: 
-  dungeonCoordsY: 
 --- !u!1 &725286824810590555
 GameObject:
   m_ObjectHideFlags: 0

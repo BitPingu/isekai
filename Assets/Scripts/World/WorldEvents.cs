@@ -113,45 +113,45 @@ public class WorldEvents : MonoBehaviour
     }
 
     // Change scene based on current tile
-    public void EnterBuilding(PlayerPosition position)
+    public void EnterBuilding(string building, PlayerPosition position)
     {
-        switch (position.currentOTile)
+        if (building.Contains("Village"))
         {
-            case (int)BuildingTileType.House:
-                // Stop current music  
-                FindObjectOfType<AudioManager>().Stop();
-                if (SceneManager.GetActiveScene().buildIndex == 1) 
-                {
-                    // Enter house
-                    TempData.tempPlayerBuildingSpawn = new Vector3(position.currentPos.x + .5f, position.currentPos.y + .4f); // save player position when exit
-                    SceneManager.LoadScene("Village");
-                }
-                else
-                {
-                    // Exit house
-                    TempData.tempFog2 = FindObjectOfType<FogData>();;
-                    SceneManager.LoadScene("Overworld");
-                }
-                break;
-            case (int)BuildingTileType.Dungeon:
-                // Stop current music  
-                FindObjectOfType<AudioManager>().Stop();
-                if (SceneManager.GetActiveScene().buildIndex == 1)
-                {
-                    // Enter dungeon
-                    TempData.tempPlayerBuildingSpawn = new Vector3(position.currentPos.x + .5f, position.currentPos.y + .4f); // save player position when exit
-                    SceneManager.LoadScene("Dungeon");
-                }
-                else
-                {
-                    // Exit dungeon
-                    TempData.tempFog2 = FindObjectOfType<FogData>();;
-                    SceneManager.LoadScene("Overworld");
-                }
-                break;
-            default:
-                Debug.Log("No interactable tile!");
-                break;
+            // Stop current music  
+            FindObjectOfType<AudioManager>().Stop();
+            if (SceneManager.GetActiveScene().buildIndex == 1) 
+            {
+                // Enter house
+                TempData.tempPlayerBuildingSpawn = new Vector3(position.currentPos.x + .5f, position.currentPos.y + .4f); // save player position when exit
+                SceneManager.LoadScene("Village");
+            }
+            else
+            {
+                // Exit house
+                TempData.tempFog2 = FindObjectOfType<FogData>();;
+                SceneManager.LoadScene("Overworld");
+            }
+        }
+        else if (building.Contains("Dungeon"))
+        {
+            // Stop current music  
+            FindObjectOfType<AudioManager>().Stop();
+            if (SceneManager.GetActiveScene().buildIndex == 1)
+            {
+                // Enter dungeon
+                TempData.tempPlayerBuildingSpawn = new Vector3(position.currentPos.x + .5f, position.currentPos.y + .4f); // save player position when exit
+                SceneManager.LoadScene("Dungeon");
+            }
+            else
+            {
+                // Exit dungeon
+                TempData.tempFog2 = FindObjectOfType<FogData>();;
+                SceneManager.LoadScene("Overworld");
+            }
+        }
+        else
+        {
+            Debug.Log("No interactable tile!");
         }
     }
 }

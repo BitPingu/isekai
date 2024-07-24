@@ -73,7 +73,7 @@
     <Compile Include="Assets/Scripts/NPC/EnemyData.cs" />
     <Compile Include="Assets/Scripts/Tilemaps/TileGrid.cs" />
     <Compile Include="Assets/Scripts/Algorithms/Helpers/TilemapHelper.cs" />
-    <Compile Include="Assets/Scripts/Data/FogData.cs" />
+    <Compile Include="Assets/Scripts/World/FogData.cs" />
     <Compile Include="Assets/Scripts/Algorithms/ObjectGeneration.cs" />
     <Compile Include="Assets/Scripts/Tilemaps/FoilageTileType.cs" />
     <Compile Include="Assets/Scripts/UI/MapIconLocator.cs" />
@@ -89,7 +89,7 @@
     <Compile Include="Assets/Scripts/UI/PauseMenu.cs" />
     <Compile Include="Assets/Scripts/NPC/NPCMovement.cs" />
     <Compile Include="Assets/Scripts/NPC/VillagerSpawner.cs" />
-    <Compile Include="Assets/Scripts/Data/BuildingData.cs" />
+    <Compile Include="Assets/Scripts/World/BuildingData.cs" />
     <Compile Include="Assets/Scripts/Player/PlayerPosition.cs" />
     <Compile Include="Assets/Scripts/NPC/EnemySpawner.cs" />
     <Compile Include="Assets/Scripts/Algorithms/ExitGen.cs" />

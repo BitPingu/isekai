@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
     private PlayerPosition position;
     private float moveSpeed;
 
+    public Collision2D currentCol;
+
     private void Awake()
     {
         // Retrieve components of player
@@ -52,9 +54,9 @@ public class PlayerController : MonoBehaviour
         animator.SetFloat("Speed", movement.sqrMagnitude);
 
         // Interactable check
-        if (Input.GetKeyDown(interactKey))
+        if (currentCol != null && Input.GetKeyDown(interactKey))
         {
-            FindObjectOfType<WorldEvents>().EnterBuilding(position);
+            FindObjectOfType<WorldEvents>().EnterBuilding(currentCol.gameObject.name, position);
         }
     }
 
@@ -63,6 +65,11 @@ public class PlayerController : MonoBehaviour
     {
         // Movement
         rb.MovePosition(rb.position + movement.normalized * moveSpeed * Time.fixedDeltaTime);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        currentCol = collision;
     }
 
     // Set speed based on current tile
