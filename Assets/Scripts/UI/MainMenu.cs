@@ -12,7 +12,7 @@ public class MainMenu : MonoBehaviour
         // Destroy leftover game objects
         Destroy(GameObject.Find("Player"));
         Destroy(GameObject.Find("Elf"));
-        Destroy(GameObject.Find("Menu"));
+        Destroy(GameObject.Find("UI"));
 
         // Check if new game
         string path = Application.persistentDataPath + "/saveData.isekai";

@@ -26,6 +26,10 @@ public class ElfPosition : MonoBehaviour
     public delegate void OnOTileChange();
     public OnOTileChange OTileChange;
 
+    public Dialogue dialogue;
+    public GameObject icon;
+    private GameObject newIcon;
+
     public static ElfPosition elf;
 
     private void Awake()
@@ -48,6 +52,11 @@ public class ElfPosition : MonoBehaviour
         // Attach delegates
         PosChange += CheckPosition;
         PosChange += OTileSound;
+
+        // Set event icon
+        Vector3 iconPos = new Vector3(transform.position.x, transform.position.y + 1);
+        newIcon = Instantiate(icon, iconPos, Quaternion.identity);
+        newIcon.transform.parent = gameObject.transform;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -55,6 +64,7 @@ public class ElfPosition : MonoBehaviour
         if (!TempData.elfSaved && collision.gameObject.name == "Player")
         {
             // Move to worldevents
+            newIcon.SetActive(false);
             TempData.elfSaved = true;
             TempData.initElf = false;
             GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
@@ -76,6 +86,17 @@ public class ElfPosition : MonoBehaviour
             else
             {
                 GetComponent<SpriteRenderer>().flipX = true;
+            }
+
+            if (CheckPlayer())
+            {
+                // Debug.Log("hi");
+                // FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
+                newIcon.SetActive(true);
+            }
+            else
+            {
+                newIcon.SetActive(false);
             }
         }
 

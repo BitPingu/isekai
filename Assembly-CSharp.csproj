@@ -109,6 +109,9 @@
     <Compile Include="Assets/Scripts/Data/TempData.cs" />
     <Compile Include="Assets/Scripts/NPC/ElfPosition.cs" />
     <Compile Include="Assets/Scripts/Algorithms/AlgorithmBase.cs" />
+    <Compile Include="Assets/Scripts/UI/DialogueManager.cs" />
+    <Compile Include="Assets/Scripts/UI/Dialogue.cs" />
+    <Compile Include="Assets/Scripts/UI/EventIconLocator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/TextMesh Pro/Shaders/TMPro.cginc" />
