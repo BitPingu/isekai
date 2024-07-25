@@ -48,6 +48,7 @@ public class WorldEvents : MonoBehaviour
                 enemy.GetComponent<NPCMovement>().enabled = true;
                 enemy.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
                 enemy.GetComponent<Animator>().SetBool("Attack", false);
+                FindObjectOfType<DialogueController>().EndDialogue();
                 Debug.Log("elf was slain!");
                 Destroy(elf);
             }

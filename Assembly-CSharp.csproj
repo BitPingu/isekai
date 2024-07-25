@@ -107,7 +107,7 @@
     <Compile Include="Assets/Scripts/Data/TempData.cs" />
     <Compile Include="Assets/Scripts/NPC/ElfPosition.cs" />
     <Compile Include="Assets/Scripts/Algorithms/AlgorithmBase.cs" />
-    <Compile Include="Assets/Scripts/UI/DialogueManager.cs" />
+    <Compile Include="Assets/Scripts/UI/DialogueController.cs" />
     <Compile Include="Assets/Scripts/UI/Dialogue.cs" />
     <Compile Include="Assets/Scripts/UI/EventIconData.cs" />
   </ItemGroup>

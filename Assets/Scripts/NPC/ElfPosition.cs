@@ -27,6 +27,7 @@ public class ElfPosition : MonoBehaviour
     public OnOTileChange OTileChange;
 
     public Dialogue dialogue;
+    private bool triggerDia;
     public GameObject icon;
     private GameObject newIcon;
 
@@ -79,12 +80,21 @@ public class ElfPosition : MonoBehaviour
 
             if (CheckPlayer())
             {
-                // FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
                 newIcon.SetActive(true);
             }
             else
             {
                 newIcon.SetActive(false);
+            }
+
+            if (CheckClosePlayer() && !FindObjectOfType<DialogueController>().isActive && !triggerDia)
+            {
+                triggerDia = true;
+                FindObjectOfType<DialogueController>().StartDialogue(dialogue);
+            }
+            if (!CheckClosePlayer())
+            {
+                triggerDia = false;
             }
         }
 
@@ -251,6 +261,19 @@ public class ElfPosition : MonoBehaviour
         if (distance < maxDistance)
         {
             // Debug.Log("hi");
+            return true;
+        }
+
+        return false;
+    }
+
+    private bool CheckClosePlayer()
+    {
+        // Calculate current distance from player
+        float distance = Vector3.Distance(FindObjectOfType<PlayerPosition>().transform.position, transform.position);
+
+        if (distance < maxDistance-1.5)
+        {
             return true;
         }
 
