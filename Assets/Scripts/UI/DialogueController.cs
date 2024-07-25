@@ -57,7 +57,6 @@ public class DialogueController : MonoBehaviour
             return;
         }
 
-        Debug.Log("display");
         Dialogue.Prompt p = prompts.Dequeue();
         if (p.options.Length == 0)
         {
@@ -108,6 +107,5 @@ public class DialogueController : MonoBehaviour
         textDialogueUI.SetActive(false);
         optionDialogueUI.SetActive(false);
         isActive = false;
-        Debug.Log("finish dia");
     }
 }

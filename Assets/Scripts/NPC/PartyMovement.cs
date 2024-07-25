@@ -50,31 +50,22 @@ public class PartyMovement : MonoBehaviour
         if (moveSpeed <= 0)
             moveSpeed = 1;
 
-        // Movement animation
-        animator.SetBool("Move", transform.hasChanged);
-        if (transform.hasChanged)
-        {
-            transform.hasChanged = false;
-        }
-    }
-
-    private void FixedUpdate()
-    {
-        // Calculate current direction towards player
-        Vector3 dir = (player.transform.position - rb.transform.position).normalized;
-
         // Calculate current distance from player
         float distance = Vector3.Distance(player.transform.position, rb.transform.position);
 
         // Check if outside range
         if (distance > minDistance)
         {
+            // Calculate current direction towards player
+            Vector2 movement = (player.transform.position - rb.transform.position).normalized;
+
             // Move towards player
-            moveSpeed+=1;
-            rb.MovePosition(rb.transform.position + dir * moveSpeed * Time.fixedDeltaTime);
+            Vector2 moveForce = movement * (moveSpeed+1);
+            moveForce /= 1.2f;
+            rb.velocity = moveForce;
 
             // Flip sprite based on horizontal movement
-            if (dir.x < 0)
+            if (movement.x < 0)
             {
                 sprite.flipX = true;
             }
@@ -83,8 +74,13 @@ public class PartyMovement : MonoBehaviour
                 sprite.flipX = false;
             }
         }
+        if (distance < minDistance-0.3)
+        {
+            // Stop moving when within range
+            rb.velocity = Vector2.zero;
+        }
 
-        // Reset values
-        rb.velocity = Vector2.zero;
+        // Movement animation
+        animator.SetFloat("Speed", rb.velocity.sqrMagnitude);
     }
 }

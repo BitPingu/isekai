@@ -64,6 +64,8 @@
   <ItemGroup>
     <Compile Include="Assets/Scripts/UI/MainMenu.cs" />
     <Compile Include="Assets/Scripts/Algorithms/PoissonDiscSampling.cs" />
+    <Compile Include="Assets/Scripts/Player/PlayerBattle.cs" />
+    <Compile Include="Assets/Scripts/Battle/BattleManager.cs" />
     <Compile Include="Assets/Scripts/Algorithms/Helpers/Noise.cs" />
     <Compile Include="Assets/Scripts/Data/SaveData.cs" />
     <Compile Include="Assets/Scripts/Algorithms/VoronoiGeneration.cs" />
@@ -74,9 +76,11 @@
     <Compile Include="Assets/Scripts/Algorithms/Helpers/TilemapHelper.cs" />
     <Compile Include="Assets/Scripts/World/FogData.cs" />
     <Compile Include="Assets/Scripts/Algorithms/ObjectGeneration.cs" />
+    <Compile Include="Assets/Scripts/UI/Dialogue.cs" />
     <Compile Include="Assets/Scripts/Tilemaps/FoilageTileType.cs" />
     <Compile Include="Assets/Scripts/UI/MapIconLocator.cs" />
     <Compile Include="Assets/Scripts/Data/SaveSystem.cs" />
+    <Compile Include="Assets/Scripts/UI/DialogueController.cs" />
     <Compile Include="Assets/Scripts/Tilemaps/AdvancedRuleTile.cs" />
     <Compile Include="Assets/Scripts/Algorithms/BuildingSpawner.cs" />
     <Compile Include="Assets/Scripts/UI/OptionsMenu.cs" />
@@ -97,6 +101,7 @@
     <Compile Include="Assets/Scripts/Algorithms/Helpers/WorldLocator.cs" />
     <Compile Include="Assets/Scripts/Audio/AudioFade.cs" />
     <Compile Include="Assets/Scripts/Audio/Sound.cs" />
+    <Compile Include="Assets/Scripts/UI/EventIconData.cs" />
     <Compile Include="Assets/Scripts/Tilemaps/TileTypes.cs" />
     <Compile Include="Assets/Scripts/Tilemaps/TilemapStructure.cs" />
     <Compile Include="Assets/Scripts/Algorithms/CellularAutomata.cs" />
@@ -107,9 +112,7 @@
     <Compile Include="Assets/Scripts/Data/TempData.cs" />
     <Compile Include="Assets/Scripts/NPC/ElfPosition.cs" />
     <Compile Include="Assets/Scripts/Algorithms/AlgorithmBase.cs" />
-    <Compile Include="Assets/Scripts/UI/DialogueController.cs" />
-    <Compile Include="Assets/Scripts/UI/Dialogue.cs" />
-    <Compile Include="Assets/Scripts/UI/EventIconData.cs" />
+    <Compile Include="Assets/Scripts/NPC/EnemyBattle.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/TextMesh Pro/Shaders/TMPro.cginc" />

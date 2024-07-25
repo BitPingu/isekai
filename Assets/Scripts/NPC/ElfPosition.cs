@@ -92,9 +92,10 @@ public class ElfPosition : MonoBehaviour
                 triggerDia = true;
                 FindObjectOfType<DialogueController>().StartDialogue(dialogue);
             }
-            if (!CheckClosePlayer())
+            if (!CheckClosePlayer() && triggerDia)
             {
                 triggerDia = false;
+                FindObjectOfType<DialogueController>().EndDialogue();
             }
         }
 

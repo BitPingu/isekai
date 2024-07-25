@@ -2,12 +2,10 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField]
-    private float maxSpeed; // Default is 5
+    public float maxSpeed; // Default is 5
     [SerializeField]
     private KeyCode interactKey;
 
-    private Vector2 movement;
     private SpriteRenderer sprite;
     private Rigidbody2D rb;
     private Animator animator;
@@ -29,16 +27,19 @@ public class PlayerController : MonoBehaviour
 
         // Attach delegates
         position.OTileChange += ChangeSpeed;
+
+        GetComponent<PlayerBattle>().enabled = false;
     }
 
     private void Update()
     {
-        // Input
-        if (!MenuController.openMenu)
-        {
-            movement.x = Input.GetAxisRaw("Horizontal");
-            movement.y = Input.GetAxisRaw("Vertical");
-        }
+        // Movement
+        Vector2 movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
+        Vector2 moveForce = movement * moveSpeed;
+        rb.velocity = moveForce;
+
+        // Movement animation
+        animator.SetFloat("Speed", rb.velocity.sqrMagnitude);
 
         // Flip sprite based on horizontal movement
         if (movement.x > 0)
@@ -50,21 +51,11 @@ public class PlayerController : MonoBehaviour
             sprite.flipX = true;
         }
 
-        // Movement animation
-        animator.SetFloat("Speed", movement.sqrMagnitude);
-
         // Interactable check
         if (Input.GetKeyDown(interactKey))
         {
             FindObjectOfType<WorldEvents>().EnterBuilding();
         }
-    }
-
-    // Executed on a fixed timer instead of frame rate
-    private void FixedUpdate()
-    {
-        // Movement
-        rb.MovePosition(rb.position + movement.normalized * moveSpeed * Time.fixedDeltaTime);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

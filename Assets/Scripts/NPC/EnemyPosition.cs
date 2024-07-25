@@ -57,6 +57,7 @@ public class EnemyPosition : MonoBehaviour
         if (collision.gameObject.name == "Player")
         {
             Debug.Log("hit");
+            FindObjectOfType<BattleManager>().Initiate(collision.gameObject, gameObject);
         }
     }
 
@@ -66,7 +67,6 @@ public class EnemyPosition : MonoBehaviour
         // look at player when nearby and (chase it?)
         if (GetComponent<EnemyData>().isHostile && CheckPlayer())
         {
-            // Debug.Log("I see u");
             if (player.transform.position.x - transform.position.x > 0)
             {
                 GetComponent<SpriteRenderer>().flipX = false;

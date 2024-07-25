@@ -45,6 +45,8 @@ public class NPCMovement : MonoBehaviour
 
         // Choose direction
         chooseDirection();
+
+        GetComponent<EnemyBattle>().enabled = false;
     }
 
     // Update is called once per frame
