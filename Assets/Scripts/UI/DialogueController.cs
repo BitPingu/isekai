@@ -14,6 +14,7 @@ public class DialogueController : MonoBehaviour
     private KeyCode dialogKey;
 
     public Queue<Dialogue.Prompt> prompts;
+    public Dialogue.Prompt currentPrompt;
 
     public string issuer;
     public bool isActive;
@@ -57,8 +58,8 @@ public class DialogueController : MonoBehaviour
             return;
         }
 
-        Dialogue.Prompt p = prompts.Dequeue();
-        if (p.options.Length == 0)
+        currentPrompt = prompts.Dequeue();
+        if (currentPrompt.options.Length == 0)
         {
             textDialogueUI.SetActive(true);
             optionDialogueUI.SetActive(false);
@@ -72,7 +73,7 @@ public class DialogueController : MonoBehaviour
                 }
                 else if (t.name == "Dialogue")
                 {
-                    t.gameObject.GetComponent<TextMeshProUGUI>().text = p.sentence;
+                    t.gameObject.GetComponent<TextMeshProUGUI>().text = currentPrompt.sentence;
                 }
             }
         }
@@ -86,18 +87,53 @@ public class DialogueController : MonoBehaviour
             {
                 if (t.name == "Dialogue")
                 {
-                    t.gameObject.GetComponent<TextMeshProUGUI>().text = p.sentence;
+                    t.gameObject.GetComponent<TextMeshProUGUI>().text = currentPrompt.sentence;
                 }
                 else if (t.name == "Option1")
                 {
-                    t.gameObject.GetComponentInChildren<TextMeshProUGUI>().text = p.options[0];
+                    t.gameObject.GetComponentInChildren<TextMeshProUGUI>().text = currentPrompt.options[0];
                 }
                 else if (t.name == "Option2")
                 {
-                    t.gameObject.GetComponentInChildren<TextMeshProUGUI>().text = p.options[1];
+                    t.gameObject.GetComponentInChildren<TextMeshProUGUI>().text = currentPrompt.options[1];
                 }
             }
         }
+    }
+
+    public void Action(string act)
+    {
+        Debug.Log("do " + act);
+        switch(act)
+        {
+            case "Yes":
+                break;
+            case "No":
+                DisplayNextSentence();
+                break;
+            case "Attack":
+                FindObjectOfType<BattleManager>().OnAttackButton();
+                break;
+            case "Run":
+                FindObjectOfType<BattleManager>().EndBattle();
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void Action1()
+    {
+        string option = currentPrompt.options[0];
+        Debug.Log("action1");
+        Action(option);
+    }
+
+    public void Action2()
+    {
+        string option = currentPrompt.options[1];
+        Debug.Log("action2");
+        Action(option);
     }
 
     public void EndDialogue()

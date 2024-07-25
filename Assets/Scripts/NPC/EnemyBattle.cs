@@ -17,7 +17,7 @@ public class EnemyBattle : MonoBehaviour
         stance = false;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (FindObjectOfType<PlayerPosition>().transform.position.x - transform.position.x > 0)
         {
@@ -27,11 +27,13 @@ public class EnemyBattle : MonoBehaviour
         {
             GetComponent<SpriteRenderer>().flipX = true;
         }
+
+        // Reset values
+        rb.velocity = Vector2.zero;
     }
 
     public void Stance()
     {
-        // Reset values
-        rb.velocity = Vector2.zero;
+        
     }
 }

@@ -5839,6 +5839,14 @@ MonoBehaviour:
     loop: 1
     group: {fileID: 24300002, guid: c4c83fb57896dcd48b875c9cb4f4709b, type: 2}
     source: {fileID: 0}
+  - name: Battle
+    clip: {fileID: 8300000, guid: 632d77166a5ae4f8bad42247183515ba, type: 3}
+    maxVolume: 0
+    volume: 0.39
+    pitch: 1
+    loop: 1
+    group: {fileID: 24300002, guid: c4c83fb57896dcd48b875c9cb4f4709b, type: 2}
+    source: {fileID: 0}
   soundFx:
   - name: Button
     clip: {fileID: 8300000, guid: 6e9c79c1b38291a479ec3c0186ac62e5, type: 3}

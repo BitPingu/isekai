@@ -55,6 +55,9 @@ public class PauseMenu : MonoBehaviour
         // Resume time
         Time.timeScale = 1f;
 
+        // Resume sound
+        FindObjectOfType<AudioManager>().UnDampen();
+
         // Stop sound
         FindObjectOfType<AudioManager>().Stop();
 

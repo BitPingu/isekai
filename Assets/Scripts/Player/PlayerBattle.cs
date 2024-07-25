@@ -67,7 +67,6 @@ public class PlayerBattle : MonoBehaviour
 
     public void Stance()
     {
-        Debug.Log("I am battling enemy at " + FindObjectOfType<BattleManager>().enemy.transform.position);
         // Generate random battle position
         float xCoord, yCoord, currentTile;
         // Get enemy position

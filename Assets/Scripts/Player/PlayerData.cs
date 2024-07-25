@@ -2,11 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyData : MonoBehaviour
+public class PlayerData : MonoBehaviour
 {
-    public string type;
+    public string playerName;
     public int level;
-    public bool isHostile;
 
     public void test()
     {

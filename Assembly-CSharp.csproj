@@ -113,6 +113,10 @@
     <Compile Include="Assets/Scripts/NPC/ElfPosition.cs" />
     <Compile Include="Assets/Scripts/Algorithms/AlgorithmBase.cs" />
     <Compile Include="Assets/Scripts/NPC/EnemyBattle.cs" />
+    <Compile Include="Assets/Scripts/UI/Camera.cs" />
+    <Compile Include="Assets/Scripts/Player/PlayerData.cs" />
+    <Compile Include="Assets/Scripts/UI/BattleHUD.cs" />
+    <Compile Include="Assets/Scripts/Battle/BattleData.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/TextMesh Pro/Shaders/TMPro.cginc" />
