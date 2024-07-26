@@ -134,11 +134,13 @@ public class ElfPosition : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public void SaveElf2()
+    public IEnumerator SaveElf2()
     {
         FindObjectOfType<DialogueController>().StartDialogue("Helpless Elf");
         FindObjectOfType<DialogueController>().AddPrompt(new Dialogue("Thanks!"));
-        // FindObjectOfType<DialogueController>().DisplayNextSentence();
+        FindObjectOfType<DialogueController>().DisplayNextSentence();
+        yield return new WaitForSeconds(1f);
+        FindObjectOfType<DialogueController>().EndDialogue();
         GetComponent<PartyMovement>().minDistance = 1.55f;
     }
 

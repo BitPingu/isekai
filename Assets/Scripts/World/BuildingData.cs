@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class BuildingData : MonoBehaviour
 {
+    public bool interactable;
     [SerializeField]
     private float maxDistance; // default is 0.5f
     public GameObject icon;
@@ -19,7 +20,7 @@ public class BuildingData : MonoBehaviour
 
     private void Update()
     {
-        if (CheckPlayer())
+        if (interactable && CheckPlayer())
         {
             newIcon.SetActive(true);
         }

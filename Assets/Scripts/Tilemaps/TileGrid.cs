@@ -90,6 +90,7 @@ public class TileGrid : MonoBehaviour
         GameObject[] buildings = GameObject.FindGameObjectsWithTag("Building");
         List<Vector3> vils = new List<Vector3>();
         List<Vector3> duns = new List<Vector3>();
+        List<Vector3> camps = new List<Vector3>();
 
         foreach (GameObject building in buildings)
         {
@@ -101,14 +102,19 @@ public class TileGrid : MonoBehaviour
             {
                 duns.Add(new Vector3((int)building.transform.position.x, (int)building.transform.position.y));
             }
+            else if (building.name.Contains("Camp"))
+            {
+                camps.Add(new Vector3((int)building.transform.position.x, (int)building.transform.position.y));
+            }
             else
             {
-                Debug.Log("unable to get building data!");
+                Debug.Log("unable to get building data for " + building.name);
             }
         }
 
         TempData.tempVillages = vils;
         TempData.tempDungeons = duns;
+        TempData.tempCamps = camps;
     }
 
     // Returns all cached shared tiles available to be placed on tilemap

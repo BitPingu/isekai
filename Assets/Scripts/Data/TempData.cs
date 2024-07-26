@@ -23,6 +23,7 @@ public class TempData : MonoBehaviour
     public static bool initBuilding;
     public static List<Vector3> tempVillages;
     public static List<Vector3> tempDungeons;
+    public static List<Vector3> tempCamps;
 
     public static bool initElf;
     public static bool initElfSpawn;

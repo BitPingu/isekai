@@ -54,6 +54,7 @@ public class BattleManager : MonoBehaviour
     private void PlayerTurn()
     {
         FindObjectOfType<DialogueController>().AddPrompt(new Dialogue(playerData.name + "'s Turn.", new string[2]{"Attack", "Run"}));
+        FindObjectOfType<DialogueController>().DisplayNextSentence();
     }
 
     public void OnAttackButton()
@@ -61,64 +62,76 @@ public class BattleManager : MonoBehaviour
         if (state != BattleState.PLAYERTURN)
             return;
         
-        PlayerAttack();
+        StartCoroutine(PlayerAttack());
     }
 
-    private void PlayerAttack()
+    private IEnumerator PlayerAttack()
     {
         FindObjectOfType<DialogueController>().AddPrompt(new Dialogue(playerData.name + " attacks!"));
+        FindObjectOfType<DialogueController>().DisplayNextSentence();
+        yield return new WaitForSeconds(1f);
 
         bool isDead = enemyData.TakeDamage(playerData.damage);
 
         enemyHUD.GetComponent<BattleHUD>().SetHP(enemyData.currentHP);
         FindObjectOfType<DialogueController>().AddPrompt(new Dialogue(enemyData.name + " took " + playerData.damage + " damage."));
+        FindObjectOfType<DialogueController>().DisplayNextSentence();
+        yield return new WaitForSeconds(1f);
 
         if (isDead)
         {
             state = BattleState.WON;
-            EndBattle();
+            StartCoroutine(EndBattle());
         }
         else
         {
             state = BattleState.ENEMYTURN;
-            EnemyTurn();
+            StartCoroutine(EnemyTurn());
         }
     }
 
-    public void OnRunButton()
+    public IEnumerator OnRunButton()
     {
         if (state != BattleState.PLAYERTURN)
-            return;
+            yield break;
 
         if (enemy.tag.Equals("SpecialEnemy"))
         {
             FindObjectOfType<DialogueController>().AddPrompt(new Dialogue("Couldn't get away!"));
+            FindObjectOfType<DialogueController>().DisplayNextSentence();
+            yield return new WaitForSeconds(1f);
             PlayerTurn();
-            return;
+            yield break;
         }
         
-        PlayerRun();
+        StartCoroutine(PlayerRun());
     }
 
-    private void PlayerRun()
+    private IEnumerator PlayerRun()
     {
         FindObjectOfType<DialogueController>().AddPrompt(new Dialogue(playerData.name + " ran."));
-        EndBattle();
+        FindObjectOfType<DialogueController>().DisplayNextSentence();
+        yield return new WaitForSeconds(1f);
+        StartCoroutine(EndBattle());
     }
 
-    private void EnemyTurn()
+    private IEnumerator EnemyTurn()
     {
         FindObjectOfType<DialogueController>().AddPrompt(new Dialogue(enemyData.name + " attacks!"));
+        FindObjectOfType<DialogueController>().DisplayNextSentence();
+        yield return new WaitForSeconds(1f);
         
         bool isDead = playerData.TakeDamage(enemyData.damage);
 
         playerHUD.GetComponent<BattleHUD>().SetHP(playerData.currentHP);
         FindObjectOfType<DialogueController>().AddPrompt(new Dialogue(playerData.name + " took " + enemyData.damage + " damage."));
+        FindObjectOfType<DialogueController>().DisplayNextSentence();
+        yield return new WaitForSeconds(1f);
 
         if (isDead)
         {
             state = BattleState.LOST;
-            EndBattle();
+            StartCoroutine(EndBattle());
         }
         else
         {
@@ -127,26 +140,38 @@ public class BattleManager : MonoBehaviour
         }
     }
 
-    public void EndBattle()
+    public IEnumerator EndBattle()
     {
-        Destroy(playerHUD);
-        Destroy(enemyHUD);
+        bool special = false;
+        if (enemy.tag.Equals("SpecialEnemy"))
+            special = true;
 
         if (state == BattleState.WON)
         {
             Destroy(enemy);
             FindObjectOfType<DialogueController>().AddPrompt(new Dialogue(enemyData.name + " was defeated!"));
+            FindObjectOfType<DialogueController>().DisplayNextSentence();
+            yield return new WaitForSeconds(1f);
         }
         else if (state == BattleState.LOST)
         {
             FindObjectOfType<DialogueController>().AddPrompt(new Dialogue(playerData.name + " was defeated!"));
+            FindObjectOfType<DialogueController>().DisplayNextSentence();
+            yield return new WaitForSeconds(1f);
         }
+        FindObjectOfType<DialogueController>().EndDialogue();
+
+        Destroy(playerHUD);
+        Destroy(enemyHUD);
 
         // DeInit battle stance
         player.GetComponent<PlayerController>().enabled = true;
         player.GetComponent<PlayerBattle>().enabled = false;
-        enemy.GetComponent<NPCMovement>().enabled = true;
-        enemy.GetComponent<EnemyBattle>().enabled = false;
+        if (enemy)
+        {
+            enemy.GetComponent<NPCMovement>().enabled = true;
+            enemy.GetComponent<EnemyBattle>().enabled = false;
+        }
 
         // DeStart battle
         FindObjectOfType<Camera>().target = player;
@@ -161,10 +186,9 @@ public class BattleManager : MonoBehaviour
             dayNight.NightMusic();
         }
 
-        if (enemy.tag.Equals("SpecialEnemy"))
-        {
-            FindObjectOfType<ElfPosition>().SaveElf2();
-        }
+        if (special)
+            StartCoroutine(FindObjectOfType<ElfPosition>().SaveElf2());
+
         // Back to overworld
     }
 }

@@ -16,6 +16,8 @@ public class SaveData
     public List<int> saveVillageCoordsY;
     public List<int> saveDungeonCoordsX;
     public List<int> saveDungeonCoordsY;
+    public List<int> saveCampCoordsX;
+    public List<int> saveCampCoordsY;
 
 
     public SaveData ()
@@ -58,5 +60,15 @@ public class SaveData
         }
         saveDungeonCoordsX = dunsX;
         saveDungeonCoordsY = dunsY;
+
+        List<int> campX = new List<int>();
+        List<int> campY = new List<int>();
+        foreach (Vector3 camp in TempData.tempCamps)
+        {
+            campX.Add((int)camp.x);
+            campY.Add((int)camp.y);
+        }
+        saveCampCoordsX = campX;
+        saveCampCoordsY = campY;
     }
 }

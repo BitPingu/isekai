@@ -1171,13 +1171,6 @@ MonoBehaviour:
   state: 0
   player: {fileID: 0}
   enemy: {fileID: 0}
-  dialogue:
-    name: 
-    prompts:
-    - sentence: A wild slime approaches...
-      options:
-      - Attack
-      - Run
   HUD: {fileID: 661872706025064440, guid: 9220f0cf4a3534e359f59da47f1213fa, type: 3}
 --- !u!114 &842743448 stripped
 MonoBehaviour:
@@ -2552,8 +2545,13 @@ MonoBehaviour:
   - gameObject: {fileID: 7751972130982338795, guid: b23810bbe30eae941839d06f0b03b79f, type: 3}
     spawnPoint: {x: 0, y: 0, z: 0}
     nightEnemy: 1
-  algorithm: {fileID: 11400000, guid: 94ffa57e431c95d43851725aa0782f7b, type: 2}
+  - gameObject: {fileID: 7751972130982338795, guid: eac8ea6a5ef214293a34ede81e08ffe8, type: 3}
+    spawnPoint: {x: 0, y: 0, z: 0}
+    nightEnemy: 0
+  algorithms: []
+  overworldEnemyAlgorithm: {fileID: 11400000, guid: 94ffa57e431c95d43851725aa0782f7b, type: 2}
   displayRadius: 1
+  goblinAlgorithm: {fileID: 11400000, guid: 52c9555d24b524fa6961f9194528963e, type: 2}
   dayNight: {fileID: 1551174836}
 --- !u!4 &1512219761
 Transform:
@@ -3422,6 +3420,14 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1493488788}
+    - target: {fileID: 725286824561060687, guid: b1d4d0c234ecf6b43b26f0e51520c30c, type: 3}
+      propertyPath: algorithms.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 725286824561060687, guid: b1d4d0c234ecf6b43b26f0e51520c30c, type: 3}
+      propertyPath: algorithms.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: cf23189ae6435457d826342a990094e7, type: 2}
     - target: {fileID: 725286824810590558, guid: b1d4d0c234ecf6b43b26f0e51520c30c, type: 3}
       propertyPath: player
       value: 
@@ -3494,6 +3500,10 @@ PrefabInstance:
     - target: {fileID: 6051531619059624774, guid: 12442fc3ad8dfae4394f6933d0291586, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6255811696301944309, guid: 12442fc3ad8dfae4394f6933d0291586, type: 3}
+      propertyPath: damage
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12442fc3ad8dfae4394f6933d0291586, type: 3}
@@ -3590,14 +3600,8 @@ MonoBehaviour:
   currentGTile: 0
   currentOTile: 0
   dialogue:
-    name: Helpless Elf
-    prompts:
-    - sentence: Please help me!
-      options: []
-    - sentence: Save Elf?
-      options:
-      - Yes
-      - No
+    sentence: 
+    options: []
   icon: {fileID: 4896040726258886826, guid: 5e6d5117116a74371a0979b40584be49, type: 3}
 --- !u!50 &6051531619161849268
 Rigidbody2D:

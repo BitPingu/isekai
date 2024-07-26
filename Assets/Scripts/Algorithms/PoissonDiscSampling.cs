@@ -66,11 +66,6 @@ public class PoissonDiscSampling : ScriptableObject
         }
 
         // Return list of generated points
-        // Debug.Log("candpoints:"+points.Count);
-        // Debug.Log("newpoints:"+points);
-        // foreach (var x in points) {
-        //     Debug.Log(x.ToString());
-        // }
         return points;
     }
 

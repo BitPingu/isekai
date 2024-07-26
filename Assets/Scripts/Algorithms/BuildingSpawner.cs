@@ -13,16 +13,12 @@ public class BuildingSpawner : AlgorithmBase
     private int currentTile;
 
     public GameObject building;
-    public List<int> villageCoordsX;
-    public List<int> villageCoordsY;
-    public List<int> dungeonCoordsX;
-    public List<int> dungeonCoordsY;
-
 
     public override void Apply(TilemapStructure tilemap)
     {
         LoadPoints();
         var groundTilemap = tilemap.grid.GetTilemap(TilemapType.Ground);
+        var foilageTilemap = tilemap.grid.GetTilemap(TilemapType.Overworld);
 
         foreach (Vector2 point in points)
         {
@@ -32,8 +28,23 @@ public class BuildingSpawner : AlgorithmBase
             // Check valid tile
             if (currentTile == (int)GroundTileType.Land)
             {
+                // Clear foilage
+                foilageTilemap.SetTile((int)point.x, (int)point.y, (int)GroundTileType.Empty);
+
+                if (building.gameObject.name.Equals("Camp"))
+                {
+                    // Clear area for camp
+                    if (groundTilemap.GetTile((int)point.x+1, (int)point.y) == (int)GroundTileType.Land)
+                    {
+                        foilageTilemap.SetTile((int)point.x+1, (int)point.y, (int)FoilageTileType.Empty);
+                    }
+                    if (groundTilemap.GetTile((int)point.x-1, (int)point.y) == (int)GroundTileType.Land)
+                    {
+                        foilageTilemap.SetTile((int)point.x-1, (int)point.y, (int)FoilageTileType.Empty);
+                    }
+                }
+
                 // Instantiate building
-                tilemap.SetTile((int)point.x, (int)point.y, (int)GroundTileType.Empty);
                 Vector3 buildingPos = new Vector3((int)point.x + .5f, (int)point.y + .5f);
                 GameObject newBuilding = Instantiate(building, buildingPos, Quaternion.identity);
                 newBuilding.transform.parent = tilemap.gameObject.transform;
@@ -59,8 +70,8 @@ public class BuildingSpawner : AlgorithmBase
                 if (building.name.Contains("Village"))
                 {
                     // Load village data
-                    villageCoordsX = saveData.saveVillageCoordsX;
-                    villageCoordsY = saveData.saveVillageCoordsY;
+                    List<int> villageCoordsX = saveData.saveVillageCoordsX;
+                    List<int> villageCoordsY = saveData.saveVillageCoordsY;
 
                     // Combine lists
                     points = new HashSet<Vector2>();
@@ -73,13 +84,27 @@ public class BuildingSpawner : AlgorithmBase
                 else if (building.name.Contains("Dungeon"))
                 {
                     // Load dungeon data
-                    dungeonCoordsX = saveData.saveDungeonCoordsX;
-                    dungeonCoordsY = saveData.saveDungeonCoordsY;
+                    List<int> dungeonCoordsX = saveData.saveDungeonCoordsX;
+                    List<int> dungeonCoordsY = saveData.saveDungeonCoordsY;
 
                     // Combine lists
                     points = new HashSet<Vector2>();
                     var combinedDungeonCoords = dungeonCoordsX.Zip(dungeonCoordsY, (x, y) => new { xCoord = x, yCoord = y });
                     foreach (var coord in combinedDungeonCoords)
+                    {
+                        points.Add(new Vector2Int(coord.xCoord, coord.yCoord));
+                    }
+                }
+                else if (building.name.Contains("Camp"))
+                {
+                    // Load camp data
+                    List<int> campCoordsX = saveData.saveCampCoordsX;
+                    List<int> campCoordsY = saveData.saveCampCoordsY;
+
+                    // Combine lists
+                    points = new HashSet<Vector2>();
+                    var combinedCampCoords = campCoordsX.Zip(campCoordsY, (x, y) => new { xCoord = x, yCoord = y });
+                    foreach (var coord in combinedCampCoords)
                     {
                         points.Add(new Vector2Int(coord.xCoord, coord.yCoord));
                     }
@@ -113,7 +138,7 @@ public class BuildingSpawner : AlgorithmBase
             }
             else if (building.name.Contains("Dungeon"))
             {
-                 // Load dungeon data
+                // Load dungeon data
                 List<int> dungeonCoordsX = new List<int>();
                 List<int> dungeonCoordsY = new List<int>();
                 foreach (Vector3 dungeon in TempData.tempDungeons)
@@ -126,6 +151,25 @@ public class BuildingSpawner : AlgorithmBase
                 points = new HashSet<Vector2>();
                 var combinedDungeonCoords = dungeonCoordsX.Zip(dungeonCoordsY, (x, y) => new { xCoord = x, yCoord = y });
                 foreach (var coord in combinedDungeonCoords)
+                {
+                    points.Add(new Vector2Int(coord.xCoord, coord.yCoord));
+                }
+            }
+            else if (building.name.Contains("Camp"))
+            {
+                // Load camp data
+                List<int> campCoordsX = new List<int>();
+                List<int> campCoordsY = new List<int>();
+                foreach (Vector3 camp in TempData.tempCamps)
+                {
+                    campCoordsX.Add((int)camp.x);
+                    campCoordsY.Add((int)camp.y);
+                }
+
+                // Combine lists
+                points = new HashSet<Vector2>();
+                var combinedCampCoords = campCoordsX.Zip(campCoordsY, (x, y) => new { xCoord = x, yCoord = y });
+                foreach (var coord in combinedCampCoords)
                 {
                     points.Add(new Vector2Int(coord.xCoord, coord.yCoord));
                 }

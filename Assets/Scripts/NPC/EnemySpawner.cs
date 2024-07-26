@@ -14,11 +14,16 @@ public class EnemySpawner : MonoBehaviour
 
     [SerializeField]
     private EnemyTypes[] enemies;
+
     [SerializeField]
-    private PoissonDiscSampling algorithm;
+    private AlgorithmBase[] algorithms;
+    [SerializeField]
+    private PoissonDiscSampling overworldEnemyAlgorithm;
     private List<Vector2> points = new List<Vector2>();
     [SerializeField]
     private float displayRadius = 1;
+    [SerializeField]
+    private GoblinAlgorithm goblinAlgorithm;
 
     private Vector3 spawnPoint;
 
@@ -56,13 +61,20 @@ public class EnemySpawner : MonoBehaviour
         despawnEnemies();
         foreach (EnemyTypes enemy in enemies)
         {
-            if (!enemy.nightEnemy)
+            switch (enemy.gameObject.name)
             {
-                // Determine spawn points using Poisson Disc Sampling
-                points = algorithm.GeneratePoints();
-
-                // Spawn day enemies
-                spawnEnemy(enemy);
+                case "Slime":
+                    // Determine spawn points using Poisson Disc Sampling
+                    points = overworldEnemyAlgorithm.GeneratePoints();
+                    // Spawn overworld enemies
+                    spawnEnemy(enemy);
+                    break;
+                case "Goblin":
+                    points = goblinAlgorithm.GeneratePoints();
+                    spawnEnemy(enemy);
+                    break;
+                default:
+                    break;
             }
         }
     }
@@ -73,13 +85,14 @@ public class EnemySpawner : MonoBehaviour
         despawnEnemies();
         foreach (EnemyTypes enemy in enemies)
         {
-            if (enemy.nightEnemy)
+            switch (enemy.gameObject.name)
             {
-                // Determine spawn points using Poisson Disc Sampling
-                points = algorithm.GeneratePoints();
-
-                // Spawn night enemies
-                spawnEnemy(enemy);
+                case "Zombie":
+                    // Determine spawn points using Poisson Disc Sampling
+                    points = overworldEnemyAlgorithm.GeneratePoints();
+                    // Spawn overworld enemies
+                    spawnEnemy(enemy);
+                    break;
             }
         }
     }

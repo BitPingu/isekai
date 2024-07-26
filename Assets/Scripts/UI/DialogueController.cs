@@ -32,10 +32,10 @@ public class DialogueController : MonoBehaviour
         // {
         //     DisplayNextSentence();
         // }
-        if (isActive && Input.GetKeyDown(dialogKey) && currentPrompt.options.Length == 0)
-        {
-            DisplayNextSentence();
-        }
+        // if (isActive && Input.GetKeyDown(dialogKey) && currentPrompt.options.Length == 0)
+        // {
+        //     DisplayNextSentence();
+        // }
     }
 
     public void StartDialogue(string character)
@@ -114,11 +114,9 @@ public class DialogueController : MonoBehaviour
                 break;
             case "Attack":
                 FindObjectOfType<BattleManager>().OnAttackButton();
-                DisplayNextSentence();
                 break;
             case "Run":
-                FindObjectOfType<BattleManager>().OnRunButton();
-                DisplayNextSentence();
+                StartCoroutine(FindObjectOfType<BattleManager>().OnRunButton());
                 break;
             default:
                 break;
