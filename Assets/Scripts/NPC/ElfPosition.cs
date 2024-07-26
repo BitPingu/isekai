@@ -90,7 +90,9 @@ public class ElfPosition : MonoBehaviour
             if (CheckClosePlayer() && !FindObjectOfType<DialogueController>().isActive && !triggerDia)
             {
                 triggerDia = true;
-                FindObjectOfType<DialogueController>().StartDialogue(dialogue);
+                FindObjectOfType<DialogueController>().StartDialogue("Helpless Elf");
+                FindObjectOfType<DialogueController>().AddPrompt(new Dialogue("Please help me!"));
+                FindObjectOfType<DialogueController>().DisplayNextSentence();
             }
             if (!CheckClosePlayer() && triggerDia)
             {
@@ -115,15 +117,29 @@ public class ElfPosition : MonoBehaviour
     {
         if (!TempData.elfSaved && collision.gameObject.name == "Player")
         {
-            // Move to worldevents
-            newIcon.SetActive(false);
-            TempData.elfSaved = true;
-            TempData.initElf = false;
-            GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
-            GetComponent<Animator>().SetBool("Jump", false);
-            GetComponent<PartyMovement>().enabled = true;
-            DontDestroyOnLoad(gameObject);
+            SaveElf();
+            FindObjectOfType<BattleManager>().Initiate(collision.gameObject, GameObject.FindGameObjectWithTag("SpecialEnemy"));
         }
+    }
+
+    public void SaveElf()
+    {
+        TempData.elfSaved = true;
+        newIcon.SetActive(false);
+        TempData.initElf = false;
+        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+        GetComponent<Animator>().SetBool("Jump", false);
+        GetComponent<PartyMovement>().minDistance = 0.8f;
+        GetComponent<PartyMovement>().enabled = true;
+        DontDestroyOnLoad(gameObject);
+    }
+
+    public void SaveElf2()
+    {
+        FindObjectOfType<DialogueController>().StartDialogue("Helpless Elf");
+        FindObjectOfType<DialogueController>().AddPrompt(new Dialogue("Thanks!"));
+        // FindObjectOfType<DialogueController>().DisplayNextSentence();
+        GetComponent<PartyMovement>().minDistance = 1.55f;
     }
 
     private void RetrieveTilemap()

@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: Slime
-  level: 0
+  level: 1
   isHostile: 0
 --- !u!114 &-5593393989291784374
 MonoBehaviour:

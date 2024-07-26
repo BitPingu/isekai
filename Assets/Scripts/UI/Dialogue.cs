@@ -6,13 +6,18 @@ using UnityEngine;
 [System.Serializable]
 public class Dialogue
 {
-    [Serializable]
-    public class Prompt
+    public string sentence;
+    public string[] options;
+
+    public Dialogue(string s)
     {
-        [TextArea(3, 10)]
-        public string sentence;
-        public string[] options;
+        sentence = s;
+        options = new string[0];
     }
-    public string name;
-    public Prompt[] prompts;
+    public Dialogue(string s, string[] o)
+    {
+        sentence = s;
+        options = o;
+    }
+
 }

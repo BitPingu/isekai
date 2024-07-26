@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class PartyMovement : MonoBehaviour
 {
-    public float maxSpeed; // default is 3f 3 3 2
+    public float maxSpeed; // default is 5f
     private float moveSpeed;
-    [SerializeField]
-    private float minDistance; // default is 1.5f
+    public float minDistance; // default is 1.55
 
     private SpriteRenderer sprite;
     private Rigidbody2D rb;

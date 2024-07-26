@@ -13,8 +13,8 @@ public class DialogueController : MonoBehaviour
     [SerializeField]
     private KeyCode dialogKey;
 
-    public Queue<Dialogue.Prompt> prompts;
-    public Dialogue.Prompt currentPrompt;
+    public Queue<Dialogue> prompts;
+    public Dialogue currentPrompt;
 
     public string issuer;
     public bool isActive;
@@ -22,32 +22,32 @@ public class DialogueController : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        prompts = new Queue<Dialogue.Prompt>();
+        prompts = new Queue<Dialogue>();
         isActive = false;
     }
 
     private void Update()
     {
-        if (prompts.Count >= 0 && Input.GetKeyDown(dialogKey))
+        // if (prompts.Count >= 0 && Input.GetKeyDown(dialogKey))
+        // {
+        //     DisplayNextSentence();
+        // }
+        if (isActive && Input.GetKeyDown(dialogKey) && currentPrompt.options.Length == 0)
         {
             DisplayNextSentence();
         }
     }
 
-    public void StartDialogue(Dialogue dialogue)
+    public void StartDialogue(string character)
     {
         isActive = true;
+        issuer = character;
+        // prompts.Clear();
+    }
 
-        issuer = dialogue.name;
-
-        prompts.Clear();
-
-        foreach (Dialogue.Prompt prompt in dialogue.prompts)
-        {
-            prompts.Enqueue(prompt);
-        }
-
-        DisplayNextSentence();
+    public void AddPrompt(Dialogue newPrompt)
+    {
+        prompts.Enqueue(newPrompt);
     }
 
     public void DisplayNextSentence()
@@ -59,6 +59,7 @@ public class DialogueController : MonoBehaviour
         }
 
         currentPrompt = prompts.Dequeue();
+
         if (currentPrompt.options.Length == 0)
         {
             textDialogueUI.SetActive(true);
@@ -103,19 +104,21 @@ public class DialogueController : MonoBehaviour
 
     public void Action(string act)
     {
-        Debug.Log("do " + act);
         switch(act)
         {
             case "Yes":
+                // if (issuer.Equals("Helpless Elf"))
+                //     FindObjectOfType<WorldEvents>().SaveElf();
                 break;
             case "No":
-                DisplayNextSentence();
                 break;
             case "Attack":
                 FindObjectOfType<BattleManager>().OnAttackButton();
+                DisplayNextSentence();
                 break;
             case "Run":
-                FindObjectOfType<BattleManager>().EndBattle();
+                FindObjectOfType<BattleManager>().OnRunButton();
+                DisplayNextSentence();
                 break;
             default:
                 break;
@@ -125,14 +128,12 @@ public class DialogueController : MonoBehaviour
     public void Action1()
     {
         string option = currentPrompt.options[0];
-        Debug.Log("action1");
         Action(option);
     }
 
     public void Action2()
     {
         string option = currentPrompt.options[1];
-        Debug.Log("action2");
         Action(option);
     }
 

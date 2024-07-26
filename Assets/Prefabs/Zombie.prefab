@@ -16,6 +16,8 @@ GameObject:
   - component: {fileID: -8168890982047548604}
   - component: {fileID: 3308468990147731431}
   - component: {fileID: 8932795698526139035}
+  - component: {fileID: -6269245077795238698}
+  - component: {fileID: -6756701279139290983}
   m_Layer: 0
   m_Name: Zombie
   m_TagString: Enemy
@@ -166,6 +168,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7655edbd3466c4f93af54a484e4b60d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: Zombie
+  level: 1
   isHostile: 1
 --- !u!114 &3308468990147731431
 MonoBehaviour:
@@ -205,3 +209,32 @@ MonoBehaviour:
   walkTime: 1
   minWaitTime: 3
   maxWaitTime: 5
+--- !u!114 &-6269245077795238698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7751972130982338795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3633295ad872c495ab8fa0c053f08269, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-6756701279139290983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7751972130982338795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3221abaef75045969282b5faece09f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Zombie
+  level: 1
+  damage: 10
+  maxHP: 40
+  currentHP: 40

@@ -126,7 +126,7 @@ public class DayAndNightCycle : MonoBehaviour
         light.GetComponent<Light2D>().color = lightColor.Evaluate(time * ratePerDay);
     }
 
-    private void DayMusic()
+    public void DayMusic()
     {
         // Get current tile from player position
         if (SceneManager.GetActiveScene().buildIndex == 1)
@@ -143,7 +143,7 @@ public class DayAndNightCycle : MonoBehaviour
         }
     }
 
-    private void NightMusic()
+    public void NightMusic()
     {
         // Get current tile from player position
         if (SceneManager.GetActiveScene().buildIndex == 1)

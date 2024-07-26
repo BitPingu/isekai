@@ -8,14 +8,12 @@ public class BattleManager : MonoBehaviour
 {
     public BattleState state;
     public GameObject player, enemy;
-    public Dialogue dialogue;
     public GameObject HUD;
     private GameObject playerHUD, enemyHUD;
     private BattleData playerData, enemyData;
 
     public void Initiate(GameObject p, GameObject e)
     {
-        Debug.Log("battle!");
         state = BattleState.START;
 
         player = p;
@@ -38,7 +36,6 @@ public class BattleManager : MonoBehaviour
         FindObjectOfType<AudioManager>().Stop();
         FindObjectOfType<AudioManager>().Play("Battle");
         
-        // dialogue.prompts
         playerHUD = Instantiate(HUD, new Vector2(player.transform.position.x-1.5f, player.transform.position.y+0.3f), Quaternion.identity);
         playerHUD.transform.parent = player.transform;
         playerHUD.GetComponent<BattleHUD>().SetHUD(playerData);
@@ -47,15 +44,16 @@ public class BattleManager : MonoBehaviour
         enemyHUD.transform.parent = enemy.transform;
         enemyHUD.GetComponent<BattleHUD>().SetHUD(enemyData);
 
-        FindObjectOfType<DialogueController>().StartDialogue(dialogue);
+        FindObjectOfType<DialogueController>().StartDialogue("battlesystem");
+        FindObjectOfType<DialogueController>().AddPrompt(new Dialogue("A wild " + enemyData.name + " approaches!", new string[2]{"Attack", "Run"}));
+        FindObjectOfType<DialogueController>().DisplayNextSentence();
 
         state = BattleState.PLAYERTURN;
-        PlayerTurn();
     }
 
     private void PlayerTurn()
     {
-        Debug.Log("player turn");
+        FindObjectOfType<DialogueController>().AddPrompt(new Dialogue(playerData.name + "'s Turn.", new string[2]{"Attack", "Run"}));
     }
 
     public void OnAttackButton()
@@ -68,9 +66,12 @@ public class BattleManager : MonoBehaviour
 
     private void PlayerAttack()
     {
+        FindObjectOfType<DialogueController>().AddPrompt(new Dialogue(playerData.name + " attacks!"));
+
         bool isDead = enemyData.TakeDamage(playerData.damage);
 
         enemyHUD.GetComponent<BattleHUD>().SetHP(enemyData.currentHP);
+        FindObjectOfType<DialogueController>().AddPrompt(new Dialogue(enemyData.name + " took " + playerData.damage + " damage."));
 
         if (isDead)
         {
@@ -84,12 +85,35 @@ public class BattleManager : MonoBehaviour
         }
     }
 
+    public void OnRunButton()
+    {
+        if (state != BattleState.PLAYERTURN)
+            return;
+
+        if (enemy.tag.Equals("SpecialEnemy"))
+        {
+            FindObjectOfType<DialogueController>().AddPrompt(new Dialogue("Couldn't get away!"));
+            PlayerTurn();
+            return;
+        }
+        
+        PlayerRun();
+    }
+
+    private void PlayerRun()
+    {
+        FindObjectOfType<DialogueController>().AddPrompt(new Dialogue(playerData.name + " ran."));
+        EndBattle();
+    }
+
     private void EnemyTurn()
     {
-        Debug.Log("enemy turn");
+        FindObjectOfType<DialogueController>().AddPrompt(new Dialogue(enemyData.name + " attacks!"));
+        
         bool isDead = playerData.TakeDamage(enemyData.damage);
 
         playerHUD.GetComponent<BattleHUD>().SetHP(playerData.currentHP);
+        FindObjectOfType<DialogueController>().AddPrompt(new Dialogue(playerData.name + " took " + enemyData.damage + " damage."));
 
         if (isDead)
         {
@@ -105,13 +129,17 @@ public class BattleManager : MonoBehaviour
 
     public void EndBattle()
     {
+        Destroy(playerHUD);
+        Destroy(enemyHUD);
+
         if (state == BattleState.WON)
         {
-            Debug.Log("won");
+            Destroy(enemy);
+            FindObjectOfType<DialogueController>().AddPrompt(new Dialogue(enemyData.name + " was defeated!"));
         }
         else if (state == BattleState.LOST)
         {
-            Debug.Log("lost");
+            FindObjectOfType<DialogueController>().AddPrompt(new Dialogue(playerData.name + " was defeated!"));
         }
 
         // DeInit battle stance
@@ -126,13 +154,17 @@ public class BattleManager : MonoBehaviour
         DayAndNightCycle dayNight = FindObjectOfType<DayAndNightCycle>();
         if (dayNight.isDay)
         {
-            dayNight.DayTime();
+            dayNight.DayMusic();
         }
         else
         {
-            dayNight.NightTime();
+            dayNight.NightMusic();
         }
 
+        if (enemy.tag.Equals("SpecialEnemy"))
+        {
+            FindObjectOfType<ElfPosition>().SaveElf2();
+        }
         // Back to overworld
     }
 }

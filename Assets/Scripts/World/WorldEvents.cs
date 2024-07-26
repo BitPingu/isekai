@@ -46,9 +46,10 @@ public class WorldEvents : MonoBehaviour
                 GameObject enemy = GameObject.FindGameObjectWithTag("SpecialEnemy");
                 enemy.tag = "Enemy";
                 enemy.GetComponent<NPCMovement>().enabled = true;
-                enemy.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+                enemy.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
                 enemy.GetComponent<Animator>().SetBool("Attack", false);
-                FindObjectOfType<DialogueController>().EndDialogue();
+                if (FindObjectOfType<DialogueController>().issuer.Equals("Helpless Elf"))
+                    FindObjectOfType<DialogueController>().EndDialogue();
                 Debug.Log("elf was slain!");
                 Destroy(elf);
             }

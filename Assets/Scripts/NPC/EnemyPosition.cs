@@ -56,8 +56,11 @@ public class EnemyPosition : MonoBehaviour
     {
         if (collision.gameObject.name == "Player")
         {
-            Debug.Log("hit");
             FindObjectOfType<BattleManager>().Initiate(collision.gameObject, gameObject);
+        }
+        if (gameObject.tag.Equals("SpecialEnemy"))
+        {
+            FindObjectOfType<ElfPosition>().SaveElf();
         }
     }
 
