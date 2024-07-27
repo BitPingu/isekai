@@ -112,7 +112,7 @@ public class BattleManager : MonoBehaviour
 
     private IEnumerator PlayerRun()
     {
-        FindObjectOfType<DialogueController>().AddPrompt(new Dialogue(playerData.name + " ran."));
+        FindObjectOfType<DialogueController>().AddPrompt(new Dialogue("Got away safely!"));
         FindObjectOfType<DialogueController>().DisplayNextSentence();
         yield return new WaitForSeconds(1f);
         StartCoroutine(EndBattle());

@@ -141,7 +141,6 @@ public class EnemySpawner : MonoBehaviour
                 // Instantiate and spawn enemy
                 GameObject childEnemy = Instantiate(enemy.gameObject, spawnPoint, Quaternion.identity);
                 childEnemy.transform.parent = gameObject.transform;
-                // childEnemy.GetComponent<EnemyData>().set(spawnPoint);
 
                 // Assign special values
                 childEnemy.tag = "SpecialEnemy";

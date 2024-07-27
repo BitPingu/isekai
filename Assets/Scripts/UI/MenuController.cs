@@ -64,6 +64,7 @@ public class MenuController : MonoBehaviour
     {
         // Resume time
         Time.timeScale = 1f;
+        FindObjectOfType<PlayerController>().enabled = true;
 
         // Resume sound
         FindObjectOfType<AudioManager>().UnDampen();
@@ -76,6 +77,7 @@ public class MenuController : MonoBehaviour
     {
         // Freeze time
         Time.timeScale = 0f;
+        FindObjectOfType<PlayerController>().enabled = false;
 
         // Lower sound
         FindObjectOfType<AudioManager>().Dampen();

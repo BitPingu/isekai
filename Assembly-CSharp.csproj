@@ -82,7 +82,6 @@
     <Compile Include="Assets/Scripts/UI/Dialogue.cs" />
     <Compile Include="Assets/Scripts/UI/CameraController.cs" />
     <Compile Include="Assets/Scripts/Tilemaps/FoilageTileType.cs" />
-    <Compile Include="Assets/Scripts/UI/MapIconLocator.cs" />
     <Compile Include="Assets/Scripts/Data/SaveSystem.cs" />
     <Compile Include="Assets/Scripts/UI/DialogueController.cs" />
     <Compile Include="Assets/Scripts/Tilemaps/AdvancedRuleTile.cs" />
