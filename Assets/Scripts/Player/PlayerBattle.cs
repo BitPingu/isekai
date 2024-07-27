@@ -9,7 +9,7 @@ public class PlayerBattle : MonoBehaviour
     private Rigidbody2D rb;
     private Animator animator;
     private TilemapStructure groundMap;
-    private bool stance;
+    private bool stance, run;
 
     private void Awake()
     {
@@ -17,48 +17,14 @@ public class PlayerBattle : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         stance = false;
+        run = false;
     }
 
     private void Update()
     {
         if (stance)
         {
-            // Calculate current distance from pos
-            float distance = Vector3.Distance(battlePos, rb.transform.position);
-
-            // Check if outside range
-            if (distance > 0)
-            {
-                // Calculate current direction towards pos
-                Vector2 movement = (battlePos - rb.transform.position).normalized;
-
-                // Move towards pos
-                float moveSpeed = GetComponent<PlayerController>().maxSpeed;
-                Vector2 moveForce = movement * (moveSpeed+1);
-                moveForce /= 1.2f;
-                rb.velocity = moveForce;
-
-                // Flip sprite based on horizontal movement
-                if (movement.x < 0)
-                {
-                    sprite.flipX = true;
-                }
-                else
-                {
-                    sprite.flipX = false;
-                }
-            }
-            if (distance < 0.1) 
-            {
-                // Stop moving when within range
-                rb.velocity = Vector2.zero;
-
-                if (!sprite.flipX)
-                    sprite.flipX = true;
-                else
-                    sprite.flipX = false;
-                stance = false;
-            }
+            Move(run);
         }
 
         // Movement animation
@@ -87,7 +53,63 @@ public class PlayerBattle : MonoBehaviour
         battlePos = new Vector3(xCoord, yCoord);
 
         stance = true;
+        run = false;
     }
 
+    public void Run()
+    {
+        // Get enemy position
+        Vector3 enemyPos = FindObjectOfType<BattleManager>().enemy.transform.position;
+
+        // Generate run pos (inverse from enemy dir)
+        battlePos = new Vector3(enemyPos.x, enemyPos.y);
+
+        stance = true;
+        run = true;
+    }
+
+    private void Move(bool run)
+    {
+        // Calculate current distance from pos
+        float distance = Vector3.Distance(battlePos, rb.transform.position);
+
+        // Check if outside range
+        if (distance > 0)
+        {
+            // Calculate current direction towards pos
+            Vector2 movement = (battlePos - rb.transform.position).normalized;
+
+            // Invert direction if running away
+            if (run)
+                movement *= -1;
+
+            // Move towards pos
+            float moveSpeed = GetComponent<PlayerController>().maxSpeed;
+            Vector2 moveForce = movement * (moveSpeed+1);
+            moveForce /= 1.2f;
+            rb.velocity = moveForce;
+
+            // Flip sprite based on horizontal movement
+            if (movement.x < 0)
+            {
+                sprite.flipX = true;
+            }
+            else
+            {
+                sprite.flipX = false;
+            }
+        }
+        if (distance < 0.1) 
+        {
+            // Stop moving when within range
+            rb.velocity = Vector2.zero;
+
+            if (!sprite.flipX)
+                sprite.flipX = true;
+            else
+                sprite.flipX = false;
+            stance = false;
+        }
+    }
     
 }

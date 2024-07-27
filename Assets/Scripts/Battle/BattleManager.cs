@@ -112,6 +112,7 @@ public class BattleManager : MonoBehaviour
 
     private IEnumerator PlayerRun()
     {
+        player.GetComponent<PlayerBattle>().Run();
         FindObjectOfType<DialogueController>().AddPrompt(new Dialogue("Got away safely!"));
         FindObjectOfType<DialogueController>().DisplayNextSentence();
         yield return new WaitForSeconds(1f);
