@@ -19,6 +19,7 @@ public class NPCMovement : MonoBehaviour
     private TilemapStructure overworldMap;
 
     private bool isMoving;
+    private bool seePlayer;
     [SerializeField]
     private float walkTime; // default is 1f 1 .5 1
     private float walkCounter;
@@ -66,13 +67,38 @@ public class NPCMovement : MonoBehaviour
         if (moveSpeed <= 0)
             moveSpeed = 1;
 
+        // look at player when nearby and chase it
+        if (GetComponent<EnemyData>().isHostile && GetComponent<EnemyPosition>().CheckPlayer())
+        {
+            // Calculate current direction towards player
+            waitCounter = waitTime;
+            Vector2 movement = (FindObjectOfType<PlayerPosition>().transform.position - rb.transform.position).normalized;
+
+            // Move towards player
+            Vector2 moveForce = movement * (moveSpeed+1);
+            moveForce /= 1.2f;
+            rb.velocity = moveForce;
+
+            // Flip sprite based on horizontal movement
+            if (movement.x < 0)
+            {
+                sprite.flipX = true;
+            }
+            else
+            {
+                sprite.flipX = false;
+            }
+        }
+
         if (isMoving)
         {
             // Update walk counter
             walkCounter -= Time.deltaTime;
 
             // Movement
-            rb.MovePosition(rb.position + movement.normalized * moveSpeed * Time.fixedDeltaTime);
+            Vector2 moveForce = movement * (moveSpeed+.5f);
+            moveForce /= 1.2f;
+            rb.velocity = moveForce;
 
             // Flip sprite based on horizontal movement
             if (movement.x > 0)
@@ -87,7 +113,10 @@ public class NPCMovement : MonoBehaviour
             // Stop moving
             if (walkCounter < 0)
             {
+                rb.velocity = Vector2.zero;
                 isMoving = false;
+
+                // Reset wait time
                 waitCounter = waitTime;
             }
         }
@@ -95,10 +124,6 @@ public class NPCMovement : MonoBehaviour
         {
             // Update wait counter
             waitCounter -= Time.deltaTime;
-
-            // Reset values
-            rb.velocity = Vector2.zero;
-            movement = Vector2.zero;
 
             // Choose direction
             if (waitCounter < 0)
@@ -108,7 +133,7 @@ public class NPCMovement : MonoBehaviour
         }
 
         // Movement animation
-        animator.SetFloat("Speed", movement.sqrMagnitude);
+        animator.SetFloat("Speed", rb.velocity.sqrMagnitude);
     }
 
     public void chooseDirection()
@@ -122,6 +147,8 @@ public class NPCMovement : MonoBehaviour
         
         // Start moving
         isMoving = true;
+
+        // Reset walk time
         walkCounter = walkTime;
     }
 }

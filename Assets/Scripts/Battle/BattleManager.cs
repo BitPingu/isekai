@@ -29,10 +29,11 @@ public class BattleManager : MonoBehaviour
 
         enemy.GetComponent<NPCMovement>().enabled = false;
         enemy.GetComponent<EnemyBattle>().enabled = true;
+        enemy.GetComponent<Animator>().SetFloat("Speed", 0);
         enemy.GetComponent<EnemyBattle>().Stance();
 
         // Start battle
-        FindObjectOfType<Camera>().target = enemy;
+        FindObjectOfType<CameraController>().target = enemy;
         FindObjectOfType<AudioManager>().Stop();
         FindObjectOfType<AudioManager>().Play("Battle");
         
@@ -53,7 +54,7 @@ public class BattleManager : MonoBehaviour
 
     private void PlayerTurn()
     {
-        FindObjectOfType<DialogueController>().AddPrompt(new Dialogue(playerData.name + "'s Turn.", new string[2]{"Attack", "Run"}));
+        FindObjectOfType<DialogueController>().AddPrompt(new Dialogue("What will you do?", new string[2]{"Attack", "Run"}));
         FindObjectOfType<DialogueController>().DisplayNextSentence();
     }
 
@@ -69,6 +70,7 @@ public class BattleManager : MonoBehaviour
     {
         FindObjectOfType<DialogueController>().AddPrompt(new Dialogue(playerData.name + " attacks!"));
         FindObjectOfType<DialogueController>().DisplayNextSentence();
+        player.GetComponent<Animator>().SetBool("Battle", true);
         yield return new WaitForSeconds(1f);
 
         bool isDead = enemyData.TakeDamage(playerData.damage);
@@ -76,6 +78,7 @@ public class BattleManager : MonoBehaviour
         enemyHUD.GetComponent<BattleHUD>().SetHP(enemyData.currentHP);
         FindObjectOfType<DialogueController>().AddPrompt(new Dialogue(enemyData.name + " took " + playerData.damage + " damage."));
         FindObjectOfType<DialogueController>().DisplayNextSentence();
+        player.GetComponent<Animator>().SetBool("Battle", false);
         yield return new WaitForSeconds(1f);
 
         if (isDead)
@@ -119,6 +122,7 @@ public class BattleManager : MonoBehaviour
     {
         FindObjectOfType<DialogueController>().AddPrompt(new Dialogue(enemyData.name + " attacks!"));
         FindObjectOfType<DialogueController>().DisplayNextSentence();
+        enemy.GetComponent<Animator>().SetBool("Battle", true);
         yield return new WaitForSeconds(1f);
         
         bool isDead = playerData.TakeDamage(enemyData.damage);
@@ -126,6 +130,7 @@ public class BattleManager : MonoBehaviour
         playerHUD.GetComponent<BattleHUD>().SetHP(playerData.currentHP);
         FindObjectOfType<DialogueController>().AddPrompt(new Dialogue(playerData.name + " took " + enemyData.damage + " damage."));
         FindObjectOfType<DialogueController>().DisplayNextSentence();
+        enemy.GetComponent<Animator>().SetBool("Battle", false);
         yield return new WaitForSeconds(1f);
 
         if (isDead)
@@ -174,7 +179,7 @@ public class BattleManager : MonoBehaviour
         }
 
         // DeStart battle
-        FindObjectOfType<Camera>().target = player;
+        FindObjectOfType<CameraController>().target = player;
         FindObjectOfType<AudioManager>().Stop();
         DayAndNightCycle dayNight = FindObjectOfType<DayAndNightCycle>();
         if (dayNight.isDay)

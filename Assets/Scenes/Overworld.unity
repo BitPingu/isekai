@@ -833,7 +833,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1177,7 +1177,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 725286824512390002, guid: b1d4d0c234ecf6b43b26f0e51520c30c, type: 3}
   m_PrefabInstance: {fileID: 725286824212053482}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 725286824212053483}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7ead40b9c0831a041ba64b31583f36b6, type: 3}
@@ -1494,6 +1494,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 6051531617834581964}
+  xOffset: 0
+  yOffset: 0
 --- !u!1 &1056050431
 GameObject:
   m_ObjectHideFlags: 0
@@ -1505,7 +1507,8 @@ GameObject:
   - component: {fileID: 1056050435}
   - component: {fileID: 1056050434}
   - component: {fileID: 1056050432}
-  - component: {fileID: 1056050433}
+  - component: {fileID: 1056050437}
+  - component: {fileID: 1056050436}
   m_Layer: 0
   m_Name: MapCamera
   m_TagString: Untagged
@@ -1546,18 +1549,6 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
---- !u!114 &1056050433
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1056050431}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d54afa9a599269548967f03f4fd7adf2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!20 &1056050434
 Camera:
   m_ObjectHideFlags: 0
@@ -1615,6 +1606,37 @@ Transform:
   m_Father: {fileID: 1093675891}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1056050436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1056050431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9aa404b21b6744158a9523e09068672c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zoomStep: 1
+  minCamSize: 1
+  maxCamSize: 50
+  size: 50
+--- !u!114 &1056050437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1056050431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0622735be06eb4076ae3bba320b2c6e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 725286824212053483}
+  xOffset: 50
+  yOffset: 50
 --- !u!1 &1063993358
 GameObject:
   m_ObjectHideFlags: 0
@@ -2225,17 +2247,17 @@ RectTransform:
   m_GameObject: {fileID: 1237068768}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 677955108}
   m_Father: {fileID: 1093675891}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 0}
 --- !u!114 &1237068773
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2249,6 +2271,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menuManager: {fileID: 1041991285}
+  npcs: {fileID: 1643751063}
 --- !u!1 &1386557371
 GameObject:
   m_ObjectHideFlags: 0
@@ -3446,6 +3469,11 @@ PrefabInstance:
       objectReference: {fileID: 1512219760}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b1d4d0c234ecf6b43b26f0e51520c30c, type: 3}
+--- !u!1 &725286824212053483 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 725286824512390013, guid: b1d4d0c234ecf6b43b26f0e51520c30c, type: 3}
+  m_PrefabInstance: {fileID: 725286824212053482}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6051531617834581963
 PrefabInstance:
   m_ObjectHideFlags: 0

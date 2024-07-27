@@ -68,6 +68,8 @@
     <Compile Include="Assets/Scripts/Battle/BattleManager.cs" />
     <Compile Include="Assets/Scripts/Algorithms/Helpers/Noise.cs" />
     <Compile Include="Assets/Scripts/Data/SaveData.cs" />
+    <Compile Include="Assets/Scripts/Battle/BattleData.cs" />
+    <Compile Include="Assets/Scripts/Player/PlayerData.cs" />
     <Compile Include="Assets/Scripts/Algorithms/VoronoiGeneration.cs" />
     <Compile Include="Assets/Scripts/World/WorldEvents.cs" />
     <Compile Include="Assets/Scripts/UI/MenuController.cs" />
@@ -75,8 +77,10 @@
     <Compile Include="Assets/Scripts/Tilemaps/TileGrid.cs" />
     <Compile Include="Assets/Scripts/Algorithms/Helpers/TilemapHelper.cs" />
     <Compile Include="Assets/Scripts/World/FogData.cs" />
+    <Compile Include="Assets/Scripts/NPC/EnemyBattle.cs" />
     <Compile Include="Assets/Scripts/Algorithms/ObjectGeneration.cs" />
     <Compile Include="Assets/Scripts/UI/Dialogue.cs" />
+    <Compile Include="Assets/Scripts/UI/CameraController.cs" />
     <Compile Include="Assets/Scripts/Tilemaps/FoilageTileType.cs" />
     <Compile Include="Assets/Scripts/UI/MapIconLocator.cs" />
     <Compile Include="Assets/Scripts/Data/SaveSystem.cs" />
@@ -89,16 +93,17 @@
     <Compile Include="Assets/Scripts/UI/MapMenu.cs" />
     <Compile Include="Assets/Scripts/Audio/AudioManager.cs" />
     <Compile Include="Assets/Scripts/Algorithms/FogGeneration.cs" />
+    <Compile Include="Assets/Scripts/Algorithms/GoblinAlgorithm.cs" />
     <Compile Include="Assets/Scripts/UI/PauseMenu.cs" />
     <Compile Include="Assets/Scripts/NPC/NPCMovement.cs" />
     <Compile Include="Assets/Scripts/NPC/VillagerSpawner.cs" />
     <Compile Include="Assets/Scripts/World/BuildingData.cs" />
+    <Compile Include="Assets/Scripts/UI/BattleHUD.cs" />
     <Compile Include="Assets/Scripts/Player/PlayerPosition.cs" />
     <Compile Include="Assets/Scripts/NPC/EnemySpawner.cs" />
     <Compile Include="Assets/Scripts/Algorithms/ExitGen.cs" />
     <Compile Include="Assets/Scripts/Algorithms/NoiseGeneration.cs" />
     <Compile Include="Assets/Scripts/World/DayAndNightCycle.cs" />
-    <Compile Include="Assets/Scripts/Algorithms/Helpers/WorldLocator.cs" />
     <Compile Include="Assets/Scripts/Audio/AudioFade.cs" />
     <Compile Include="Assets/Scripts/Audio/Sound.cs" />
     <Compile Include="Assets/Scripts/UI/EventIconData.cs" />
@@ -112,12 +117,7 @@
     <Compile Include="Assets/Scripts/Data/TempData.cs" />
     <Compile Include="Assets/Scripts/NPC/ElfPosition.cs" />
     <Compile Include="Assets/Scripts/Algorithms/AlgorithmBase.cs" />
-    <Compile Include="Assets/Scripts/NPC/EnemyBattle.cs" />
-    <Compile Include="Assets/Scripts/UI/Camera.cs" />
-    <Compile Include="Assets/Scripts/Player/PlayerData.cs" />
-    <Compile Include="Assets/Scripts/UI/BattleHUD.cs" />
-    <Compile Include="Assets/Scripts/Battle/BattleData.cs" />
-    <Compile Include="Assets/Scripts/Algorithms/GoblinAlgorithm.cs" />
+    <Compile Include="Assets/Scripts/UI/MapController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/TextMesh Pro/Shaders/TMPro.cginc" />

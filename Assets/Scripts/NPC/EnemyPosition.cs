@@ -61,14 +61,12 @@ public class EnemyPosition : MonoBehaviour
     private void OnEnable()
     {
         // Attach delegates
-        // player.SceneChange += RetrieveTilemap;
         PosChange += CheckPosition;
         PosChange += OTileSound;
     }
 
     private void OnDisable()
     {
-        // player.SceneChange -= RetrieveTilemap;
         PosChange -= CheckPosition;
         PosChange -= OTileSound;
     }
@@ -86,21 +84,8 @@ public class EnemyPosition : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        // look at player when nearby and (chase it?)
-        if (GetComponent<EnemyData>().isHostile && CheckPlayer())
-        {
-            if (player.transform.position.x - transform.position.x > 0)
-            {
-                GetComponent<SpriteRenderer>().flipX = false;
-            }
-            else
-            {
-                GetComponent<SpriteRenderer>().flipX = true;
-            }
-        }
-
         // Retrieve coordinates
         currentPos = Vector2Int.FloorToInt(transform.position);
 
@@ -141,7 +126,7 @@ public class EnemyPosition : MonoBehaviour
         }
     }
 
-    private bool CheckPlayer()
+    public bool CheckPlayer()
     {
         // Calculate current distance from player
         float distance = Vector3.Distance(player.transform.position, transform.position);

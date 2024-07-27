@@ -47,7 +47,7 @@ public class WorldEvents : MonoBehaviour
                 enemy.tag = "Enemy";
                 enemy.GetComponent<NPCMovement>().enabled = true;
                 enemy.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
-                enemy.GetComponent<Animator>().SetBool("Attack", false);
+                enemy.GetComponent<Animator>().SetBool("Battle", false);
                 if (FindObjectOfType<DialogueController>().issuer.Equals("Helpless Elf"))
                     FindObjectOfType<DialogueController>().EndDialogue();
                 Debug.Log("elf was slain!");
