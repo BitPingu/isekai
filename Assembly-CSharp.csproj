@@ -117,6 +117,16 @@
     <Compile Include="Assets/Scripts/NPC/ElfPosition.cs" />
     <Compile Include="Assets/Scripts/Algorithms/AlgorithmBase.cs" />
     <Compile Include="Assets/Scripts/UI/MapController.cs" />
+    <Compile Include="Assets/Scripts/Algorithms/LSystem/Rules/Rule.cs" />
+    <Compile Include="Assets/Scripts/Algorithms/LSystem/LSystemGenerator.cs" />
+    <Compile Include="Assets/Scripts/Algorithms/LSystem/AgentParameters.cs" />
+    <Compile Include="Assets/Scripts/Algorithms/LSystem/SimpleVisualizer.cs" />
+    <Compile Include="Assets/Scripts/Algorithms/LSystem/Visualizer.cs" />
+    <Compile Include="Assets/Scripts/Algorithms/LSystem/RoadHelper.cs" />
+    <Compile Include="Assets/Scripts/Algorithms/LSystem/StructureHelper.cs" />
+    <Compile Include="Assets/Scripts/Algorithms/LSystem/Direction.cs" />
+    <Compile Include="Assets/Scripts/Algorithms/LSystem/PlacementHelper.cs" />
+    <Compile Include="Assets/Scripts/Algorithms/HouseType.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/TextMesh Pro/Shaders/TMPro.cginc" />
