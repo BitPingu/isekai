@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: plains-dirt-tileset_8
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: -5623102207887441233, guid: 1e41ef506d21b084a96cc32f6b3f380f, type: 3}
+  m_Sprite: {fileID: -5623102207887441233, guid: 2c6c5d81afa8543f4a8dd8a15c480e76, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1

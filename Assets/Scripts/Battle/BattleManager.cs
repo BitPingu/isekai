@@ -41,9 +41,9 @@ public class BattleManager : MonoBehaviour
         playerHUD.transform.parent = player.transform;
         playerHUD.GetComponent<BattleHUD>().SetHUD(playerData);
 
-        enemyHUD = Instantiate(HUD, new Vector2(enemy.transform.position.x-1.5f, enemy.transform.position.y), Quaternion.identity);
-        enemyHUD.transform.parent = enemy.transform;
-        enemyHUD.GetComponent<BattleHUD>().SetHUD(enemyData);
+        // enemyHUD = Instantiate(HUD, new Vector2(enemy.transform.position.x-1.5f, enemy.transform.position.y), Quaternion.identity);
+        // enemyHUD.transform.parent = enemy.transform;
+        // enemyHUD.GetComponent<BattleHUD>().SetHUD(enemyData);
 
         FindObjectOfType<DialogueController>().StartDialogue("battlesystem");
         FindObjectOfType<DialogueController>().AddPrompt(new Dialogue("A wild " + enemyData.name + " approaches!", new string[2]{"Attack", "Run"}));
@@ -75,7 +75,7 @@ public class BattleManager : MonoBehaviour
 
         bool isDead = enemyData.TakeDamage(playerData.damage);
 
-        enemyHUD.GetComponent<BattleHUD>().SetHP(enemyData.currentHP);
+        // enemyHUD.GetComponent<BattleHUD>().SetHP(enemyData.currentHP);
         FindObjectOfType<DialogueController>().AddPrompt(new Dialogue(enemyData.name + " took " + playerData.damage + " damage."));
         FindObjectOfType<DialogueController>().DisplayNextSentence();
         player.GetComponent<Animator>().SetBool("Battle", false);
@@ -168,7 +168,7 @@ public class BattleManager : MonoBehaviour
         FindObjectOfType<DialogueController>().EndDialogue();
 
         Destroy(playerHUD);
-        Destroy(enemyHUD);
+        // Destroy(enemyHUD);
 
         // DeInit battle stance
         player.GetComponent<PlayerController>().enabled = true;
