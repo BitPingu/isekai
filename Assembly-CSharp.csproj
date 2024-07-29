@@ -127,6 +127,7 @@
     <Compile Include="Assets/Scripts/Algorithms/LSystem/Direction.cs" />
     <Compile Include="Assets/Scripts/Algorithms/LSystem/PlacementHelper.cs" />
     <Compile Include="Assets/Scripts/Algorithms/HouseType.cs" />
+    <Compile Include="Assets/Scripts/Algorithms/LSystem/VillageGeneration.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/TextMesh Pro/Shaders/TMPro.cginc" />

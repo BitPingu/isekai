@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf30dd0e5c1114017ae661680fd3e37a, type: 3}
+  m_Name: VillageLSystemGenerator
+  m_EditorClassIdentifier: 
+  rules:
+  - {fileID: 11400000, guid: 3c4b114d9eeb045599200e438f6d1759, type: 2}
+  rootSentence: '[F]--F'
+  iterationLimit: 2
+  randomIgnoreRuleModifier: 1
+  chanceToIgnoreRule: 0.3

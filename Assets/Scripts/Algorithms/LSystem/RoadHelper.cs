@@ -6,7 +6,6 @@ using UnityEngine.Tilemaps;
 
 public class RoadHelper : MonoBehaviour
 {
-    public GameObject roadStraight, roadCorner, road3way, road4way, roadEnd;
     Dictionary<Vector3Int, GameObject> roadDictionary = new Dictionary<Vector3Int, GameObject>();
     Dictionary<Vector3Int, TileBase> roadDictionary2 = new Dictionary<Vector3Int, TileBase>();
     HashSet<Vector3Int> fixRoadCandidates = new HashSet<Vector3Int>();
@@ -31,8 +30,8 @@ public class RoadHelper : MonoBehaviour
             {
                 continue;
             }
-            var road = Instantiate(roadStraight, position, rotation, transform);
-            roadDictionary.Add(position, road);
+            // var road = Instantiate(roadStraight, position, rotation, transform);
+            // roadDictionary.Add(position, road);
             if (i==0 || i == length-1)
             {
                 fixRoadCandidates.Add(position);

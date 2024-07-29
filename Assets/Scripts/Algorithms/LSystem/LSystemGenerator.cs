@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 
-public class LSystemGenerator : MonoBehaviour
+[CreateAssetMenu(menuName ="Algorithms/LSystem/Generator")]
+public class LSystemGenerator : ScriptableObject
 {
-    public Rule[] rules;
-    public string rootSentence;
+    public Rule[] rules; // Rule1 (scriptable object)
+    public string rootSentence; // [F]--F
     [Range(0,10)]
-    public int iterationLimit = 1;
+    public int iterationLimit = 1; // 2
 
-    public bool randomIgnoreRuleModifier = true;
+    public bool randomIgnoreRuleModifier = true; // by default
     [Range(0,1)]
-    public float chanceToIgnoreRule = 0.3f;
+    public float chanceToIgnoreRule = 0.3f; // 0.3
 
     private void Start()
     {
