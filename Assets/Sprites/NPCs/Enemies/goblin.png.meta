@@ -1,13 +1,19 @@
 fileFormatVersion: 2
-guid: 3ad99792147a2f04382ca81fe5441807
+guid: bcf5f2f485148408d9c1645feff76e53
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 368543389579951487
-    second: slime_0
+      213: 2572365745140355499
+    second: goblin_0
   - first:
-      213: -458641133534639524
-    second: slime_1
+      213: -5757044122727447524
+    second: goblin_1
+  - first:
+      213: -1447340708653812878
+    second: goblin_2
+  - first:
+      213: 3471344404005203423
+    second: goblin_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -97,7 +103,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: slime_0
+      name: goblin_0
       rect:
         serializedVersion: 2
         x: 0
@@ -111,14 +117,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f7d3b3c92445d1500800000000000000
-      internalID: 368543389579951487
+      spriteID: ba159772401e2b320800000000000000
+      internalID: 2572365745140355499
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: slime_1
+      name: goblin_1
       rect:
         serializedVersion: 2
         x: 16
@@ -132,8 +138,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c5a094ca15492a9f0800000000000000
-      internalID: -458641133534639524
+      spriteID: c14849c5fdeda10b0800000000000000
+      internalID: -5757044122727447524
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: goblin_2
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2733ab73b430aebe0800000000000000
+      internalID: -1447340708653812878
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: goblin_3
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fdd25cde751bc2030800000000000000
+      internalID: 3471344404005203423
       vertices: []
       indices: 
       edges: []

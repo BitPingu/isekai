@@ -1,13 +1,19 @@
 fileFormatVersion: 2
-guid: b4380bbbea91c4b358ff9653fa52488d
+guid: 91ea24970654e48e7abcce0a7ed07995
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4513257294284057525
-    second: elf3_0
+      213: -5782521184205631276
+    second: zombie_0
   - first:
-      213: -5715203852086702604
-    second: elf3_1
+      213: 7424166911509628443
+    second: zombie_1
+  - first:
+      213: -2758051070605636368
+    second: zombie_2
+  - first:
+      213: 8344143291265281608
+    second: zombie_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -97,7 +103,49 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: elf3_0
+      name: zombie_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d0904dbe9b50cfa0800000000000000
+      internalID: -5782521184205631276
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_1
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b168db99870f70760800000000000000
+      internalID: 7424166911509628443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_2
       rect:
         serializedVersion: 2
         x: 32
@@ -111,14 +159,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5bbedbdc89f42ae30800000000000000
-      internalID: 4513257294284057525
+      spriteID: 0fc4a200a2f69b9d0800000000000000
+      internalID: -2758051070605636368
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: elf3_1
+      name: zombie_3
       rect:
         serializedVersion: 2
         x: 48
@@ -132,8 +180,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4fd8d6180648fa0b0800000000000000
-      internalID: -5715203852086702604
+      spriteID: 84e63de3d1a5cc370800000000000000
+      internalID: 8344143291265281608
       vertices: []
       indices: 
       edges: []
