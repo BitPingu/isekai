@@ -2,7 +2,7 @@ using System.Linq;
 using UnityEngine;
 
 [CreateAssetMenu(fileName="CellularAutomata", menuName="Algorithms/CellularAutomata")]
-public class CellularAutomata : AlgorithmBase
+public class CellularAutomata
 {
     public int minAlive, repititions;
 
@@ -10,9 +10,8 @@ public class CellularAutomata : AlgorithmBase
     public bool replaceByDominantTile;
 
     public FoilageTileType targetTile, replacedBy;
-    public GameObject tree;
 
-    public override void Apply(TilemapStructure tilemap)
+    public void Apply(TilemapStructure tilemap)
     {
         int targetTileId = (int)targetTile;
         int replaceTileId = (int)replacedBy;

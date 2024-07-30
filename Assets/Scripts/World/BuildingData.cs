@@ -20,14 +20,14 @@ public class BuildingData : MonoBehaviour
 
     private void Update()
     {
-        if (interactable && CheckPlayer())
-        {
-            newIcon.SetActive(true);
-        }
-        else
-        {
-            newIcon.SetActive(false);
-        }
+        // if (interactable && CheckPlayer())
+        // {
+        //     newIcon.SetActive(true);
+        // }
+        // else
+        // {
+        //     newIcon.SetActive(false);
+        // }
     }
 
     private bool CheckPlayer()

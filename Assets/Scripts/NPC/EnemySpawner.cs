@@ -16,8 +16,6 @@ public class EnemySpawner : MonoBehaviour
     private EnemyTypes[] enemies;
 
     [SerializeField]
-    private AlgorithmBase[] algorithms;
-    [SerializeField]
     private PoissonDiscSampling overworldEnemyAlgorithm;
     private List<Vector2> points = new List<Vector2>();
     [SerializeField]

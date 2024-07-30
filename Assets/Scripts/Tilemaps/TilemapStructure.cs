@@ -9,6 +9,11 @@ public enum TilemapType
     Fog
 }
 
+public abstract class TilemapAlgorithmBase : MonoBehaviour
+{
+    public abstract void Apply(TilemapStructure tilemap);
+}
+
 public class TilemapStructure : MonoBehaviour
 {
     [SerializeField]
@@ -16,7 +21,7 @@ public class TilemapStructure : MonoBehaviour
     public TilemapType type { get { return _type;  } }
 
     [HideInInspector]
-    public int width, height;
+    public int width, height, seed;
 
     private int[] tiles;
     private Tilemap graphicMap;
@@ -24,35 +29,33 @@ public class TilemapStructure : MonoBehaviour
     [HideInInspector]
     public TileGrid grid;
 
-    [SerializeField]
-    private AlgorithmBase[] algorithms;
-
-    private HashSet<Vector2Int> dirtyCoords;
+    private HashSet<Vector2Int> dirtyCoords = new HashSet<Vector2Int>();
 
     // True if changes are done in the structure
     public bool IsDirty => dirtyCoords.Count > 0;
 
     // Method to initialize tilemap
-    public void Initialize()
+    public void Initialize(TileGrid parentGrid, int gridWidth, int gridHeight, int worldSeed)
     {
         // Retrieve the Tilemap component from the same object this script is attached to
-        dirtyCoords = new HashSet<Vector2Int>();
         graphicMap = GetComponent<Tilemap>();
 
         // Retrieve the TileGrid component from parent gameObject
-        grid = transform.parent.GetComponent<TileGrid>();
+        grid = parentGrid;
 
-        // Get width and height from parent
-        width = grid.width;
-        height = grid.height;
+        // Get width, height, and seed from parent
+        width = gridWidth;
+        height = gridHeight;
+        seed = worldSeed;
 
         // Initialize one-dimensional array with map size
         tiles = new int[width * height];
 
         // Apply all algorithms to tilemap
-        foreach (var algorithm in algorithms)
+        TilemapAlgorithmBase[] algos = GetComponents<TilemapAlgorithmBase>();
+        foreach (TilemapAlgorithmBase algo in algos)
         {
-            Generate(algorithm);
+            algo.Apply(this);
         }
 
         // Render data
@@ -135,14 +138,14 @@ public class TilemapStructure : MonoBehaviour
     }
 
     // Returns all 8 neightbors (vertical, horizontal, diagonal)
-    public List<KeyValuePair<Vector2Int, int>> GetNeighbors(int tileX, int tileY)
+    public Dictionary<Vector2Int, int> GetNeighbors(int tileX, int tileY)
     {
         int startX = tileX - 1;
         int startY = tileY - 1;
         int endX = tileX + 1;
         int endY = tileY + 1;
 
-        var neighbors = new List<KeyValuePair<Vector2Int, int>>();
+        var neighbors = new Dictionary<Vector2Int, int>();
         for (int x=startX; x<endX+1; x++)
         {
             for (int y=startY; y<endY+1; y++)
@@ -154,7 +157,7 @@ public class TilemapStructure : MonoBehaviour
                 if (InBounds(x, y))
                 {
                     // Pass along a key value pair of the coordinate + the tile type
-                    neighbors.Add(new KeyValuePair<Vector2Int, int>(new Vector2Int(x, y), GetTile(x, y)));
+                    neighbors.Add(new Vector2Int(x, y), GetTile(x, y));
                 }
             }
         }
@@ -220,11 +223,4 @@ public class TilemapStructure : MonoBehaviour
     {
         return x >= 0 && x < width && y >= 0 && y < height;
     }
-
-    // Applies algorithm code to tilemap structure
-    public void Generate(AlgorithmBase algorithm)
-    {
-        algorithm.Apply(this);
-    }
-
 }

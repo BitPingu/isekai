@@ -171,7 +171,7 @@ public class PlayerPosition : MonoBehaviour
     // Looks at adjacent tiles around player
     public void CheckNearby()
     {
-        neighbours = groundMap.GetNeighbors(currentPos.x, currentPos.y);
+        // neighbours = groundMap.GetNeighbors(currentPos.x, currentPos.y);
 
         int landTiles = 0, villageTiles = 0, waterTiles = 0;
 

@@ -18,7 +18,7 @@ public class MapController : MonoBehaviour
     private void Awake()
     {
         cam = GetComponent<Camera>();
-        enabled = false;
+        // enabled = false;
     }
 
     private void Update()
@@ -29,9 +29,10 @@ public class MapController : MonoBehaviour
     private void OnEnable()
     {
         // Show points of interest
-        ShowPointsOfInterest();
+        // ShowPointsOfInterest();
         // Set map cam size
-        cam.orthographicSize = maxCamSize/2;   
+        // cam.orthographicSize = maxCamSize/2;
+        cam.orthographicSize = maxCamSize;
     }
 
     private void OnDisable()
