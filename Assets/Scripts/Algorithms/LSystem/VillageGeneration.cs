@@ -11,7 +11,8 @@ public class VillageGeneration : MonoBehaviour
     [SerializeField]
     private LSystemGenerator lsystem;
 
-    private int length = 6; // adjust value to make roads span wider (default is 8)
+    private Vector3 direction;
+    private int length = 1; // adjust value to make roads span wider (default is 8)
     private float angle = 90;
     private int vilSquareRad = 2;
     private int vilMaxWidth = 0, vilMaxHeight = 0;
@@ -24,13 +25,25 @@ public class VillageGeneration : MonoBehaviour
     {
         get
         {
-            if (length > 0)
+            if (length > 3)
             {
                 return length;
             }
             else 
             {
-                return 2;
+                // Min length of road branches
+                if (direction.x > 0.1f || direction.x < -0.1f)
+                {
+                    return 4;
+                }
+                else if (direction.y > 0.1f || direction.y < -0.1f)
+                {
+                    return 3;
+                }
+                else
+                {
+                    return 1;
+                }
             }
         }
         set => length = value;
@@ -38,10 +51,22 @@ public class VillageGeneration : MonoBehaviour
 
     private void Start()
     {
+        // Test grid
         FillTile();
+
+        // Generate lsystem sequence
         var sequence = lsystem.GenerateSentence();
+
+        // Start heading east in 2d world space
+        direction = Vector3.right;
+
+        // Generate village
         VisualizeSequence(sequence);
+
+        // Spawn fountain (to be added later)
         Instantiate(fountain, new Vector3(.5f, .5f), Quaternion.identity, transform);
+
+        // Village zone data for spawning in world
         Debug.Log("Max Width: " + vilMaxWidth*2);
         Debug.Log("Max Height: " + vilMaxHeight*2);
     }
@@ -92,9 +117,6 @@ public class VillageGeneration : MonoBehaviour
         // Initialize village square
         SpawnVillageSquare(currentPosition);
 
-        // Start heading east in 2d world space
-        Vector3 direction = Vector3.right;
-
         foreach(var letter in sequence)
         {
             // Get letter encoding from sequence
@@ -131,11 +153,11 @@ public class VillageGeneration : MonoBehaviour
                     // offset village square
                     if (currentPosition == Vector3.zero && direction.x > 0.1f)
                     {
-                        currentPosition = new Vector3(vilSquareRad, 0, 0);
+                        currentPosition = new Vector3(vilSquareRad+1, 0, 0);
                     }
                     else if (currentPosition == Vector3.zero && direction.x < -0.1f)
                     {
-                        currentPosition = new Vector3(-vilSquareRad, 0, 0);
+                        currentPosition = new Vector3(-(vilSquareRad+1), 0, 0);
                     }
                     // Debug.Log("start at: " + currentPosition + " heading " + direction);
                     // Place road
@@ -149,7 +171,7 @@ public class VillageGeneration : MonoBehaviour
                             // Place house
                             if (direction.x > 0.1f || direction.x < -0.1f)
                             {
-                                Vector3 housePos = new Vector3(currentPosition.x+.5f, currentPosition.y+1.5f, 0);
+                                Vector3 housePos = new Vector3(currentPosition.x+.5f, currentPosition.y+2f, 0);
                                 SpawnHouse(housePos);
                             }
                             else if (direction.y > 0.1f || direction.y < -0.1f)

@@ -10,6 +10,7 @@ public class CellularAutomata : AlgorithmBase
     public bool replaceByDominantTile;
 
     public FoilageTileType targetTile, replacedBy;
+    public GameObject tree;
 
     public override void Apply(TilemapStructure tilemap)
     {

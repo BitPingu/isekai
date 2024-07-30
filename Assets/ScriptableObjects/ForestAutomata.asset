@@ -17,3 +17,4 @@ MonoBehaviour:
   replaceByDominantTile: 0
   targetTile: 2001
   replacedBy: 0
+  tree: {fileID: 0}
