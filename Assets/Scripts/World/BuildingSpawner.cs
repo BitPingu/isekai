@@ -6,7 +6,7 @@ using UnityEngine;
 public class BuildingSpawner
 {
     [SerializeField]
-    private PoissonDiscSampling algorithm;
+    private PoissonDiscSamplingGenerator algorithm;
 
     [SerializeField]
     private HashSet<Vector2> points;
@@ -18,10 +18,10 @@ public class BuildingSpawner
     {
         // LoadPoints();
         // Determine spawn points using Poisson Disc Sampling
-                List<Vector2> listPoints = algorithm.GeneratePoints();
+                // List<Vector2> listPoints = algorithm.GeneratePoints();
 
                 // Convert to hash set
-                points = new HashSet<Vector2>(listPoints);
+                // points = new HashSet<Vector2>(listPoints);
         var groundTilemap = tilemap.grid.GetTilemap(TilemapType.Ground);
         var foilageTilemap = tilemap.grid.GetTilemap(TilemapType.Overworld);
 
@@ -64,10 +64,10 @@ public class BuildingSpawner
             if (TempData.newGame)
             {
                 // Determine spawn points using Poisson Disc Sampling
-                List<Vector2> listPoints = algorithm.GeneratePoints();
+                // List<Vector2> listPoints = algorithm.GeneratePoints();
 
                 // Convert to hash set
-                points = new HashSet<Vector2>(listPoints);
+                // points = new HashSet<Vector2>(listPoints);
             }
             else
             {

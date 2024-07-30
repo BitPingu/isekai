@@ -9,15 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa29013fa54e7514ea5ff5b426b568e2, type: 3}
-  m_Name: VillageGroundGen
+  m_Script: {fileID: 11500000, guid: fc0c84c86c9e4504dbb3ea181b13face, type: 3}
+  m_Name: VillagePoissonDiscSampling
   m_EditorClassIdentifier: 
-  octaves: 6
-  persistance: 0.036
-  lacunarity: 3
-  noiseScale: 12
-  offset: {x: 250, y: 250}
-  applyIslandGradient: 0
-  tileTypes:
-  - height: 1
-    groundTile: 2
+  radius: 60
+  samplesBeforeRejection: 60

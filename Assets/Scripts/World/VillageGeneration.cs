@@ -6,10 +6,13 @@ using UnityEngine.Tilemaps;
 using System;
 
 
-public class VillageGeneration : TilemapAlgorithmBase
+public class VillageGeneration : MonoBehaviour
 {
     [SerializeField]
     private LSystemGenerator lsystem;
+    [SerializeField]
+    private PoissonDiscSamplingGenerator sampling;
+    private List<Vector2> vilPoints = new List<Vector2>();
 
     private Vector3 vilCenter, direction;
     private int length = 1; // adjust value to make roads span wider (default is 8)
@@ -48,45 +51,38 @@ public class VillageGeneration : TilemapAlgorithmBase
         set => length = value;
     }
 
-    private void Start()
+    public void Initialize(TilemapStructure tilemap)
     {
-        
-    }
-
-    private void FillTile()
-    {
-        // for testing only
-        for (int i=-100; i<100; i++)
-        {
-            for (int j=-100; j<100; j++)
-            {
-                // graphicMap.SetTile(new Vector3Int(i, j, 0), grass);
-            }
-        }
-    }
-
-    public override void Apply(TilemapStructure tilemap)
-    {
-        // Generate lsystem sequence
-        var sequence = lsystem.GenerateSentence();
-
         // Get tilemap structure
         groundMap = tilemap;
 
         // Generate village coords
-        vilCenter.x = tilemap.width/2;
-        vilCenter.y = tilemap.height/2;
+        vilPoints = sampling.GeneratePoints(tilemap);
 
-        // Start heading east in 2d world space
-        direction = Vector3.right;
+        // Generate villages
+        foreach (Vector2 point in vilPoints)
+        {
+            // Skip water coords
+            if (groundMap.GetTile(Mathf.FloorToInt(point.x), Mathf.FloorToInt(point.y)) == (int)GroundTileType.Water)
+                continue;
 
-        // Generate village
-        VisualizeSequence(sequence);
+            // Generate lsystem sequence
+            var sequence = lsystem.GenerateSentence();
 
-        // Spawn fountain (to be added later)
-        Instantiate(fountain, new Vector3(.5f, .5f), Quaternion.identity, transform);
+            // Set village centerpoint
+            vilCenter = new Vector3(Mathf.FloorToInt(point.x), Mathf.FloorToInt(point.y));
 
-        // Village zone data for spawning in world
+            // Start heading east in 2d world space
+            direction = Vector3.right;
+
+            // Generate village
+            VisualizeSequence(sequence);
+
+            // Spawn fountain (to be added later)
+            Instantiate(fountain, new Vector3(vilCenter.x+.5f, vilCenter.y+.5f), Quaternion.identity, transform);
+        }
+
+        // Village zone data for spawning in world (need to apply to each village later)
         Debug.Log("Max Width: " + vilMaxWidth*2);
         Debug.Log("Max Height: " + vilMaxHeight*2);
     }
@@ -103,7 +99,8 @@ public class VillageGeneration : TilemapAlgorithmBase
         }
 
         // townhall
-        Instantiate(townhall, new Vector3(.5f, vilSquareRad + 1.5f), Quaternion.identity, transform);
+        groundMap.SetTile(Mathf.FloorToInt(vilCenter.x), Mathf.FloorToInt(vilCenter.y+vilSquareRad+1), (int)GroundTileType.VillagePlot, setDirty : false);
+        Instantiate(townhall, new Vector3(vilCenter.x+.5f, vilCenter.y+vilSquareRad+2f), Quaternion.identity, transform);
     }
 
     private void SpawnHouse(Vector3 housePos)

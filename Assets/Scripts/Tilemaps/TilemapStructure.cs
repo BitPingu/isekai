@@ -9,11 +9,6 @@ public enum TilemapType
     Fog
 }
 
-public abstract class TilemapAlgorithmBase : MonoBehaviour
-{
-    public abstract void Apply(TilemapStructure tilemap);
-}
-
 public class TilemapStructure : MonoBehaviour
 {
     [SerializeField]
@@ -52,11 +47,8 @@ public class TilemapStructure : MonoBehaviour
         tiles = new int[width * height];
 
         // Apply all algorithms to tilemap
-        TilemapAlgorithmBase[] algos = GetComponents<TilemapAlgorithmBase>();
-        foreach (TilemapAlgorithmBase algo in algos)
-        {
-            algo.Apply(this);
-        }
+        GetComponent<GroundGeneration>().Initialize(this);
+        GetComponent<VillageGeneration>().Initialize(this);
 
         // Render data
         UpdateTiles();

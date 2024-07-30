@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using UnityEngine;
 
-public class GroundGeneration : TilemapAlgorithmBase
+public class GroundGeneration : MonoBehaviour
 {
     [SerializeField]
     private PerlinNoiseGenerator noise;
@@ -19,10 +19,9 @@ public class GroundGeneration : TilemapAlgorithmBase
     [SerializeField]
     private NoiseValues[] tileTypes;
 
-    public Vector3 minIslandCoords;
-    public Vector3 maxIslandCoords;
+    public Vector2 islandRegionSize;
 
-    public override void Apply(TilemapStructure tilemap)
+    public void Initialize(TilemapStructure tilemap)
     {
         // Make sure that TileTypes are ordered from small to high height
         tileTypes = tileTypes.OrderBy(a => a.height).ToArray();
@@ -46,8 +45,8 @@ public class GroundGeneration : TilemapAlgorithmBase
             }
         }
 
-        minIslandCoords = new Vector3(tilemap.width, tilemap.height);
-        maxIslandCoords = Vector3.zero;
+        Vector2 minIslandCoords = new Vector3(tilemap.width, tilemap.height);
+        Vector2 maxIslandCoords = Vector3.zero;
 
         for (int x=0; x<tilemap.width; x++)
         {
@@ -89,5 +88,11 @@ public class GroundGeneration : TilemapAlgorithmBase
                 }
             }
         }
+
+        // Calculate island region size
+        // Debug.Log("min:" + minIslandCoords);
+        // Debug.Log("max:" + maxIslandCoords);
+        islandRegionSize = new Vector2(maxIslandCoords.x-minIslandCoords.x, maxIslandCoords.y-minIslandCoords.y);
+        // Debug.Log("size:" + islandRegionSize);
     }
 }

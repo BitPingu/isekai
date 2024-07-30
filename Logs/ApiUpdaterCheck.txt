@@ -4055,3 +4055,23 @@ C# parse time         : 609ms
 candidates check time : 118ms
 console write time    : 1ms
 
+[api-updater (non-obsolete-error-filter)] 2024-07-30 1:12:16 PM : Starting /Applications/Unity/Hub/Editor/2020.3.25f1/Unity.app/Contents/Tools/ScriptUpdater/APIUpdater.NonObsoleteApiUpdaterDetector.exe
+[api-updater (non-obsolete-error-filter)] 
+----------------------------------
+jit/startup time      : 190.212ms
+moved types parse time: 141ms
+candidates parse time : 6ms
+C# parse time         : 541ms
+candidates check time : 113ms
+console write time    : 1ms
+
+[api-updater (non-obsolete-error-filter)] 2024-07-30 1:54:55 PM : Starting /Applications/Unity/Hub/Editor/2020.3.25f1/Unity.app/Contents/Tools/ScriptUpdater/APIUpdater.NonObsoleteApiUpdaterDetector.exe
+[api-updater (non-obsolete-error-filter)] 
+----------------------------------
+jit/startup time      : 180.557ms
+moved types parse time: 138ms
+candidates parse time : 5ms
+C# parse time         : 521ms
+candidates check time : 117ms
+console write time    : 1ms
+

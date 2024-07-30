@@ -5,7 +5,7 @@ using UnityEngine;
 public class WorldGeneration : MonoBehaviour
 {
     public int width, height, seed;
-    public Vector3 minIslandCoords, maxIslandCoords;
+    public Vector2 islandRegionSize;
     public GameObject test;
 
     private void Awake()
@@ -17,10 +17,8 @@ public class WorldGeneration : MonoBehaviour
         // Init tile grid
         GetComponentInChildren<TileGrid>().Initialize(width, height, seed);
 
-        minIslandCoords = GetComponentInChildren<GroundGeneration>().minIslandCoords;
-        maxIslandCoords = GetComponentInChildren<GroundGeneration>().maxIslandCoords;
-        Instantiate(test, minIslandCoords, Quaternion.identity);
-        Instantiate(test, maxIslandCoords, Quaternion.identity);
+        islandRegionSize = GetComponentInChildren<GroundGeneration>().islandRegionSize;
+        // Instantiate(test, islandRegionSize, Quaternion.identity);
 
         // Init vegetation
         GetComponentInChildren<TreeGeneration>().Initialize(width, height, seed);

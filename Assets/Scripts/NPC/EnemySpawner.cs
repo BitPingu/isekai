@@ -16,7 +16,7 @@ public class EnemySpawner : MonoBehaviour
     private EnemyTypes[] enemies;
 
     [SerializeField]
-    private PoissonDiscSampling overworldEnemyAlgorithm;
+    private PoissonDiscSamplingGenerator overworldEnemyAlgorithm;
     private List<Vector2> points = new List<Vector2>();
     [SerializeField]
     private float displayRadius = 1;
@@ -63,7 +63,7 @@ public class EnemySpawner : MonoBehaviour
             {
                 case "Slime":
                     // Determine spawn points using Poisson Disc Sampling
-                    points = overworldEnemyAlgorithm.GeneratePoints();
+                    // points = overworldEnemyAlgorithm.GeneratePoints();
                     // Spawn overworld enemies
                     spawnEnemy(enemy);
                     break;
@@ -87,7 +87,7 @@ public class EnemySpawner : MonoBehaviour
             {
                 case "Zombie":
                     // Determine spawn points using Poisson Disc Sampling
-                    points = overworldEnemyAlgorithm.GeneratePoints();
+                    // points = overworldEnemyAlgorithm.GeneratePoints();
                     // Spawn overworld enemies
                     spawnEnemy(enemy);
                     break;

@@ -1,19 +1,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "PoissonDiscSampling", menuName = "Algorithms/PoissonDiscSampling")]
-public class PoissonDiscSampling : ScriptableObject
+[CreateAssetMenu(fileName = "PoissonDiscSampling", menuName = "Algorithms/PoissonDiscSamplingGenerator")]
+public class PoissonDiscSamplingGenerator : ScriptableObject
 {
     public float radius = 1; // radius of each cell
-    public Vector2 regionSize = Vector2.one;
     public int samplesBeforeRejection = 30;
+    private Vector2 regionSize;
 
-    public List<Vector2> GeneratePoints()
+    public List<Vector2> GeneratePoints(TilemapStructure tilemap)
     {
         // Calculate cell size
         float cellSize = radius / Mathf.Sqrt(2);
 
         // Calculate number of cells on x and y axis to make grid
+        regionSize = new Vector2(tilemap.width, tilemap.height);
         int[,] grid = new int[Mathf.CeilToInt(regionSize.x / cellSize), Mathf.CeilToInt(regionSize.y / cellSize)];
 
         // Points generated
@@ -22,6 +23,7 @@ public class PoissonDiscSampling : ScriptableObject
         List<Vector2> spawnPoints = new List<Vector2>();
 
         // Add starting point in middle
+        Debug.Log("start at " + regionSize/2);
         spawnPoints.Add(regionSize / 2);
 
         // While spawn points list is not empty
