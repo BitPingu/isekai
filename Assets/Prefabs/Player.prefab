@@ -89,7 +89,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!50 &6051531619059624772
 Rigidbody2D:
   serializedVersion: 4
@@ -124,10 +124,10 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.00015409291, y: -0.4063807}
+  m_Offset: {x: -0.00015409291, y: 0.09366816}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0}
     oldSize: {x: 1, y: 1}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
@@ -135,7 +135,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.25029665, y: 0.062477946}
+  m_Size: {x: 0.25029665, y: 0.06468916}
   m_EdgeRadius: 0
 --- !u!95 &6051531619059624795
 Animator:
@@ -198,9 +198,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prevPos: {x: 0, y: 0}
   currentPos: {x: 0, y: 0}
-  prevGTile: 0
+  prevGTile: 1
   prevOTile: 0
-  currentGTile: 0
+  currentGTile: 1
   currentOTile: 0
   dominantTile: 0
   spawnPoint: {x: 0, y: 0, z: 0}

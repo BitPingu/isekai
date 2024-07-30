@@ -100,7 +100,7 @@ public class VillageGeneration : MonoBehaviour
 
         // townhall
         groundMap.SetTile(Mathf.FloorToInt(vilCenter.x), Mathf.FloorToInt(vilCenter.y+vilSquareRad+1), (int)GroundTileType.VillagePlot, setDirty : false);
-        Instantiate(townhall, new Vector3(vilCenter.x+.5f, vilCenter.y+vilSquareRad+2f), Quaternion.identity, transform);
+        Instantiate(townhall, new Vector3(vilCenter.x+.5f, vilCenter.y+vilSquareRad+1.5f), Quaternion.identity, transform);
     }
 
     private void SpawnHouse(Vector3 housePos)
@@ -108,7 +108,7 @@ public class VillageGeneration : MonoBehaviour
         if (groundMap.GetTile(Mathf.FloorToInt(housePos.x), Mathf.FloorToInt(housePos.y)) == (int)GroundTileType.Land)
         {
             // Reserve plot (tile)
-            groundMap.SetTile(Mathf.FloorToInt(housePos.x), Mathf.FloorToInt(housePos.y-1), (int)GroundTileType.VillagePlot, setDirty : false);
+            groundMap.SetTile(Mathf.FloorToInt(housePos.x), Mathf.FloorToInt(housePos.y), (int)GroundTileType.VillagePlot, setDirty : false);
 
             // Place house object
             Instantiate(house, housePos, Quaternion.identity, transform);
@@ -184,7 +184,7 @@ public class VillageGeneration : MonoBehaviour
                             // Place house
                             if (direction.x > 0.1f || direction.x < -0.1f)
                             {
-                                Vector3 housePos = new Vector3(currentPosition.x+.5f, currentPosition.y+2f, 0);
+                                Vector3 housePos = new Vector3(currentPosition.x+.5f, currentPosition.y+1.5f, 0);
                                 SpawnHouse(housePos);
                             }
                         }
