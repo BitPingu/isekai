@@ -23,7 +23,6 @@ public class PoissonDiscSamplingGenerator : ScriptableObject
         List<Vector2> spawnPoints = new List<Vector2>();
 
         // Add starting point in middle
-        Debug.Log("start at " + regionSize/2);
         spawnPoints.Add(regionSize / 2);
 
         // While spawn points list is not empty

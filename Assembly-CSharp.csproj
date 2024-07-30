@@ -129,6 +129,8 @@
     <Compile Include="Assets/Scripts/Data/TempData.cs" />
     <Compile Include="Assets/Scripts/NPC/ElfPosition.cs" />
     <Compile Include="Assets/Scripts/World/TreeGeneration.cs" />
+    <Compile Include="Assets/Scripts/World/DungeonGeneration.cs" />
+    <Compile Include="Assets/Scripts/World/CampGeneration.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/TextMesh Pro/Shaders/TMPro.cginc" />

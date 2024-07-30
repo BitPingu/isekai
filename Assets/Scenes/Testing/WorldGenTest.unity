@@ -171,6 +171,7 @@ MonoBehaviour:
   spawnChance: 80
   groundMap: {fileID: 1290391389}
   tree: {fileID: 6904338341474015277, guid: 228ec15cfae5b4d548837d337d8feb02, type: 3}
+  grass: {fileID: 6904338341474015277, guid: 7f246c06248dc44b09e11aaad94c5832, type: 3}
 --- !u!1 &287626573
 GameObject:
   m_ObjectHideFlags: 0
@@ -459,6 +460,8 @@ GameObject:
   - component: {fileID: 1290391389}
   - component: {fileID: 1290391390}
   - component: {fileID: 1290391391}
+  - component: {fileID: 1290391392}
+  - component: {fileID: 1290391393}
   m_Layer: 0
   m_Name: GroundTileMap
   m_TagString: Untagged
@@ -674,8 +677,36 @@ MonoBehaviour:
   lsystem: {fileID: 11400000, guid: 9c98505ecda714c5c8ad8e2fcf5712ef, type: 2}
   sampling: {fileID: 11400000, guid: 9fca922da7d8242b69a54d9632775449, type: 2}
   house: {fileID: 6904338341474015277, guid: 525d004159cea4606a752e3f4e71b05b, type: 3}
-  fountain: {fileID: 6904338341474015277, guid: de29fd5f8fea240cbab726b95cd07468, type: 3}
+  fountain: {fileID: 6904338341474015277, guid: 228ec15cfae5b4d548837d337d8feb02, type: 3}
   townhall: {fileID: 6904338341474015277, guid: 525d004159cea4606a752e3f4e71b05b, type: 3}
+--- !u!114 &1290391392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1290391385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fbb3f3d8d3564cbfb9f44befdcf27ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sampling: {fileID: 11400000, guid: 1255dc085f9ed4ca6ae16bfffb022b79, type: 2}
+  dungeon: {fileID: 6904338341474015277, guid: de29fd5f8fea240cbab726b95cd07468, type: 3}
+--- !u!114 &1290391393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1290391385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20a2cd7abf772437db3d9025134bf479, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sampling: {fileID: 11400000, guid: 2cce0de8973554b83aa671898820348d, type: 2}
+  camp: {fileID: 6904338341474015277, guid: 61f4c2bba4851438e9970938b9058ede, type: 3}
 --- !u!1 &1557974993
 GameObject:
   m_ObjectHideFlags: 0

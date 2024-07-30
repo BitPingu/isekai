@@ -49,6 +49,8 @@ public class TilemapStructure : MonoBehaviour
         // Apply all algorithms to tilemap
         GetComponent<GroundGeneration>().Initialize(this);
         GetComponent<VillageGeneration>().Initialize(this);
+        GetComponent<DungeonGeneration>().Initialize(this);
+        GetComponent<CampGeneration>().Initialize(this);
 
         // Render data
         UpdateTiles();

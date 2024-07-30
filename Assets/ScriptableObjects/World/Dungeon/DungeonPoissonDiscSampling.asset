@@ -10,8 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fc0c84c86c9e4504dbb3ea181b13face, type: 3}
-  m_Name: CampSpawnGeneration
+  m_Name: DungeonPoissonDiscSampling
   m_EditorClassIdentifier: 
   radius: 30
-  regionSize: {x: 100, y: 100}
-  samplesBeforeRejection: 30
+  samplesBeforeRejection: 60

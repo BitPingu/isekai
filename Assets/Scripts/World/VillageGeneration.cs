@@ -83,8 +83,8 @@ public class VillageGeneration : MonoBehaviour
         }
 
         // Village zone data for spawning in world (need to apply to each village later)
-        Debug.Log("Max Width: " + vilMaxWidth*2);
-        Debug.Log("Max Height: " + vilMaxHeight*2);
+        // Debug.Log("Max Width: " + vilMaxWidth*2);
+        // Debug.Log("Max Height: " + vilMaxHeight*2);
     }
 
     private void SpawnVillageSquare(Vector3 centerPos)
@@ -122,7 +122,6 @@ public class VillageGeneration : MonoBehaviour
 
         // Start current position in center of village
         var currentPosition = vilCenter;
-        Debug.Log("village center at: " + vilCenter);
 
         // Initialize village square
         SpawnVillageSquare(currentPosition);

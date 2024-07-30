@@ -10,7 +10,7 @@ public class TreeGeneration : MonoBehaviour
     public float spawnChance; // default is 65f
     public TilemapStructure groundMap;
 
-    public GameObject tree;
+    public GameObject tree, grass;
 
     private void Awake()
     {
@@ -57,6 +57,16 @@ public class TreeGeneration : MonoBehaviour
                         // Additional chance to replace tree to spawn a different foliage? ie bush
                         // Spawn tree
                         Instantiate(tree, new Vector3(treePos.x, treePos.y), Quaternion.identity, transform);
+                    }
+                }
+                else if (noiseHeight <= .55)
+                {
+                    var neighbors = groundMap.GetNeighbors(Mathf.FloorToInt(x), Mathf.FloorToInt(y));
+                    if (!neighbors.ContainsValue((int)GroundTileType.Water) 
+                        && !neighbors.ContainsValue((int)GroundTileType.VillagePath) && !neighbors.ContainsValue((int)GroundTileType.VillagePlot))
+                    {
+                        // Grass
+                        Instantiate(grass, new Vector3(x, y), Quaternion.identity, transform);
                     }
                 }
             }
