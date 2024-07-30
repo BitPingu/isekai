@@ -33,7 +33,7 @@ public class BattleManager : MonoBehaviour
         enemy.GetComponent<EnemyBattle>().Stance();
 
         // Start battle
-        FindObjectOfType<CameraController>().target = enemy;
+        // FindObjectOfType<CameraController>().target = enemy;
         FindObjectOfType<AudioManager>().Stop();
         FindObjectOfType<AudioManager>().Play("Battle");
         
@@ -180,7 +180,7 @@ public class BattleManager : MonoBehaviour
         }
 
         // DeStart battle
-        FindObjectOfType<CameraController>().target = player;
+        // FindObjectOfType<CameraController>().target = player;
         FindObjectOfType<AudioManager>().Stop();
         DayAndNightCycle dayNight = FindObjectOfType<DayAndNightCycle>();
         if (dayNight.isDay)

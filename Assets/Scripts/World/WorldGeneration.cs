@@ -6,7 +6,6 @@ public class WorldGeneration : MonoBehaviour
 {
     public int width, height, seed;
     public Vector2 islandRegionSize;
-    public GameObject test;
 
     private void Awake()
     {
@@ -18,9 +17,11 @@ public class WorldGeneration : MonoBehaviour
         GetComponentInChildren<TileGrid>().Initialize(width, height, seed);
 
         islandRegionSize = GetComponentInChildren<GroundGeneration>().islandRegionSize;
-        // Instantiate(test, islandRegionSize, Quaternion.identity);
 
         // Init vegetation
         GetComponentInChildren<TreeGeneration>().Initialize(width, height, seed);
+
+        // Start world events
+        GetComponent<WorldEvents>().Initialize(GetComponentInChildren<TilemapStructure>());
     }
 }

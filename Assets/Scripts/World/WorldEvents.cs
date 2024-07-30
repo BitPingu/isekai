@@ -10,87 +10,80 @@ public class WorldEvents : MonoBehaviour
     public delegate void OnSceneChange();
     public OnSceneChange SceneChange;
 
-    private TileGrid gen;
     private TilemapStructure groundMap, overworldMap;
 
-    public GameObject elf;
+    public GameObject player, elf;
+    public CameraController camera;
     public EnemySpawner spawner;
 
-    private void Awake()
-    {
-        gen = GetComponent<TileGrid>();
-        groundMap = FindObjectOfType<TileGrid>().GetTilemap(TilemapType.Ground);
-    }
-
-    private void OnEnable()
-    {
-        // Start world events after world gen
-        gen.WorldGen += StartEvents;
-    }
-
-    private void OnDisable()
-    {
-        gen.WorldGen -= StartEvents;
-    }
+    // private void Awake()
+    // {
+    //     groundMap = FindObjectOfType<TileGrid>().GetTilemap(TilemapType.Ground);
+    // }
 
     private void Update()
     {
-        // Check if elf event is ongoing
-        if (SceneManager.GetActiveScene().buildIndex == 1 && TempData.initElf) 
-        {
-            // End elf event
-            if (!TempData.elfSaved && TempData.tempTime >= 60f)
-            {
-                TempData.initElf = false;
-                // relese enemy
-                GameObject enemy = GameObject.FindGameObjectWithTag("SpecialEnemy");
-                enemy.tag = "Enemy";
-                enemy.GetComponent<NPCMovement>().enabled = true;
-                enemy.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
-                enemy.GetComponent<Animator>().SetBool("Battle", false);
-                if (FindObjectOfType<DialogueController>().issuer.Equals("Helpless Elf"))
-                    FindObjectOfType<DialogueController>().EndDialogue();
-                Debug.Log("elf was slain!");
-                Destroy(elf);
-            }
-        }
+        // // Check if elf event is ongoing
+        // if (SceneManager.GetActiveScene().buildIndex == 1 && TempData.initElf) 
+        // {
+        //     // End elf event
+        //     if (!TempData.elfSaved && TempData.tempTime >= 60f)
+        //     {
+        //         TempData.initElf = false;
+        //         // relese enemy
+        //         GameObject enemy = GameObject.FindGameObjectWithTag("SpecialEnemy");
+        //         enemy.tag = "Enemy";
+        //         enemy.GetComponent<NPCMovement>().enabled = true;
+        //         enemy.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+        //         enemy.GetComponent<Animator>().SetBool("Battle", false);
+        //         if (FindObjectOfType<DialogueController>().issuer.Equals("Helpless Elf"))
+        //             FindObjectOfType<DialogueController>().EndDialogue();
+        //         Debug.Log("elf was slain!");
+        //         Destroy(elf);
+        //     }
+        // }
     }
 
-    private void StartEvents()
+    public void Initialize(TilemapStructure tilemap)
     {
-        // Spawn player
-        FindObjectOfType<PlayerPosition>().Spawn(TempData.initPlayerSpawn, SceneManager.GetActiveScene().buildIndex);
-        if (TempData.initPlayerSpawn)
-            TempData.initPlayerSpawn = false;
-        // Spawn elf
-        if (TempData.newGame && TempData.initElfSpawn)
-            TempData.elfSaved = false;
-        if (TempData.elfSaved)
-        {
-            if (TempData.initElfSpawn)
-                elf.SetActive(true);
-            FindObjectOfType<ElfPosition>().Spawn(TempData.initElfSpawn, SceneManager.GetActiveScene().buildIndex);
-            if (TempData.initElfSpawn)
-                TempData.initElfSpawn = false;
-        }
+        // Init player
+        GameObject p = Instantiate(player, new Vector3(tilemap.width/2, tilemap.height/2), Quaternion.identity);
 
-        switch (SceneManager.GetActiveScene().buildIndex)
-        {
-            case 1:
-                // Overworld events
-                if (TempData.initElf && TempData.tempDays == 0 && !TempData.elfSaved)
-                    ElfEvent();
-                break;
-            case 2:
-                // Village events
-                break;
-            case 3:
-                // Dungeon events
-                break;
-            default:
-                Debug.Log("no events for this scene.");
-                break;
-        }
+        // Make camera look at player
+        camera.LookAt(p.transform);
+
+        // if (TempData.initPlayerSpawn)
+        //     TempData.initPlayerSpawn = false;
+
+        // // Spawn elf
+        // if (TempData.newGame && TempData.initElfSpawn)
+        //     TempData.elfSaved = false;
+        // if (TempData.elfSaved)
+        // {
+        //     if (TempData.initElfSpawn)
+        //         elf.SetActive(true);
+        //     FindObjectOfType<ElfPosition>().Spawn(TempData.initElfSpawn, SceneManager.GetActiveScene().buildIndex);
+        //     if (TempData.initElfSpawn)
+        //         TempData.initElfSpawn = false;
+        // }
+
+        // switch (SceneManager.GetActiveScene().buildIndex)
+        // {
+        //     case 1:
+        //         // Overworld events
+        //         if (TempData.initElf && TempData.tempDays == 0 && !TempData.elfSaved)
+        //             ElfEvent();
+        //         break;
+        //     case 2:
+        //         // Village events
+        //         break;
+        //     case 3:
+        //         // Dungeon events
+        //         break;
+        //     default:
+        //         Debug.Log("no events for this scene.");
+        //         break;
+        // }
     }
 
     private void ElfEvent()

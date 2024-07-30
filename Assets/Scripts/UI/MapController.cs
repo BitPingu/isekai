@@ -31,8 +31,7 @@ public class MapController : MonoBehaviour
         // Show points of interest
         // ShowPointsOfInterest();
         // Set map cam size
-        // cam.orthographicSize = maxCamSize/2;
-        cam.orthographicSize = maxCamSize;
+        cam.orthographicSize = maxCamSize/2;
     }
 
     private void OnDisable()

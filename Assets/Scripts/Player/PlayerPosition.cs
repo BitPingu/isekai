@@ -26,40 +26,40 @@ public class PlayerPosition : MonoBehaviour
     private TilemapStructure groundMap, overworldMap;
     private List<KeyValuePair<Vector2Int, int>> neighbours;
 
-    public static PlayerPosition player;
+    // public static PlayerPosition player;
 
     private void Awake()
     {
-        if (player == null)
-        {
-            player = this;
-        } 
-        else 
-        {
-            Destroy(gameObject);
-            return;
-        }
+        // if (player == null)
+        // {
+        //     player = this;
+        // } 
+        // else 
+        // {
+        //     Destroy(gameObject);
+        //     return;
+        // }
 
-        DontDestroyOnLoad(gameObject);
+        // DontDestroyOnLoad(gameObject);
 
         // Attach delegates
-        PosChange += CheckPosition;
-        PosChange += OTileSound;
-        PosChange += CheckNearby;
+        // PosChange += CheckPosition;
+        // PosChange += OTileSound;
+        // PosChange += CheckNearby;
     }
 
     private void Update()
     {
         // Retrieve coordinates of player
-        currentPos = Vector2Int.FloorToInt(transform.position);
-        TempData.tempPlayerPos = new Vector3(transform.position.x, transform.position.y);
+        // currentPos = Vector2Int.FloorToInt(transform.position);
+        // TempData.tempPlayerPos = new Vector3(transform.position.x, transform.position.y);
 
-        // Position check
-        if (currentPos != prevPos)
-        {
-            PosChange(); // Call delegate (and any methods tied to it)
-            prevPos = currentPos;
-        }
+        // // Position check
+        // if (currentPos != prevPos)
+        // {
+        //     PosChange(); // Call delegate (and any methods tied to it)
+        //     prevPos = currentPos;
+        // }
     }
 
     private void RetrieveTilemap()
@@ -70,70 +70,70 @@ public class PlayerPosition : MonoBehaviour
     }
 
     // Generates a random spawn point
-    public void Spawn(bool initialSpawn, int scene)
+    public void Spawn()
     {
-        RetrieveTilemap();
-        switch (scene)
-        {
-            case 1:
-                if (initialSpawn)
-                {
-                    // Coming from main menu
-                    if (TempData.newGame)
-                    {
-                        // Generate initial spawn point
-                        float xCoord, yCoord, currentTile;
-                        do
-                        {
-                            // Choose random spawn point
-                            xCoord = Random.Range(0f, TempData.tempWidth);
-                            yCoord = Random.Range(0f, TempData.tempHeight);
+        // RetrieveTilemap();
+        // switch (scene)
+        // {
+        //     case 1:
+        //         if (initialSpawn)
+        //         {
+        //             // Coming from main menu
+        //             if (TempData.newGame)
+        //             {
+        //                 // Generate initial spawn point
+        //                 float xCoord, yCoord, currentTile;
+        //                 do
+        //                 {
+        //                     // Choose random spawn point
+        //                     xCoord = Random.Range(0f, TempData.tempWidth);
+        //                     yCoord = Random.Range(0f, TempData.tempHeight);
 
-                            // Check tile
-                            currentTile = groundMap.GetTile((int)xCoord, (int)yCoord);
-                        }
-                        while (currentTile != (int)GroundTileType.Land);
+        //                     // Check tile
+        //                     currentTile = groundMap.GetTile((int)xCoord, (int)yCoord);
+        //                 }
+        //                 while (currentTile != (int)GroundTileType.Land);
 
-                        // Generate spawn point
-                        spawnPoint = new Vector3(xCoord, yCoord);
-                        TempData.tempPlayerStartingSpawn = spawnPoint;
-                    }
-                    else
-                    {
-                        // Load player position
-                        SaveData saveData = SaveSystem.Load();
-                        spawnPoint.x = saveData.savePlayerPos[0];
-                        spawnPoint.y = saveData.savePlayerPos[1];
-                        spawnPoint.z = saveData.savePlayerPos[2];
-                    }
-                }
-                else
-                {
-                    // Still in game (exiting from building)
-                    spawnPoint = TempData.tempPlayerBuildingSpawn;
-                }
-                break;
-            case 2:
-            case 3:
-                // Dungeon or village spawn
-                spawnPoint = new Vector3(10 / 2, 0.5f);
-                break;
-            default:
-                Debug.Log("cannot spawn!");
-                break;
-        }
+        //                 // Generate spawn point
+        //                 spawnPoint = new Vector3(xCoord, yCoord);
+        //                 TempData.tempPlayerStartingSpawn = spawnPoint;
+        //             }
+        //             else
+        //             {
+        //                 // Load player position
+        //                 SaveData saveData = SaveSystem.Load();
+        //                 spawnPoint.x = saveData.savePlayerPos[0];
+        //                 spawnPoint.y = saveData.savePlayerPos[1];
+        //                 spawnPoint.z = saveData.savePlayerPos[2];
+        //             }
+        //         }
+        //         else
+        //         {
+        //             // Still in game (exiting from building)
+        //             spawnPoint = TempData.tempPlayerBuildingSpawn;
+        //         }
+        //         break;
+        //     case 2:
+        //     case 3:
+        //         // Dungeon or village spawn
+        //         spawnPoint = new Vector3(10 / 2, 0.5f);
+        //         break;
+        //     default:
+        //         Debug.Log("cannot spawn!");
+        //         break;
+        // }
 
         // Set spawn point
-        transform.position = spawnPoint;
-        prevPos = currentPos = Vector2Int.FloorToInt(transform.position);
-        TempData.tempPlayerPos = new Vector3(spawnPoint.x, spawnPoint.y);
+        // transform.position = spawnPoint;
+        // prevPos = currentPos = Vector2Int.FloorToInt(transform.position);
+        // TempData.tempPlayerPos = new Vector3(spawnPoint.x, spawnPoint.y);
 
-        // Retrieve spawn point tile
-        prevGTile = currentGTile = groundMap.GetTile(currentPos.x, currentPos.y);
-        prevOTile = currentOTile = overworldMap.GetTile(currentPos.x, currentPos.y);
+        // // Retrieve spawn point tile
+        // prevGTile = currentGTile = groundMap.GetTile(currentPos.x, currentPos.y);
+        // prevOTile = currentOTile = overworldMap.GetTile(currentPos.x, currentPos.y);
 
-        // Clear fog
-        PosChange();
+        // // Clear fog
+        // PosChange();
     }
 
     // Looks at current position
