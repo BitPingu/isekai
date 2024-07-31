@@ -167,31 +167,4 @@ public class PlayerPosition : MonoBehaviour
             FindObjectOfType<AudioManager>().PlayFx("Tree");
         }
     }
-
-    // Looks at adjacent tiles around player
-    public void CheckNearby()
-    {
-        // neighbours = groundMap.GetNeighbors(currentPos.x, currentPos.y);
-
-        int landTiles = 0, villageTiles = 0, waterTiles = 0;
-
-        foreach (var neighbour in neighbours)
-        {
-            if (neighbour.Value == (int)GroundTileType.Land)
-                landTiles++;
-
-            if (neighbour.Value == (int)GroundTileType.Water)
-                waterTiles++;
-        }
-
-        // Compare water tiles with land tiles
-        if (waterTiles >= landTiles - 2)
-        {
-            dominantTile = (int)GroundTileType.Water;
-        }
-        else if (waterTiles - 2 > villageTiles)
-        {
-            dominantTile = (int)GroundTileType.Land;
-        }
-    }
 }

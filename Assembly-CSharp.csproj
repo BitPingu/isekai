@@ -75,11 +75,13 @@
     <Compile Include="Assets/Scripts/World/WorldEvents.cs" />
     <Compile Include="Assets/Scripts/UI/MenuController.cs" />
     <Compile Include="Assets/Scripts/NPC/EnemyData.cs" />
+    <Compile Include="Assets/Scripts/World/DungeonGeneration.cs" />
     <Compile Include="Assets/Scripts/Tilemaps/TileGrid.cs" />
     <Compile Include="Assets/Scripts/Tilemaps/TilemapHelper.cs" />
     <Compile Include="Assets/Scripts/UI/MapController.cs" />
     <Compile Include="Assets/Scripts/World/FogData.cs" />
     <Compile Include="Assets/Scripts/NPC/EnemyBattle.cs" />
+    <Compile Include="Assets/Scripts/World/CampGeneration.cs" />
     <Compile Include="Assets/Scripts/Algorithms/LSystem/RoadHelper.cs" />
     <Compile Include="Assets/Scripts/World/ObjectGeneration.cs" />
     <Compile Include="Assets/Scripts/UI/Dialogue.cs" />
@@ -107,6 +109,7 @@
     <Compile Include="Assets/Scripts/UI/BattleHUD.cs" />
     <Compile Include="Assets/Scripts/Player/PlayerPosition.cs" />
     <Compile Include="Assets/Scripts/NPC/EnemySpawner.cs" />
+    <Compile Include="Assets/Scripts/World/TreeGeneration.cs" />
     <Compile Include="Assets/Scripts/World/ExitGen.cs" />
     <Compile Include="Assets/Scripts/World/GroundGeneration.cs" />
     <Compile Include="Assets/Scripts/World/DayAndNightCycle.cs" />
@@ -128,9 +131,6 @@
     <Compile Include="Assets/Scripts/Tilemaps/BuildingTileType.cs" />
     <Compile Include="Assets/Scripts/Data/TempData.cs" />
     <Compile Include="Assets/Scripts/NPC/ElfPosition.cs" />
-    <Compile Include="Assets/Scripts/World/TreeGeneration.cs" />
-    <Compile Include="Assets/Scripts/World/DungeonGeneration.cs" />
-    <Compile Include="Assets/Scripts/World/CampGeneration.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/TextMesh Pro/Shaders/TMPro.cginc" />

@@ -29,15 +29,16 @@ public class BattleManager : MonoBehaviour
 
         enemy.GetComponent<NPCMovement>().enabled = false;
         enemy.GetComponent<EnemyBattle>().enabled = true;
+        enemy.GetComponent<Animator>().SetBool("Battle", false);
         enemy.GetComponent<Animator>().SetFloat("Speed", 0);
         enemy.GetComponent<EnemyBattle>().Stance();
 
         // Start battle
-        // FindObjectOfType<CameraController>().target = enemy;
-        FindObjectOfType<AudioManager>().Stop();
-        FindObjectOfType<AudioManager>().Play("Battle");
+        FindObjectOfType<CameraController>().LookAt(enemy.transform);
+        // FindObjectOfType<AudioManager>().Stop();
+        // FindObjectOfType<AudioManager>().Play("Battle");
         
-        playerHUD = Instantiate(HUD, new Vector2(player.transform.position.x-1.5f, player.transform.position.y+0.3f), Quaternion.identity);
+        playerHUD = Instantiate(HUD, new Vector2(player.transform.position.x-1.5f, player.transform.position.y+0.7f), Quaternion.identity);
         playerHUD.transform.parent = player.transform;
         playerHUD.GetComponent<BattleHUD>().SetHUD(playerData);
 
@@ -180,17 +181,17 @@ public class BattleManager : MonoBehaviour
         }
 
         // DeStart battle
-        // FindObjectOfType<CameraController>().target = player;
-        FindObjectOfType<AudioManager>().Stop();
-        DayAndNightCycle dayNight = FindObjectOfType<DayAndNightCycle>();
-        if (dayNight.isDay)
-        {
-            dayNight.DayMusic();
-        }
-        else
-        {
-            dayNight.NightMusic();
-        }
+        FindObjectOfType<CameraController>().LookAt(player.transform);
+        // FindObjectOfType<AudioManager>().Stop();
+        // DayAndNightCycle dayNight = FindObjectOfType<DayAndNightCycle>();
+        // if (dayNight.isDay)
+        // {
+        //     dayNight.DayMusic();
+        // }
+        // else
+        // {
+        //     dayNight.NightMusic();
+        // }
 
         if (special)
             StartCoroutine(FindObjectOfType<ElfPosition>().SaveElf2());

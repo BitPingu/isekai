@@ -112,7 +112,6 @@ public class EnemySpawner : MonoBehaviour
                 // Assign special values
                 childEnemy.tag = "SpecialEnemy";
                 childEnemy.GetComponent<NPCMovement>().enabled = false;
-                childEnemy.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
                 childEnemy.GetComponent<SpriteRenderer>().flipX = flipX;
                 childEnemy.GetComponent<Animator>().SetBool("Battle", true);
                 break;

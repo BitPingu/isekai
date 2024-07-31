@@ -47,7 +47,7 @@ public class MenuController : MonoBehaviour
         if (Input.GetKeyDown(mapKey))
         {
             // Play sound fx
-            FindObjectOfType<AudioManager>().PlayFx("Open");
+            // FindObjectOfType<AudioManager>().PlayFx("Open");
 
             // Pause game
             Pause();
@@ -67,7 +67,7 @@ public class MenuController : MonoBehaviour
         FindObjectOfType<PlayerController>().enabled = true;
 
         // Resume sound
-        FindObjectOfType<AudioManager>().UnDampen();
+        // FindObjectOfType<AudioManager>().UnDampen();
 
         // Unpause game
         openMenu = false;
@@ -80,7 +80,7 @@ public class MenuController : MonoBehaviour
         FindObjectOfType<PlayerController>().enabled = false;
 
         // Lower sound
-        FindObjectOfType<AudioManager>().Dampen();
+        // FindObjectOfType<AudioManager>().Dampen();
 
         // Pause game
         openMenu = true;

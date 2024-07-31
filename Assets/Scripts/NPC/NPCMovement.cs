@@ -37,9 +37,6 @@ public class NPCMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
 
-        // Retrieve tilemap component
-        // overworldMap = FindObjectOfType<TileGrid>().GetTilemap(TilemapType.Overworld);
-
         // Set counters
         waitCounter = waitTime;
         walkCounter = walkTime;
@@ -47,7 +44,8 @@ public class NPCMovement : MonoBehaviour
         // Choose direction
         chooseDirection();
 
-        // GetComponent<EnemyBattle>().enabled = false;
+        if (GetComponent<EnemyBattle>())
+            GetComponent<EnemyBattle>().enabled = false;
     }
 
     // Update is called once per frame
@@ -56,39 +54,37 @@ public class NPCMovement : MonoBehaviour
         // Retrieve coordinates of enemy
         currentPos = Vector2Int.FloorToInt(transform.position);
 
-        // Get current tile from enemy position
-        // currentTile = overworldMap.GetTile(currentPos.x, currentPos.y);
-
-        // Get speed from current tile
+        // Get speed
         moveSpeed = maxSpeed;
-        if (currentTile == (int)FoilageTileType.Tree)
-            moveSpeed = maxSpeed - 2;
 
         if (moveSpeed <= 0)
             moveSpeed = 1;
 
         // look at player when nearby and chase it
-        // if (GetComponent<EnemyData>().isHostile && GetComponent<EnemyPosition>().CheckPlayer())
-        // {
-        //     // Calculate current direction towards player
-        //     waitCounter = waitTime;
-        //     Vector2 movement = (FindObjectOfType<PlayerPosition>().transform.position - rb.transform.position).normalized;
+        if (GetComponent<EnemyPosition>())
+        {
+            if (GetComponent<EnemyData>().isHostile && GetComponent<EnemyPosition>().CheckPlayer())
+            {
+                // Calculate current direction towards player
+                waitCounter = waitTime;
+                Vector2 movement = (FindObjectOfType<PlayerPosition>().transform.position - rb.transform.position).normalized;
 
-        //     // Move towards player
-        //     Vector2 moveForce = movement * (moveSpeed+1);
-        //     moveForce /= 1.2f;
-        //     rb.velocity = moveForce;
+                // Move towards player
+                Vector2 moveForce = movement * (moveSpeed+1);
+                moveForce /= 1.2f;
+                rb.velocity = moveForce;
 
-        //     // Flip sprite based on horizontal movement
-        //     if (movement.x < 0)
-        //     {
-        //         sprite.flipX = true;
-        //     }
-        //     else
-        //     {
-        //         sprite.flipX = false;
-        //     }
-        // }
+                // Flip sprite based on horizontal movement
+                if (movement.x < 0)
+                {
+                    sprite.flipX = true;
+                }
+                else
+                {
+                    sprite.flipX = false;
+                }
+            }
+        }
 
         if (isMoving)
         {
@@ -121,7 +117,9 @@ public class NPCMovement : MonoBehaviour
         }
         else
         {
+            // Stop moving
             rb.velocity = Vector2.zero;
+
             // Update wait counter
             waitCounter -= Time.deltaTime;
 

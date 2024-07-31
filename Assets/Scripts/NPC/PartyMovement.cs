@@ -16,20 +16,18 @@ public class PartyMovement : MonoBehaviour
     private Vector2Int currentPos;
     [SerializeField]
     private int currentTile;
-    private TilemapStructure overworldMap;
 
     private PlayerPosition player;
 
     private void Awake()
     {
+        // Find player
+        player = FindObjectOfType<PlayerPosition>();
+        
         // Retrieve components
         sprite = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-
-        // Retrieve tilemap component
-        overworldMap = FindObjectOfType<TileGrid>().GetTilemap(TilemapType.Overworld);
-        player = FindObjectOfType<PlayerPosition>();
     }
 
     // Update is called once per frame
@@ -39,12 +37,10 @@ public class PartyMovement : MonoBehaviour
         currentPos = Vector2Int.FloorToInt(transform.position);
 
         // Get current tile
-        currentTile = overworldMap.GetTile(currentPos.x, currentPos.y);
+        // currentTile = overworldMap.GetTile(currentPos.x, currentPos.y);
 
         // Get speed from current tile
         moveSpeed = maxSpeed;
-        if (currentTile == (int)FoilageTileType.Tree)
-            moveSpeed = maxSpeed - 2;
 
         if (moveSpeed <= 0)
             moveSpeed = 1;

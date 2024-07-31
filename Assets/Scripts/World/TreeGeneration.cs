@@ -59,7 +59,7 @@ public class TreeGeneration : MonoBehaviour
                         Instantiate(tree, new Vector3(treePos.x, treePos.y), Quaternion.identity, transform);
                     }
                 }
-                else if (noiseHeight <= .55 && random.Next(0, 100) <= spawnChance)
+                else if (noiseHeight <= .52 && random.Next(0, 100) <= spawnChance)
                 {
                     var neighbors = groundMap.GetNeighbors(Mathf.FloorToInt(x), Mathf.FloorToInt(y));
                     if (!neighbors.ContainsValue((int)GroundTileType.Water) 

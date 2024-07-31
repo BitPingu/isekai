@@ -8,11 +8,11 @@ public class MapMenu : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        // M to resume
-        if (Input.GetKeyDown(KeyCode.M))
+        // M or esc to resume
+        if (Input.GetKeyDown(KeyCode.M) || Input.GetKeyDown(KeyCode.Escape))
         {
             // Play sound fx
-            FindObjectOfType<AudioManager>().PlayFx("Close");
+            // FindObjectOfType<AudioManager>().PlayFx("Close");
 
             // Resume game from pause 
             MenuController.Resume();
