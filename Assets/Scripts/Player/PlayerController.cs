@@ -25,9 +25,6 @@ public class PlayerController : MonoBehaviour
         // Set speed
         moveSpeed = maxSpeed;
 
-        // Attach delegates
-        position.OTileChange += ChangeSpeed;
-
         GetComponent<PlayerBattle>().enabled = false;
     }
 

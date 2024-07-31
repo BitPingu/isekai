@@ -90,7 +90,6 @@
     <Compile Include="Assets/Scripts/Data/SaveSystem.cs" />
     <Compile Include="Assets/Scripts/UI/DialogueController.cs" />
     <Compile Include="Assets/Scripts/Tilemaps/AdvancedRuleTile.cs" />
-    <Compile Include="Assets/Scripts/World/BuildingSpawner.cs" />
     <Compile Include="Assets/Scripts/Algorithms/LSystem/Direction.cs" />
     <Compile Include="Assets/Scripts/Algorithms/LSystem/SimpleVisualizer.cs" />
     <Compile Include="Assets/Scripts/UI/OptionsMenu.cs" />

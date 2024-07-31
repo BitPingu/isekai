@@ -9,8 +9,15 @@ public class WorldGeneration : MonoBehaviour
 
     private void Awake()
     {
-        // Generate world seed
-        seed = UnityEngine.Random.Range(-100000, 100000);
+        if (TempData.loadGame)
+        {
+            seed = SaveSystem.Load().saveSeed;
+        }
+        else
+        {
+            // Generate world seed
+            seed = UnityEngine.Random.Range(-100000, 100000);
+        }
         TempData.tempSeed = seed;
 
         // Init tile grid

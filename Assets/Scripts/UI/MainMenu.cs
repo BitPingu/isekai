@@ -41,31 +41,32 @@ public class MainMenu : MonoBehaviour
         }
 
         // Play theme
-        FindObjectOfType<AudioManager>().Play("Theme");
+        // FindObjectOfType<AudioManager>().Play("Theme");
     }
 
     public void PlayGame ()
     {
         // Play sound fx
-        FindObjectOfType<AudioManager>().PlayFx("Button");
+        // FindObjectOfType<AudioManager>().PlayFx("Button");
         // Change to Game Scene from queue
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void NewGame ()
     {
-        FindObjectOfType<AudioManager>().Stop();
+        // FindObjectOfType<AudioManager>().Stop();
         // Set temp vars
-        TempData.newGame = true;
-        init(true);
+        TempData.loadGame = false;
+        TempData.elfSaved = false;
+        // init(true);
     }
 
     public void LoadGame ()
     {
-        FindObjectOfType<AudioManager>().Stop();
+        // FindObjectOfType<AudioManager>().Stop();
         // Set temp vars
-        TempData.newGame = false;
-        init(true);
+        TempData.loadGame = true;
+        // init(true);
         // Load save data
         SaveSystem.Load();
     }
@@ -73,19 +74,19 @@ public class MainMenu : MonoBehaviour
     public void QuitGame ()
     {
         // Play sound fx
-        FindObjectOfType<AudioManager>().PlayFx("Button");
+        // FindObjectOfType<AudioManager>().PlayFx("Button");
         
         Application.Quit();
     }
 
-    private void init (bool cond)
-    {
-        TempData.initPlayerSpawn = cond;
-        TempData.initElfSpawn = cond;
-        TempData.initSeed = cond;
-        TempData.initTime = cond;
-        TempData.initFog = cond;
-        TempData.initBuilding = cond;
-        TempData.initElf = cond;
-    }
+    // private void init (bool cond)
+    // {
+    //     TempData.initPlayerSpawn = cond;
+    //     TempData.initElfSpawn = cond;
+    //     TempData.initSeed = cond;
+    //     TempData.initTime = cond;
+    //     TempData.initFog = cond;
+    //     TempData.initBuilding = cond;
+    //     TempData.initElf = cond;
+    // }
 }

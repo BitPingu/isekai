@@ -4,7 +4,18 @@ using UnityEngine;
 using static SimpleVisualizer;
 using UnityEngine.Tilemaps;
 using System;
+using System.Linq;
 
+public class Village
+{
+    public Vector2 vilCenter;
+    public string vilSequence;
+    public Village(Vector2 center, string sequence)
+    {
+        vilCenter = center;
+        vilSequence = sequence;
+    }
+}
 
 public class VillageGeneration : MonoBehaviour
 {
@@ -12,7 +23,7 @@ public class VillageGeneration : MonoBehaviour
     private LSystemGenerator lsystem;
     [SerializeField]
     private PoissonDiscSamplingGenerator sampling;
-    private List<Vector2> vilPoints = new List<Vector2>();
+    private List<Village> villages = new List<Village>();
 
     private Vector3 vilCenter, direction;
     private int length = 1; // adjust value to make roads span wider (default is 8)
@@ -56,27 +67,51 @@ public class VillageGeneration : MonoBehaviour
         // Get tilemap structure
         groundMap = tilemap;
 
-        // Generate village coords
-        vilPoints = sampling.GeneratePoints(tilemap);
+        if (TempData.loadGame)
+        {
+            // Load village data
+            List<int> villageCoordsX = SaveSystem.Load().saveVillageCoordsX;
+            List<int> villageCoordsY = SaveSystem.Load().saveVillageCoordsY;
+            List<string> villageSequences = SaveSystem.Load().saveVillageSequences;
+
+            for (int i=0; i<villageCoordsX.Count; i++)
+            {
+                villages.Add(new Village(new Vector2(villageCoordsX[i], villageCoordsY[i]), villageSequences[i]));
+            }
+        }
+        else
+        {
+            // Generate village coords
+            List<Vector2> vilPoints = sampling.GeneratePoints(tilemap);
+
+            foreach (Vector2 point in vilPoints)
+            {
+                // Skip water coords
+                if (groundMap.GetTile(Mathf.FloorToInt(point.x), Mathf.FloorToInt(point.y)) == (int)GroundTileType.Water)
+                    continue;
+
+                // Generate lsystem sequence for each village
+                string vilSequence = lsystem.GenerateSentence();
+
+                // Add new village to list
+                villages.Add(new Village(point, vilSequence));
+            }
+        }
+
+        // Save vil data
+        TempData.tempVillages = villages;
 
         // Generate villages
-        foreach (Vector2 point in vilPoints)
+        foreach (Village vil in villages)
         {
-            // Skip water coords
-            if (groundMap.GetTile(Mathf.FloorToInt(point.x), Mathf.FloorToInt(point.y)) == (int)GroundTileType.Water)
-                continue;
-
-            // Generate lsystem sequence
-            var sequence = lsystem.GenerateSentence();
-
             // Set village centerpoint
-            vilCenter = new Vector3(Mathf.FloorToInt(point.x), Mathf.FloorToInt(point.y));
+            vilCenter = new Vector3(Mathf.FloorToInt(vil.vilCenter.x), Mathf.FloorToInt(vil.vilCenter.y));
 
             // Start heading east in 2d world space
             direction = Vector3.right;
 
             // Generate village
-            VisualizeSequence(sequence);
+            VisualizeSequence(vil.vilSequence);
 
             // Spawn fountain (to be added later)
             Instantiate(fountain, new Vector3(vilCenter.x+.5f, vilCenter.y+.5f), Quaternion.identity, transform);

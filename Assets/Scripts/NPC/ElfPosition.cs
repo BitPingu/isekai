@@ -93,7 +93,7 @@ public class ElfPosition : MonoBehaviour
 
         // Retrieve coordinates
         currentPos = Vector2Int.FloorToInt(transform.position);
-        // TempData.tempElfPos = new Vector3(transform.position.x, transform.position.y);
+        TempData.tempElfPos = new Vector3(transform.position.x, transform.position.y);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -136,6 +136,7 @@ public class ElfPosition : MonoBehaviour
         yield return new WaitForSeconds(1f);
         FindObjectOfType<DialogueController>().EndDialogue();
         GetComponent<PartyMovement>().minDistance = 1.55f;
+        TempData.elfSaved = true;
     }
 
     private void RetrieveTilemap()

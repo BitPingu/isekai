@@ -4,11 +4,11 @@ using UnityEngine;
 public class TempData : MonoBehaviour
 {
     // init vars are set in mainmenu
-    public static bool newGame;
+    public static bool loadGame;
     public static bool initPlayerSpawn;
-    public static Vector3 tempPlayerStartingSpawn;
-    public static Vector3 tempPlayerBuildingSpawn;
-    public static Vector3 tempPlayerPos;
+    public static Vector2 tempPlayerStartingSpawn;
+    public static Vector2 tempPlayerBuildingSpawn;
+    public static Vector2 tempPlayerPos;
     public static bool initSeed;
     public static int tempSeed;
     public static int tempWidth;
@@ -19,15 +19,15 @@ public class TempData : MonoBehaviour
     public static bool tempIsDay;
     public static bool initFog;
     public static FogData tempFog;
-    public static FogData tempFog2;
+    // public static FogData tempFog2;
     public static bool initBuilding;
-    public static List<Vector3> tempVillages;
-    public static List<Vector3> tempDungeons;
-    public static List<Vector3> tempCamps;
+    public static List<Village> tempVillages;
+    public static List<Vector2> tempDungeons;
+    public static List<Vector2> tempCamps;
 
     public static bool initElf;
     public static bool initElfSpawn;
-    public static Vector3 tempElfStartingSpawn;
-    public static Vector3 tempElfPos;
+    public static Vector2 tempElfStartingSpawn;
+    public static Vector2 tempElfPos;
     public static bool elfSaved;
 }

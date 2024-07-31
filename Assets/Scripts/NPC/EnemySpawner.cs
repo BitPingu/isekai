@@ -29,9 +29,6 @@ public class EnemySpawner : MonoBehaviour
     {
         // Get tilemap structure
         groundMap = tilemap;
-
-        // Spawn init enemies
-        dayEnemies();
     }
 
     public void dayEnemies()

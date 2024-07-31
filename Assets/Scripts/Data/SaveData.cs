@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [System.Serializable]
@@ -14,23 +15,23 @@ public class SaveData
     public List<int> saveClearFogCoordsY;
     public List<int> saveVillageCoordsX;
     public List<int> saveVillageCoordsY;
+    public List<string> saveVillageSequences;
     public List<int> saveDungeonCoordsX;
     public List<int> saveDungeonCoordsY;
     public List<int> saveCampCoordsX;
     public List<int> saveCampCoordsY;
+    public bool saveElf;
 
 
     public SaveData ()
     {
-        savePlayerPos = new float[3];
+        savePlayerPos = new float[2];
         savePlayerPos[0] = TempData.tempPlayerPos.x;
         savePlayerPos[1] = TempData.tempPlayerPos.y;
-        savePlayerPos[2] = TempData.tempPlayerPos.z;
 
-        saveElfPos = new float[3];
+        saveElfPos = new float[2];
         saveElfPos[0] = TempData.tempElfPos.x;
         saveElfPos[1] = TempData.tempElfPos.y;
-        saveElfPos[2] = TempData.tempElfPos.z;
 
         saveSeed = TempData.tempSeed;
 
@@ -38,22 +39,32 @@ public class SaveData
         saveTime = TempData.tempTime;
         saveIsDay = TempData.tempIsDay;
 
-        saveClearFogCoordsX = TempData.tempFog.clearFogCoordsX;
-        saveClearFogCoordsY = TempData.tempFog.clearFogCoordsY;
+        List<int> fogX = new List<int>();
+        List<int> fogY = new List<int>();
+        foreach (Vector2 clearFog in TempData.tempFog.clearFogCoords)
+        {
+            fogX.Add((int)clearFog.x);
+            fogY.Add((int)clearFog.y);
+        }
+        saveClearFogCoordsX = fogX;
+        saveClearFogCoordsY = fogY;
 
         List<int> vilsX = new List<int>();
         List<int> vilsY = new List<int>();
-        foreach (Vector3 village in TempData.tempVillages)
+        List<string> vilSeq = new List<string>();
+        foreach (Village vil in TempData.tempVillages)
         {
-            vilsX.Add((int)village.x);
-            vilsY.Add((int)village.y);
+            vilsX.Add((int)vil.vilCenter.x);
+            vilsY.Add((int)vil.vilCenter.y);
+            vilSeq.Add(vil.vilSequence);
         }
         saveVillageCoordsX = vilsX;
         saveVillageCoordsY = vilsY;
+        saveVillageSequences = vilSeq;
 
         List<int> dunsX = new List<int>();
         List<int> dunsY = new List<int>();
-        foreach (Vector3 dungeon in TempData.tempDungeons)
+        foreach (Vector2 dungeon in TempData.tempDungeons)
         {
             dunsX.Add((int)dungeon.x);
             dunsY.Add((int)dungeon.y);
@@ -63,12 +74,14 @@ public class SaveData
 
         List<int> campX = new List<int>();
         List<int> campY = new List<int>();
-        foreach (Vector3 camp in TempData.tempCamps)
+        foreach (Vector2 camp in TempData.tempCamps)
         {
             campX.Add((int)camp.x);
             campY.Add((int)camp.y);
         }
         saveCampCoordsX = campX;
         saveCampCoordsY = campY;
+
+        saveElf = TempData.elfSaved;
     }
 }

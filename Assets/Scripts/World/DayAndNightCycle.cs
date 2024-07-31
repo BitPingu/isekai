@@ -76,9 +76,25 @@ public class DayAndNightCycle : MonoBehaviour
 
     public void Initialize()
     {
-        days = 0;
-        time = 50;
-        isDay = true;
+        if (TempData.loadGame)
+        {
+            // Load time
+            days = SaveSystem.Load().saveDays;
+            time = SaveSystem.Load().saveTime;
+            isDay = SaveSystem.Load().saveIsDay;
+        }
+        else
+        {
+            // New game
+            days = 0;
+            time = 50;
+            isDay = true;
+        }
+
+        // Save time
+        TempData.tempDays = days;
+        TempData.tempTime = time;
+        TempData.tempIsDay = isDay;
     }
 
     private void Update()
@@ -123,7 +139,7 @@ public class DayAndNightCycle : MonoBehaviour
         
         // Tie time to frame rate
         time += Time.deltaTime;
-        // TempData.tempTime = time;
+        TempData.tempTime = time;
 
         // Pick color from gradient based on value from 0-1
         GetComponent<Light2D>().color = lightColor.Evaluate(time * ratePerDay);   

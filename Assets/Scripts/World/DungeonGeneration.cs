@@ -16,8 +16,25 @@ public class DungeonGeneration : MonoBehaviour
         // Get tilemap structure
         groundMap = tilemap;
 
-        // Generate dungeon coords
-        dunPoints = sampling.GeneratePoints(tilemap);
+        if (TempData.loadGame)
+        {
+            // Load dungeon data
+            List<int> dungeonCoordsX = SaveSystem.Load().saveDungeonCoordsX;
+            List<int> dungeonCoordsY = SaveSystem.Load().saveDungeonCoordsY;
+
+            for (int i=0; i<dungeonCoordsX.Count; i++)
+            {
+                dunPoints.Add(new Vector2(dungeonCoordsX[i], dungeonCoordsY[i]));
+            }
+        }
+        else
+        {
+            // Generate dungeon coords
+            dunPoints = sampling.GeneratePoints(tilemap);
+        }
+
+        // Save dun data
+        TempData.tempDungeons = dunPoints;
 
         // Generate dungeons
         foreach (Vector2 point in dunPoints)

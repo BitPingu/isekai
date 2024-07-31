@@ -15,9 +15,6 @@ public class EnemyPosition : MonoBehaviour
 
     private void Awake()
     {
-        // Find player
-        player = FindObjectOfType<PlayerPosition>();
-
         // Get spawn point
         spawnPoint = transform.position;
 
@@ -64,6 +61,9 @@ public class EnemyPosition : MonoBehaviour
 
     public bool CheckPlayer()
     {
+        // Find player
+        player = FindObjectOfType<PlayerPosition>();
+        
         // Calculate current distance from player
         float distance = Vector3.Distance(player.transform.position, transform.position);
 

@@ -61,72 +61,54 @@ public class NPCMovement : MonoBehaviour
             moveSpeed = 1;
 
         // look at player when nearby and chase it
-        if (GetComponent<EnemyPosition>())
+        if (GetComponent<EnemyPosition>() && GetComponent<EnemyData>().isHostile && GetComponent<EnemyPosition>().CheckPlayer())
         {
-            if (GetComponent<EnemyData>().isHostile && GetComponent<EnemyPosition>().CheckPlayer())
+            Chase();
+        }
+        else
+        {
+            if (isMoving)
             {
-                // Calculate current direction towards player
-                waitCounter = waitTime;
-                Vector2 movement = (FindObjectOfType<PlayerPosition>().transform.position - rb.transform.position).normalized;
+                // Update walk counter
+                walkCounter -= Time.deltaTime;
 
-                // Move towards player
-                Vector2 moveForce = movement * (moveSpeed+1);
+                // Movement
+                Vector2 moveForce = movement * (moveSpeed+.5f);
                 moveForce /= 1.2f;
                 rb.velocity = moveForce;
 
                 // Flip sprite based on horizontal movement
-                if (movement.x < 0)
-                {
-                    sprite.flipX = true;
-                }
-                else
+                if (movement.x > 0)
                 {
                     sprite.flipX = false;
                 }
+                else if (movement.x < 0)
+                {
+                    sprite.flipX = true;
+                }
+
+                // Stop moving
+                if (walkCounter < 0)
+                {
+                    isMoving = false;
+
+                    // Reset wait time
+                    waitCounter = waitTime;
+                }
             }
-        }
-
-        if (isMoving)
-        {
-            // Update walk counter
-            walkCounter -= Time.deltaTime;
-
-            // Movement
-            Vector2 moveForce = movement * (moveSpeed+.5f);
-            moveForce /= 1.2f;
-            rb.velocity = moveForce;
-
-            // Flip sprite based on horizontal movement
-            if (movement.x > 0)
+            else
             {
-                sprite.flipX = false;
-            }
-            else if (movement.x < 0)
-            {
-                sprite.flipX = true;
-            }
+                // Stop moving
+                rb.velocity = Vector2.zero;
 
-            // Stop moving
-            if (walkCounter < 0)
-            {
-                isMoving = false;
+                // Update wait counter
+                waitCounter -= Time.deltaTime;
 
-                // Reset wait time
-                waitCounter = waitTime;
-            }
-        }
-        else
-        {
-            // Stop moving
-            rb.velocity = Vector2.zero;
-
-            // Update wait counter
-            waitCounter -= Time.deltaTime;
-
-            // Choose direction
-            if (waitCounter < 0)
-            {
-                chooseDirection();
+                // Choose direction
+                if (waitCounter < 0)
+                {
+                    chooseDirection();
+                }
             }
         }
 
@@ -134,7 +116,7 @@ public class NPCMovement : MonoBehaviour
         animator.SetFloat("Speed", rb.velocity.sqrMagnitude);
     }
 
-    public void chooseDirection()
+    private void chooseDirection()
     {
         // Choose random movement
         movement.x = Random.Range(-1f, 1f);
@@ -148,5 +130,30 @@ public class NPCMovement : MonoBehaviour
 
         // Reset walk time
         walkCounter = walkTime;
+    }
+
+    private void Chase()
+    {
+        // Always walk
+        // isMoving = true;
+        // walkCounter = walkTime;
+
+        // Calculate current direction towards player
+        Vector2 movement = (FindObjectOfType<PlayerPosition>().transform.position - rb.transform.position).normalized;
+
+        // Move towards player
+        Vector2 moveForce = movement * (moveSpeed+1);
+        moveForce /= 1.2f;
+        rb.velocity = moveForce;
+
+        // Flip sprite based on horizontal movement
+        if (movement.x < 0)
+        {
+            sprite.flipX = true;
+        }
+        else
+        {
+            sprite.flipX = false;
+        }
     }
 }

@@ -14,16 +14,10 @@ public class PlayerPosition : MonoBehaviour
     public delegate void OnPosChange();
     public OnPosChange PosChange;
 
-    // Call other functions when tile types change
-    public delegate void OnGTileChange();
-    public OnGTileChange GTileChange;
-    public delegate void OnOTileChange();
-    public OnOTileChange OTileChange;
-
     [SerializeField]
     private Vector3 spawnPoint;
 
-    private TilemapStructure groundMap, overworldMap;
+    private TilemapStructure groundMap;
     private List<KeyValuePair<Vector2Int, int>> neighbours;
 
     // public static PlayerPosition player;
@@ -51,22 +45,21 @@ public class PlayerPosition : MonoBehaviour
     private void Update()
     {
         // Retrieve coordinates of player
-        // currentPos = Vector2Int.FloorToInt(transform.position);
-        // TempData.tempPlayerPos = new Vector3(transform.position.x, transform.position.y);
+        currentPos = Vector2Int.FloorToInt(transform.position);
+        TempData.tempPlayerPos = new Vector3(transform.position.x, transform.position.y);
 
-        // // Position check
-        // if (currentPos != prevPos)
-        // {
-        //     PosChange(); // Call delegate (and any methods tied to it)
-        //     prevPos = currentPos;
-        // }
+        // Position check
+        if (currentPos != prevPos)
+        {
+            PosChange(); // Call delegate (and any methods tied to it)
+            prevPos = currentPos;
+        }
     }
 
     private void RetrieveTilemap()
     {
         // Retrieve tilemap components
         groundMap = FindObjectOfType<TileGrid>().GetTilemap(TilemapType.Ground);
-        overworldMap = FindObjectOfType<TileGrid>().GetTilemap(TilemapType.Overworld);
     }
 
     // Generates a random spawn point
@@ -134,28 +127,6 @@ public class PlayerPosition : MonoBehaviour
 
         // // Clear fog
         // PosChange();
-    }
-
-    // Looks at current position
-    private void CheckPosition()
-    {
-        // Get current tiles from player position
-        currentGTile = groundMap.GetTile(currentPos.x, currentPos.y);
-        currentOTile = overworldMap.GetTile(currentPos.x, currentPos.y);
-
-        // Ground tile check
-        if (currentGTile != prevGTile)
-        {
-            // GTileChange();
-            prevGTile = currentGTile;
-        }
-
-        // Object tile check
-        if (currentOTile != prevOTile)
-        {
-            OTileChange();
-            prevOTile = currentOTile;
-        }
     }
 
     // Play sound based on current object tile

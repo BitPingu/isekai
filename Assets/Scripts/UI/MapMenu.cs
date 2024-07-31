@@ -27,8 +27,11 @@ public class MapMenu : MonoBehaviour
 
     private void OnEnable()
     {
-        FindObjectOfType<MapController>().enabled = true;
-        FindObjectOfType<MapController>().GetComponent<CameraController>().enabled = false;
+        if (FindObjectOfType<MapController>())
+        {
+            FindObjectOfType<MapController>().enabled = true;
+            FindObjectOfType<MapController>().GetComponent<CameraController>().enabled = false;
+        }
         npcs = GameObject.Find("NPC");
         if (npcs)
             npcs.transform.localScale = new Vector3(0, 0, 0);
@@ -36,8 +39,11 @@ public class MapMenu : MonoBehaviour
 
     private void OnDisable()
     {
-        FindObjectOfType<MapController>().enabled = false;
-        FindObjectOfType<MapController>().GetComponent<CameraController>().enabled = true;
+        if (FindObjectOfType<MapController>())
+        {
+            FindObjectOfType<MapController>().enabled = false;
+            FindObjectOfType<MapController>().GetComponent<CameraController>().enabled = true;
+        }
         npcs = GameObject.Find("NPC");
         if (npcs)
             npcs.transform.localScale = new Vector3(1, 1, 1);

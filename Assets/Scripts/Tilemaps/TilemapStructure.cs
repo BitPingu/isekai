@@ -47,10 +47,17 @@ public class TilemapStructure : MonoBehaviour
         tiles = new int[width * height];
 
         // Apply all algorithms to tilemap
-        GetComponent<GroundGeneration>().Initialize(this);
-        GetComponent<VillageGeneration>().Initialize(this);
-        GetComponent<DungeonGeneration>().Initialize(this);
-        GetComponent<CampGeneration>().Initialize(this);
+        if (type == TilemapType.Ground)
+        {
+            GetComponent<GroundGeneration>().Initialize(this);
+            GetComponent<VillageGeneration>().Initialize(this);
+            GetComponent<DungeonGeneration>().Initialize(this);
+            GetComponent<CampGeneration>().Initialize(this);
+        }
+        else if (type == TilemapType.Fog)
+        {
+            GetComponent<FogGeneration>().Initialize(this);
+        }
 
         // Render data
         UpdateTiles();

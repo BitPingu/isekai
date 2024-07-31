@@ -14,9 +14,9 @@ public class GoblinAlgorithm : ScriptableObject
         List<Vector2> points = new List<Vector2>();
 
         // Look for camp points
-        List<Vector3> campPoints = TempData.tempCamps;
+        List<Vector2> campPoints = TempData.tempCamps;
 
-        foreach (Vector3 point in campPoints)
+        foreach (Vector2 point in campPoints)
         {
             // Check if safe to spawn
             if (groundMap.GetTile((int)point.x+1, (int)point.y) == (int)GroundTileType.Land)

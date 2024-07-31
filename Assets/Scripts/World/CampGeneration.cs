@@ -16,8 +16,25 @@ public class CampGeneration : MonoBehaviour
         // Get tilemap structure
         groundMap = tilemap;
 
-        // Generate camp coords
-        campPoints = sampling.GeneratePoints(tilemap);
+        if (TempData.loadGame)
+        {
+            // Load camp points
+            List<int> campCoordsX = SaveSystem.Load().saveCampCoordsX;
+            List<int> campCoordsY = SaveSystem.Load().saveCampCoordsY;
+
+            for (int i=0; i<campCoordsX.Count; i++)
+            {
+                campPoints.Add(new Vector2(campCoordsX[i], campCoordsY[i]));
+            }
+        }
+        else
+        {
+            // Generate camp coords
+            campPoints = sampling.GeneratePoints(tilemap);
+        }
+
+        // Save camp points
+        TempData.tempCamps = campPoints;
 
         // Generate camps
         foreach (Vector2 point in campPoints)
@@ -34,12 +51,5 @@ public class CampGeneration : MonoBehaviour
             // Spawn camp
             Instantiate(camp, new Vector3(point.x+.5f, point.y+.5f), Quaternion.identity, transform);
         }
-
-        List<Vector3> tcamps = new List<Vector3>();
-        foreach (Vector2 point in campPoints)
-        {
-            tcamps.Add(point);
-        }
-        TempData.tempCamps = tcamps;
     }
 }

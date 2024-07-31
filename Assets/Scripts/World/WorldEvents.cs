@@ -36,44 +36,81 @@ public class WorldEvents : MonoBehaviour
         dayNight.DayTime += GetComponentInChildren<VillagerSpawner>().Spawn;
         dayNight.NightTime += GetComponentInChildren<VillagerSpawner>().Despawn;
 
-        // Generate player spawn point
+        // Determine player spawn
+        Vector3 spawnPoint = new Vector3();
         float xCoord, yCoord;
-        do
+        if (TempData.loadGame)
         {
-            // Choose random spawn point
-            xCoord = Random.Range(0f, tilemap.width);
-            yCoord = Random.Range(0f, tilemap.height);
+            spawnPoint.x = SaveSystem.Load().savePlayerPos[0];
+            spawnPoint.y = SaveSystem.Load().savePlayerPos[1];
         }
-        while (tilemap.GetTile((int)xCoord, (int)yCoord) != (int)GroundTileType.Land);
+        else
+        {
+            do
+            {
+                // Choose random spawn point
+                xCoord = Random.Range(0f, tilemap.width);
+                yCoord = Random.Range(0f, tilemap.height);
+            }
+            while (tilemap.GetTile((int)xCoord, (int)yCoord) != (int)GroundTileType.Land);
 
-        // Generate spawn point
-        Vector3 spawnPoint = new Vector3(xCoord, yCoord);
+            // Generate spawn point
+            spawnPoint = new Vector3(xCoord, yCoord);
+        }
 
         // Init player
-        GameObject p = Instantiate(player, spawnPoint, Quaternion.identity);
+        p = Instantiate(player, spawnPoint, Quaternion.identity);
+
+        // Attach clearfog delegate to player movement
+        p.GetComponent<PlayerPosition>().PosChange += GetComponentInChildren<FogData>().ClearFog;
 
         // Make camera look at player
         camera.LookAt(p.transform);
 
 
 
-        // Generate elf spawn point
-        do
+        if (TempData.loadGame)
         {
-            // Choose random spawn point around player
-            xCoord = Random.Range(spawnPoint.x-5, spawnPoint.x+5);
-            yCoord = Random.Range(spawnPoint.y-5, spawnPoint.y+5);
+            spawnPoint.x = SaveSystem.Load().saveElfPos[0];
+            spawnPoint.y = SaveSystem.Load().saveElfPos[1];
         }
-        while (tilemap.GetTile((int)xCoord, (int)yCoord) != (int)GroundTileType.Land);
+        else
+        {
+            // Generate elf spawn point
+            do
+            {
+                // Choose random spawn point around player
+                xCoord = Random.Range(spawnPoint.x-5, spawnPoint.x+5);
+                yCoord = Random.Range(spawnPoint.y-5, spawnPoint.y+5);
+            }
+            while (tilemap.GetTile((int)xCoord, (int)yCoord) != (int)GroundTileType.Land);
 
-        // Generate spawn point
-        spawnPoint = new Vector3(xCoord, yCoord);
+            // Generate spawn point
+            spawnPoint = new Vector3(xCoord, yCoord);
+        }
 
         // Init elf
         e = Instantiate(elf, spawnPoint, Quaternion.identity);
 
+
+
+        // Call dayNight delegates (and any methods tied to it)
+        if (dayNight.isDay)
+        {
+            dayNight.DayTime();
+        }
+        else
+        {
+            dayNight.NightTime();
+        }
+
+
+        if (TempData.loadGame)
+            TempData.elfSaved = SaveSystem.Load().saveElf;
+
         // Start elf event
-        ElfEvent(tilemap, e, GetComponentInChildren<EnemySpawner>());
+        if (!TempData.elfSaved)
+            ElfEvent(tilemap, e, GetComponentInChildren<EnemySpawner>());
 
         // if (TempData.initPlayerSpawn)
         //     TempData.initPlayerSpawn = false;
@@ -131,7 +168,7 @@ public class WorldEvents : MonoBehaviour
         //     }
         // }
 
-        if (e && e.GetComponent<ElfPosition>().inDanger && time.days == 0 && time.time >= 60f)
+        if (!TempData.elfSaved && e && e.GetComponent<ElfPosition>().inDanger && time.days == 0 && time.time >= 60f)
         {
             // End elf event
             // TempData.initElf = false;
@@ -200,7 +237,7 @@ public class WorldEvents : MonoBehaviour
             else
             {
                 // Exit house
-                TempData.tempFog2 = FindObjectOfType<FogData>();;
+                // TempData.tempFog2 = FindObjectOfType<FogData>();;
                 SceneManager.LoadScene("Overworld");
             }
         }
@@ -218,7 +255,7 @@ public class WorldEvents : MonoBehaviour
             else
             {
                 // Exit dungeon
-                TempData.tempFog2 = FindObjectOfType<FogData>();;
+                // TempData.tempFog2 = FindObjectOfType<FogData>();;
                 SceneManager.LoadScene("Overworld");
             }
         }

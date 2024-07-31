@@ -56,10 +56,10 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1f;
 
         // Resume sound
-        FindObjectOfType<AudioManager>().UnDampen();
+        // FindObjectOfType<AudioManager>().UnDampen();
 
         // Stop sound
-        FindObjectOfType<AudioManager>().Stop();
+        // FindObjectOfType<AudioManager>().Stop();
 
         // Resume game from pause 
         MenuController.Resume();
