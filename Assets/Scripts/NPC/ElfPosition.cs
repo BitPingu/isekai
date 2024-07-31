@@ -11,7 +11,7 @@ public class ElfPosition : MonoBehaviour
     [SerializeField]
     private float maxDistance; // default is 3.5f
     public Vector2Int currentPos;
-    private bool inDanger;
+    public bool inDanger;
 
     public Dialogue dialogue;
     private bool triggerDia;
@@ -56,6 +56,9 @@ public class ElfPosition : MonoBehaviour
     {
         if (inDanger)
         {
+            // Stop moving
+            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+
             if (FindObjectOfType<PlayerPosition>().transform.position.x - transform.position.x > 0)
             {
                 GetComponent<SpriteRenderer>().flipX = false;

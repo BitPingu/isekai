@@ -14,10 +14,14 @@ public class WorldEvents : MonoBehaviour
     private DayAndNightCycle time;
 
     public GameObject player, elf;
+    private GameObject p, e;
     public CameraController camera;
 
     public void Initialize(TilemapStructure tilemap, DayAndNightCycle dayNight)
     {
+        // Get time
+        time = dayNight;
+
         // Init enemy spawner
         GetComponentInChildren<EnemySpawner>().Initialize(tilemap);
 
@@ -66,7 +70,7 @@ public class WorldEvents : MonoBehaviour
         spawnPoint = new Vector3(xCoord, yCoord);
 
         // Init elf
-        GameObject e = Instantiate(elf, spawnPoint, Quaternion.identity);
+        e = Instantiate(elf, spawnPoint, Quaternion.identity);
 
         // Start elf event
         ElfEvent(tilemap, e, GetComponentInChildren<EnemySpawner>());
@@ -126,6 +130,21 @@ public class WorldEvents : MonoBehaviour
         //         Destroy(elf);
         //     }
         // }
+
+        if (e && e.GetComponent<ElfPosition>().inDanger && time.days == 0 && time.time >= 60f)
+        {
+            // End elf event
+            // TempData.initElf = false;
+            // relese enemy
+            GameObject enemy = GameObject.FindGameObjectWithTag("SpecialEnemy");
+            enemy.tag = "Enemy";
+            enemy.GetComponent<NPCMovement>().enabled = true;
+            enemy.GetComponent<Animator>().SetBool("Battle", false);
+            if (FindObjectOfType<DialogueController>().issuer.Equals("Helpless Elf"))
+                FindObjectOfType<DialogueController>().EndDialogue();
+            Debug.Log("elf was slain!");
+            Destroy(e);
+        }
 
 
     }
