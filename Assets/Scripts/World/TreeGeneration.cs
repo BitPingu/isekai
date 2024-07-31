@@ -34,18 +34,22 @@ public class TreeGeneration : MonoBehaviour
                 // Spawn tree based on height and chance
                 if (noiseHeight <= treeNoiseHeight && random.Next(0, 100) <= spawnChance)
                 {
-                    Vector3 treePos = new Vector3(x, y, 0);
+                    // Tree sprite offset
+                    if (x % 2 == 1)
+                        continue;
+
+                    Vector2 treePos = new Vector2(x, y);
                     int randPos = random.Next(0, 100);
 
                     // Random offset placement
                     if (randPos < 20)
                     {
-                        treePos.x += .5f;
+                        treePos.x += .7f;
                         treePos.y += .5f;
                     }
                     else if (randPos < 40)
                     {
-                        treePos.x -= .5f;
+                        treePos.x -= .7f;
                         treePos.y += .5f;
                     }
 
@@ -66,7 +70,9 @@ public class TreeGeneration : MonoBehaviour
                         && !neighbors.ContainsValue((int)GroundTileType.VillagePath) && !neighbors.ContainsValue((int)GroundTileType.VillagePlot))
                     {
                         // Grass
-                        Instantiate(grass, new Vector3(x, y), Quaternion.identity, transform);
+                        float randX = (float)random.NextDouble();
+                        float randY = (float)random.NextDouble();
+                        Instantiate(grass, new Vector3(x+randX, y+randY), Quaternion.identity, transform);
                     }
                 }
             }

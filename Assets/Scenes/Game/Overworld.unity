@@ -772,7 +772,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   noise: {fileID: 11400000, guid: 937366faf6218400fa8c32100d3701d1, type: 2}
   treeNoiseHeight: 0.47
-  spawnChance: 65
+  spawnChance: 80
   groundMap: {fileID: 689998009}
   tree: {fileID: 6904338341474015277, guid: 228ec15cfae5b4d548837d337d8feb02, type: 3}
   grass: {fileID: 6904338341474015277, guid: 7f246c06248dc44b09e11aaad94c5832, type: 3}
@@ -2222,8 +2222,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2357b82183254c14b8e366c52b2b978f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clearFogCoordsX: 
-  clearFogCoordsY: 
+  clearFogCoords: []
 --- !u!114 &1080372377
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -10,9 +10,9 @@ public class MainMenu : MonoBehaviour
     private void Awake()
     {
         // Destroy leftover game objects
-        Destroy(GameObject.Find("Player"));
-        Destroy(GameObject.Find("Elf"));
-        Destroy(GameObject.Find("UI"));
+        // Destroy(GameObject.Find("Player"));
+        // Destroy(GameObject.Find("Elf"));
+        // Destroy(GameObject.Find("UI"));
 
         // Check if new game
         string path = Application.persistentDataPath + "/saveData.isekai";
