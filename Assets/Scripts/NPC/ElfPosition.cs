@@ -148,7 +148,7 @@ public class ElfPosition : MonoBehaviour
     {
         // Retrieve tilemap components
         groundMap = FindObjectOfType<TileGrid>().GetTilemap(TilemapType.Ground);
-        overworldMap = FindObjectOfType<TileGrid>().GetTilemap(TilemapType.Overworld);
+        // overworldMap = FindObjectOfType<TileGrid>().GetTilemap(TilemapType.Overworld);
     }
 
     // Generates a random spawn point

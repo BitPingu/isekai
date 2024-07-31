@@ -6,7 +6,7 @@ public class EnemyPosition : MonoBehaviour
 {
     [SerializeField]
     private Vector3 spawnPoint;
-    private TilemapStructure groundMap, overworldMap;
+    private TilemapStructure groundMap;
 
     private PlayerPosition player;
     [SerializeField]
@@ -100,16 +100,16 @@ public class EnemyPosition : MonoBehaviour
     private void RetrieveTilemap()
     {
         // Retrieve tilemap components
-        groundMap = FindObjectOfType<TileGrid>().GetTilemap(TilemapType.Ground);
-        overworldMap = FindObjectOfType<TileGrid>().GetTilemap(TilemapType.Overworld);
+        // groundMap = FindObjectOfType<TileGrid>().GetTilemap(TilemapType.Ground);
+        // overworldMap = FindObjectOfType<TileGrid>().GetTilemap(TilemapType.Overworld);
     }
 
     // Looks at current position
     private void CheckPosition()
     {
         // Get current tiles from position
-        currentGTile = groundMap.GetTile(currentPos.x, currentPos.y);
-        currentOTile = overworldMap.GetTile(currentPos.x, currentPos.y);
+        // currentGTile = groundMap.GetTile(currentPos.x, currentPos.y);
+        // currentOTile = overworldMap.GetTile(currentPos.x, currentPos.y);
 
         // Ground tile check
         if (currentGTile != prevGTile)
@@ -129,13 +129,13 @@ public class EnemyPosition : MonoBehaviour
     public bool CheckPlayer()
     {
         // Calculate current distance from player
-        float distance = Vector3.Distance(player.transform.position, transform.position);
+        // float distance = Vector3.Distance(player.transform.position, transform.position);
 
-        if (distance < maxDistance)
-        {
-            // Debug.Log("hi");
-            return true;
-        }
+        // if (distance < maxDistance)
+        // {
+        //     // Debug.Log("hi");
+        //     return true;
+        // }
 
         return false;
     }

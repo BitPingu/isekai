@@ -16,7 +16,7 @@ public class NPCMovement : MonoBehaviour
     private Vector2Int currentPos;
     [SerializeField]
     private int currentTile;
-    private TilemapStructure overworldMap;
+    // private TilemapStructure overworldMap;
 
     private bool isMoving;
     private bool seePlayer;
@@ -38,7 +38,7 @@ public class NPCMovement : MonoBehaviour
         animator = GetComponent<Animator>();
 
         // Retrieve tilemap component
-        overworldMap = FindObjectOfType<TileGrid>().GetTilemap(TilemapType.Overworld);
+        // overworldMap = FindObjectOfType<TileGrid>().GetTilemap(TilemapType.Overworld);
 
         // Set counters
         waitCounter = waitTime;
@@ -57,7 +57,7 @@ public class NPCMovement : MonoBehaviour
         currentPos = Vector2Int.FloorToInt(transform.position);
 
         // Get current tile from enemy position
-        currentTile = overworldMap.GetTile(currentPos.x, currentPos.y);
+        // currentTile = overworldMap.GetTile(currentPos.x, currentPos.y);
 
         // Get speed from current tile
         moveSpeed = maxSpeed;
@@ -113,7 +113,6 @@ public class NPCMovement : MonoBehaviour
             // Stop moving
             if (walkCounter < 0)
             {
-                rb.velocity = Vector2.zero;
                 isMoving = false;
 
                 // Reset wait time
@@ -122,6 +121,7 @@ public class NPCMovement : MonoBehaviour
         }
         else
         {
+            rb.velocity = Vector2.zero;
             // Update wait counter
             waitCounter -= Time.deltaTime;
 

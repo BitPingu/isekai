@@ -24,7 +24,6 @@ public class TileTypes
     public abstract class TileData
     {
         public Sprite sprite;
-        public Color color;
         public TileBase tile;
         public virtual int tileTypeId { get; }
     }

@@ -16,10 +16,10 @@ public class EnemySpawner : MonoBehaviour
     private EnemyTypes[] enemies;
 
     [SerializeField]
-    private PoissonDiscSamplingGenerator overworldEnemyAlgorithm;
-    private List<Vector2> points = new List<Vector2>();
-    [SerializeField]
-    private float displayRadius = 1;
+    private PoissonDiscSamplingGenerator sampling;
+    private List<Vector2> enemySpawnPoints = new List<Vector2>();
+
+
     [SerializeField]
     private GoblinAlgorithm goblinAlgorithm;
 
@@ -34,60 +34,57 @@ public class EnemySpawner : MonoBehaviour
     private void Awake()
     {
         // Retrieve tilemap component
-        groundMap = FindObjectOfType<TileGrid>().GetTilemap(TilemapType.Ground);
+        // groundMap = FindObjectOfType<TileGrid>().GetTilemap(TilemapType.Ground);
 
         // Attach delegates
-        dayNight.DayTime += dayEnemies;
-        dayNight.NightTime += nightEnemies;
+        // dayNight.DayTime += dayEnemies;
+        // dayNight.NightTime += nightEnemies;
     }
 
-    // private void OnDrawGizmos()
-    // {
-    //     Gizmos.DrawWireCube(algorithm.regionSize / 2, algorithm.regionSize);
-    //     if (points != null)
-    //     {
-    //         foreach (Vector2 point in points)
-    //         {
-    //             Gizmos.DrawSphere(point, displayRadius);
-    //         }
-    //     }
-    // }
-
-    private void dayEnemies()
+    public void Initialize(TilemapStructure tilemap, DayAndNightCycle dayNight)
     {
-        points.Clear();
+        // Get tilemap structure
+        groundMap = tilemap;
+
+        // Spawn init enemies
+        dayEnemies();
+    }
+
+    public void dayEnemies()
+    {
         despawnEnemies();
+        // Generate enemy spawn points (might change algo to random chance later ie more common in forested areas)
+        enemySpawnPoints = sampling.GeneratePoints(groundMap);
+
         foreach (EnemyTypes enemy in enemies)
         {
             switch (enemy.gameObject.name)
             {
                 case "Slime":
-                    // Determine spawn points using Poisson Disc Sampling
-                    // points = overworldEnemyAlgorithm.GeneratePoints();
                     // Spawn overworld enemies
                     spawnEnemy(enemy);
                     break;
-                case "Goblin":
-                    points = goblinAlgorithm.GeneratePoints();
-                    spawnEnemy(enemy);
-                    break;
+                // case "Goblin":
+                //     points = goblinAlgorithm.GeneratePoints();
+                //     spawnEnemy(enemy);
+                //     break;
                 default:
                     break;
             }
         }
     }
 
-    private void nightEnemies()
+    public void nightEnemies()
     {
-        points.Clear();
         despawnEnemies();
+        // Generate enemy spawn points (might change algo to random chance later ie more common in forested areas)
+        enemySpawnPoints = sampling.GeneratePoints(groundMap);
+
         foreach (EnemyTypes enemy in enemies)
         {
             switch (enemy.gameObject.name)
             {
                 case "Zombie":
-                    // Determine spawn points using Poisson Disc Sampling
-                    // points = overworldEnemyAlgorithm.GeneratePoints();
                     // Spawn overworld enemies
                     spawnEnemy(enemy);
                     break;
@@ -97,38 +94,27 @@ public class EnemySpawner : MonoBehaviour
 
     private void spawnEnemy(EnemyTypes enemy)
     {
-        foreach (Vector2 point in points)
+        // Spawn enemies
+        foreach (Vector2 point in enemySpawnPoints)
         {
+            // Skip water coords
+            if (groundMap.GetTile(Mathf.FloorToInt(point.x), Mathf.FloorToInt(point.y)) == (int)GroundTileType.Water)
+                continue;
+
             // Create new spawn point from list
             spawnPoint = new Vector3(point.x, point.y, 0);
 
-            // Check tile
-            currentTile = groundMap.GetTile((int)spawnPoint.x, (int)spawnPoint.y);
-
-            // Check valid tile
-            if (currentTile == (int)GroundTileType.Land)
-            {
-                // Instantiate and spawn enemy
-                GameObject childEnemy = Instantiate(enemy.gameObject, spawnPoint, Quaternion.identity);
-                childEnemy.transform.parent = gameObject.transform;
-            }
-            else
-            {
-                // Debug.Log("enemy couldn't spawn :(");
-            }
+            // Instantiate and spawn enemy
+            Instantiate(enemy.gameObject, spawnPoint, Quaternion.identity, transform);
         }
     }
 
     public void spawnEnemy(string type, Vector3 spawnPoint, bool flipX)
     {
-        // Check tile
-        currentTile = groundMap.GetTile(Mathf.FloorToInt(spawnPoint.x), Mathf.FloorToInt(spawnPoint.y));
-
-        // Check valid tile
-        if (currentTile != (int)GroundTileType.Land)
+        // Skip water coords
+        if (groundMap.GetTile(Mathf.FloorToInt(spawnPoint.x), Mathf.FloorToInt(spawnPoint.y)) == (int)GroundTileType.Water)
         {
-            Debug.Log("enemy couldn't spawn :(");
-            return;
+            Debug.Log("enemy will spawn on water!");
         }
 
         // Get enemy
@@ -137,8 +123,7 @@ public class EnemySpawner : MonoBehaviour
             if (enemy.gameObject.name.Equals(type))
             {
                 // Instantiate and spawn enemy
-                GameObject childEnemy = Instantiate(enemy.gameObject, spawnPoint, Quaternion.identity);
-                childEnemy.transform.parent = gameObject.transform;
+                GameObject childEnemy = Instantiate(enemy.gameObject, spawnPoint, Quaternion.identity, transform);
 
                 // Assign special values
                 childEnemy.tag = "SpecialEnemy";

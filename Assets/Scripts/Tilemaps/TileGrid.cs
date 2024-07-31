@@ -178,7 +178,7 @@ public class TileGrid : MonoBehaviour
 
             // If using custom tile, otherwise create new tile
             var tile = tiletype.tile == null ?
-                CreateTile(tiletype.color, tiletype.sprite) :
+                CreateTile(tiletype.sprite) :
                 tiletype.tile;
 
             // Check if tile id already exists in the tiles
@@ -201,29 +201,10 @@ public class TileGrid : MonoBehaviour
         return (tileTypeField.FieldType.Name, value.ToString());
     }
 
-    private Tile CreateTile (Color color, Sprite sprite)
+    private Tile CreateTile (Sprite sprite)
     {
         // Create an instance of type Tile (inherits from TileBase)
         var tile = ScriptableObject.CreateInstance<Tile>();
-
-        // If no sprite specified, create one for color instead
-        if (sprite == null)
-        {
-            // Created sprites do not support custom physics shape
-            var texture = new Texture2D(tileSize, tileSize)
-            {
-                filterMode = FilterMode.Point
-            };
-
-            // Create new sprite without any custom physics shape
-            sprite = Sprite.Create(texture, new Rect(0, 0, tileSize, tileSize), new Vector2(0.5f, 0.5f), tileSize);
-
-            // Make sure color is not transparent
-            color.a = 1;
-
-            // Set the tile color
-            tile.color = color;
-        }
 
         // Assign the sprite created to tiles
         tile.sprite = sprite;

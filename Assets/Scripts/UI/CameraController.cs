@@ -18,7 +18,6 @@ public class CameraController : MonoBehaviour
 
     public void LookAt(Transform targetPos)
     {
-        Debug.Log("goto " + targetPos);
         target = targetPos;
         follow = true;
     }

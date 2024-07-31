@@ -11,6 +11,7 @@ public class WorldEvents : MonoBehaviour
     public OnSceneChange SceneChange;
 
     private TilemapStructure groundMap, overworldMap;
+    private DayAndNightCycle time;
 
     public GameObject player, elf;
     public CameraController camera;
@@ -21,31 +22,15 @@ public class WorldEvents : MonoBehaviour
     //     groundMap = FindObjectOfType<TileGrid>().GetTilemap(TilemapType.Ground);
     // }
 
-    private void Update()
+    public void Initialize(TilemapStructure tilemap, DayAndNightCycle dayNight)
     {
-        // // Check if elf event is ongoing
-        // if (SceneManager.GetActiveScene().buildIndex == 1 && TempData.initElf) 
-        // {
-        //     // End elf event
-        //     if (!TempData.elfSaved && TempData.tempTime >= 60f)
-        //     {
-        //         TempData.initElf = false;
-        //         // relese enemy
-        //         GameObject enemy = GameObject.FindGameObjectWithTag("SpecialEnemy");
-        //         enemy.tag = "Enemy";
-        //         enemy.GetComponent<NPCMovement>().enabled = true;
-        //         enemy.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
-        //         enemy.GetComponent<Animator>().SetBool("Battle", false);
-        //         if (FindObjectOfType<DialogueController>().issuer.Equals("Helpless Elf"))
-        //             FindObjectOfType<DialogueController>().EndDialogue();
-        //         Debug.Log("elf was slain!");
-        //         Destroy(elf);
-        //     }
-        // }
-    }
+        // Init enemy spawner
+        GetComponentInChildren<EnemySpawner>().Initialize(tilemap, dayNight);
 
-    public void Initialize(TilemapStructure tilemap)
-    {
+        // Attach dayNight delegates to enemy spawner
+        dayNight.DayTime += GetComponentInChildren<EnemySpawner>().dayEnemies;
+        dayNight.NightTime += GetComponentInChildren<EnemySpawner>().nightEnemies;
+
         // Init player
         GameObject p = Instantiate(player, new Vector3(tilemap.width/2, tilemap.height/2), Quaternion.identity);
 
@@ -84,6 +69,31 @@ public class WorldEvents : MonoBehaviour
         //         Debug.Log("no events for this scene.");
         //         break;
         // }
+    }
+
+    private void Update()
+    {
+        // // Check if elf event is ongoing
+        // if (SceneManager.GetActiveScene().buildIndex == 1 && TempData.initElf) 
+        // {
+        //     // End elf event
+        //     if (!TempData.elfSaved && TempData.tempTime >= 60f)
+        //     {
+        //         TempData.initElf = false;
+        //         // relese enemy
+        //         GameObject enemy = GameObject.FindGameObjectWithTag("SpecialEnemy");
+        //         enemy.tag = "Enemy";
+        //         enemy.GetComponent<NPCMovement>().enabled = true;
+        //         enemy.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+        //         enemy.GetComponent<Animator>().SetBool("Battle", false);
+        //         if (FindObjectOfType<DialogueController>().issuer.Equals("Helpless Elf"))
+        //             FindObjectOfType<DialogueController>().EndDialogue();
+        //         Debug.Log("elf was slain!");
+        //         Destroy(elf);
+        //     }
+        // }
+
+
     }
 
     private void ElfEvent()

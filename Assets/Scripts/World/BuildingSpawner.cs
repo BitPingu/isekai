@@ -23,7 +23,7 @@ public class BuildingSpawner
                 // Convert to hash set
                 // points = new HashSet<Vector2>(listPoints);
         var groundTilemap = tilemap.grid.GetTilemap(TilemapType.Ground);
-        var foilageTilemap = tilemap.grid.GetTilemap(TilemapType.Overworld);
+        // var foilageTilemap = tilemap.grid.GetTilemap(TilemapType.Overworld);
 
         foreach (Vector2 point in points)
         {
@@ -34,18 +34,18 @@ public class BuildingSpawner
             if (currentTile == (int)GroundTileType.Land)
             {
                 // Clear foilage
-                foilageTilemap.SetTile((int)point.x, (int)point.y, (int)GroundTileType.Empty);
+                // foilageTilemap.SetTile((int)point.x, (int)point.y, (int)GroundTileType.Empty);
 
                 if (building.gameObject.name.Equals("Camp"))
                 {
                     // Clear area for camp
                     if (groundTilemap.GetTile((int)point.x+1, (int)point.y) == (int)GroundTileType.Land)
                     {
-                        foilageTilemap.SetTile((int)point.x+1, (int)point.y, (int)FoilageTileType.Empty);
+                        // foilageTilemap.SetTile((int)point.x+1, (int)point.y, (int)FoilageTileType.Empty);
                     }
                     if (groundTilemap.GetTile((int)point.x-1, (int)point.y) == (int)GroundTileType.Land)
                     {
-                        foilageTilemap.SetTile((int)point.x-1, (int)point.y, (int)FoilageTileType.Empty);
+                        // foilageTilemap.SetTile((int)point.x-1, (int)point.y, (int)FoilageTileType.Empty);
                     }
                 }
 

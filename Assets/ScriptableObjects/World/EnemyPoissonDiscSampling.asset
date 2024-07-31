@@ -10,8 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fc0c84c86c9e4504dbb3ea181b13face, type: 3}
-  m_Name: EnemySpawnGeneration
+  m_Name: EnemyPoissonDiscSampling
   m_EditorClassIdentifier: 
-  radius: 10
-  regionSize: {x: 100, y: 100}
-  rejectionSamples: 30
+  radius: 15
+  samplesBeforeRejection: 60

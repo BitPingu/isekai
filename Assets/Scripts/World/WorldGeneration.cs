@@ -21,7 +21,10 @@ public class WorldGeneration : MonoBehaviour
         // Init vegetation
         GetComponentInChildren<TreeGeneration>().Initialize(width, height, seed);
 
+        // Init time
+        GetComponentInChildren<DayAndNightCycle>().Initialize();
+
         // Start world events
-        GetComponent<WorldEvents>().Initialize(GetComponentInChildren<TilemapStructure>());
+        GetComponent<WorldEvents>().Initialize(GetComponentInChildren<TilemapStructure>(), GetComponentInChildren<DayAndNightCycle>());
     }
 }
