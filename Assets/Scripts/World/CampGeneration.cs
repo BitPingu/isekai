@@ -16,10 +16,10 @@ public class CampGeneration : MonoBehaviour
         // Get tilemap structure
         groundMap = tilemap;
 
-        // Generate dungeon coords
+        // Generate camp coords
         campPoints = sampling.GeneratePoints(tilemap);
 
-        // Generate dungeons
+        // Generate camps
         foreach (Vector2 point in campPoints)
         {
             // Skip water coords
@@ -31,8 +31,15 @@ public class CampGeneration : MonoBehaviour
 
             // Generate procedural dungeon area here saved on another tilemap
 
-            // Spawn dungeon
+            // Spawn camp
             Instantiate(camp, new Vector3(point.x+.5f, point.y+.5f), Quaternion.identity, transform);
         }
+
+        List<Vector3> tcamps = new List<Vector3>();
+        foreach (Vector2 point in campPoints)
+        {
+            tcamps.Add(point);
+        }
+        TempData.tempCamps = tcamps;
     }
 }

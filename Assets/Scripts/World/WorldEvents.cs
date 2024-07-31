@@ -25,11 +25,18 @@ public class WorldEvents : MonoBehaviour
     public void Initialize(TilemapStructure tilemap, DayAndNightCycle dayNight)
     {
         // Init enemy spawner
-        GetComponentInChildren<EnemySpawner>().Initialize(tilemap, dayNight);
+        GetComponentInChildren<EnemySpawner>().Initialize(tilemap);
 
-        // Attach dayNight delegates to enemy spawner
+        // Attach dayNight delegates to enemy spawners
         dayNight.DayTime += GetComponentInChildren<EnemySpawner>().dayEnemies;
         dayNight.NightTime += GetComponentInChildren<EnemySpawner>().nightEnemies;
+
+        // Init villager spawner
+        GetComponentInChildren<VillagerSpawner>().Initialize(tilemap);
+
+        // Attach dayNight delegates to villager spawner
+        dayNight.DayTime += GetComponentInChildren<VillagerSpawner>().Spawn;
+        dayNight.NightTime += GetComponentInChildren<VillagerSpawner>().Despawn;
 
         // Init player
         GameObject p = Instantiate(player, new Vector3(tilemap.width/2, tilemap.height/2), Quaternion.identity);

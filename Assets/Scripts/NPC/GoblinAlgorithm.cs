@@ -21,11 +21,11 @@ public class GoblinAlgorithm : ScriptableObject
             // Check if safe to spawn
             if (groundMap.GetTile((int)point.x+1, (int)point.y) == (int)GroundTileType.Land)
             {
-                points.Add(new Vector2((int)point.x+1.5f, (int)point.y+.55f));
+                points.Add(new Vector2((int)point.x+1.5f, (int)point.y+.7f));
             }
             if (groundMap.GetTile((int)point.x-1, (int)point.y) == (int)GroundTileType.Land)
             {
-                points.Add(new Vector2((int)point.x-.5f, (int)point.y+.55f));
+                points.Add(new Vector2((int)point.x+.5f, (int)point.y+1.2f));
             }
         }
 

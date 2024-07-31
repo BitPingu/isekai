@@ -47,7 +47,7 @@ public class NPCMovement : MonoBehaviour
         // Choose direction
         chooseDirection();
 
-        GetComponent<EnemyBattle>().enabled = false;
+        // GetComponent<EnemyBattle>().enabled = false;
     }
 
     // Update is called once per frame
@@ -68,27 +68,27 @@ public class NPCMovement : MonoBehaviour
             moveSpeed = 1;
 
         // look at player when nearby and chase it
-        if (GetComponent<EnemyData>().isHostile && GetComponent<EnemyPosition>().CheckPlayer())
-        {
-            // Calculate current direction towards player
-            waitCounter = waitTime;
-            Vector2 movement = (FindObjectOfType<PlayerPosition>().transform.position - rb.transform.position).normalized;
+        // if (GetComponent<EnemyData>().isHostile && GetComponent<EnemyPosition>().CheckPlayer())
+        // {
+        //     // Calculate current direction towards player
+        //     waitCounter = waitTime;
+        //     Vector2 movement = (FindObjectOfType<PlayerPosition>().transform.position - rb.transform.position).normalized;
 
-            // Move towards player
-            Vector2 moveForce = movement * (moveSpeed+1);
-            moveForce /= 1.2f;
-            rb.velocity = moveForce;
+        //     // Move towards player
+        //     Vector2 moveForce = movement * (moveSpeed+1);
+        //     moveForce /= 1.2f;
+        //     rb.velocity = moveForce;
 
-            // Flip sprite based on horizontal movement
-            if (movement.x < 0)
-            {
-                sprite.flipX = true;
-            }
-            else
-            {
-                sprite.flipX = false;
-            }
-        }
+        //     // Flip sprite based on horizontal movement
+        //     if (movement.x < 0)
+        //     {
+        //         sprite.flipX = true;
+        //     }
+        //     else
+        //     {
+        //         sprite.flipX = false;
+        //     }
+        // }
 
         if (isMoving)
         {

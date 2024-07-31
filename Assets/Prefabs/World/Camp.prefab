@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: -8713950786945251708}
   - component: {fileID: 6831777328229196781}
   - component: {fileID: 3295761631342762882}
-  - component: {fileID: 6904338341474015282}
   m_Layer: 0
   m_Name: Camp
   m_TagString: Building
@@ -85,7 +84,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!50 &-8713950786945251708
 Rigidbody2D:
   serializedVersion: 4
@@ -123,7 +122,7 @@ BoxCollider2D:
   m_Offset: {x: 0.0034375489, y: -0.405}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0}
     oldSize: {x: 1, y: 1}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
@@ -152,17 +151,3 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &6904338341474015282
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6904338341474015277}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c96ed5dd2d1ba0a4f9e1735e83f83b61, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxDistance: 0.5
-  icon: {fileID: 4896040726258886826, guid: 5e6d5117116a74371a0979b40584be49, type: 3}

@@ -23,25 +23,9 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField]
     private GoblinAlgorithm goblinAlgorithm;
 
-    private Vector3 spawnPoint;
-
-    private int currentTile;
-
     private TilemapStructure groundMap;
 
-    public DayAndNightCycle dayNight;
-
-    private void Awake()
-    {
-        // Retrieve tilemap component
-        // groundMap = FindObjectOfType<TileGrid>().GetTilemap(TilemapType.Ground);
-
-        // Attach delegates
-        // dayNight.DayTime += dayEnemies;
-        // dayNight.NightTime += nightEnemies;
-    }
-
-    public void Initialize(TilemapStructure tilemap, DayAndNightCycle dayNight)
+    public void Initialize(TilemapStructure tilemap)
     {
         // Get tilemap structure
         groundMap = tilemap;
@@ -64,10 +48,10 @@ public class EnemySpawner : MonoBehaviour
                     // Spawn overworld enemies
                     spawnEnemy(enemy);
                     break;
-                // case "Goblin":
-                //     points = goblinAlgorithm.GeneratePoints();
-                //     spawnEnemy(enemy);
-                //     break;
+                case "Goblin":
+                    enemySpawnPoints = goblinAlgorithm.GeneratePoints();
+                    spawnEnemy(enemy);
+                    break;
                 default:
                     break;
             }
@@ -102,7 +86,7 @@ public class EnemySpawner : MonoBehaviour
                 continue;
 
             // Create new spawn point from list
-            spawnPoint = new Vector3(point.x, point.y, 0);
+            Vector3 spawnPoint = new Vector3(point.x, point.y, 0);
 
             // Instantiate and spawn enemy
             Instantiate(enemy.gameObject, spawnPoint, Quaternion.identity, transform);

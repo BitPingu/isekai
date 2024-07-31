@@ -188,7 +188,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &90910568
 Transform:
   m_ObjectHideFlags: 0
@@ -215,8 +215,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed8b3784d66d3f14fb762af836f9f756, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grid: {fileID: 0}
-  dayNight: {fileID: 0}
+  villager: {fileID: 7751972130982338795, guid: 6534722b27a159c4d86bfb39ad47afd9, type: 3}
 --- !u!1 &287626573
 GameObject:
   m_ObjectHideFlags: 0
@@ -1193,7 +1192,6 @@ MonoBehaviour:
     nightEnemy: 0
   sampling: {fileID: 11400000, guid: 81a87356742f74d9c953795ecbca8f8d, type: 2}
   goblinAlgorithm: {fileID: 11400000, guid: 52c9555d24b524fa6961f9194528963e, type: 2}
-  dayNight: {fileID: 0}
 --- !u!1 &725286824039860529
 GameObject:
   m_ObjectHideFlags: 0
