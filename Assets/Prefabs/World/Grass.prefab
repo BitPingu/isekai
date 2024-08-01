@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2112094027151110587}
   m_Layer: 0
   m_Name: Grass
-  m_TagString: Building
+  m_TagString: Vegetation
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

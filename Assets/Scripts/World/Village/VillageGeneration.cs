@@ -29,10 +29,11 @@ public class VillageGeneration : MonoBehaviour
     private int length = 1; // adjust value to make roads span wider (default is 8)
     private float angle = 90;
     private int vilSquareRad = 2;
-    private int vilMaxWidth = 0, vilMaxHeight = 0;
+    private int vilMaxWidth, vilMaxHeight;
 
     private TilemapStructure groundMap;
     public GameObject house, fountain, townhall;
+    private GameObject villageTree;
 
     public int Length
     {
@@ -107,6 +108,10 @@ public class VillageGeneration : MonoBehaviour
             // Set village centerpoint
             vilCenter = new Vector3(Mathf.FloorToInt(vil.vilCenter.x), Mathf.FloorToInt(vil.vilCenter.y));
 
+            // Set village width
+            vilMaxWidth = 0;
+            vilMaxHeight = 0;
+
             // Start heading east in 2d world space
             direction = Vector3.right;
 
@@ -114,12 +119,11 @@ public class VillageGeneration : MonoBehaviour
             VisualizeSequence(vil.vilSequence);
 
             // Spawn fountain (to be added later)
-            Instantiate(fountain, new Vector3(vilCenter.x+.5f, vilCenter.y+.5f), Quaternion.identity, transform);
-        }
+            villageTree = Instantiate(fountain, new Vector3(vilCenter.x+.5f, vilCenter.y+.5f), Quaternion.identity, transform);
 
-        // Village zone data for spawning in world (need to apply to each village later)
-        // Debug.Log("Max Width: " + vilMaxWidth*2);
-        // Debug.Log("Max Height: " + vilMaxHeight*2);
+            // Village zone data for spawning in world
+            villageTree.GetComponent<BoxCollider2D>().size = new Vector2(vilMaxWidth*2.3f, vilMaxHeight*2.7f);
+        }
     }
 
     private void SpawnVillageSquare(Vector3 centerPos)
@@ -194,6 +198,7 @@ public class VillageGeneration : MonoBehaviour
                     }
                     break;
                 case EncodingLetters.draw:
+
                     // offset village square
                     if (currentPosition == vilCenter && direction.x > 0.1f)
                     {
@@ -224,11 +229,14 @@ public class VillageGeneration : MonoBehaviour
                             }
                         }
 
+                        // Move in current direction
                         currentPosition += direction;
-                        if (Math.Abs(currentPosition.x) > vilMaxWidth)
-                            vilMaxWidth = Mathf.FloorToInt(Math.Abs(currentPosition.x));
-                        if (Math.Abs(currentPosition.y) > vilMaxHeight)
-                            vilMaxHeight = Mathf.FloorToInt(Math.Abs(currentPosition.y));
+
+                        // Get village zone
+                        if (Mathf.FloorToInt(Math.Abs(currentPosition.x-(int)vilCenter.x)) > vilMaxWidth)
+                            vilMaxWidth = Mathf.FloorToInt(Math.Abs(currentPosition.x-(int)vilCenter.x));
+                        if (Mathf.FloorToInt(Math.Abs(currentPosition.y-(int)vilCenter.y)) > vilMaxHeight)
+                            vilMaxHeight = Mathf.FloorToInt(Math.Abs(currentPosition.y-(int)vilCenter.y));
                     }
                     
                     Length -= 1; // default is -= 2

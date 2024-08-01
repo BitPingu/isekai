@@ -9,10 +9,7 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer sprite;
     private Rigidbody2D rb;
     private Animator animator;
-    private PlayerPosition position;
     private float moveSpeed;
-
-    public Collision2D currentCol;
 
     private void Awake()
     {
@@ -20,7 +17,6 @@ public class PlayerController : MonoBehaviour
         sprite = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        position = GetComponent<PlayerPosition>();
 
         // Set speed
         moveSpeed = maxSpeed;
@@ -52,25 +48,6 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(interactKey))
         {
             FindObjectOfType<WorldEvents>().EnterBuilding();
-        }
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        currentCol = collision;
-    }
-
-    // Set speed based on current tile
-    private void ChangeSpeed()
-    {
-        // Get speed from current object tile
-        if (position.currentOTile == (int)FoilageTileType.Tree)
-        {
-            moveSpeed = maxSpeed - 2;
-        }
-        else
-        {
-            moveSpeed = maxSpeed;
         }
     }
 }

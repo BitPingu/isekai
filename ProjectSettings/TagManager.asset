@@ -9,6 +9,8 @@ TagManager:
   - SpecialEnemy
   - Building
   - Event
+  - Landmark
+  - Vegetation
   layers:
   - Default
   - TransparentFX

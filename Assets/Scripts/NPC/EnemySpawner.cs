@@ -33,6 +33,9 @@ public class EnemySpawner : MonoBehaviour
 
     public void dayEnemies()
     {
+        if (FindObjectOfType<PlayerPosition>().currentArea == "Village")
+            return;
+
         despawnEnemies();
         // Generate enemy spawn points (might change algo to random chance later ie more common in forested areas)
         enemySpawnPoints = sampling.GeneratePoints(groundMap);
@@ -57,6 +60,9 @@ public class EnemySpawner : MonoBehaviour
 
     public void nightEnemies()
     {
+        if (FindObjectOfType<PlayerPosition>().currentArea == "Village")
+            return;
+        
         despawnEnemies();
         // Generate enemy spawn points (might change algo to random chance later ie more common in forested areas)
         enemySpawnPoints = sampling.GeneratePoints(groundMap);

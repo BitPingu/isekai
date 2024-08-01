@@ -6,6 +6,7 @@ public class VillagerSpawner : MonoBehaviour
 {
     private TilemapStructure groundMap;
     public GameObject villager;
+    private bool villagersAlreadySpawned;
 
     public void Initialize(TilemapStructure tilemap)
     {
@@ -18,16 +19,20 @@ public class VillagerSpawner : MonoBehaviour
 
     public void Spawn()
     {
-        for (int x=0; x<groundMap.width; x++)
+        if (!villagersAlreadySpawned)
         {
-            for (int y=0; y<groundMap.height; y++)
+            villagersAlreadySpawned = true;
+            for (int x=0; x<groundMap.width; x++)
             {
-                // Check tile
-                if (groundMap.GetTile(x, y) == (int)GroundTileType.VillagePlot && Random.value < 0.5)
+                for (int y=0; y<groundMap.height; y++)
                 {
-                   // Spawn villager at spawnPoint
-                   Vector3Int spawnPoint = new Vector3Int(x, y, 0);
-                   Instantiate(villager, spawnPoint, Quaternion.identity, transform);
+                    // Check tile
+                    if (groundMap.GetTile(x, y) == (int)GroundTileType.VillagePlot && Random.value < 0.5)
+                    {
+                    // Spawn villager at spawnPoint
+                    Vector3Int spawnPoint = new Vector3Int(x, y, 0);
+                    Instantiate(villager, spawnPoint, Quaternion.identity, transform);
+                    }
                 }
             }
         }
@@ -35,6 +40,7 @@ public class VillagerSpawner : MonoBehaviour
 
     public void Despawn()
     {
+        villagersAlreadySpawned = false;
         var clones = GameObject.FindGameObjectsWithTag("Villager");
         foreach (var clone in clones)
         {

@@ -33,47 +33,6 @@ public class DayAndNightCycle : MonoBehaviour
         // NightTime -= NightMusic;
     }
 
-    private void Start()
-    {
-        // if (TempData.initTime)
-        // {
-        //     if (TempData.newGame)
-        //     {
-        //         // New game
-        //         days = 0;
-        //         time = 50;
-        //         isDay = true;
-        //     }
-        //     else
-        //     {
-        //         // Load world data
-        //         SaveData saveData = SaveSystem.Load();
-        //         days = saveData.saveDays;
-        //         time = saveData.saveTime;
-        //         isDay = saveData.saveIsDay;
-        //     }
-        //     TempData.tempDays = days;
-        //     TempData.tempTime = time;
-        //     TempData.tempIsDay = isDay;
-        //     TempData.initTime = false;
-        // }
-        // else
-        // {
-        //     time = TempData.tempTime;
-        //     isDay = TempData.tempIsDay;
-        // }
-
-        // // Call delegates (and any methods tied to it)
-        // if (isDay)
-        // {
-        //     DayTime();
-        // }
-        // else
-        // {
-        //     NightTime();
-        // }
-    }
-
     public void Initialize()
     {
         if (TempData.loadGame)
@@ -151,35 +110,39 @@ public class DayAndNightCycle : MonoBehaviour
 
     public void DayMusic()
     {
-        // Get current tile from player position
-        if (SceneManager.GetActiveScene().buildIndex == 1)
+        switch(FindObjectOfType<PlayerPosition>().currentArea)
         {
-            FindObjectOfType<AudioManager>().FadeIn("Overworld Day", 1f);
-        }
-        else if (SceneManager.GetActiveScene().buildIndex == 2)
-        {
-            FindObjectOfType<AudioManager>().FadeIn("Village Day", 1f);
-        }
-        else if (SceneManager.GetActiveScene().buildIndex == 3)
-        {
-            FindObjectOfType<AudioManager>().FadeIn("Dungeon", 1f);
+            case "Overworld":
+                FindObjectOfType<AudioManager>().FadeIn("Overworld Day", 1f);
+                break;
+            case "Village":
+                FindObjectOfType<AudioManager>().FadeIn("Village Day", 1f);
+                break;
+            case "Dungeon":
+                FindObjectOfType<AudioManager>().FadeIn("Dungeon", 1f);
+                break;
+            default:
+                Debug.Log("unknown area to play day music");
+                break;
         }
     }
 
     public void NightMusic()
     {
-        // Get current tile from player position
-        if (SceneManager.GetActiveScene().buildIndex == 1)
+        switch(FindObjectOfType<PlayerPosition>().currentArea)
         {
-            FindObjectOfType<AudioManager>().FadeIn("Overworld Night", 1f);
-        }
-        else if (SceneManager.GetActiveScene().buildIndex == 2)
-        {
-            FindObjectOfType<AudioManager>().FadeIn("Village Night", 1f);
-        }
-        else if (SceneManager.GetActiveScene().buildIndex == 3)
-        {
-            FindObjectOfType<AudioManager>().FadeIn("Dungeon", 1f);
+            case "Overworld":
+                FindObjectOfType<AudioManager>().FadeIn("Overworld Night", 1f);
+                break;
+            case "Village":
+                FindObjectOfType<AudioManager>().FadeIn("Village Night", 1f);
+                break;
+            case "Dungeon":
+                FindObjectOfType<AudioManager>().FadeIn("Dungeon", 1f);
+                break;
+            default:
+                Debug.Log("unknown area to play day music");
+                break;
         }
     }
 }

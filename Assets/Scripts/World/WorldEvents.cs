@@ -60,6 +60,7 @@ public class WorldEvents : MonoBehaviour
 
         // Init player
         p = Instantiate(player, spawnPoint, Quaternion.identity);
+        p.GetComponent<PlayerPosition>().currentArea = "Overworld";
 
         // Attach clearfog delegate to player movement
         p.GetComponent<PlayerPosition>().PosChange += GetComponentInChildren<FogData>().ClearFog;
@@ -112,68 +113,14 @@ public class WorldEvents : MonoBehaviour
         // Start elf event
         if (!TempData.elfSaved)
             ElfEvent(tilemap, e, GetComponentInChildren<EnemySpawner>());
-
-        // if (TempData.initPlayerSpawn)
-        //     TempData.initPlayerSpawn = false;
-
-        // // Spawn elf
-        // if (TempData.newGame && TempData.initElfSpawn)
-        //     TempData.elfSaved = false;
-        // if (TempData.elfSaved)
-        // {
-        //     if (TempData.initElfSpawn)
-        //         elf.SetActive(true);
-        //     FindObjectOfType<ElfPosition>().Spawn(TempData.initElfSpawn, SceneManager.GetActiveScene().buildIndex);
-        //     if (TempData.initElfSpawn)
-        //         TempData.initElfSpawn = false;
-        // }
-
-        // switch (SceneManager.GetActiveScene().buildIndex)
-        // {
-        //     case 1:
-        //         // Overworld events
-        //         if (TempData.initElf && TempData.tempDays == 0 && !TempData.elfSaved)
-        //             ElfEvent();
-        //         break;
-        //     case 2:
-        //         // Village events
-        //         break;
-        //     case 3:
-        //         // Dungeon events
-        //         break;
-        //     default:
-        //         Debug.Log("no events for this scene.");
-        //         break;
-        // }
     }
 
     private void Update()
     {
-        // // Check if elf event is ongoing
-        // if (SceneManager.GetActiveScene().buildIndex == 1 && TempData.initElf) 
-        // {
-        //     // End elf event
-        //     if (!TempData.elfSaved && TempData.tempTime >= 60f)
-        //     {
-        //         TempData.initElf = false;
-        //         // relese enemy
-        //         GameObject enemy = GameObject.FindGameObjectWithTag("SpecialEnemy");
-        //         enemy.tag = "Enemy";
-        //         enemy.GetComponent<NPCMovement>().enabled = true;
-        //         enemy.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
-        //         enemy.GetComponent<Animator>().SetBool("Battle", false);
-        //         if (FindObjectOfType<DialogueController>().issuer.Equals("Helpless Elf"))
-        //             FindObjectOfType<DialogueController>().EndDialogue();
-        //         Debug.Log("elf was slain!");
-        //         Destroy(elf);
-        //     }
-        // }
-
+        // Check if elf event is ongoing
         if (!TempData.elfSaved && e && e.GetComponent<ElfPosition>().inDanger && time.days == 0 && time.time >= 60f)
         {
-            // End elf event
-            // TempData.initElf = false;
-            // relese enemy
+            // end event and relese enemy
             GameObject enemy = GameObject.FindGameObjectWithTag("SpecialEnemy");
             enemy.tag = "Enemy";
             enemy.GetComponent<NPCMovement>().enabled = true;
@@ -189,10 +136,6 @@ public class WorldEvents : MonoBehaviour
 
     private void ElfEvent(TilemapStructure tilemap, GameObject elf, EnemySpawner spawner)
     {
-        // Spawn elf
-        // if (TempData.initElfSpawn)
-        //         TempData.initElfSpawn = false;
-
         // Spawn enemy
         if (tilemap.GetTile((int)elf.transform.position.x+1, (int)elf.transform.position.y) == (int)GroundTileType.Land)
         {
@@ -238,7 +181,6 @@ public class WorldEvents : MonoBehaviour
             else
             {
                 // Exit house
-                // TempData.tempFog2 = FindObjectOfType<FogData>();;
                 SceneManager.LoadScene("Overworld");
             }
         }
@@ -256,7 +198,6 @@ public class WorldEvents : MonoBehaviour
             else
             {
                 // Exit dungeon
-                // TempData.tempFog2 = FindObjectOfType<FogData>();;
                 SceneManager.LoadScene("Overworld");
             }
         }
