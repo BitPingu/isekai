@@ -12,7 +12,7 @@ public class MapMenu : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.M) || Input.GetKeyDown(KeyCode.Escape))
         {
             // Play sound fx
-            // FindObjectOfType<AudioManager>().PlayFx("Close");
+            FindObjectOfType<AudioManager>().PlayFx("Close");
 
             // Resume game from pause 
             MenuController.Resume();

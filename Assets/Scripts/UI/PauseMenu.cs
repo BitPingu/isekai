@@ -26,7 +26,7 @@ public class PauseMenu : MonoBehaviour
     public void ResumeFromClick ()
     {
         // Play sound fx
-        // FindObjectOfType<AudioManager>().PlayFx("Button");
+        FindObjectOfType<AudioManager>().PlayFx("Button");
 
         // Resume game from pause 
         MenuController.Resume();
@@ -41,7 +41,7 @@ public class PauseMenu : MonoBehaviour
     public void Save()
     {
         // Play sound fx
-        // FindObjectOfType<AudioManager>().PlayFx("Button");
+        FindObjectOfType<AudioManager>().PlayFx("Button");
 
         // Save all data
         SaveSystem.Save();
@@ -50,16 +50,16 @@ public class PauseMenu : MonoBehaviour
     public void Quit()
     {
         // Play sound fx
-        // FindObjectOfType<AudioManager>().PlayFx("Button");
+        FindObjectOfType<AudioManager>().PlayFx("Button");
 
         // Resume time
         Time.timeScale = 1f;
 
         // Resume sound
-        // FindObjectOfType<AudioManager>().UnDampen();
+        FindObjectOfType<AudioManager>().UnDampen();
 
         // Stop sound
-        // FindObjectOfType<AudioManager>().Stop();
+        FindObjectOfType<AudioManager>().Stop();
 
         // Resume game from pause 
         MenuController.Resume();

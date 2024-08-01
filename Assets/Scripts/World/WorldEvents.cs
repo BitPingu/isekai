@@ -13,7 +13,7 @@ public class WorldEvents : MonoBehaviour
     // private TilemapStructure groundMap;
     private DayAndNightCycle time;
 
-    public GameObject player, elf;
+    public GameObject player, elf, audio;
     private GameObject p, e;
     public CameraController camera;
 
@@ -92,7 +92,8 @@ public class WorldEvents : MonoBehaviour
         // Init elf
         e = Instantiate(elf, spawnPoint, Quaternion.identity);
 
-
+        // Audio
+        Instantiate(audio, Vector3.zero, Quaternion.identity);
 
         // Call dayNight delegates (and any methods tied to it)
         if (dayNight.isDay)

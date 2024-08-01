@@ -95,6 +95,10 @@ public class DayAndNightCycle : MonoBehaviour
         TempData.tempDays = days;
         TempData.tempTime = time;
         TempData.tempIsDay = isDay;
+
+        // Attach music delegates
+        DayTime += DayMusic;
+        NightTime += NightMusic;
     }
 
     private void Update()
@@ -104,14 +108,14 @@ public class DayAndNightCycle : MonoBehaviour
             time = 0;
 
         // Stop night music (fade)
-        // if ((int)time == timePerDay - 10)
-        //     FindObjectOfType<AudioManager>().FadeOut(800f);
+        if ((int)time == timePerDay - 10)
+            FindObjectOfType<AudioManager>().FadeOut(800f);
 
         // Day time
         if (time == 0)
         {
             Debug.Log("it's a new day!");
-            // FindObjectOfType<AudioManager>().Stop();
+            FindObjectOfType<AudioManager>().Stop();
             DayTime(); // Call delegate (and any methods tied to it)
             isDay = true;
             TempData.tempIsDay = isDay;
@@ -119,8 +123,8 @@ public class DayAndNightCycle : MonoBehaviour
         }
 
         // Stop day music (fade)
-        // if ((int)time == (timePerDay / 2) - 10)
-        //     FindObjectOfType<AudioManager>().FadeOut(800f);
+        if ((int)time == (timePerDay / 2) - 10)
+            FindObjectOfType<AudioManager>().FadeOut(800f);
 
         // Prevent multiple day changes
         if ((int)time == (timePerDay / 2) - 1)
@@ -130,7 +134,7 @@ public class DayAndNightCycle : MonoBehaviour
         if ((int)time == (timePerDay / 2) && canChangeDay)
         {
             Debug.Log("night");
-            // FindObjectOfType<AudioManager>().Stop();
+            FindObjectOfType<AudioManager>().Stop();
             NightTime(); // Call delegate (and any methods tied to it)
             isDay = false;
             TempData.tempIsDay = isDay;

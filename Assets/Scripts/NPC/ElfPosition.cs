@@ -271,17 +271,4 @@ public class ElfPosition : MonoBehaviour
 
         return false;
     }
-
-    // Play sound based on current object tile
-    // private void OTileSound()
-    // {
-    //     if (CheckPlayer())
-    //     {
-    //         // Get sound from current object tile
-    //         if (currentOTile == (int)FoilageTileType.Tree)
-    //         {
-    //             FindObjectOfType<AudioManager>().PlayFx("Tree");
-    //         }
-    //     }
-    // }
 }

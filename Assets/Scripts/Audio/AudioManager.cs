@@ -5,21 +5,21 @@ public class AudioManager : MonoBehaviour
 {
     public Sound[] bgSounds, soundFx;
     public Sound bg, sf;
-    public static AudioManager audioManager;
+    // public static AudioManager audioManager;
 
     private void Awake()
     {
-        if (audioManager == null)
-        {
-            audioManager = this;
-        } 
-        else 
-        {
-            Destroy(gameObject);
-            return;
-        }
+        // if (audioManager == null)
+        // {
+        //     audioManager = this;
+        // } 
+        // else 
+        // {
+        //     Destroy(gameObject);
+        //     return;
+        // }
 
-        DontDestroyOnLoad(gameObject);
+        // DontDestroyOnLoad(gameObject);
 
         // Add sound components to bgSounds
         AddComponents(bgSounds);

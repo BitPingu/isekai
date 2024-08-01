@@ -75,15 +75,14 @@
     <Compile Include="Assets/Scripts/World/WorldEvents.cs" />
     <Compile Include="Assets/Scripts/UI/MenuController.cs" />
     <Compile Include="Assets/Scripts/NPC/EnemyData.cs" />
-    <Compile Include="Assets/Scripts/World/DungeonGeneration.cs" />
+    <Compile Include="Assets/Scripts/World/Dungeon/DungeonGeneration.cs" />
     <Compile Include="Assets/Scripts/Tilemaps/TileGrid.cs" />
     <Compile Include="Assets/Scripts/Tilemaps/TilemapHelper.cs" />
     <Compile Include="Assets/Scripts/UI/MapController.cs" />
-    <Compile Include="Assets/Scripts/World/FogData.cs" />
+    <Compile Include="Assets/Scripts/World/Fog/FogData.cs" />
     <Compile Include="Assets/Scripts/NPC/EnemyBattle.cs" />
     <Compile Include="Assets/Scripts/World/CampGeneration.cs" />
     <Compile Include="Assets/Scripts/Algorithms/LSystem/RoadHelper.cs" />
-    <Compile Include="Assets/Scripts/World/ObjectGeneration.cs" />
     <Compile Include="Assets/Scripts/UI/Dialogue.cs" />
     <Compile Include="Assets/Scripts/UI/CameraController.cs" />
     <Compile Include="Assets/Scripts/Tilemaps/FoilageTileType.cs" />
@@ -94,11 +93,10 @@
     <Compile Include="Assets/Scripts/Algorithms/LSystem/SimpleVisualizer.cs" />
     <Compile Include="Assets/Scripts/UI/OptionsMenu.cs" />
     <Compile Include="Assets/Scripts/NPC/PartyMovement.cs" />
-    <Compile Include="Assets/Scripts/World/InsideGeneration.cs" />
     <Compile Include="Assets/Scripts/UI/MapMenu.cs" />
-    <Compile Include="Assets/Scripts/World/VillageGeneration.cs" />
+    <Compile Include="Assets/Scripts/World/Village/VillageGeneration.cs" />
     <Compile Include="Assets/Scripts/Audio/AudioManager.cs" />
-    <Compile Include="Assets/Scripts/World/FogGeneration.cs" />
+    <Compile Include="Assets/Scripts/World/Fog/FogGeneration.cs" />
     <Compile Include="Assets/Scripts/NPC/GoblinAlgorithm.cs" />
     <Compile Include="Assets/Scripts/UI/PauseMenu.cs" />
     <Compile Include="Assets/Scripts/NPC/NPCMovement.cs" />
@@ -109,7 +107,6 @@
     <Compile Include="Assets/Scripts/Player/PlayerPosition.cs" />
     <Compile Include="Assets/Scripts/NPC/EnemySpawner.cs" />
     <Compile Include="Assets/Scripts/World/TreeGeneration.cs" />
-    <Compile Include="Assets/Scripts/World/ExitGen.cs" />
     <Compile Include="Assets/Scripts/World/GroundGeneration.cs" />
     <Compile Include="Assets/Scripts/World/DayAndNightCycle.cs" />
     <Compile Include="Assets/Scripts/Algorithms/LSystem/AgentParameters.cs" />
@@ -130,6 +127,7 @@
     <Compile Include="Assets/Scripts/Tilemaps/BuildingTileType.cs" />
     <Compile Include="Assets/Scripts/Data/TempData.cs" />
     <Compile Include="Assets/Scripts/NPC/ElfPosition.cs" />
+    <Compile Include="Assets/Scripts/World/VegetationData.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/TextMesh Pro/Shaders/TMPro.cginc" />

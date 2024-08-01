@@ -1,11 +1,13 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.IO;
+using System.Collections;
 
 public class MainMenu : MonoBehaviour
 {
     [SerializeField]
     private OptionsMenu options;
+    public GameObject audio;
 
     private void Awake()
     {
@@ -13,6 +15,9 @@ public class MainMenu : MonoBehaviour
         // Destroy(GameObject.Find("Player"));
         // Destroy(GameObject.Find("Elf"));
         // Destroy(GameObject.Find("UI"));
+
+        // Audio
+        Instantiate(audio, Vector3.zero, Quaternion.identity);
 
         // Check if new game
         string path = Application.persistentDataPath + "/saveData.isekai";
@@ -41,20 +46,29 @@ public class MainMenu : MonoBehaviour
         }
 
         // Play theme
-        // FindObjectOfType<AudioManager>().Play("Theme");
+        FindObjectOfType<AudioManager>().Play("Theme");
     }
 
     public void PlayGame ()
     {
         // Play sound fx
-        // FindObjectOfType<AudioManager>().PlayFx("Button");
+        FindObjectOfType<AudioManager>().PlayFx("Button");
+
+        // Fade
+        GetComponentInParent<Animator>().SetTrigger("FadeOut");
+        StartCoroutine(OnFadeComplete());
+    }
+
+    public IEnumerator OnFadeComplete()
+    {
+        yield return new WaitForSeconds(1f);
+        FindObjectOfType<AudioManager>().Stop();
         // Change to Game Scene from queue
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void NewGame ()
     {
-        // FindObjectOfType<AudioManager>().Stop();
         // Set temp vars
         TempData.loadGame = false;
         TempData.elfSaved = false;
@@ -63,7 +77,6 @@ public class MainMenu : MonoBehaviour
 
     public void LoadGame ()
     {
-        // FindObjectOfType<AudioManager>().Stop();
         // Set temp vars
         TempData.loadGame = true;
         // init(true);
@@ -74,7 +87,7 @@ public class MainMenu : MonoBehaviour
     public void QuitGame ()
     {
         // Play sound fx
-        // FindObjectOfType<AudioManager>().PlayFx("Button");
+        FindObjectOfType<AudioManager>().PlayFx("Button");
         
         Application.Quit();
     }

@@ -35,8 +35,8 @@ public class BattleManager : MonoBehaviour
 
         // Start battle
         FindObjectOfType<CameraController>().LookAt(enemy.transform);
-        // FindObjectOfType<AudioManager>().Stop();
-        // FindObjectOfType<AudioManager>().Play("Battle");
+        FindObjectOfType<AudioManager>().Stop();
+        FindObjectOfType<AudioManager>().Play("Battle");
         
         playerHUD = Instantiate(HUD, new Vector2(player.transform.position.x-1.5f, player.transform.position.y+0.7f), Quaternion.identity);
         playerHUD.transform.parent = player.transform;
@@ -182,16 +182,16 @@ public class BattleManager : MonoBehaviour
 
         // DeStart battle
         FindObjectOfType<CameraController>().LookAt(player.transform);
-        // FindObjectOfType<AudioManager>().Stop();
-        // DayAndNightCycle dayNight = FindObjectOfType<DayAndNightCycle>();
-        // if (dayNight.isDay)
-        // {
-        //     dayNight.DayMusic();
-        // }
-        // else
-        // {
-        //     dayNight.NightMusic();
-        // }
+        FindObjectOfType<AudioManager>().Stop();
+        DayAndNightCycle dayNight = FindObjectOfType<DayAndNightCycle>();
+        if (dayNight.isDay)
+        {
+            dayNight.DayMusic();
+        }
+        else
+        {
+            dayNight.NightMusic();
+        }
 
         if (special)
             StartCoroutine(FindObjectOfType<ElfPosition>().SaveElf2());
