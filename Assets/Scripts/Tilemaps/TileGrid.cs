@@ -12,110 +12,9 @@ public class TileGrid : MonoBehaviour
 
     [SerializeField]
     private TileTypes.GroundTiles[] groundTileTypes;
-    [SerializeField]
-    private TileTypes.FoilageTiles[] foilageTileTypes;
 
     private Dictionary<int, TileBase> tiles;
     private Dictionary<TilemapType, TilemapStructure> tilemaps;
-
-    // Call other functions when world gen finishes
-    public delegate void OnWorldGen();
-    public OnWorldGen WorldGen;
-
-    // private void Awake ()
-    // {
-    //     if (randomize)
-    //     {
-    //         // if (TempData.initSeed)
-    //         // {
-    //         //     if (TempData.newGame)
-    //         //     {
-    //         //         // Generate init seed
-    //         //         seed = UnityEngine.Random.Range(-100000, 100000);
-    //         //     }
-    //         //     else
-    //         //     {
-    //         //         // Load world data
-    //         //         SaveData saveData = SaveSystem.Load();
-    //         //         seed = saveData.saveSeed;
-    //         //     }
-    //         //     TempData.tempSeed = seed;
-    //         //     TempData.initSeed = false;
-    //         //     TempData.tempWidth = width;
-    //         //     TempData.tempHeight = height;
-    //         // }
-    //         // else
-    //         // {
-    //         //     seed = TempData.tempSeed;
-    //         // }
-    //         // Generate init seed
-    //         seed = UnityEngine.Random.Range(-100000, 100000);
-    //     }
-
-    //     InitializeTiles();
-
-    //     tilemaps = new Dictionary<TilemapType, TilemapStructure>();
-
-    //     // Add all tilemaps by name to collection for easy access
-    //     foreach (Transform child in transform)
-    //     {
-    //         var tilemap = child.GetComponent<TilemapStructure>();
-    //         if (tilemap == null) continue;
-    //         if (tilemaps.ContainsKey(tilemap.type))
-    //         {
-    //             throw new Exception("Duplicate tilemap type: " + tilemap.type);
-    //         }
-    //         tilemaps.Add(tilemap.type, tilemap);
-    //     }
-
-    //     // Initialize tilemaps in the collection
-    //     foreach (var tilemap in tilemaps.Values)
-    //     {
-    //         tilemap.Initialize();
-    //     }
-    // }
-
-    private void Start()
-    {
-        // // WorldGen(); // Finish world gen
-        // if (TempData.initBuilding)
-        // {
-        //     GetBuildingData();
-        //     TempData.initBuilding = false;
-        // }
-    }
-
-    // private void GetBuildingData()
-    // {
-    //     GameObject[] buildings = GameObject.FindGameObjectsWithTag("Building");
-    //     List<Vector3> vils = new List<Vector3>();
-    //     List<Vector3> duns = new List<Vector3>();
-    //     List<Vector3> camps = new List<Vector3>();
-
-    //     foreach (GameObject building in buildings)
-    //     {
-    //         if (building.name.Contains("Village"))
-    //         {
-    //             vils.Add(new Vector3((int)building.transform.position.x, (int)building.transform.position.y));
-    //         }
-    //         else if (building.name.Contains("Dungeon"))
-    //         {
-    //             duns.Add(new Vector3((int)building.transform.position.x, (int)building.transform.position.y));
-    //         }
-    //         else if (building.name.Contains("Camp"))
-    //         {
-    //             camps.Add(new Vector3((int)building.transform.position.x, (int)building.transform.position.y));
-    //         }
-    //         else
-    //         {
-    //             Debug.Log("unable to get building data for " + building.name);
-    //         }
-    //     }
-
-    //     TempData.tempVillages = vils;
-    //     TempData.tempDungeons = duns;
-    //     TempData.tempCamps = camps;
-    // }
 
     public void Initialize(int width, int height, int seed)
     {
@@ -166,7 +65,6 @@ public class TileGrid : MonoBehaviour
 
         // Add all tilesets
         AddTileSet(tiles, groundTileTypes);
-        AddTileSet(tiles, foilageTileTypes);
     }
 
     // Adds a new tileset to the dictionary

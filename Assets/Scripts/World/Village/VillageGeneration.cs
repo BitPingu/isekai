@@ -124,6 +124,9 @@ public class VillageGeneration : MonoBehaviour
             // Village zone data for spawning in world
             villageTree.GetComponent<BoxCollider2D>().size = new Vector2(vilMaxWidth*2.3f, vilMaxHeight*2.7f);
         }
+
+        // Render tiles
+        groundMap.UpdateTiles();
     }
 
     private void SpawnVillageSquare(Vector3 centerPos)

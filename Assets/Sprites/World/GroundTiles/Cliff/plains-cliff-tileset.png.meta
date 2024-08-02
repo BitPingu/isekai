@@ -1,97 +1,97 @@
 fileFormatVersion: 2
-guid: 4e00d28d038044ce48fb58caaa4fc822
+guid: 192f1d8a5b0724fb68916eaa911cd870
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4046092001745805860
-    second: newplains-tileset_0
+      213: 4347530830566333416
+    second: plains-cliff-tileset_0
   - first:
-      213: 6615443720981590293
-    second: newplains-tileset_1
+      213: 1780032083765202106
+    second: plains-cliff-tileset_1
   - first:
-      213: 7914114681354813130
-    second: newplains-tileset_2
+      213: 2289543971229370339
+    second: plains-cliff-tileset_2
   - first:
-      213: -7556728223309749462
-    second: newplains-tileset_3
+      213: -2291546442382108729
+    second: plains-cliff-tileset_3
   - first:
-      213: 1079858397268936159
-    second: newplains-tileset_4
+      213: 5128594716215082273
+    second: plains-cliff-tileset_4
   - first:
-      213: -5108387742432625872
-    second: newplains-tileset_5
+      213: 4808786310858625861
+    second: plains-cliff-tileset_5
   - first:
-      213: -4109762113414904366
-    second: newplains-tileset_6
+      213: 8148555225472937967
+    second: plains-cliff-tileset_6
   - first:
-      213: -7074797507004735388
-    second: newplains-tileset_7
+      213: 1798044332399064548
+    second: plains-cliff-tileset_7
   - first:
-      213: -7089669832066985727
-    second: newplains-tileset_8
+      213: 2630314483443483539
+    second: plains-cliff-tileset_8
   - first:
-      213: 5544426850476171007
-    second: newplains-tileset_9
+      213: 251766263589044609
+    second: plains-cliff-tileset_9
   - first:
-      213: 7419477950092875678
-    second: newplains-tileset_10
+      213: 9157433375489942547
+    second: plains-cliff-tileset_10
   - first:
-      213: 5243328728103477525
-    second: newplains-tileset_11
+      213: 6275973876170401775
+    second: plains-cliff-tileset_11
   - first:
-      213: 7474488393533267129
-    second: newplains-tileset_12
+      213: 1723023684193106312
+    second: plains-cliff-tileset_12
   - first:
-      213: 7883796500564281447
-    second: newplains-tileset_13
+      213: -4764574552275996645
+    second: plains-cliff-tileset_13
   - first:
-      213: -5257419058381835418
-    second: newplains-tileset_14
+      213: 7024727852931419525
+    second: plains-cliff-tileset_14
   - first:
-      213: -8336938498027449517
-    second: newplains-tileset_15
+      213: -1542404248799493673
+    second: plains-cliff-tileset_15
   - first:
-      213: 7055504749770717112
-    second: newplains-tileset_16
+      213: 2482255890340994781
+    second: plains-cliff-tileset_16
   - first:
-      213: 1393649193759811807
-    second: newplains-tileset_17
+      213: -2068344630078040598
+    second: plains-cliff-tileset_17
   - first:
-      213: 1923618116597884741
-    second: newplains-tileset_18
+      213: -1920074867311609069
+    second: plains-cliff-tileset_18
   - first:
-      213: -6211500127803018350
-    second: newplains-tileset_19
+      213: -957193659738701282
+    second: plains-cliff-tileset_19
   - first:
-      213: -2343647298161674468
-    second: newplains-tileset_20
+      213: 1431708503396206711
+    second: plains-cliff-tileset_20
   - first:
-      213: 7965439964648579432
-    second: newplains-tileset_21
+      213: -5964411441708482536
+    second: plains-cliff-tileset_21
   - first:
-      213: 8336722914333456089
-    second: newplains-tileset_22
+      213: -6493881318523598827
+    second: plains-cliff-tileset_22
   - first:
-      213: 6988894727124872845
-    second: newplains-tileset_23
+      213: -9082850468983463281
+    second: plains-cliff-tileset_23
   - first:
-      213: -2978403855982072577
-    second: newplains-tileset_24
+      213: -6142393682361365881
+    second: plains-cliff-tileset_24
   - first:
-      213: -7186720437371719790
-    second: newplains-tileset_25
+      213: -2316082583720563552
+    second: plains-cliff-tileset_25
   - first:
-      213: -3789923782567125961
-    second: newplains-tileset_26
+      213: 4022350152786448358
+    second: plains-cliff-tileset_26
   - first:
-      213: 373009134700731649
-    second: newplains-tileset_27
+      213: 1129999636902559987
+    second: plains-cliff-tileset_27
   - first:
-      213: 3420547889640315953
-    second: newplains-tileset_28
+      213: 1250720037714872008
+    second: plains-cliff-tileset_28
   - first:
-      213: -3489993196641400782
-    second: newplains-tileset_29
+      213: -2128861303829812559
+    second: plains-cliff-tileset_29
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -181,7 +181,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: newplains-tileset_0
+      name: plains-cliff-tileset_0
       rect:
         serializedVersion: 2
         x: 0
@@ -199,14 +199,14 @@ TextureImporter:
         - {x: 8, y: 8}
       tessellationDetail: 0
       bones: []
-      spriteID: 422ab9c0d3b962830800000000000000
-      internalID: 4046092001745805860
+      spriteID: 8eb17f59148855c30800000000000000
+      internalID: 4347530830566333416
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: newplains-tileset_1
+      name: plains-cliff-tileset_1
       rect:
         serializedVersion: 2
         x: 16
@@ -224,14 +224,14 @@ TextureImporter:
         - {x: 8, y: 8}
       tessellationDetail: 0
       bones: []
-      spriteID: 51132bc9307cecb50800000000000000
-      internalID: 6615443720981590293
+      spriteID: abc8f99cfb1f3b810800000000000000
+      internalID: 1780032083765202106
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: newplains-tileset_2
+      name: plains-cliff-tileset_2
       rect:
         serializedVersion: 2
         x: 32
@@ -249,14 +249,14 @@ TextureImporter:
         - {x: 8, y: 8}
       tessellationDetail: 0
       bones: []
-      spriteID: ace7bd53f5594dd60800000000000000
-      internalID: 7914114681354813130
+      spriteID: 3e783ce7c1816cf10800000000000000
+      internalID: 2289543971229370339
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: newplains-tileset_3
+      name: plains-cliff-tileset_3
       rect:
         serializedVersion: 2
         x: 48
@@ -274,14 +274,14 @@ TextureImporter:
         - {x: 8, y: 8}
       tessellationDetail: 0
       bones: []
-      spriteID: a232479d7bb112790800000000000000
-      internalID: -7556728223309749462
+      spriteID: 7c7118bd6aac230e0800000000000000
+      internalID: -2291546442382108729
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: newplains-tileset_4
+      name: plains-cliff-tileset_4
       rect:
         serializedVersion: 2
         x: 64
@@ -299,22 +299,22 @@ TextureImporter:
         - {x: 8, y: 8}
       tessellationDetail: 0
       bones: []
-      spriteID: fd500f0bd7d6cfe00800000000000000
-      internalID: 1079858397268936159
+      spriteID: 12df1f0d8bd6c2740800000000000000
+      internalID: 5128594716215082273
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: newplains-tileset_5
+      name: plains-cliff-tileset_5
       rect:
         serializedVersion: 2
         x: 80
         y: 64
         width: 16
         height: 16
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
@@ -324,14 +324,14 @@ TextureImporter:
         - {x: 8, y: 8}
       tessellationDetail: 0
       bones: []
-      spriteID: 03bf755e96c5b19b0800000000000000
-      internalID: -5108387742432625872
+      spriteID: 5435d73fbad3cb240800000000000000
+      internalID: 4808786310858625861
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: newplains-tileset_6
+      name: plains-cliff-tileset_6
       rect:
         serializedVersion: 2
         x: 0
@@ -349,22 +349,22 @@ TextureImporter:
         - {x: 8, y: 8}
       tessellationDetail: 0
       bones: []
-      spriteID: 2d5cb8ed12137f6c0800000000000000
-      internalID: -4109762113414904366
+      spriteID: fefa7fefdcb751170800000000000000
+      internalID: 8148555225472937967
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: newplains-tileset_7
+      name: plains-cliff-tileset_7
       rect:
         serializedVersion: 2
         x: 16
         y: 48
         width: 16
         height: 16
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
@@ -374,22 +374,22 @@ TextureImporter:
         - {x: 8, y: 8}
       tessellationDetail: 0
       bones: []
-      spriteID: 460e929b62541dd90800000000000000
-      internalID: -7074797507004735388
+      spriteID: 4e5fc0b3bcfe3f810800000000000000
+      internalID: 1798044332399064548
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: newplains-tileset_8
+      name: plains-cliff-tileset_8
       rect:
         serializedVersion: 2
         x: 32
         y: 48
         width: 16
         height: 16
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
@@ -399,14 +399,14 @@ TextureImporter:
         - {x: 8, y: 8}
       tessellationDetail: 0
       bones: []
-      spriteID: 10118d4b9de6c9d90800000000000000
-      internalID: -7089669832066985727
+      spriteID: 393c6313611c08420800000000000000
+      internalID: 2630314483443483539
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: newplains-tileset_9
+      name: plains-cliff-tileset_9
       rect:
         serializedVersion: 2
         x: 48
@@ -424,22 +424,22 @@ TextureImporter:
         - {x: 8, y: 8}
       tessellationDetail: 0
       bones: []
-      spriteID: ffe15c948d2c1fc40800000000000000
-      internalID: 5544426850476171007
+      spriteID: 18107a335147e7300800000000000000
+      internalID: 251766263589044609
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: newplains-tileset_10
+      name: plains-cliff-tileset_10
       rect:
         serializedVersion: 2
         x: 64
         y: 48
         width: 16
         height: 16
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
@@ -449,35 +449,39 @@ TextureImporter:
         - {x: 8, y: 8}
       tessellationDetail: 0
       bones: []
-      spriteID: e971122b2e747f660800000000000000
-      internalID: 7419477950092875678
+      spriteID: 3146268032db51f70800000000000000
+      internalID: 9157433375489942547
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: newplains-tileset_11
+      name: plains-cliff-tileset_11
       rect:
         serializedVersion: 2
         x: 80
         y: 48
         width: 16
         height: 16
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -8, y: 8}
+        - {x: -8, y: -8}
+        - {x: 8, y: -8}
+        - {x: 8, y: 8}
       tessellationDetail: 0
       bones: []
-      spriteID: 5116537a2bb04c840800000000000000
-      internalID: 5243328728103477525
+      spriteID: fe7a4c42dfcb81750800000000000000
+      internalID: 6275973876170401775
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: newplains-tileset_12
+      name: plains-cliff-tileset_12
       rect:
         serializedVersion: 2
         x: 0
@@ -495,14 +499,14 @@ TextureImporter:
         - {x: 8, y: 8}
       tessellationDetail: 0
       bones: []
-      spriteID: 9bc9456a797bab760800000000000000
-      internalID: 7474488393533267129
+      spriteID: 8893aeb69e869e710800000000000000
+      internalID: 1723023684193106312
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: newplains-tileset_13
+      name: plains-cliff-tileset_13
       rect:
         serializedVersion: 2
         x: 16
@@ -514,20 +518,20 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: -8, y: 8}
+      - - {x: -8, y: 0}
         - {x: -8, y: -8}
         - {x: 8, y: -8}
-        - {x: 8, y: 8}
+        - {x: 8, y: 0}
       tessellationDetail: 0
       bones: []
-      spriteID: 7680a99a52fd86d60800000000000000
-      internalID: 7883796500564281447
+      spriteID: b1039b140b4d0edb0800000000000000
+      internalID: -4764574552275996645
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: newplains-tileset_14
+      name: plains-cliff-tileset_14
       rect:
         serializedVersion: 2
         x: 32
@@ -539,20 +543,20 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: -8, y: 8}
+      - - {x: -8, y: 0}
         - {x: -8, y: -8}
         - {x: 8, y: -8}
-        - {x: 8, y: 8}
+        - {x: 8, y: 0}
       tessellationDetail: 0
       bones: []
-      spriteID: 66338cda835e907b0800000000000000
-      internalID: -5257419058381835418
+      spriteID: 58d05cd73c8dc7160800000000000000
+      internalID: 7024727852931419525
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: newplains-tileset_15
+      name: plains-cliff-tileset_15
       rect:
         serializedVersion: 2
         x: 48
@@ -570,14 +574,14 @@ TextureImporter:
         - {x: 8, y: 8}
       tessellationDetail: 0
       bones: []
-      spriteID: 3539bc66b9e3d4c80800000000000000
-      internalID: -8336938498027449517
+      spriteID: 7d1c04af187489ae0800000000000000
+      internalID: -1542404248799493673
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: newplains-tileset_16
+      name: plains-cliff-tileset_16
       rect:
         serializedVersion: 2
         x: 64
@@ -589,20 +593,20 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: -8, y: 8}
+      - - {x: -8, y: 0}
         - {x: -8, y: -8}
         - {x: 8, y: -8}
-        - {x: 8, y: 8}
+        - {x: 8, y: 0}
       tessellationDetail: 0
       bones: []
-      spriteID: 8b73a2130303ae160800000000000000
-      internalID: 7055504749770717112
+      spriteID: dde5569a49eb27220800000000000000
+      internalID: 2482255890340994781
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: newplains-tileset_17
+      name: plains-cliff-tileset_17
       rect:
         serializedVersion: 2
         x: 80
@@ -614,20 +618,20 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: -8, y: 8}
+      - - {x: -8, y: 0}
         - {x: -8, y: -8}
         - {x: 8, y: -8}
-        - {x: 8, y: 8}
+        - {x: 8, y: 0}
       tessellationDetail: 0
       bones: []
-      spriteID: fd8209fce8c375310800000000000000
-      internalID: 1393649193759811807
+      spriteID: ae59c1b7483cb43e0800000000000000
+      internalID: -2068344630078040598
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: newplains-tileset_18
+      name: plains-cliff-tileset_18
       rect:
         serializedVersion: 2
         x: 0
@@ -645,14 +649,14 @@ TextureImporter:
         - {x: 8, y: 8}
       tessellationDetail: 0
       bones: []
-      spriteID: 547a25b3c7012ba10800000000000000
-      internalID: 1923618116597884741
+      spriteID: 31b7cb7c4168a55e0800000000000000
+      internalID: -1920074867311609069
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: newplains-tileset_19
+      name: plains-cliff-tileset_19
       rect:
         serializedVersion: 2
         x: 16
@@ -670,14 +674,14 @@ TextureImporter:
         - {x: 8, y: 8}
       tessellationDetail: 0
       bones: []
-      spriteID: 293f1003b815cc9a0800000000000000
-      internalID: -6211500127803018350
+      spriteID: e12c40a107d57b2f0800000000000000
+      internalID: -957193659738701282
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: newplains-tileset_20
+      name: plains-cliff-tileset_20
       rect:
         serializedVersion: 2
         x: 32
@@ -695,14 +699,14 @@ TextureImporter:
         - {x: 8, y: 8}
       tessellationDetail: 0
       bones: []
-      spriteID: c17f4421331b97fd0800000000000000
-      internalID: -2343647298161674468
+      spriteID: 77846de5c437ed310800000000000000
+      internalID: 1431708503396206711
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: newplains-tileset_21
+      name: plains-cliff-tileset_21
       rect:
         serializedVersion: 2
         x: 48
@@ -720,14 +724,14 @@ TextureImporter:
         - {x: 8, y: 8}
       tessellationDetail: 0
       bones: []
-      spriteID: 8612494f17dea8e60800000000000000
-      internalID: 7965439964648579432
+      spriteID: 810c0b205672a3da0800000000000000
+      internalID: -5964411441708482536
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: newplains-tileset_22
+      name: plains-cliff-tileset_22
       rect:
         serializedVersion: 2
         x: 64
@@ -745,14 +749,14 @@ TextureImporter:
         - {x: 8, y: 8}
       tessellationDetail: 0
       bones: []
-      spriteID: 9d674bb125df1b370800000000000000
-      internalID: 8336722914333456089
+      spriteID: 5180bdbc85911e5a0800000000000000
+      internalID: -6493881318523598827
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: newplains-tileset_23
+      name: plains-cliff-tileset_23
       rect:
         serializedVersion: 2
         x: 80
@@ -764,20 +768,20 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: -8, y: 8}
+      - - {x: -8, y: 0}
         - {x: -8, y: -8}
         - {x: 8, y: -8}
-        - {x: 8, y: 8}
+        - {x: 8, y: 0}
       tessellationDetail: 0
       bones: []
-      spriteID: d8ee0eeb9ba8df060800000000000000
-      internalID: 6988894727124872845
+      spriteID: f8220481f9b33f180800000000000000
+      internalID: -9082850468983463281
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: newplains-tileset_24
+      name: plains-cliff-tileset_24
       rect:
         serializedVersion: 2
         x: 0
@@ -790,19 +794,19 @@ TextureImporter:
       outline: []
       physicsShape:
       - - {x: -8, y: 8}
-        - {x: -8, y: 5}
-        - {x: 8, y: 5}
+        - {x: -8, y: -8}
+        - {x: 8, y: -8}
         - {x: 8, y: 8}
       tessellationDetail: 0
       bones: []
-      spriteID: ffce88629759aa6d0800000000000000
-      internalID: -2978403855982072577
+      spriteID: 78a4f3c5d75d1caa0800000000000000
+      internalID: -6142393682361365881
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: newplains-tileset_25
+      name: plains-cliff-tileset_25
       rect:
         serializedVersion: 2
         x: 16
@@ -815,19 +819,19 @@ TextureImporter:
       outline: []
       physicsShape:
       - - {x: -8, y: 8}
-        - {x: -8, y: 5}
-        - {x: 8, y: 5}
+        - {x: -8, y: -8}
+        - {x: 8, y: -8}
         - {x: 8, y: 8}
       tessellationDetail: 0
       bones: []
-      spriteID: 29f2b6ec6d3a34c90800000000000000
-      internalID: -7186720437371719790
+      spriteID: 0acedd6492f9bdfd0800000000000000
+      internalID: -2316082583720563552
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: newplains-tileset_26
+      name: plains-cliff-tileset_26
       rect:
         serializedVersion: 2
         x: 32
@@ -845,14 +849,14 @@ TextureImporter:
         - {x: 8, y: 8}
       tessellationDetail: 0
       bones: []
-      spriteID: 73c184e466c776bc0800000000000000
-      internalID: -3789923782567125961
+      spriteID: 6ef0313172242d730800000000000000
+      internalID: 4022350152786448358
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: newplains-tileset_27
+      name: plains-cliff-tileset_27
       rect:
         serializedVersion: 2
         x: 48
@@ -870,58 +874,58 @@ TextureImporter:
         - {x: 8, y: 8}
       tessellationDetail: 0
       bones: []
-      spriteID: 10d10dbe4d13d2500800000000000000
-      internalID: 373009134700731649
+      spriteID: 3f0c5e9cea09eaf00800000000000000
+      internalID: 1129999636902559987
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: newplains-tileset_28
+      name: plains-cliff-tileset_28
       rect:
         serializedVersion: 2
         x: 64
         y: 0
         width: 16
         height: 16
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: -8, y: 8}
+      - - {x: -8, y: 0}
         - {x: -8, y: -8}
         - {x: 8, y: -8}
-        - {x: 8, y: 8}
+        - {x: 8, y: 0}
       tessellationDetail: 0
       bones: []
-      spriteID: 13c193bce2a387f20800000000000000
-      internalID: 3420547889640315953
+      spriteID: 8c645796f337b5110800000000000000
+      internalID: 1250720037714872008
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: newplains-tileset_29
+      name: plains-cliff-tileset_29
       rect:
         serializedVersion: 2
         x: 80
         y: 0
         width: 16
         height: 16
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: -8, y: 8}
+      - - {x: -8, y: 0}
         - {x: -8, y: -8}
         - {x: 8, y: -8}
-        - {x: 8, y: 8}
+        - {x: 8, y: 0}
       tessellationDetail: 0
       bones: []
-      spriteID: 238c8adadad019fc0800000000000000
-      internalID: -3489993196641400782
+      spriteID: 1ba26216ce3c472e0800000000000000
+      internalID: -2128861303829812559
       vertices: []
       indices: 
       edges: []

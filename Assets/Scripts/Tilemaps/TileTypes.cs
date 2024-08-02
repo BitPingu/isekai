@@ -7,12 +7,6 @@ public class TileTypes
     [Serializable]
     public class GroundTiles : TileData<GroundTileType> { }
 
-    [Serializable]
-    public class FoilageTiles : TileData<FoilageTileType> { }
-
-    [Serializable]
-    public class BuildingTiles : TileData<BuildingTileType> { }
-
     public abstract class TileData<T> : TileData
         where T : Enum
 

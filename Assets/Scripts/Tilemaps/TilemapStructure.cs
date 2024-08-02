@@ -5,7 +5,7 @@ using UnityEngine.Tilemaps;
 public enum TilemapType
 {
     Ground,
-    Overworld,
+    Cliff,
     Fog
 }
 
@@ -50,9 +50,10 @@ public class TilemapStructure : MonoBehaviour
         if (type == TilemapType.Ground)
         {
             GetComponent<GroundGeneration>().Initialize(this);
-            GetComponent<VillageGeneration>().Initialize(this);
-            GetComponent<DungeonGeneration>().Initialize(this);
-            GetComponent<CampGeneration>().Initialize(this);
+        }
+        else if (type == TilemapType.Cliff)
+        {
+            GetComponent<CliffGeneration>().Initialize(this);
         }
         else if (type == TilemapType.Fog)
         {

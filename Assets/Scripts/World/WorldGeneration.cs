@@ -22,8 +22,12 @@ public class WorldGeneration : MonoBehaviour
 
         // Init tile grid
         GetComponentInChildren<TileGrid>().Initialize(width, height, seed);
-
         islandRegionSize = GetComponentInChildren<GroundGeneration>().islandRegionSize;
+
+        // Init structures
+        GetComponentInChildren<VillageGeneration>().Initialize(GetComponentInChildren<TilemapStructure>());
+        GetComponentInChildren<DungeonGeneration>().Initialize(GetComponentInChildren<TilemapStructure>());
+        GetComponentInChildren<CampGeneration>().Initialize(GetComponentInChildren<TilemapStructure>());
 
         // Init vegetation
         GetComponentInChildren<TreeGeneration>().Initialize(width, height, seed);

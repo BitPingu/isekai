@@ -64,6 +64,7 @@
   <ItemGroup>
     <Compile Include="Assets/Scripts/Algorithms/LSystem/Visualizer.cs" />
     <Compile Include="Assets/Scripts/UI/MainMenu.cs" />
+    <Compile Include="Assets/Scripts/World/Village/VillageData.cs" />
     <Compile Include="Assets/Scripts/Algorithms/PoissonDiscSamplingGenerator.cs" />
     <Compile Include="Assets/Scripts/Player/PlayerBattle.cs" />
     <Compile Include="Assets/Scripts/Battle/BattleManager.cs" />
@@ -72,6 +73,7 @@
     <Compile Include="Assets/Scripts/Battle/BattleData.cs" />
     <Compile Include="Assets/Scripts/Player/PlayerData.cs" />
     <Compile Include="Assets/Scripts/Algorithms/VoronoiGeneration.cs" />
+    <Compile Include="Assets/Scripts/World/Ground/CliffGeneration.cs" />
     <Compile Include="Assets/Scripts/World/WorldEvents.cs" />
     <Compile Include="Assets/Scripts/UI/MenuController.cs" />
     <Compile Include="Assets/Scripts/NPC/EnemyData.cs" />
@@ -81,11 +83,10 @@
     <Compile Include="Assets/Scripts/UI/MapController.cs" />
     <Compile Include="Assets/Scripts/World/Fog/FogData.cs" />
     <Compile Include="Assets/Scripts/NPC/EnemyBattle.cs" />
-    <Compile Include="Assets/Scripts/World/CampGeneration.cs" />
+    <Compile Include="Assets/Scripts/World/Structures/CampGeneration.cs" />
     <Compile Include="Assets/Scripts/Algorithms/LSystem/RoadHelper.cs" />
     <Compile Include="Assets/Scripts/UI/Dialogue.cs" />
     <Compile Include="Assets/Scripts/UI/CameraController.cs" />
-    <Compile Include="Assets/Scripts/Tilemaps/FoilageTileType.cs" />
     <Compile Include="Assets/Scripts/Data/SaveSystem.cs" />
     <Compile Include="Assets/Scripts/UI/DialogueController.cs" />
     <Compile Include="Assets/Scripts/Tilemaps/AdvancedRuleTile.cs" />
@@ -102,33 +103,31 @@
     <Compile Include="Assets/Scripts/NPC/NPCMovement.cs" />
     <Compile Include="Assets/Scripts/NPC/VillagerSpawner.cs" />
     <Compile Include="Assets/Scripts/Algorithms/LSystem/Rules/Rule.cs" />
-    <Compile Include="Assets/Scripts/World/BuildingData.cs" />
+    <Compile Include="Assets/Scripts/World/Structures/BuildingData.cs" />
     <Compile Include="Assets/Scripts/UI/BattleHUD.cs" />
     <Compile Include="Assets/Scripts/Player/PlayerPosition.cs" />
     <Compile Include="Assets/Scripts/NPC/EnemySpawner.cs" />
-    <Compile Include="Assets/Scripts/World/TreeGeneration.cs" />
-    <Compile Include="Assets/Scripts/World/GroundGeneration.cs" />
+    <Compile Include="Assets/Scripts/World/Vegetation/TreeGeneration.cs" />
+    <Compile Include="Assets/Scripts/World/Ground/GroundGeneration.cs" />
     <Compile Include="Assets/Scripts/World/DayAndNightCycle.cs" />
     <Compile Include="Assets/Scripts/Algorithms/LSystem/AgentParameters.cs" />
     <Compile Include="Assets/Scripts/Audio/AudioFade.cs" />
     <Compile Include="Assets/Scripts/Algorithms/LSystem/PlacementHelper.cs" />
     <Compile Include="Assets/Scripts/World/WorldGeneration.cs" />
     <Compile Include="Assets/Scripts/Audio/Sound.cs" />
+    <Compile Include="Assets/Scripts/World/Vegetation/VegetationData.cs" />
     <Compile Include="Assets/Scripts/Algorithms/LSystem/StructureHelper.cs" />
     <Compile Include="Assets/Scripts/UI/EventIconData.cs" />
     <Compile Include="Assets/Scripts/Tilemaps/TileTypes.cs" />
     <Compile Include="Assets/Scripts/Tilemaps/TilemapStructure.cs" />
     <Compile Include="Assets/Scripts/Algorithms/CellularAutomata.cs" />
-    <Compile Include="Assets/Scripts/World/HouseType.cs" />
+    <Compile Include="Assets/Scripts/World/Village/HouseType.cs" />
     <Compile Include="Assets/Scripts/Algorithms/LSystem/LSystemGenerator.cs" />
     <Compile Include="Assets/Scripts/NPC/EnemyPosition.cs" />
     <Compile Include="Assets/Scripts/Tilemaps/GroundTileType.cs" />
     <Compile Include="Assets/Scripts/Player/PlayerController.cs" />
-    <Compile Include="Assets/Scripts/Tilemaps/BuildingTileType.cs" />
     <Compile Include="Assets/Scripts/Data/TempData.cs" />
     <Compile Include="Assets/Scripts/NPC/ElfPosition.cs" />
-    <Compile Include="Assets/Scripts/World/VegetationData.cs" />
-    <Compile Include="Assets/Scripts/World/Village/VillageData.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/TextMesh Pro/Shaders/TMPro.cginc" />
