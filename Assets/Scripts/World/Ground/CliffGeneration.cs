@@ -2,50 +2,66 @@ using System;
 using System.Linq;
 using UnityEngine;
 
-public class CliffGeneration : MonoBehaviour
+public class CliffGeneration : Generation
 {
     [SerializeField]
     private PerlinNoiseGenerator noise;
 
-    [Serializable]
-    private class NoiseValues
+    // [Serializable]
+    // private class NoiseValues
+    // {
+    //     [Range(0f, 1f)]
+    //     public float height;
+    //     public GroundTileType groundTile;
+    // }
+
+    // [SerializeField]
+    // private NoiseValues[] tileTypes;
+
+    [SerializeField, Range(0, 1)]
+    private float hillsCircularMaskModifier = 0.48f;
+
+    [SerializeField, Range(0, 1)] 
+    private float hillsLevel1AmountModifier = 0.732f;
+    [SerializeField, Range(0, 1)] 
+    private float hillsLevel2AmountModifier = 0.56f;
+
+    public override void Initialize(WorldGeneration world)
     {
-        [Range(0f, 1f)]
-        public float height;
-        public GroundTileType groundTile;
+        Debug.Log("start cliff gen");
+        HillGeneration(world);
     }
 
-    [SerializeField]
-    private NoiseValues[] tileTypes;
-
-    public void Initialize(TilemapStructure tilemap)
+    private void HillGeneration(WorldGeneration world)
     {
         // Make sure that TileTypes are ordered from small to high height
-        tileTypes = tileTypes.OrderBy(a => a.height).ToArray();
+        // tileTypes = tileTypes.OrderBy(a => a.height).ToArray();
 
         // Pass along parameters to generate noise
-        var noiseMap = noise.GenerateNoiseMap(tilemap.width, tilemap.height, tilemap.seed);
-
-        for (int x=0; x<tilemap.width; x++)
+        float[,] baseNoiseMap = noise.GenerateNoiseMap(world.width, world.height, world.seed);
+        float[,] circularMask = noise.GenerateCircularMask(world.width, world.height, hillsCircularMaskModifier);
+        for (int i=0; i<world.width; i++)
         {
-            for (int y=0; y<tilemap.height; y++)
+            for (int j=0; j<world.height; j++)
             {
-                // Get height at this position
-                var height = noiseMap[y * tilemap.width + x];
+                Debug.Log(circularMask[i,j] + " at " + i + " " + j);
+            }
+        }
 
-                // Loop over configured tile types
-                for (int i=0; i<tileTypes.Length; i++)
+        for (int x=0; x<world.width; x++)
+        {
+            for (int y=0; y<world.height; y++)
+            {
+                // Invert mask
+                float baseNoiseValue = baseNoiseMap[x,y] * (1 - circularMask[x,y]);
+
+                if (baseNoiseValue > (1-hillsLevel1AmountModifier))
                 {
-                    // If the height is smaller or equal then use this tiletype
-                    if (height <= tileTypes[i].height)
-                    {
-                        TilemapStructure groundMap = tilemap.grid.GetTilemap(TilemapType.Ground);
-                        if (groundMap.GetTile(x, y) == (int)GroundTileType.Land)
-                        {
-                            tilemap.SetTile(x, y, (int)tileTypes[i].groundTile, setDirty : false);  
-                            break;
-                        }
-                    }
+                    world.groundTiles[x,y] = TileType.Cliff;
+                }
+                if (baseNoiseValue > (1-hillsLevel2AmountModifier))
+                {
+                    world.groundTiles[x,y] = TileType.Cliff;
                 }
             }
         }

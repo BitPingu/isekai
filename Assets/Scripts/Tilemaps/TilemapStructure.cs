@@ -49,11 +49,11 @@ public class TilemapStructure : MonoBehaviour
         // Apply all algorithms to tilemap
         if (type == TilemapType.Ground)
         {
-            GetComponent<GroundGeneration>().Initialize(this);
+            // GetComponent<GroundGeneration>().Initialize(this);
         }
         else if (type == TilemapType.Cliff)
         {
-            GetComponent<CliffGeneration>().Initialize(this);
+            // GetComponent<CliffGeneration>().Initialize(this);
         }
         else if (type == TilemapType.Fog)
         {

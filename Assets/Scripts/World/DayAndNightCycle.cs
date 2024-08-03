@@ -19,19 +19,7 @@ public class DayAndNightCycle : MonoBehaviour
     public delegate void OnDayChanged();
     public OnDayChanged DayTime, NightTime;
 
-    private void OnEnable()
-    {
-        // Attach delegates
-        // DayTime += DayMusic;
-        // NightTime += NightMusic;
-    }
-
-    private void OnDisable()
-    {
-        // Detatch delegates
-        // DayTime -= DayMusic;
-        // NightTime -= NightMusic;
-    }
+    private bool init;
 
     public void Initialize()
     {
@@ -58,9 +46,18 @@ public class DayAndNightCycle : MonoBehaviour
         // Attach music delegates
         DayTime += DayMusic;
         NightTime += NightMusic;
+
+        // Done init
+        init = true;
     }
 
     private void Update()
+    {
+        if (init)
+            Cycle();
+    }
+
+    private void Cycle()
     {
         // Reset time for new day
         if (time > timePerDay)

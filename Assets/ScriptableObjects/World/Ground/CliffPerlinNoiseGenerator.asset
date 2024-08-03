@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a371486525177449bdda5a7d81c0ab1, type: 3}
   m_Name: CliffPerlinNoiseGenerator
   m_EditorClassIdentifier: 
-  octaves: 1
-  persistance: 0
-  lacunarity: 0
-  noiseScale: 10
+  scale: 160
+  octaves: 3
+  persistence: 2
+  lacunarity: 3
   offset: {x: 0, y: 0}

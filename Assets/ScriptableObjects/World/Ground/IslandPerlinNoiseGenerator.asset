@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7a371486525177449bdda5a7d81c0ab1, type: 3}
-  m_Name: GroundPerlinNoiseGenerator
+  m_Name: IslandPerlinNoiseGenerator
   m_EditorClassIdentifier: 
-  scale: 80
-  octaves: 5
-  persistence: 5
-  lacunarity: 1.5
+  scale: 300
+  octaves: 3
+  persistence: 2
+  lacunarity: 3
   offset: {x: 0, y: 0}
