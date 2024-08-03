@@ -2,10 +2,12 @@ public enum GroundTileType
 {
     /* 0 - 1000 */
     Empty = 0,
-    Water = 1,
-    Land = 2,
-    Cliff = 3,
-    VillagePath = 4,
-    VillagePlot = 5,
-    Fog = 6
+    Sea = 1,
+    Beach = 2,
+    Land = 3,
+    Lake = 4,
+    Cliff = 5,
+    VillagePath = 6,
+    VillagePlot = 7,
+    Fog = 8
 }

@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   octaves: 1
   persistance: 0
-  lacunarity: 0
-  noiseScale: 10
+  lacunarity: 10
+  noiseScale: 20
   offset: {x: 0, y: 0}

@@ -30,6 +30,7 @@ public class VillageGeneration : MonoBehaviour
     private float angle = 90;
     private int vilSquareRad = 2;
     private int vilMaxWidth, vilMaxHeight;
+    public int maxVillages = 4, minHousesPerVillage;
 
     private TilemapStructure groundMap;
     public GameObject house, fountain, townhall;
@@ -66,7 +67,7 @@ public class VillageGeneration : MonoBehaviour
     public void Initialize(TilemapStructure tilemap)
     {
         // Get tilemap structure
-        groundMap = tilemap;
+        groundMap = tilemap.grid.GetTilemap(TilemapType.Ground);
 
         if (TempData.loadGame)
         {
@@ -85,17 +86,29 @@ public class VillageGeneration : MonoBehaviour
             // Generate village coords
             List<Vector2> vilPoints = sampling.GeneratePoints(tilemap);
 
-            foreach (Vector2 point in vilPoints)
+            // Limit number of villages in world
+            int villageCount = 0;
+            for (int i=0; i<vilPoints.Count; i++)
             {
-                // Skip water coords
-                if (groundMap.GetTile(Mathf.FloorToInt(point.x), Mathf.FloorToInt(point.y)) == (int)GroundTileType.Water)
+                // Skip obstructed coords
+                TilemapStructure lakeMap = groundMap.grid.GetTilemap(TilemapType.Lake);
+                TilemapStructure cliffMap = groundMap.grid.GetTilemap(TilemapType.Cliff);
+                if (groundMap.GetTile(Mathf.FloorToInt(vilPoints[i].x), Mathf.FloorToInt(vilPoints[i].y)) != (int)GroundTileType.Land
+                    || lakeMap.GetTile(Mathf.FloorToInt(vilPoints[i].x), Mathf.FloorToInt(vilPoints[i].y)) == (int)GroundTileType.Lake
+                        || cliffMap.GetTile(Mathf.FloorToInt(vilPoints[i].x), Mathf.FloorToInt(vilPoints[i].y)) == (int)GroundTileType.Cliff)
+                {
                     continue;
+                }
 
                 // Generate lsystem sequence for each village
                 string vilSequence = lsystem.GenerateSentence();
 
                 // Add new village to list
-                villages.Add(new Village(point, vilSequence));
+                villages.Add(new Village(vilPoints[i], vilSequence));
+                villageCount++;
+
+                if (villageCount == maxVillages)
+                    break;
             }
         }
 
@@ -216,7 +229,15 @@ public class VillageGeneration : MonoBehaviour
                     for (int i=0; i<Length; i++)
                     {
                         // Check for water
-                        if (groundMap.GetTile(Mathf.FloorToInt(currentPosition.x), Mathf.FloorToInt(currentPosition.y)) == (int)GroundTileType.Water)
+                        if (groundMap.GetTile(Mathf.FloorToInt(currentPosition.x), Mathf.FloorToInt(currentPosition.y)) != (int)GroundTileType.Land)
+                            continue;
+                        TilemapStructure lakeMap = groundMap.grid.GetTilemap(TilemapType.Lake);
+                        if (lakeMap.GetTile(Mathf.FloorToInt(currentPosition.x), Mathf.FloorToInt(currentPosition.y)) == (int)GroundTileType.Lake)
+                            continue;
+
+                        // Check for cliff
+                        TilemapStructure cliffMap = groundMap.grid.GetTilemap(TilemapType.Cliff);
+                        if (cliffMap.GetTile(Mathf.FloorToInt(currentPosition.x), Mathf.FloorToInt(currentPosition.y)) == (int)GroundTileType.Cliff)
                             continue;
 
                         // Road tile

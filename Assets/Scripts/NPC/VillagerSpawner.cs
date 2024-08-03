@@ -8,10 +8,10 @@ public class VillagerSpawner : MonoBehaviour
     public GameObject villager;
     private bool villagersAlreadySpawned;
 
-    public void Initialize(TilemapStructure tilemap)
+    public void Initialize(TileGrid grid)
     {
         // Retrieve tilemap component
-        groundMap = tilemap;
+        groundMap = grid.GetTilemap(TilemapType.Ground);
 
         // Spawn init villagers
         Spawn();

@@ -4,7 +4,9 @@ using UnityEngine.Tilemaps;
 
 public enum TilemapType
 {
+    Sea,
     Ground,
+    Lake,
     Cliff,
     Fog
 }
@@ -47,9 +49,17 @@ public class TilemapStructure : MonoBehaviour
         tiles = new int[width * height];
 
         // Apply all algorithms to tilemap
-        if (type == TilemapType.Ground)
+        if (type == TilemapType.Sea)
         {
             GetComponent<GroundGeneration>().Initialize(this);
+        }
+        else if (type == TilemapType.Ground)
+        {
+            GetComponent<GroundGeneration>().Initialize(this);
+        }
+        else if (type == TilemapType.Lake)
+        {
+            GetComponent<LakeGeneration>().Initialize(this);
         }
         else if (type == TilemapType.Cliff)
         {

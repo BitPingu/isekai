@@ -45,6 +45,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Sea
+    uniqueID: 2842912423
+    locked: 0
   - name: Ground
     uniqueID: 3427601457
     locked: 0

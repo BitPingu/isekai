@@ -19,6 +19,8 @@ public class DayAndNightCycle : MonoBehaviour
     public delegate void OnDayChanged();
     public OnDayChanged DayTime, NightTime;
 
+    private bool init;
+
     private void OnEnable()
     {
         // Attach delegates
@@ -58,9 +60,17 @@ public class DayAndNightCycle : MonoBehaviour
         // Attach music delegates
         DayTime += DayMusic;
         NightTime += NightMusic;
+
+        init = true;
     }
 
     private void Update()
+    {
+        if (init)
+            Cycle(); 
+    }
+
+    private void Cycle()
     {
         // Reset time for new day
         if (time > timePerDay)
@@ -105,7 +115,7 @@ public class DayAndNightCycle : MonoBehaviour
         TempData.tempTime = time;
 
         // Pick color from gradient based on value from 0-1
-        GetComponent<Light2D>().color = lightColor.Evaluate(time * ratePerDay);   
+        GetComponent<Light2D>().color = lightColor.Evaluate(time * ratePerDay);  
     }
 
     public void DayMusic()

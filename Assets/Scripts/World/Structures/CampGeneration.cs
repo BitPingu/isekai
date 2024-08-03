@@ -40,7 +40,7 @@ public class CampGeneration : MonoBehaviour
         foreach (Vector2 point in campPoints)
         {
             // Skip water coords
-            if (groundMap.GetTile(Mathf.FloorToInt(point.x), Mathf.FloorToInt(point.y)) == (int)GroundTileType.Water)
+            if (groundMap.GetTile(Mathf.FloorToInt(point.x), Mathf.FloorToInt(point.y)) == (int)GroundTileType.Sea)
                 continue;
 
             // Set dungeon centerpoint

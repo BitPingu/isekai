@@ -8,11 +8,9 @@ public class TreeGeneration : MonoBehaviour
     private PerlinNoiseGenerator noise;
     public float treeNoiseHeight; // default is 0.4f
     public float spawnChance; // default is 65f
-    public TilemapStructure groundMap;
-
     public GameObject tree, grass;
 
-    public void Initialize(int width, int height, int seed)
+    public void Initialize(TileGrid grid, int width, int height, int seed)
     {
         var random = new System.Random(seed);
 
@@ -37,7 +35,7 @@ public class TreeGeneration : MonoBehaviour
 
                     int randPos = random.Next(0, 100);
 
-                    TilemapStructure cliffMap = groundMap.grid.GetTilemap(TilemapType.Cliff);
+                    TilemapStructure cliffMap = grid.GetTilemap(TilemapType.Cliff);
                     if (!(cliffMap.GetTile((int)treePos.x, (int)treePos.y) == (int)GroundTileType.Cliff))
                     {
                         // Random offset placement
@@ -59,9 +57,12 @@ public class TreeGeneration : MonoBehaviour
                     }
 
                     // Check if tree is spawning on land
-                    var neighbors = groundMap.GetNeighbors(Mathf.FloorToInt(treePos.x), Mathf.FloorToInt(treePos.y));
-                    if (!neighbors.ContainsValue((int)GroundTileType.Water) 
-                        && !neighbors.ContainsValue((int)GroundTileType.VillagePath) && !neighbors.ContainsValue((int)GroundTileType.VillagePlot))
+                    TilemapStructure groundMap = grid.GetTilemap(TilemapType.Ground);
+                    var groundNeighbors = groundMap.GetNeighbors(Mathf.FloorToInt(treePos.x), Mathf.FloorToInt(treePos.y));
+                    TilemapStructure lakeMap = groundMap.grid.GetTilemap(TilemapType.Lake);
+                    var lakeNeighbors = lakeMap.GetNeighbors(Mathf.FloorToInt(treePos.x), Mathf.FloorToInt(treePos.y));
+                    if (groundMap.GetTile((int)treePos.x, (int)treePos.y) == (int)GroundTileType.Land && !lakeNeighbors.ContainsValue((int)GroundTileType.Lake) 
+                        && !groundNeighbors.ContainsValue((int)GroundTileType.VillagePath) && !groundNeighbors.ContainsValue((int)GroundTileType.VillagePlot))
                     {
                         // Additional chance to replace tree to spawn a different foliage? ie bush
                         // Spawn tree
@@ -74,8 +75,11 @@ public class TreeGeneration : MonoBehaviour
                 }
                 else if (noiseHeight <= .52 && random.Next(0, 100) <= spawnChance)
                 {
+                    TilemapStructure groundMap = grid.GetTilemap(TilemapType.Ground);
                     var neighbors = groundMap.GetNeighbors(Mathf.FloorToInt(x), Mathf.FloorToInt(y));
-                    if (!neighbors.ContainsValue((int)GroundTileType.Water) 
+                    TilemapStructure lakeMap = groundMap.grid.GetTilemap(TilemapType.Lake);
+                    var lakeNeighbors = lakeMap.GetNeighbors(Mathf.FloorToInt(x), Mathf.FloorToInt(y));
+                    if (groundMap.GetTile(x, y) == (int)GroundTileType.Land && !lakeNeighbors.ContainsValue((int)GroundTileType.Lake) 
                         && !neighbors.ContainsValue((int)GroundTileType.VillagePath) && !neighbors.ContainsValue((int)GroundTileType.VillagePlot))
                     {
                         float randX=0, randY=0;

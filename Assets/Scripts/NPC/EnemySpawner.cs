@@ -25,10 +25,10 @@ public class EnemySpawner : MonoBehaviour
 
     private TilemapStructure groundMap;
 
-    public void Initialize(TilemapStructure tilemap)
+    public void Initialize(TileGrid grid)
     {
         // Get tilemap structure
-        groundMap = tilemap;
+        groundMap = grid.GetTilemap(TilemapType.Ground);
     }
 
     public void dayEnemies()
@@ -85,7 +85,7 @@ public class EnemySpawner : MonoBehaviour
         foreach (Vector2 point in enemySpawnPoints)
         {
             // Skip water coords
-            if (groundMap.GetTile(Mathf.FloorToInt(point.x), Mathf.FloorToInt(point.y)) == (int)GroundTileType.Water)
+            if (groundMap.GetTile(Mathf.FloorToInt(point.x), Mathf.FloorToInt(point.y)) == (int)GroundTileType.Empty)
                 continue;
 
             // Create new spawn point from list
@@ -99,7 +99,7 @@ public class EnemySpawner : MonoBehaviour
     public void spawnEnemy(string type, Vector3 spawnPoint, bool flipX)
     {
         // Skip water coords
-        if (groundMap.GetTile(Mathf.FloorToInt(spawnPoint.x), Mathf.FloorToInt(spawnPoint.y)) == (int)GroundTileType.Water)
+        if (groundMap.GetTile(Mathf.FloorToInt(spawnPoint.x), Mathf.FloorToInt(spawnPoint.y)) == (int)GroundTileType.Empty)
         {
             Debug.Log("enemy will spawn on water!");
         }

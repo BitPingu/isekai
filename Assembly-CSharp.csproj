@@ -115,6 +115,7 @@
     <Compile Include="Assets/Scripts/Algorithms/LSystem/PlacementHelper.cs" />
     <Compile Include="Assets/Scripts/World/WorldGeneration.cs" />
     <Compile Include="Assets/Scripts/Audio/Sound.cs" />
+    <Compile Include="Assets/Scripts/World/Ground/LakeGeneration.cs" />
     <Compile Include="Assets/Scripts/World/Vegetation/VegetationData.cs" />
     <Compile Include="Assets/Scripts/Algorithms/LSystem/StructureHelper.cs" />
     <Compile Include="Assets/Scripts/UI/EventIconData.cs" />

@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using UnityEngine;
 
-public class CliffGeneration : MonoBehaviour
+public class LakeGeneration : MonoBehaviour
 {
     [SerializeField]
     private PerlinNoiseGenerator noise;
@@ -40,10 +40,8 @@ public class CliffGeneration : MonoBehaviour
                     if (height <= tileTypes[i].height)
                     {
                         TilemapStructure groundMap = tilemap.grid.GetTilemap(TilemapType.Ground);
-                        TilemapStructure lakeMap = tilemap.grid.GetTilemap(TilemapType.Lake);
                         var groundNeighbors = groundMap.GetNeighbors(x, y);
-                        var lakeNeighbors = lakeMap.GetNeighbors(x, y);
-                        if (!groundNeighbors.ContainsValue((int)GroundTileType.Empty) && !lakeNeighbors.ContainsValue((int)GroundTileType.Lake))
+                        if (!groundNeighbors.ContainsValue((int)GroundTileType.Empty))
                         {
                             tilemap.SetTile(x, y, (int)tileTypes[i].groundTile, setDirty : false);  
                             break;

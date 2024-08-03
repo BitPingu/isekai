@@ -30,12 +30,12 @@ public class WorldGeneration : MonoBehaviour
         GetComponentInChildren<CampGeneration>().Initialize(GetComponentInChildren<TilemapStructure>());
 
         // Init vegetation
-        GetComponentInChildren<TreeGeneration>().Initialize(width, height, seed);
+        GetComponentInChildren<TreeGeneration>().Initialize(GetComponentInChildren<TileGrid>(), width, height, seed);
 
         // Init time
         GetComponentInChildren<DayAndNightCycle>().Initialize();
 
         // Start world events
-        GetComponent<WorldEvents>().Initialize(GetComponentInChildren<TilemapStructure>(), GetComponentInChildren<DayAndNightCycle>());
+        GetComponent<WorldEvents>().Initialize(this, GetComponentInChildren<TileGrid>(), GetComponentInChildren<DayAndNightCycle>());
     }
 }
