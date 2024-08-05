@@ -17,16 +17,6 @@ public class WorldEvents : MonoBehaviour
         // Get time
         time = dayNight;
 
-        // Init enemy spawner
-        GetComponentInChildren<EnemySpawner>().Initialize(grid);
-
-        // Init villager spawner
-        GetComponentInChildren<VillagerSpawner>().Initialize(grid);
-
-        // Attach dayNight delegates to villager spawner
-        dayNight.DayTime += GetComponentInChildren<VillagerSpawner>().Spawn;
-        dayNight.NightTime += GetComponentInChildren<VillagerSpawner>().Despawn;
-
         // Spawn player
         SpawnPlayer(grid, world);
 
@@ -35,6 +25,16 @@ public class WorldEvents : MonoBehaviour
 
         // Audio
         Instantiate(audio, Vector3.zero, Quaternion.identity);
+
+        // Init enemy spawner
+        GetComponentInChildren<EnemySpawner>().Initialize(grid, dayNight, p);
+
+        // Init villager spawner
+        GetComponentInChildren<VillagerSpawner>().Initialize(grid, dayNight);
+
+        // Attach dayNight delegates to villager spawner
+        dayNight.DayTime += GetComponentInChildren<VillagerSpawner>().Spawn;
+        dayNight.NightTime += GetComponentInChildren<VillagerSpawner>().Despawn;
 
         // Call dayNight delegates (and any methods tied to it)
         if (dayNight.isDay)
@@ -46,21 +46,22 @@ public class WorldEvents : MonoBehaviour
             dayNight.NightTime();
         }
 
+
+
         if (TempData.loadGame)
             TempData.elfSaved = SaveSystem.Load().saveElf;
 
         // Start elf event
         if (!TempData.elfSaved)
-            ElfEvent(grid, e, GetComponentInChildren<EnemySpawner>());
+            ElfEvent(e, GetComponentInChildren<EnemySpawner>());
+
+
     }
 
     private void SpawnPlayer(TileGrid grid, WorldGeneration world)
     {
         // Determine player spawn
         Vector3 spawnPoint = new Vector3();
-        TilemapStructure groundMap = grid.GetTilemap(TilemapType.Ground);
-        TilemapStructure lakeMap = grid.GetTilemap(TilemapType.Lake);
-        TilemapStructure cliffMap = grid.GetTilemap(TilemapType.Cliff);
         if (TempData.loadGame)
         {
             spawnPoint.x = SaveSystem.Load().savePlayerPos[0];
@@ -75,9 +76,7 @@ public class WorldEvents : MonoBehaviour
                 xCoord = Random.Range(0f, world.width);
                 yCoord = Random.Range(0f, world.height);
             }
-            while (groundMap.GetTile(Mathf.FloorToInt(xCoord), Mathf.FloorToInt(yCoord)) == (int)GroundTileType.Empty 
-                || lakeMap.GetTile(Mathf.FloorToInt(xCoord), Mathf.FloorToInt(yCoord)) == (int)GroundTileType.Lake 
-                    || cliffMap.GetTile(Mathf.FloorToInt(xCoord), Mathf.FloorToInt(yCoord)) == (int)GroundTileType.Cliff);
+            while (!grid.CheckLand(new Vector2(xCoord, yCoord)) || !grid.CheckCliff(new Vector2(xCoord, yCoord)));
 
             // Generate spawn point
             spawnPoint = new Vector3(xCoord, yCoord);
@@ -85,6 +84,7 @@ public class WorldEvents : MonoBehaviour
 
         // Init player
         p = Instantiate(player, spawnPoint, Quaternion.identity);
+
         p.GetComponent<PlayerPosition>().currentArea = "Overworld";
 
         // Attach clearfog delegate to player movement
@@ -97,9 +97,6 @@ public class WorldEvents : MonoBehaviour
     private void SpawnElf(TileGrid grid, Transform player)
     {
         Vector3 spawnPoint = new Vector3();
-        TilemapStructure groundMap = grid.GetTilemap(TilemapType.Ground);
-        TilemapStructure lakeMap = grid.GetTilemap(TilemapType.Lake);
-        TilemapStructure cliffMap = grid.GetTilemap(TilemapType.Cliff);
         if (TempData.loadGame)
         {
             spawnPoint.x = SaveSystem.Load().saveElfPos[0];
@@ -115,9 +112,7 @@ public class WorldEvents : MonoBehaviour
                 xCoord = Random.Range(player.position.x-5, player.position.x+5);
                 yCoord = Random.Range(player.position.y-5, player.position.y+5);
             }
-            while (groundMap.GetTile(Mathf.FloorToInt(xCoord), Mathf.FloorToInt(yCoord)) == (int)GroundTileType.Empty 
-                || lakeMap.GetTile(Mathf.FloorToInt(xCoord), Mathf.FloorToInt(yCoord)) == (int)GroundTileType.Lake 
-                    || cliffMap.GetTile(Mathf.FloorToInt(xCoord), Mathf.FloorToInt(yCoord)) == (int)GroundTileType.Cliff);
+            while (!grid.CheckLand(new Vector2(xCoord, yCoord)) || !grid.CheckCliff(new Vector2(xCoord, yCoord)));
 
             // Generate spawn point
             spawnPoint = new Vector3(xCoord, yCoord);
@@ -146,17 +141,24 @@ public class WorldEvents : MonoBehaviour
 
     }
 
-    private void ElfEvent(TileGrid grid, GameObject elf, EnemySpawner spawner)
+    private void ElfEvent(GameObject elf, EnemySpawner spawner)
     {
         // Spawn enemy
+        Debug.Log("start elf event");
+        GameObject elfEnemy;
         if (Random.Range(0,1) == 1)
         {
-            spawner.spawnEnemy("Slime", new Vector3(elf.transform.position.x+1, elf.transform.position.y), true);
+            elfEnemy = spawner.spawnEnemy("Slime", new Vector3(elf.transform.position.x+1, elf.transform.position.y));
+            elfEnemy.GetComponent<SpriteRenderer>().flipX = true;
         }
         else
         {
-            spawner.spawnEnemy("Slime", new Vector3(elf.transform.position.x-1, elf.transform.position.y), false);
+            elfEnemy = spawner.spawnEnemy("Slime", new Vector3(elf.transform.position.x-1, elf.transform.position.y));
+            elfEnemy.GetComponent<SpriteRenderer>().flipX = false;
         }
+        elfEnemy.tag = "SpecialEnemy";
+        elfEnemy.GetComponent<NPCMovement>().enabled = false;
+        elfEnemy.GetComponent<Animator>().SetBool("Battle", true);
 
         // Attacked by slime
         elf.GetComponent<ElfPosition>().InDanger();

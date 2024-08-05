@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 public class ElfPosition : MonoBehaviour
 {
     public Vector3 spawnPoint;
-    private TilemapStructure groundMap;
 
     [SerializeField]
     private float maxDistance; // default is 3.5f
@@ -18,38 +17,6 @@ public class ElfPosition : MonoBehaviour
     public GameObject helpIcon;
     private GameObject helpIconChild;
 
-    // public static ElfPosition elf;
-
-    private void Awake()
-    {
-        // if (TempData.elfSaved)
-        // {
-        //     if (elf == null)
-        //     {
-        //         elf = this;
-        //     } 
-        //     else 
-        //     {
-        //         Destroy(gameObject);
-        //         return;
-        //     }
-
-        //     DontDestroyOnLoad(gameObject);
-        // }
-
-        // Attach delegates
-        // PosChange += CheckPosition;
-        // PosChange += OTileSound;
-
-        // Set event icon
-        // if (!TempData.elfSaved)
-        // {
-        //     Vector3 iconPos = new Vector3(transform.position.x, transform.position.y + 1);
-        //     newIcon = Instantiate(icon, iconPos, Quaternion.identity);
-        //     newIcon.transform.parent = gameObject.transform;
-        //     newIcon.GetComponent<EventIconData>().SetIcon("Event");
-        // }
-    }
 
     // Update is called once per frame
     private void Update()
@@ -117,6 +84,7 @@ public class ElfPosition : MonoBehaviour
 
     public void SaveElf()
     {
+        Debug.Log("saved");
         // TempData.elfSaved = true;
         // newIcon.SetActive(false);
         // TempData.initElf = false;
@@ -137,13 +105,6 @@ public class ElfPosition : MonoBehaviour
         FindObjectOfType<DialogueController>().EndDialogue();
         GetComponent<PartyMovement>().minDistance = 1.55f;
         TempData.elfSaved = true;
-    }
-
-    private void RetrieveTilemap()
-    {
-        // Retrieve tilemap components
-        groundMap = FindObjectOfType<TileGrid>().GetTilemap(TilemapType.Ground);
-        // overworldMap = FindObjectOfType<TileGrid>().GetTilemap(TilemapType.Overworld);
     }
 
     // Generates a random spawn point

@@ -3025,7 +3025,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   menuManager: {fileID: 1041991285}
   vege: {fileID: 1610619045}
-  npcs: {fileID: 1679262712}
 --- !u!1 &1267088605
 GameObject:
   m_ObjectHideFlags: 0
@@ -3841,7 +3840,7 @@ TilemapRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
+  m_RenderingLayerMask: 2
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
@@ -4561,8 +4560,10 @@ MonoBehaviour:
   - gameObject: {fileID: 7751972130982338795, guid: eac8ea6a5ef214293a34ede81e08ffe8, type: 3}
     spawnPoint: {x: 0, y: 0, z: 0}
     nightEnemy: 0
-  sampling: {fileID: 11400000, guid: 81a87356742f74d9c953795ecbca8f8d, type: 2}
-  goblinAlgorithm: {fileID: 11400000, guid: 52c9555d24b524fa6961f9194528963e, type: 2}
+  maxSpawn: 3
+  minWaitTime: 3
+  maxWaitTime: 5
+  minDistance: 50
 --- !u!1 &1818095764
 GameObject:
   m_ObjectHideFlags: 0
@@ -4811,7 +4812,7 @@ TilemapRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1932694722}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1

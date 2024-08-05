@@ -17,27 +17,6 @@ public class EnemyPosition : MonoBehaviour
     {
         // Get spawn point
         spawnPoint = transform.position;
-
-        // For goblins
-        if (name.Contains("Goblin"))
-        {
-            GameObject[] camps = GameObject.FindGameObjectsWithTag("Building");
-            foreach (GameObject camp in camps)
-            {
-                float distance = Vector3.Distance(camp.transform.position, transform.position);
-                if (camp.name.Contains("Camp") && distance <= 1.6)
-                {
-                    if (camp.transform.position.x - transform.position.x > 0)
-                    {
-                        GetComponent<SpriteRenderer>().flipX = false;
-                    }
-                    else
-                    {
-                        GetComponent<SpriteRenderer>().flipX = true;
-                    }
-                }
-            }
-        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -46,7 +25,7 @@ public class EnemyPosition : MonoBehaviour
         {
             FindObjectOfType<BattleManager>().Initiate(collision.gameObject, gameObject);
         }
-        if (gameObject.tag.Equals("SpecialEnemy"))
+        if (collision.gameObject.name.Contains("Player") && gameObject.tag.Equals("SpecialEnemy"))
         {
             FindObjectOfType<ElfPosition>().SaveElf();
         }

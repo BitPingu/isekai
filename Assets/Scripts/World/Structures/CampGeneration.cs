@@ -29,8 +29,7 @@ public class CampGeneration : MonoBehaviour
             campPoints = sampling.GeneratePoints(grid.GetTilemap(TilemapType.Ground));
         }
 
-        // Save camp points
-        TempData.tempCamps = campPoints;
+        List<Vector2> safeCampPoints = new List<Vector2>();
 
         // Generate camps
         foreach (Vector2 point in campPoints)
@@ -41,6 +40,10 @@ public class CampGeneration : MonoBehaviour
 
             // Spawn camp
             Instantiate(camp, new Vector3(point.x+.5f, point.y+.5f), Quaternion.identity, transform);
+            safeCampPoints.Add(point);
         }
+
+        // Save camp points
+        TempData.tempCamps = safeCampPoints;
     }
 }

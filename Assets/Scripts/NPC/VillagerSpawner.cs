@@ -5,34 +5,31 @@ using UnityEngine;
 public class VillagerSpawner : MonoBehaviour
 {
     private TilemapStructure villageMap;
+    private DayAndNightCycle time;
     public GameObject villager;
-    private bool villagersAlreadySpawned;
 
-    public void Initialize(TileGrid grid)
+    public void Initialize(TileGrid grid, DayAndNightCycle dayNight)
     {
-        // Retrieve tilemap component
+        // Retrieve tilemap component and time
         villageMap = grid.GetTilemap(TilemapType.Village);
-
-        // Spawn init villagers
-        Spawn();
+        time = dayNight;
     }
 
     public void Spawn()
     {
-        if (!villagersAlreadySpawned)
+        var villages = GameObject.FindGameObjectsWithTag("Landmark");
+        foreach (GameObject village in villages)
         {
-            villagersAlreadySpawned = true;
-            for (int x=0; x<villageMap.width; x++)
+            if (village.name.Contains("Village"))
             {
-                for (int y=0; y<villageMap.height; y++)
+                foreach (Vector2 lot in village.GetComponent<VillageData>().lots)
                 {
-                    // Check tile
-                    if (villageMap.GetTile(x, y) == (int)GroundTileType.VillagePlot)
-                    {
                     // Spawn villager at spawnPoint
-                    Vector3 spawnPoint = new Vector3(x, y-.5f, 0);
-                    Instantiate(villager, spawnPoint, Quaternion.identity, transform);
-                    }
+                    Vector3 spawnPoint = new Vector3(lot.x, lot.y-.5f, 0);
+                    GameObject v = Instantiate(villager, spawnPoint, Quaternion.identity, village.transform);
+                    village.GetComponent<VillageData>().villagers.Add(v);
+                    if (!village.GetComponent<VillageData>().containsPlayer)
+                        v.gameObject.SetActive(false);
                 }
             }
         }
@@ -40,11 +37,16 @@ public class VillagerSpawner : MonoBehaviour
 
     public void Despawn()
     {
-        villagersAlreadySpawned = false;
-        var clones = GameObject.FindGameObjectsWithTag("Villager");
-        foreach (var clone in clones)
+        var villages = GameObject.FindGameObjectsWithTag("Landmark");
+        foreach (GameObject village in villages)
         {
-            Destroy(clone);
+            if (village.name.Contains("Village"))
+            {
+                foreach (GameObject villager in village.GetComponent<VillageData>().villagers)
+                {
+                    villager.SetActive(false);
+                }
+            }
         }
     }
 }

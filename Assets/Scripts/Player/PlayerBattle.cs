@@ -8,7 +8,6 @@ public class PlayerBattle : MonoBehaviour
     private SpriteRenderer sprite;
     private Rigidbody2D rb;
     private Animator animator;
-    private TilemapStructure groundMap;
     private bool stance, isMoving;
     private float walkCounter;
 

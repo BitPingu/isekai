@@ -2,7 +2,10 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public Vector2 movement;
+    private Vector2 moveForce;
     public float maxSpeed; // Default is 5
+    
     [SerializeField]
     private KeyCode interactKey;
 
@@ -27,8 +30,8 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         // Movement
-        Vector2 movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
-        Vector2 moveForce = movement * moveSpeed;
+        movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
+        moveForce = movement * moveSpeed;
         rb.velocity = moveForce;
 
         // Movement animation

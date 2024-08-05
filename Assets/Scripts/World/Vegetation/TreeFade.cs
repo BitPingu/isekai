@@ -10,23 +10,45 @@ public class TreeFade : MonoBehaviour
     {
         treeDefaultColor = GetComponent<SpriteRenderer>().color;
         treeFadedColor = treeDefaultColor;
-        treeFadedColor.a = .5f;
+        treeFadedColor.a = .3f;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.name.Contains("Player"))
+        if (gameObject && (collision.gameObject.name.Contains("Player") || collision.gameObject.name.Contains("Elf")))
         {
             // Player enters
-            GetComponent<SpriteRenderer>().color = treeFadedColor;
+            StartCoroutine(FadeOut());
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.name.Contains("Player"))
+        if (gameObject && (collision.gameObject.name.Contains("Player") || collision.gameObject.name.Contains("Elf")))
         {
-            GetComponent<SpriteRenderer>().color = treeDefaultColor;
+            StartCoroutine(FadeIn());
+        }
+    }
+
+    private IEnumerator FadeOut()
+    {
+        float elapsedTime = 0f, fadeDuration = .1f;
+        while (gameObject && elapsedTime < fadeDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            GetComponent<SpriteRenderer>().color = Color.Lerp(treeDefaultColor, treeFadedColor, elapsedTime/fadeDuration);
+            yield return null;
+        }
+    }
+
+    private IEnumerator FadeIn()
+    {
+        float elapsedTime = 0f, fadeDuration = .1f;
+        while (gameObject && elapsedTime < fadeDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            GetComponent<SpriteRenderer>().color = Color.Lerp(treeFadedColor, treeDefaultColor, elapsedTime/fadeDuration);
+            yield return null;
         }
     }
 }

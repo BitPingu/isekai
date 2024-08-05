@@ -121,14 +121,14 @@ public class VillageGeneration : MonoBehaviour
             vilMaxWidth = 0;
             vilMaxHeight = 0;
 
+            // Spawn fountain (to be added later)
+            villageTree = Instantiate(fountain, new Vector3(vilCenter.x+.5f, vilCenter.y+.5f), Quaternion.identity, transform);
+
             // Start heading east in 2d world space
             direction = Vector3.right;
 
             // Generate village
             VisualizeSequence(vil.vilSequence);
-
-            // Spawn fountain (to be added later)
-            villageTree = Instantiate(fountain, new Vector3(vilCenter.x+.5f, vilCenter.y+.5f), Quaternion.identity, transform);
 
             // Village zone data for spawning in world
             villageTree.GetComponent<BoxCollider2D>().size = new Vector2(vilMaxWidth*2.3f, vilMaxHeight*2.7f);
@@ -160,6 +160,7 @@ public class VillageGeneration : MonoBehaviour
         {
             // Reserve plot (tile)
             grid.GetTilemap(TilemapType.Village).SetTile(Mathf.FloorToInt(housePos.x), Mathf.FloorToInt(housePos.y), (int)GroundTileType.VillagePlot, setDirty : false);
+            villageTree.GetComponent<VillageData>().lots.Add(housePos);
 
             // Place house object
             Instantiate(house, housePos, Quaternion.identity, transform);

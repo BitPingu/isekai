@@ -35,10 +35,6 @@ public class NPCMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
 
-        // Set counters
-        waitCounter = waitTime;
-        walkCounter = walkTime;
-
         // Choose direction
         chooseDirection();
 

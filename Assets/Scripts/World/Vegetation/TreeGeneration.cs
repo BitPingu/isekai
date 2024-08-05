@@ -35,7 +35,7 @@ public class TreeGeneration : MonoBehaviour
 
             // Divide into chunks
             chu = Instantiate(chunk, new Vector3(currentPoint.x, currentPoint.y), Quaternion.identity, transform);
-            chu.GetComponent<BoxCollider2D>().size = new Vector2(chunkSize*2, chunkSize*2);
+            chu.GetComponent<BoxCollider2D>().size = new Vector2(chunkSize*3, chunkSize*3);
             chu.GetComponent<BoxCollider2D>().offset = new Vector2(chunkSize/2, chunkSize/2);
 
             for (int x=0; x<chunkSize; x++)

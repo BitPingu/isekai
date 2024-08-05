@@ -99,7 +99,6 @@
     <Compile Include="Assets/Scripts/World/Village/VillageGeneration.cs" />
     <Compile Include="Assets/Scripts/Audio/AudioManager.cs" />
     <Compile Include="Assets/Scripts/World/Fog/FogGeneration.cs" />
-    <Compile Include="Assets/Scripts/NPC/GoblinAlgorithm.cs" />
     <Compile Include="Assets/Scripts/UI/PauseMenu.cs" />
     <Compile Include="Assets/Scripts/NPC/NPCMovement.cs" />
     <Compile Include="Assets/Scripts/NPC/VillagerSpawner.cs" />

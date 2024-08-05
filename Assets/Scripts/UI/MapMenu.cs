@@ -1,9 +1,10 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class MapMenu : MonoBehaviour
 {
     [SerializeField]
-    private GameObject menuManager, vege, npcs;
+    private GameObject menuManager, vege;
 
     // Update is called once per frame
     private void Update()
@@ -42,8 +43,6 @@ public class MapMenu : MonoBehaviour
                 }
             }
         }
-        if (npcs)
-            npcs.transform.localScale = new Vector3(0, 0, 0);
     }
 
     private void OnDisable()
@@ -66,7 +65,5 @@ public class MapMenu : MonoBehaviour
                 }
             }
         }
-        if (npcs)
-            npcs.transform.localScale = new Vector3(1, 1, 1);
     }
 }

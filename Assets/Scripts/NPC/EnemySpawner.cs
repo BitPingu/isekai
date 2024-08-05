@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
@@ -16,40 +18,89 @@ public class EnemySpawner : MonoBehaviour
     private EnemyTypes[] enemies;
 
     [SerializeField]
-    private PoissonDiscSamplingGenerator sampling;
-    private List<Vector2> enemySpawnPoints = new List<Vector2>();
-
+    private int maxSpawn;
+    private List<GameObject> spawnedEnemies = new List<GameObject>();
 
     [SerializeField]
-    private GoblinAlgorithm goblinAlgorithm;
+    private float minWaitTime; // default is 3f
+    [SerializeField]
+    private float maxWaitTime; // default is 5f
+    [SerializeField]
+    private float minDistance;
+    
+    private TileGrid grid;
+    private DayAndNightCycle time;
+    private GameObject player;
 
-    private TilemapStructure groundMap;
-
-    public void Initialize(TileGrid grid)
+    public void Initialize(TileGrid g, DayAndNightCycle dayNight, GameObject p)
     {
-        // Get tilemap structure
-        groundMap = grid.GetTilemap(TilemapType.Ground);
+        // Get tilemap structure and time and player
+        grid = g;
+        time = dayNight;
+        player = p;
+
+        // Spawn enemies
+        StartCoroutine(Spawn());
+        SpawnGoblins();
     }
 
-    public void dayEnemies()
+    public IEnumerator Spawn()
     {
-        if (FindObjectOfType<PlayerPosition>().currentArea == "Village")
-            return;
+        Debug.Log("try spawn with " + FindObjectOfType<PlayerPosition>().currentArea + " " + spawnedEnemies.Count);
+        while (FindObjectOfType<PlayerPosition>().currentArea == "Overworld" && spawnedEnemies.Count <= maxSpawn)
+        {
+            // Spawn enemies
+            if (time.isDay)
+            {
+                dayEnemies();
+            }
+            else
+            {
+                nightEnemies();
+            }
+            Debug.Log("spawn " + spawnedEnemies.Count);
 
-        despawnEnemies();
-        // Generate enemy spawn points (might change algo to random chance later ie more common in forested areas)
-        enemySpawnPoints = sampling.GeneratePoints(groundMap);
+            // Choose random wait time
+            float interval = UnityEngine.Random.Range(minWaitTime, maxWaitTime);
+            yield return new WaitForSeconds(interval);
+        }
+    }
 
+    private void Update()
+    {
+        if (spawnedEnemies.Count > 0)
+        {
+            GameObject[] enemies = spawnedEnemies.ToArray();
+            foreach (GameObject enemy in enemies)
+            {
+                if (!enemy)
+                    continue;
+
+                // Calculate current distance from player
+                float distance = Vector3.Distance(player.transform.position, enemy.transform.position);
+
+                // Check if outside range
+                if (distance > minDistance)
+                {
+                    Debug.Log("despawn");
+                    // maybe use a coroutine?
+                    spawnedEnemies.Remove(enemy);
+                    Destroy(enemy);
+
+                    // Spawn another enemy
+                    StartCoroutine(Spawn());
+                }
+            }
+        }
+    }
+
+    private void dayEnemies()
+    {
         foreach (EnemyTypes enemy in enemies)
         {
             switch (enemy.gameObject.name)
             {
                 case "Slime":
-                    // Spawn overworld enemies
-                    spawnEnemy(enemy);
-                    break;
-                case "Goblin":
-                    enemySpawnPoints = goblinAlgorithm.GeneratePoints();
                     spawnEnemy(enemy);
                     break;
                 default:
@@ -58,22 +109,16 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    public void nightEnemies()
+    private void nightEnemies()
     {
-        if (FindObjectOfType<PlayerPosition>().currentArea == "Village")
-            return;
-        
-        despawnEnemies();
-        // Generate enemy spawn points (might change algo to random chance later ie more common in forested areas)
-        enemySpawnPoints = sampling.GeneratePoints(groundMap);
-
         foreach (EnemyTypes enemy in enemies)
         {
             switch (enemy.gameObject.name)
             {
                 case "Zombie":
-                    // Spawn overworld enemies
                     spawnEnemy(enemy);
+                    break;
+                default:
                     break;
             }
         }
@@ -81,27 +126,36 @@ public class EnemySpawner : MonoBehaviour
 
     private void spawnEnemy(EnemyTypes enemy)
     {
-        // Spawn enemies
-        foreach (Vector2 point in enemySpawnPoints)
+        Vector3 spawnPoint = new Vector3();
+
+        float xCoord, yCoord;
+
+        Vector2 playerMovement = player.GetComponent<PlayerController>().movement;
+
+        // Generate enemy spawn point
+        do
         {
-            // Skip water coords
-            if (groundMap.GetTile(Mathf.FloorToInt(point.x), Mathf.FloorToInt(point.y)) == (int)GroundTileType.Empty)
-                continue;
-
-            // Create new spawn point from list
-            Vector3 spawnPoint = new Vector3(point.x, point.y, 0);
-
-            // Instantiate and spawn enemy
-            Instantiate(enemy.gameObject, spawnPoint, Quaternion.identity, transform);
+            // Choose random spawn point around player
+            xCoord = UnityEngine.Random.Range((player.transform.position.x-20), (player.transform.position.x+20));
+            yCoord = UnityEngine.Random.Range((player.transform.position.y-20), (player.transform.position.y+20));
         }
+        while (!grid.CheckLand(new Vector2(xCoord, yCoord)) || !grid.CheckCliff(new Vector2(xCoord, yCoord)));
+
+        // Generate spawn point
+        spawnPoint = new Vector3(xCoord, yCoord);
+
+        // Instantiate and spawn enemy
+        GameObject e = Instantiate(enemy.gameObject, spawnPoint, Quaternion.identity, transform);
+        spawnedEnemies.Add(e);
     }
 
-    public void spawnEnemy(string type, Vector3 spawnPoint, bool flipX)
+    public GameObject spawnEnemy(string type, Vector3 spawnPoint)
     {
-        // Skip water coords
-        if (groundMap.GetTile(Mathf.FloorToInt(spawnPoint.x), Mathf.FloorToInt(spawnPoint.y)) == (int)GroundTileType.Empty)
+        // Check if safe to spawn
+        if (!grid.CheckLand(spawnPoint) || !grid.CheckCliff(spawnPoint))
         {
-            Debug.Log("enemy will spawn on water!");
+            Debug.Log(type + " cant spawn!");
+            return null;
         }
 
         // Get enemy
@@ -113,21 +167,45 @@ public class EnemySpawner : MonoBehaviour
                 GameObject childEnemy = Instantiate(enemy.gameObject, spawnPoint, Quaternion.identity, transform);
 
                 // Assign special values
-                childEnemy.tag = "SpecialEnemy";
-                childEnemy.GetComponent<NPCMovement>().enabled = false;
-                childEnemy.GetComponent<SpriteRenderer>().flipX = flipX;
-                childEnemy.GetComponent<Animator>().SetBool("Battle", true);
-                break;
+                return childEnemy;
+            }
+        }
+
+        return null;
+    }
+
+    private void SpawnGoblins()
+    {
+        foreach (EnemyTypes enemy in enemies)
+        {
+            switch (enemy.gameObject.name)
+            {
+                case "Goblin":
+                    // Look for camp points
+                    foreach (Vector2 point in TempData.tempCamps)
+                    {
+                        // Check if safe to spawn (randomize later on?)
+                        GameObject goblin1 = spawnEnemy(enemy.gameObject.name, new Vector2((int)point.x+1.5f, (int)point.y+.7f));
+                        if (goblin1)
+                            goblin1.GetComponent<SpriteRenderer>().flipX = true;
+                        GameObject goblin2 = spawnEnemy(enemy.gameObject.name, new Vector2((int)point.x+.5f, (int)point.y+1.2f));
+                        if (goblin2)
+                            goblin2.GetComponent<SpriteRenderer>().flipX = true;
+                    }
+                    break;
+                default:
+                    break;
             }
         }
     }
 
     public void despawnEnemies()
     {
-        var clones = GameObject.FindGameObjectsWithTag("Enemy");
-        foreach (var clone in clones)
+        GameObject[] enemies = spawnedEnemies.ToArray();
+        foreach (GameObject enemy in enemies)
         {
-            Destroy(clone);
+            spawnedEnemies.Remove(enemy);
+            Destroy(enemy);
         }
     }
 }
