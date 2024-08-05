@@ -3,7 +3,7 @@ using UnityEngine;
 public class MapMenu : MonoBehaviour
 {
     [SerializeField]
-    private GameObject menuManager, npcs;
+    private GameObject menuManager, vege, npcs;
 
     // Update is called once per frame
     private void Update()
@@ -32,7 +32,16 @@ public class MapMenu : MonoBehaviour
             FindObjectOfType<MapController>().enabled = true;
             FindObjectOfType<MapController>().GetComponent<CameraController>().enabled = false;
         }
-        npcs = GameObject.Find("NPC");
+        if (vege)
+        {
+            foreach (Transform chunk in vege.transform)
+            {
+                foreach (Transform child in chunk.transform)
+                {
+                     child.gameObject.SetActive(true);
+                }
+            }
+        }
         if (npcs)
             npcs.transform.localScale = new Vector3(0, 0, 0);
     }
@@ -44,7 +53,19 @@ public class MapMenu : MonoBehaviour
             FindObjectOfType<MapController>().enabled = false;
             FindObjectOfType<MapController>().GetComponent<CameraController>().enabled = true;
         }
-        npcs = GameObject.Find("NPC");
+        if (vege)
+        {
+            foreach (Transform chunk in vege.transform)
+            {
+                if (!chunk.GetComponent<ChunkLoader>().containsPlayer)
+                {
+                    foreach (Transform child in chunk.transform)
+                    {
+                        child.gameObject.SetActive(false);
+                    }
+                }
+            }
+        }
         if (npcs)
             npcs.transform.localScale = new Vector3(1, 1, 1);
     }

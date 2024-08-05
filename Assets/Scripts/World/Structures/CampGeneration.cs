@@ -8,14 +8,10 @@ public class CampGeneration : MonoBehaviour
     private PoissonDiscSamplingGenerator sampling;
     private List<Vector2> campPoints = new List<Vector2>();
 
-    private TilemapStructure groundMap;
     public GameObject camp;
 
-    public void Initialize(TilemapStructure tilemap)
+    public void Initialize(TileGrid grid)
     {
-        // Get tilemap structure
-        groundMap = tilemap;
-
         if (TempData.loadGame)
         {
             // Load camp points
@@ -30,7 +26,7 @@ public class CampGeneration : MonoBehaviour
         else
         {
             // Generate camp coords
-            campPoints = sampling.GeneratePoints(tilemap);
+            campPoints = sampling.GeneratePoints(grid.GetTilemap(TilemapType.Ground));
         }
 
         // Save camp points
@@ -39,14 +35,9 @@ public class CampGeneration : MonoBehaviour
         // Generate camps
         foreach (Vector2 point in campPoints)
         {
-            // Skip water coords
-            if (groundMap.GetTile(Mathf.FloorToInt(point.x), Mathf.FloorToInt(point.y)) == (int)GroundTileType.Sea)
+            // Check if safe to spawn
+            if (!grid.CheckLand(new Vector2(point.x, point.y)) || !grid.CheckCliff(new Vector2(point.x, point.y)))
                 continue;
-
-            // Set dungeon centerpoint
-            // vilCenter = new Vector3(Mathf.FloorToInt(point.x), Mathf.FloorToInt(point.y));
-
-            // Generate procedural dungeon area here saved on another tilemap
 
             // Spawn camp
             Instantiate(camp, new Vector3(point.x+.5f, point.y+.5f), Quaternion.identity, transform);

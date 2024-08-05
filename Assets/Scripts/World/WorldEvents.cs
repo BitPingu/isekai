@@ -6,16 +6,11 @@ using UnityEngine.Tilemaps;
 
 public class WorldEvents : MonoBehaviour
 {
-    // Call other functions when scene changes
-    public delegate void OnSceneChange();
-    public OnSceneChange SceneChange;
-
-    // private TilemapStructure groundMap;
-    private DayAndNightCycle time;
-
     public GameObject player, elf, audio;
     private GameObject p, e;
     public CameraController camera;
+
+    private DayAndNightCycle time;
 
     public void Initialize(WorldGeneration world, TileGrid grid, DayAndNightCycle dayNight)
     {
@@ -25,10 +20,6 @@ public class WorldEvents : MonoBehaviour
         // Init enemy spawner
         GetComponentInChildren<EnemySpawner>().Initialize(grid);
 
-        // Attach dayNight delegates to enemy spawners
-        dayNight.DayTime += GetComponentInChildren<EnemySpawner>().dayEnemies;
-        dayNight.NightTime += GetComponentInChildren<EnemySpawner>().nightEnemies;
-
         // Init villager spawner
         GetComponentInChildren<VillagerSpawner>().Initialize(grid);
 
@@ -36,9 +27,37 @@ public class WorldEvents : MonoBehaviour
         dayNight.DayTime += GetComponentInChildren<VillagerSpawner>().Spawn;
         dayNight.NightTime += GetComponentInChildren<VillagerSpawner>().Despawn;
 
+        // Spawn player
+        SpawnPlayer(grid, world);
+
+        // Spawn elf
+        SpawnElf(grid, p.transform);
+
+        // Audio
+        Instantiate(audio, Vector3.zero, Quaternion.identity);
+
+        // Call dayNight delegates (and any methods tied to it)
+        if (dayNight.isDay)
+        {
+            dayNight.DayTime();
+        }
+        else
+        {
+            dayNight.NightTime();
+        }
+
+        if (TempData.loadGame)
+            TempData.elfSaved = SaveSystem.Load().saveElf;
+
+        // Start elf event
+        if (!TempData.elfSaved)
+            ElfEvent(grid, e, GetComponentInChildren<EnemySpawner>());
+    }
+
+    private void SpawnPlayer(TileGrid grid, WorldGeneration world)
+    {
         // Determine player spawn
         Vector3 spawnPoint = new Vector3();
-        float xCoord, yCoord;
         TilemapStructure groundMap = grid.GetTilemap(TilemapType.Ground);
         TilemapStructure lakeMap = grid.GetTilemap(TilemapType.Lake);
         TilemapStructure cliffMap = grid.GetTilemap(TilemapType.Cliff);
@@ -49,6 +68,7 @@ public class WorldEvents : MonoBehaviour
         }
         else
         {
+            float xCoord, yCoord;
             do
             {
                 // Choose random spawn point
@@ -72,9 +92,14 @@ public class WorldEvents : MonoBehaviour
 
         // Make camera look at player
         camera.LookAt(p.transform);
+    }
 
-
-
+    private void SpawnElf(TileGrid grid, Transform player)
+    {
+        Vector3 spawnPoint = new Vector3();
+        TilemapStructure groundMap = grid.GetTilemap(TilemapType.Ground);
+        TilemapStructure lakeMap = grid.GetTilemap(TilemapType.Lake);
+        TilemapStructure cliffMap = grid.GetTilemap(TilemapType.Cliff);
         if (TempData.loadGame)
         {
             spawnPoint.x = SaveSystem.Load().saveElfPos[0];
@@ -82,12 +107,13 @@ public class WorldEvents : MonoBehaviour
         }
         else
         {
+            float xCoord, yCoord;
             // Generate elf spawn point
             do
             {
                 // Choose random spawn point around player
-                xCoord = Random.Range(spawnPoint.x-5, spawnPoint.x+5);
-                yCoord = Random.Range(spawnPoint.y-5, spawnPoint.y+5);
+                xCoord = Random.Range(player.position.x-5, player.position.x+5);
+                yCoord = Random.Range(player.position.y-5, player.position.y+5);
             }
             while (groundMap.GetTile(Mathf.FloorToInt(xCoord), Mathf.FloorToInt(yCoord)) == (int)GroundTileType.Empty 
                 || lakeMap.GetTile(Mathf.FloorToInt(xCoord), Mathf.FloorToInt(yCoord)) == (int)GroundTileType.Lake 
@@ -99,27 +125,6 @@ public class WorldEvents : MonoBehaviour
 
         // Init elf
         e = Instantiate(elf, spawnPoint, Quaternion.identity);
-
-        // Audio
-        Instantiate(audio, Vector3.zero, Quaternion.identity);
-
-        // Call dayNight delegates (and any methods tied to it)
-        if (dayNight.isDay)
-        {
-            dayNight.DayTime();
-        }
-        else
-        {
-            dayNight.NightTime();
-        }
-
-
-        if (TempData.loadGame)
-            TempData.elfSaved = SaveSystem.Load().saveElf;
-
-        // Start elf event
-        if (!TempData.elfSaved)
-            ElfEvent(grid, e, GetComponentInChildren<EnemySpawner>());
     }
 
     private void Update()
@@ -144,12 +149,11 @@ public class WorldEvents : MonoBehaviour
     private void ElfEvent(TileGrid grid, GameObject elf, EnemySpawner spawner)
     {
         // Spawn enemy
-        TilemapStructure groundMap = grid.GetTilemap(TilemapType.Ground);
-        if (groundMap.GetTile((int)elf.transform.position.x+1, (int)elf.transform.position.y) == (int)GroundTileType.Land)
+        if (Random.Range(0,1) == 1)
         {
             spawner.spawnEnemy("Slime", new Vector3(elf.transform.position.x+1, elf.transform.position.y), true);
         }
-        else if (groundMap.GetTile((int)elf.transform.position.x-1, (int)elf.transform.position.y) == (int)GroundTileType.Land)
+        else
         {
             spawner.spawnEnemy("Slime", new Vector3(elf.transform.position.x-1, elf.transform.position.y), false);
         }

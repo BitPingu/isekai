@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class VillagerSpawner : MonoBehaviour
 {
-    private TilemapStructure groundMap;
+    private TilemapStructure villageMap;
     public GameObject villager;
     private bool villagersAlreadySpawned;
 
     public void Initialize(TileGrid grid)
     {
         // Retrieve tilemap component
-        groundMap = grid.GetTilemap(TilemapType.Ground);
+        villageMap = grid.GetTilemap(TilemapType.Village);
 
         // Spawn init villagers
         Spawn();
@@ -22,15 +22,15 @@ public class VillagerSpawner : MonoBehaviour
         if (!villagersAlreadySpawned)
         {
             villagersAlreadySpawned = true;
-            for (int x=0; x<groundMap.width; x++)
+            for (int x=0; x<villageMap.width; x++)
             {
-                for (int y=0; y<groundMap.height; y++)
+                for (int y=0; y<villageMap.height; y++)
                 {
                     // Check tile
-                    if (groundMap.GetTile(x, y) == (int)GroundTileType.VillagePlot && Random.value < 0.5)
+                    if (villageMap.GetTile(x, y) == (int)GroundTileType.VillagePlot)
                     {
                     // Spawn villager at spawnPoint
-                    Vector3Int spawnPoint = new Vector3Int(x, y, 0);
+                    Vector3 spawnPoint = new Vector3(x, y-.5f, 0);
                     Instantiate(villager, spawnPoint, Quaternion.identity, transform);
                     }
                 }

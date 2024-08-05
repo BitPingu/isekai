@@ -41,6 +41,34 @@ public class TileGrid : MonoBehaviour
         }
     }
 
+    public bool CheckLand(Vector2 position)
+    {
+        TilemapStructure groundMap = GetTilemap(TilemapType.Ground);
+        TilemapStructure lakeMap = groundMap.grid.GetTilemap(TilemapType.Lake);
+        var groundNeighbors = groundMap.GetNeighbors(Mathf.FloorToInt(position.x), Mathf.FloorToInt(position.y));
+        var lakeNeighbors = lakeMap.GetNeighbors(Mathf.FloorToInt(position.x), Mathf.FloorToInt(position.y));
+
+        if (!groundNeighbors.ContainsValue((int)GroundTileType.Empty) && !lakeNeighbors.ContainsValue((int)GroundTileType.Lake))
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    public bool CheckCliff(Vector2 position)
+    {
+        TilemapStructure cliffMap = GetTilemap(TilemapType.Cliff);
+        var cliffNeighbors = cliffMap.GetNeighbors(Mathf.FloorToInt(position.x), Mathf.FloorToInt(position.y));
+
+        if (!cliffNeighbors.ContainsValue((int)GroundTileType.Cliff))
+        {
+            return true;
+        }
+
+        return false;
+    }
+
     // Returns all cached shared tiles available to be placed on tilemap
     public Dictionary<int, TileBase> GetTileCache()
     {

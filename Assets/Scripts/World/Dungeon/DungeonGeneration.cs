@@ -8,14 +8,10 @@ public class DungeonGeneration : MonoBehaviour
     private PoissonDiscSamplingGenerator sampling;
     private List<Vector2> dunPoints = new List<Vector2>();
 
-    private TilemapStructure groundMap;
     public GameObject dungeon;
 
-    public void Initialize(TilemapStructure tilemap)
+    public void Initialize(TileGrid grid)
     {
-        // Get tilemap structure
-        groundMap = tilemap;
-
         if (TempData.loadGame)
         {
             // Load dungeon data
@@ -30,7 +26,7 @@ public class DungeonGeneration : MonoBehaviour
         else
         {
             // Generate dungeon coords
-            dunPoints = sampling.GeneratePoints(tilemap);
+            dunPoints = sampling.GeneratePoints(grid.GetTilemap(TilemapType.Ground));
         }
 
         // Save dun data
@@ -39,8 +35,8 @@ public class DungeonGeneration : MonoBehaviour
         // Generate dungeons
         foreach (Vector2 point in dunPoints)
         {
-            // Skip water coords
-            if (groundMap.GetTile(Mathf.FloorToInt(point.x), Mathf.FloorToInt(point.y)) == (int)GroundTileType.Sea)
+            // Check if safe to spawn
+            if (!grid.CheckLand(new Vector2(point.x, point.y)) || !grid.CheckCliff(new Vector2(point.x, point.y)))
                 continue;
 
             // Set dungeon centerpoint

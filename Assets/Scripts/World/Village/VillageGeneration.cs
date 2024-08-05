@@ -32,7 +32,7 @@ public class VillageGeneration : MonoBehaviour
     private int vilMaxWidth, vilMaxHeight;
     public int maxVillages = 4, minHousesPerVillage;
 
-    private TilemapStructure groundMap;
+    private TileGrid grid;
     public GameObject house, fountain, townhall;
     private GameObject villageTree;
 
@@ -64,10 +64,10 @@ public class VillageGeneration : MonoBehaviour
         set => length = value;
     }
 
-    public void Initialize(TilemapStructure tilemap)
+    public void Initialize(TileGrid g)
     {
-        // Get tilemap structure
-        groundMap = tilemap.grid.GetTilemap(TilemapType.Ground);
+        // Get grid
+        grid = g;
 
         if (TempData.loadGame)
         {
@@ -84,18 +84,14 @@ public class VillageGeneration : MonoBehaviour
         else
         {
             // Generate village coords
-            List<Vector2> vilPoints = sampling.GeneratePoints(tilemap);
+            List<Vector2> vilPoints = sampling.GeneratePoints(grid.GetTilemap(TilemapType.Ground));
 
             // Limit number of villages in world
             int villageCount = 0;
             for (int i=0; i<vilPoints.Count; i++)
             {
                 // Skip obstructed coords
-                TilemapStructure lakeMap = groundMap.grid.GetTilemap(TilemapType.Lake);
-                TilemapStructure cliffMap = groundMap.grid.GetTilemap(TilemapType.Cliff);
-                if (groundMap.GetTile(Mathf.FloorToInt(vilPoints[i].x), Mathf.FloorToInt(vilPoints[i].y)) != (int)GroundTileType.Land
-                    || lakeMap.GetTile(Mathf.FloorToInt(vilPoints[i].x), Mathf.FloorToInt(vilPoints[i].y)) == (int)GroundTileType.Lake
-                        || cliffMap.GetTile(Mathf.FloorToInt(vilPoints[i].x), Mathf.FloorToInt(vilPoints[i].y)) == (int)GroundTileType.Cliff)
+                if (!grid.CheckLand(vilPoints[i]) || !grid.CheckCliff(vilPoints[i]))
                 {
                     continue;
                 }
@@ -139,7 +135,7 @@ public class VillageGeneration : MonoBehaviour
         }
 
         // Render tiles
-        groundMap.UpdateTiles();
+        grid.GetTilemap(TilemapType.Village).UpdateTiles();
     }
 
     private void SpawnVillageSquare(Vector3 centerPos)
@@ -149,21 +145,21 @@ public class VillageGeneration : MonoBehaviour
             for (int j=Mathf.FloorToInt(centerPos.y)-vilSquareRad; j<=Mathf.FloorToInt(centerPos.y)+vilSquareRad; j++)
             {
                 // Place road for village square
-                groundMap.SetTile(i, j, (int)GroundTileType.VillagePath, setDirty : false);
+                grid.GetTilemap(TilemapType.Village).SetTile(i, j, (int)GroundTileType.VillagePath, setDirty : false);
             }
         }
 
         // townhall
-        groundMap.SetTile(Mathf.FloorToInt(vilCenter.x), Mathf.FloorToInt(vilCenter.y+vilSquareRad+1), (int)GroundTileType.VillagePlot, setDirty : false);
+        grid.GetTilemap(TilemapType.Village).SetTile(Mathf.FloorToInt(vilCenter.x), Mathf.FloorToInt(vilCenter.y+vilSquareRad+1), (int)GroundTileType.VillagePlot, setDirty : false);
         Instantiate(townhall, new Vector3(vilCenter.x+.5f, vilCenter.y+vilSquareRad+1.5f), Quaternion.identity, transform);
     }
 
     private void SpawnHouse(Vector3 housePos)
     {
-        if (groundMap.GetTile(Mathf.FloorToInt(housePos.x), Mathf.FloorToInt(housePos.y)) == (int)GroundTileType.Land)
+        if (grid.CheckLand(housePos) || grid.CheckCliff(housePos))
         {
             // Reserve plot (tile)
-            groundMap.SetTile(Mathf.FloorToInt(housePos.x), Mathf.FloorToInt(housePos.y), (int)GroundTileType.VillagePlot, setDirty : false);
+            grid.GetTilemap(TilemapType.Village).SetTile(Mathf.FloorToInt(housePos.x), Mathf.FloorToInt(housePos.y), (int)GroundTileType.VillagePlot, setDirty : false);
 
             // Place house object
             Instantiate(house, housePos, Quaternion.identity, transform);
@@ -190,7 +186,6 @@ public class VillageGeneration : MonoBehaviour
             switch (encoding)
             {
                 case EncodingLetters.save:
-                    // Debug.Log("save");
                     // Save current parameters and push to stack
                     savePoints.Push(new AgentParameters{
                         position = currentPosition,
@@ -201,7 +196,6 @@ public class VillageGeneration : MonoBehaviour
                 case EncodingLetters.load:
                     if (savePoints.Count > 0)
                     {
-                        // Debug.Log("load");
                         // Load saved parameters from stack
                         var agentParameter = savePoints.Pop();
                         currentPosition = agentParameter.position;
@@ -229,19 +223,15 @@ public class VillageGeneration : MonoBehaviour
                     for (int i=0; i<Length; i++)
                     {
                         // Check for water
-                        if (groundMap.GetTile(Mathf.FloorToInt(currentPosition.x), Mathf.FloorToInt(currentPosition.y)) != (int)GroundTileType.Land)
-                            continue;
-                        TilemapStructure lakeMap = groundMap.grid.GetTilemap(TilemapType.Lake);
-                        if (lakeMap.GetTile(Mathf.FloorToInt(currentPosition.x), Mathf.FloorToInt(currentPosition.y)) == (int)GroundTileType.Lake)
+                        if (!grid.CheckLand(new Vector2(currentPosition.x, currentPosition.y)))
                             continue;
 
                         // Check for cliff
-                        TilemapStructure cliffMap = groundMap.grid.GetTilemap(TilemapType.Cliff);
-                        if (cliffMap.GetTile(Mathf.FloorToInt(currentPosition.x), Mathf.FloorToInt(currentPosition.y)) == (int)GroundTileType.Cliff)
+                        if (!grid.CheckCliff(new Vector2(currentPosition.x, currentPosition.y)))
                             continue;
 
                         // Road tile
-                        groundMap.SetTile(Mathf.FloorToInt(currentPosition.x), Mathf.FloorToInt(currentPosition.y), (int)GroundTileType.VillagePath, setDirty : false);
+                        grid.GetTilemap(TilemapType.Village).SetTile(Mathf.FloorToInt(currentPosition.x), Mathf.FloorToInt(currentPosition.y), (int)GroundTileType.VillagePath, setDirty : false);
 
                         if (i == Length/2)
                         {

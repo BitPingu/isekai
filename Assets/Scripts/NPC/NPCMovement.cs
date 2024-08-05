@@ -16,10 +16,8 @@ public class NPCMovement : MonoBehaviour
     private Vector2Int currentPos;
     [SerializeField]
     private int currentTile;
-    // private TilemapStructure overworldMap;
-
     private bool isMoving;
-    private bool seePlayer;
+
     [SerializeField]
     private float walkTime; // default is 1f 1 .5 1
     private float walkCounter;
@@ -134,10 +132,6 @@ public class NPCMovement : MonoBehaviour
 
     private void Chase()
     {
-        // Always walk
-        // isMoving = true;
-        // walkCounter = walkTime;
-
         // Calculate current direction towards player
         Vector2 movement = (FindObjectOfType<PlayerPosition>().transform.position - rb.transform.position).normalized;
 

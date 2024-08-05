@@ -69,6 +69,7 @@
     <Compile Include="Assets/Scripts/Player/PlayerBattle.cs" />
     <Compile Include="Assets/Scripts/Battle/BattleManager.cs" />
     <Compile Include="Assets/Scripts/Algorithms/PerlinNoiseGenerator.cs" />
+    <Compile Include="Assets/Scripts/World/Vegetation/TreeFade.cs" />
     <Compile Include="Assets/Scripts/Data/SaveData.cs" />
     <Compile Include="Assets/Scripts/Battle/BattleData.cs" />
     <Compile Include="Assets/Scripts/Player/PlayerData.cs" />
@@ -119,6 +120,7 @@
     <Compile Include="Assets/Scripts/World/Vegetation/VegetationData.cs" />
     <Compile Include="Assets/Scripts/Algorithms/LSystem/StructureHelper.cs" />
     <Compile Include="Assets/Scripts/UI/EventIconData.cs" />
+    <Compile Include="Assets/Scripts/World/ChunkLoader.cs" />
     <Compile Include="Assets/Scripts/Tilemaps/TileTypes.cs" />
     <Compile Include="Assets/Scripts/Tilemaps/TilemapStructure.cs" />
     <Compile Include="Assets/Scripts/Algorithms/CellularAutomata.cs" />

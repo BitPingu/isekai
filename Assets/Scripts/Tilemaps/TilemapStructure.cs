@@ -8,6 +8,7 @@ public enum TilemapType
     Ground,
     Lake,
     Cliff,
+    Village,
     Fog
 }
 

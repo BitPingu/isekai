@@ -39,11 +39,7 @@ public class CliffGeneration : MonoBehaviour
                     // If the height is smaller or equal then use this tiletype
                     if (height <= tileTypes[i].height)
                     {
-                        TilemapStructure groundMap = tilemap.grid.GetTilemap(TilemapType.Ground);
-                        TilemapStructure lakeMap = tilemap.grid.GetTilemap(TilemapType.Lake);
-                        var groundNeighbors = groundMap.GetNeighbors(x, y);
-                        var lakeNeighbors = lakeMap.GetNeighbors(x, y);
-                        if (!groundNeighbors.ContainsValue((int)GroundTileType.Empty) && !lakeNeighbors.ContainsValue((int)GroundTileType.Lake))
+                        if (tilemap.grid.CheckLand(new Vector2(x,y)))
                         {
                             tilemap.SetTile(x, y, (int)tileTypes[i].groundTile, setDirty : false);  
                             break;
