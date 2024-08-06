@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 192f1d8a5b0724fb68916eaa911cd870
+guid: 3c0e8d7b4e9f64e2fb40c58b4314b484
 TextureImporter:
   internalIDToNameTable:
   - first:
@@ -86,12 +86,6 @@ TextureImporter:
   - first:
       213: 1129999636902559987
     second: plains-cliff-tileset_27
-  - first:
-      213: 1250720037714872008
-    second: plains-cliff-tileset_28
-  - first:
-      213: -2128861303829812559
-    second: plains-cliff-tileset_29
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -192,11 +186,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape:
-      - - {x: -8, y: 8}
-        - {x: -8, y: -8}
-        - {x: 8, y: -8}
-        - {x: 8, y: 8}
+      physicsShape: []
       tessellationDetail: 0
       bones: []
       spriteID: 8eb17f59148855c30800000000000000
@@ -217,11 +207,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape:
-      - - {x: -8, y: 8}
-        - {x: -8, y: -8}
-        - {x: 8, y: -8}
-        - {x: 8, y: 8}
+      physicsShape: []
       tessellationDetail: 0
       bones: []
       spriteID: abc8f99cfb1f3b810800000000000000
@@ -242,11 +228,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape:
-      - - {x: -8, y: 8}
-        - {x: -8, y: -8}
-        - {x: 8, y: -8}
-        - {x: 8, y: 8}
+      physicsShape: []
       tessellationDetail: 0
       bones: []
       spriteID: 3e783ce7c1816cf10800000000000000
@@ -267,11 +249,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape:
-      - - {x: -8, y: 8}
-        - {x: -8, y: -8}
-        - {x: 8, y: -8}
-        - {x: 8, y: 8}
+      physicsShape: []
       tessellationDetail: 0
       bones: []
       spriteID: 7c7118bd6aac230e0800000000000000
@@ -292,11 +270,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape:
-      - - {x: -8, y: 8}
-        - {x: -8, y: -8}
-        - {x: 8, y: -8}
-        - {x: 8, y: 8}
+      physicsShape: []
       tessellationDetail: 0
       bones: []
       spriteID: 12df1f0d8bd6c2740800000000000000
@@ -317,11 +291,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape:
-      - - {x: -8, y: 8}
-        - {x: -8, y: -8}
-        - {x: 8, y: -8}
-        - {x: 8, y: 8}
+      physicsShape: []
       tessellationDetail: 0
       bones: []
       spriteID: 5435d73fbad3cb240800000000000000
@@ -342,11 +312,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape:
-      - - {x: -8, y: 8}
-        - {x: -8, y: -8}
-        - {x: 8, y: -8}
-        - {x: 8, y: 8}
+      physicsShape: []
       tessellationDetail: 0
       bones: []
       spriteID: fefa7fefdcb751170800000000000000
@@ -359,19 +325,15 @@ TextureImporter:
       name: plains-cliff-tileset_7
       rect:
         serializedVersion: 2
-        x: 16
+        x: 48
         y: 48
         width: 16
         height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape:
-      - - {x: -8, y: 8}
-        - {x: -8, y: -8}
-        - {x: 8, y: -8}
-        - {x: 8, y: 8}
+      physicsShape: []
       tessellationDetail: 0
       bones: []
       spriteID: 4e5fc0b3bcfe3f810800000000000000
@@ -384,7 +346,7 @@ TextureImporter:
       name: plains-cliff-tileset_8
       rect:
         serializedVersion: 2
-        x: 32
+        x: 64
         y: 48
         width: 16
         height: 16
@@ -392,11 +354,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape:
-      - - {x: -8, y: 8}
-        - {x: -8, y: -8}
-        - {x: 8, y: -8}
-        - {x: 8, y: 8}
+      physicsShape: []
       tessellationDetail: 0
       bones: []
       spriteID: 393c6313611c08420800000000000000
@@ -409,19 +367,15 @@ TextureImporter:
       name: plains-cliff-tileset_9
       rect:
         serializedVersion: 2
-        x: 48
+        x: 80
         y: 48
         width: 16
         height: 16
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape:
-      - - {x: -8, y: 8}
-        - {x: -8, y: -8}
-        - {x: 8, y: -8}
-        - {x: 8, y: 8}
+      physicsShape: []
       tessellationDetail: 0
       bones: []
       spriteID: 18107a335147e7300800000000000000
@@ -434,19 +388,15 @@ TextureImporter:
       name: plains-cliff-tileset_10
       rect:
         serializedVersion: 2
-        x: 64
-        y: 48
+        x: 0
+        y: 32
         width: 16
         height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape:
-      - - {x: -8, y: 8}
-        - {x: -8, y: -8}
-        - {x: 8, y: -8}
-        - {x: 8, y: 8}
+      physicsShape: []
       tessellationDetail: 0
       bones: []
       spriteID: 3146268032db51f70800000000000000
@@ -459,19 +409,15 @@ TextureImporter:
       name: plains-cliff-tileset_11
       rect:
         serializedVersion: 2
-        x: 80
-        y: 48
+        x: 16
+        y: 32
         width: 16
         height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape:
-      - - {x: -8, y: 8}
-        - {x: -8, y: -8}
-        - {x: 8, y: -8}
-        - {x: 8, y: 8}
+      physicsShape: []
       tessellationDetail: 0
       bones: []
       spriteID: fe7a4c42dfcb81750800000000000000
@@ -484,7 +430,7 @@ TextureImporter:
       name: plains-cliff-tileset_12
       rect:
         serializedVersion: 2
-        x: 0
+        x: 32
         y: 32
         width: 16
         height: 16
@@ -492,11 +438,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape:
-      - - {x: -8, y: 8}
-        - {x: -8, y: -8}
-        - {x: 8, y: -8}
-        - {x: 8, y: 8}
+      physicsShape: []
       tessellationDetail: 0
       bones: []
       spriteID: 8893aeb69e869e710800000000000000
@@ -509,7 +451,7 @@ TextureImporter:
       name: plains-cliff-tileset_13
       rect:
         serializedVersion: 2
-        x: 16
+        x: 48
         y: 32
         width: 16
         height: 16
@@ -517,11 +459,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape:
-      - - {x: -8, y: 0}
-        - {x: -8, y: -8}
-        - {x: 8, y: -8}
-        - {x: 8, y: 0}
+      physicsShape: []
       tessellationDetail: 0
       bones: []
       spriteID: b1039b140b4d0edb0800000000000000
@@ -534,7 +472,7 @@ TextureImporter:
       name: plains-cliff-tileset_14
       rect:
         serializedVersion: 2
-        x: 32
+        x: 64
         y: 32
         width: 16
         height: 16
@@ -542,11 +480,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape:
-      - - {x: -8, y: 0}
-        - {x: -8, y: -8}
-        - {x: 8, y: -8}
-        - {x: 8, y: 0}
+      physicsShape: []
       tessellationDetail: 0
       bones: []
       spriteID: 58d05cd73c8dc7160800000000000000
@@ -559,7 +493,7 @@ TextureImporter:
       name: plains-cliff-tileset_15
       rect:
         serializedVersion: 2
-        x: 48
+        x: 80
         y: 32
         width: 16
         height: 16
@@ -568,10 +502,10 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: -8, y: 8}
-        - {x: -8, y: -8}
+      - - {x: -8, y: -8}
+        - {x: -8, y: 1}
+        - {x: 8, y: 1}
         - {x: 8, y: -8}
-        - {x: 8, y: 8}
       tessellationDetail: 0
       bones: []
       spriteID: 7d1c04af187489ae0800000000000000
@@ -584,8 +518,8 @@ TextureImporter:
       name: plains-cliff-tileset_16
       rect:
         serializedVersion: 2
-        x: 64
-        y: 32
+        x: 0
+        y: 16
         width: 16
         height: 16
       alignment: 7
@@ -593,10 +527,10 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: -8, y: 0}
-        - {x: -8, y: -8}
+      - - {x: -8, y: -8}
+        - {x: -8, y: 1}
+        - {x: 8, y: 1}
         - {x: 8, y: -8}
-        - {x: 8, y: 0}
       tessellationDetail: 0
       bones: []
       spriteID: dde5569a49eb27220800000000000000
@@ -609,8 +543,8 @@ TextureImporter:
       name: plains-cliff-tileset_17
       rect:
         serializedVersion: 2
-        x: 80
-        y: 32
+        x: 16
+        y: 16
         width: 16
         height: 16
       alignment: 7
@@ -618,10 +552,10 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: -8, y: 0}
-        - {x: -8, y: -8}
+      - - {x: -7, y: -8}
+        - {x: -7, y: 1}
+        - {x: 8, y: 1}
         - {x: 8, y: -8}
-        - {x: 8, y: 0}
       tessellationDetail: 0
       bones: []
       spriteID: ae59c1b7483cb43e0800000000000000
@@ -634,7 +568,7 @@ TextureImporter:
       name: plains-cliff-tileset_18
       rect:
         serializedVersion: 2
-        x: 0
+        x: 32
         y: 16
         width: 16
         height: 16
@@ -643,10 +577,10 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: -8, y: 8}
-        - {x: -8, y: -8}
-        - {x: 8, y: -8}
-        - {x: 8, y: 8}
+      - - {x: -8, y: -8}
+        - {x: -8, y: 1}
+        - {x: 7, y: 1}
+        - {x: 7, y: -8}
       tessellationDetail: 0
       bones: []
       spriteID: 31b7cb7c4168a55e0800000000000000
@@ -659,7 +593,7 @@ TextureImporter:
       name: plains-cliff-tileset_19
       rect:
         serializedVersion: 2
-        x: 16
+        x: 48
         y: 16
         width: 16
         height: 16
@@ -668,10 +602,10 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: -8, y: 8}
-        - {x: -8, y: -8}
+      - - {x: -8, y: -8}
+        - {x: -8, y: 1}
+        - {x: 8, y: 1}
         - {x: 8, y: -8}
-        - {x: 8, y: 8}
       tessellationDetail: 0
       bones: []
       spriteID: e12c40a107d57b2f0800000000000000
@@ -684,7 +618,7 @@ TextureImporter:
       name: plains-cliff-tileset_20
       rect:
         serializedVersion: 2
-        x: 32
+        x: 64
         y: 16
         width: 16
         height: 16
@@ -692,11 +626,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape:
-      - - {x: -8, y: 8}
-        - {x: -8, y: -8}
-        - {x: 8, y: -8}
-        - {x: 8, y: 8}
+      physicsShape: []
       tessellationDetail: 0
       bones: []
       spriteID: 77846de5c437ed310800000000000000
@@ -709,7 +639,7 @@ TextureImporter:
       name: plains-cliff-tileset_21
       rect:
         serializedVersion: 2
-        x: 48
+        x: 80
         y: 16
         width: 16
         height: 16
@@ -718,10 +648,10 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: -8, y: 8}
-        - {x: -8, y: -8}
-        - {x: 8, y: -8}
-        - {x: 8, y: 8}
+      - - {x: -7, y: -8}
+        - {x: -7, y: 1}
+        - {x: 7, y: 1}
+        - {x: 7, y: -8}
       tessellationDetail: 0
       bones: []
       spriteID: 810c0b205672a3da0800000000000000
@@ -734,19 +664,15 @@ TextureImporter:
       name: plains-cliff-tileset_22
       rect:
         serializedVersion: 2
-        x: 64
-        y: 16
+        x: 0
+        y: 0
         width: 16
         height: 16
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape:
-      - - {x: -8, y: 8}
-        - {x: -8, y: -8}
-        - {x: 8, y: -8}
-        - {x: 8, y: 8}
+      physicsShape: []
       tessellationDetail: 0
       bones: []
       spriteID: 5180bdbc85911e5a0800000000000000
@@ -759,19 +685,15 @@ TextureImporter:
       name: plains-cliff-tileset_23
       rect:
         serializedVersion: 2
-        x: 80
-        y: 16
+        x: 16
+        y: 0
         width: 16
         height: 16
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape:
-      - - {x: -8, y: 0}
-        - {x: -8, y: -8}
-        - {x: 8, y: -8}
-        - {x: 8, y: 0}
+      physicsShape: []
       tessellationDetail: 0
       bones: []
       spriteID: f8220481f9b33f180800000000000000
@@ -784,7 +706,7 @@ TextureImporter:
       name: plains-cliff-tileset_24
       rect:
         serializedVersion: 2
-        x: 0
+        x: 32
         y: 0
         width: 16
         height: 16
@@ -792,11 +714,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape:
-      - - {x: -8, y: 8}
-        - {x: -8, y: -8}
-        - {x: 8, y: -8}
-        - {x: 8, y: 8}
+      physicsShape: []
       tessellationDetail: 0
       bones: []
       spriteID: 78a4f3c5d75d1caa0800000000000000
@@ -809,7 +727,7 @@ TextureImporter:
       name: plains-cliff-tileset_25
       rect:
         serializedVersion: 2
-        x: 16
+        x: 48
         y: 0
         width: 16
         height: 16
@@ -817,11 +735,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape:
-      - - {x: -8, y: 8}
-        - {x: -8, y: -8}
-        - {x: 8, y: -8}
-        - {x: 8, y: 8}
+      physicsShape: []
       tessellationDetail: 0
       bones: []
       spriteID: 0acedd6492f9bdfd0800000000000000
@@ -834,7 +748,7 @@ TextureImporter:
       name: plains-cliff-tileset_26
       rect:
         serializedVersion: 2
-        x: 32
+        x: 64
         y: 0
         width: 16
         height: 16
@@ -843,10 +757,10 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: -8, y: 8}
-        - {x: -8, y: -8}
+      - - {x: -7, y: -8}
+        - {x: -7, y: 1}
+        - {x: 8, y: 1}
         - {x: 8, y: -8}
-        - {x: 8, y: 8}
       tessellationDetail: 0
       bones: []
       spriteID: 6ef0313172242d730800000000000000
@@ -859,7 +773,7 @@ TextureImporter:
       name: plains-cliff-tileset_27
       rect:
         serializedVersion: 2
-        x: 48
+        x: 80
         y: 0
         width: 16
         height: 16
@@ -868,64 +782,14 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: -8, y: 8}
-        - {x: -8, y: -8}
-        - {x: 8, y: -8}
-        - {x: 8, y: 8}
+      - - {x: -8, y: -8}
+        - {x: -8, y: 1}
+        - {x: 7, y: 1}
+        - {x: 7, y: -8}
       tessellationDetail: 0
       bones: []
       spriteID: 3f0c5e9cea09eaf00800000000000000
       internalID: 1129999636902559987
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: plains-cliff-tileset_28
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape:
-      - - {x: -8, y: 0}
-        - {x: -8, y: -8}
-        - {x: 8, y: -8}
-        - {x: 8, y: 0}
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8c645796f337b5110800000000000000
-      internalID: 1250720037714872008
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: plains-cliff-tileset_29
-      rect:
-        serializedVersion: 2
-        x: 80
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape:
-      - - {x: -8, y: 0}
-        - {x: -8, y: -8}
-        - {x: 8, y: -8}
-        - {x: 8, y: 0}
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1ba26216ce3c472e0800000000000000
-      internalID: -2128861303829812559
       vertices: []
       indices: 
       edges: []

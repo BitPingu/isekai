@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: -719414119
   m_SortingLayer: -2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 117717e5c12734c92982237576026d82, type: 3}
+  m_Sprite: {fileID: 21300000, guid: bafa465ac770c4489be67f8049b22a33, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -144,3 +144,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2d833e11035e41419007f187fd91f89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lots: []
+  villagers: []
+  containsPlayer: 0

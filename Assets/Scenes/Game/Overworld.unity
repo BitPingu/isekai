@@ -737,7 +737,7 @@ MonoBehaviour:
     tile: {fileID: 11400000, guid: e36f0edee744e4fc18f726935c043b6e, type: 2}
     tileType: 2
   - sprite: {fileID: 0}
-    tile: {fileID: 11400000, guid: 657ad0b7de1fb40efa9cddcbfa2c5cd0, type: 2}
+    tile: {fileID: 11400000, guid: 35b6fad9b32be4dbd94b39d5ea4b2db5, type: 2}
     tileType: 1
 --- !u!156049354 &228300425
 Grid:
