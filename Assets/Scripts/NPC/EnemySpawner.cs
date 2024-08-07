@@ -184,13 +184,19 @@ public class EnemySpawner : MonoBehaviour
                     // Look for camp points
                     foreach (Vector2 point in TempData.tempCamps)
                     {
-                        // Check if safe to spawn (randomize later on?)
+                        // Spawn goblins
                         GameObject goblin1 = spawnEnemy(enemy.gameObject.name, new Vector2((int)point.x+1.5f, (int)point.y+.7f));
                         if (goblin1)
+                        {
                             goblin1.GetComponent<SpriteRenderer>().flipX = true;
+                            goblin1.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+                        }
                         GameObject goblin2 = spawnEnemy(enemy.gameObject.name, new Vector2((int)point.x+.5f, (int)point.y+1.2f));
                         if (goblin2)
+                        {
                             goblin2.GetComponent<SpriteRenderer>().flipX = true;
+                            goblin2.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+                        }
                     }
                     break;
                 default:

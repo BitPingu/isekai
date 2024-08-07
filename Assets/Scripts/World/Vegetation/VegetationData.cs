@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class VegetationData : MonoBehaviour
 {
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        Physics2D.IgnoreCollision(collision.gameObject.GetComponent<Collider2D>(), GetComponent<Collider2D>());
-
         if (collision.gameObject.name.Contains("Player") || 
             (collision.gameObject.tag.Contains("Enemy") && collision.gameObject.GetComponent<EnemyPosition>().CheckPlayer()))
         {

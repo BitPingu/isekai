@@ -168,6 +168,7 @@ MonoBehaviour:
   spawnPoint: {x: 0, y: 0, z: 0}
   maxDistance: 3.5
   currentPos: {x: 0, y: 0}
+  inDanger: 0
   dialogue:
     sentence: 
     options: []

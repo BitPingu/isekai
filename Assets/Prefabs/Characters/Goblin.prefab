@@ -185,12 +185,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnPoint: {x: 0, y: 0, z: 0}
   maxDistance: 3.5
-  prevPos: {x: 0, y: 0}
   currentPos: {x: 0, y: 0}
-  prevGTile: 0
-  prevOTile: 0
-  currentGTile: 0
-  currentOTile: 0
 --- !u!114 &8932795698526139035
 MonoBehaviour:
   m_ObjectHideFlags: 0
