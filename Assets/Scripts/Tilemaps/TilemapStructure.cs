@@ -9,6 +9,7 @@ public enum TilemapType
     Lake,
     Cliff,
     Village,
+    Dungeon,
     Fog
 }
 
@@ -19,7 +20,7 @@ public class TilemapStructure : MonoBehaviour
     public TilemapType type { get { return _type;  } }
 
     [HideInInspector]
-    public int width, height, seed;
+    public int width, height;
 
     private int[] tiles;
     private Tilemap graphicMap;
@@ -41,10 +42,9 @@ public class TilemapStructure : MonoBehaviour
         // Retrieve the TileGrid component from parent gameObject
         grid = parentGrid;
 
-        // Get width, height, and seed from parent
+        // Get width, height from parent
         width = gridWidth;
         height = gridHeight;
-        seed = worldSeed;
 
         // Initialize one-dimensional array with map size
         tiles = new int[width * height];

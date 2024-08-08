@@ -146,7 +146,8 @@ public class WorldEvents : MonoBehaviour
         // Spawn enemy
         Debug.Log("start elf event");
         GameObject elfEnemy;
-        if (Random.Range(0,1) == 1)
+        var random = TempData.tempRandom;
+        if (random.Next(0,2) == 1)
         {
             elfEnemy = spawner.spawnEnemy("Slime", new Vector3(elf.transform.position.x+1, elf.transform.position.y));
             elfEnemy.GetComponent<SpriteRenderer>().flipX = true;

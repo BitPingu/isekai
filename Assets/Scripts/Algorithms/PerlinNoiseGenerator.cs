@@ -13,10 +13,9 @@ public class PerlinNoiseGenerator: ScriptableObject
     public Vector2 offset;
 
     // public int scale, octaves, persistance, lacunarity;
-    public float[] GenerateNoiseMap(int mapWidth, int mapHeight, int seed)
+    public float[] GenerateNoiseMap(int mapWidth, int mapHeight)
     {
         float[] noiseMap = new float[mapWidth * mapHeight];
-        var random = new System.Random(seed);
 
         // Need at least one octave
         if (octaves < 1)
@@ -27,8 +26,20 @@ public class PerlinNoiseGenerator: ScriptableObject
         Vector2[] octaveOffsets = new Vector2[octaves];
         for (int i=0; i<octaves; i++)
         {
-            float offsetX = random.Next(-100000, 100000) + offset.x;
-            float offsetY = random.Next(-100000, 100000) + offset.y;
+            float offsetX, offsetY;
+            if (TempData.tempNoiseOffsetX == 0 && TempData.tempNoiseOffsetY == 0)
+            {
+                var random = TempData.tempRandom;
+                offsetX = random.Next(-100000, 100000) + offset.x;
+                offsetY = random.Next(-100000, 100000) + offset.y;
+                TempData.tempNoiseOffsetX = offsetX;
+                TempData.tempNoiseOffsetY = offsetY;
+            }
+            else
+            {
+                offsetX = TempData.tempNoiseOffsetX;
+                offsetY = TempData.tempNoiseOffsetY;
+            }
             octaveOffsets[i] = new Vector2(offsetX, offsetY);
         }
 

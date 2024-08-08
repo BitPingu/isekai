@@ -45,10 +45,12 @@ public class TileGrid : MonoBehaviour
     {
         TilemapStructure groundMap = GetTilemap(TilemapType.Ground);
         TilemapStructure lakeMap = groundMap.grid.GetTilemap(TilemapType.Lake);
+        TilemapStructure dungeonMap = GetTilemap(TilemapType.Dungeon);
         var groundNeighbors = groundMap.GetNeighbors(Mathf.FloorToInt(position.x), Mathf.FloorToInt(position.y));
         var lakeNeighbors = lakeMap.GetNeighbors(Mathf.FloorToInt(position.x), Mathf.FloorToInt(position.y));
+        var dungeonNeighbors = dungeonMap.GetNeighbors(Mathf.FloorToInt(position.x), Mathf.FloorToInt(position.y));
 
-        if (!groundNeighbors.ContainsValue((int)GroundTileType.Empty) && !lakeNeighbors.ContainsValue((int)GroundTileType.Lake))
+        if (!groundNeighbors.ContainsValue((int)GroundTileType.Empty) && !lakeNeighbors.ContainsValue((int)GroundTileType.Lake) && !dungeonNeighbors.ContainsValue((int)GroundTileType.DungeonEntrance))
         {
             return true;
         }

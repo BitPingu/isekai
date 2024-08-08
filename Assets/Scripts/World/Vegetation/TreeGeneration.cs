@@ -35,12 +35,12 @@ public class TreeGeneration : MonoBehaviour
     [SerializeField]
     private NoiseValues[] extras;
 
-    public void Initialize(TileGrid grid, int width, int height, int seed)
+    public void Initialize(TileGrid grid, int width, int height)
     {
-        var random = new System.Random(seed);
+        var random = TempData.tempRandom;
 
         // Pass along parameters to generate noise
-        var noiseMap = noise.GenerateNoiseMap(width, height, seed);
+        var noiseMap = noise.GenerateNoiseMap(width, height);
 
         Vector2Int currentPoint = new Vector2Int();
         int chunkSize = 16, pivotPoint = 0;

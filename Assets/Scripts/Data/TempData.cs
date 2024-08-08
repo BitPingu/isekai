@@ -8,6 +8,9 @@ public class TempData : MonoBehaviour
     public static Vector2 tempPlayerBuildingSpawn;
     public static Vector2 tempPlayerPos;
     public static int tempSeed;
+    public static System.Random tempRandom;
+    public static float tempNoiseOffsetX;
+    public static float tempNoiseOffsetY;
     public static int tempWidth;
     public static int tempHeight;
     public static int tempDays;

@@ -10,7 +10,7 @@ public class DungeonGeneration : MonoBehaviour
 
     public GameObject dungeon;
 
-    public void Initialize(TileGrid grid)
+    public void Initialize(WorldGeneration world, TileGrid grid)
     {
         if (TempData.loadGame)
         {
@@ -42,10 +42,33 @@ public class DungeonGeneration : MonoBehaviour
             // Set dungeon centerpoint
             // vilCenter = new Vector3(Mathf.FloorToInt(point.x), Mathf.FloorToInt(point.y));
 
-            // Generate procedural dungeon area here saved on another tilemap
+            // Generate procedural dungeon area here saved on another tilemap (but still in same scene)
+
+            // Place dungeon entrance in overworld
+            for (int i=Mathf.FloorToInt(point.x)-2; i<=Mathf.FloorToInt(point.x)+2; i++)
+            {
+                for (int j=Mathf.FloorToInt(point.y)-2; j<=Mathf.FloorToInt(point.y)+2; j++)
+                {
+                    if (i == Mathf.FloorToInt(point.x)-2 || i == Mathf.FloorToInt(point.x)+2 || j == Mathf.FloorToInt(point.y)-2 || j == Mathf.FloorToInt(point.y)+2)
+                    {
+                        var random = TempData.tempRandom;
+                        if (random.Next(0,2) == 1)
+                        {
+                            grid.GetTilemap(TilemapType.Dungeon).SetTile(i, j, (int)GroundTileType.DungeonEntrance, setDirty : false);
+                        }
+                    }
+                    else
+                    {
+                        grid.GetTilemap(TilemapType.Dungeon).SetTile(i, j, (int)GroundTileType.DungeonEntrance, setDirty : false);
+                    }
+                }
+            }
 
             // Spawn dungeon
-            Instantiate(dungeon, new Vector3(point.x+.5f, point.y+.5f), Quaternion.identity, transform);
+            Instantiate(dungeon, new Vector3(point.x+.5f, point.y), Quaternion.identity, transform);
         }
+
+        // Render tiles
+        grid.GetTilemap(TilemapType.Dungeon).UpdateTiles();
     }
 }

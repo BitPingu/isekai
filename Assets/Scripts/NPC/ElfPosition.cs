@@ -12,7 +12,6 @@ public class ElfPosition : MonoBehaviour
     public Vector2Int currentPos;
     public bool inDanger;
 
-    public Dialogue dialogue;
     private bool triggerDia;
     public GameObject helpIcon;
     private GameObject helpIconChild;
@@ -107,105 +106,6 @@ public class ElfPosition : MonoBehaviour
         TempData.elfSaved = true;
     }
 
-    // Generates a random spawn point
-    // public void Spawn(bool initialSpawn, int scene)
-    // {
-    //     RetrieveTilemap();
-    //     switch (scene)
-    //     {
-    //         case 1:
-    //             if (!TempData.elfSaved)
-    //             {
-    //                 // Not saved yet
-    //                 // Debug.Log("elf in danger");
-    //                 if (initialSpawn)
-    //                 {
-    //                     // Debug.Log("new elf");
-    //                     // Coming from main menu
-    //                     if (TempData.newGame)
-    //                     {
-    //                         // Generate initial spawn point
-    //                         float xCoord, yCoord, currentTile;
-    //                         // Get player spawn
-    //                         Vector3 worldSpawn = TempData.tempPlayerStartingSpawn;
-    //                         do
-    //                         {
-    //                             // Choose random spawn point
-    //                             xCoord = Random.Range(worldSpawn.x-5, worldSpawn.x+5);
-    //                             yCoord = Random.Range(worldSpawn.y-5, worldSpawn.y+5);
-
-    //                             // Check tile
-    //                             currentTile = groundMap.GetTile((int)xCoord, (int)yCoord);
-    //                         }
-    //                         while (currentTile != (int)GroundTileType.Land);
-
-    //                         // Generate spawn point
-    //                         spawnPoint = new Vector3(xCoord, yCoord);
-    //                         TempData.tempElfStartingSpawn = spawnPoint;
-    //                     }
-    //                     else
-    //                     {
-    //                         // Debug.Log("load unsaved elf");
-    //                         // Load unsaved elf position
-    //                         SaveData saveData = SaveSystem.Load();
-    //                         spawnPoint.x = saveData.saveElfPos[0];
-    //                         spawnPoint.y = saveData.saveElfPos[1];
-    //                         spawnPoint.z = saveData.saveElfPos[2];
-    //                     }
-    //                 }
-    //                 else
-    //                 {
-    //                     // Debug.Log("notsaved, going to spawn");
-    //                     // Stay at spawn point
-    //                     spawnPoint = TempData.tempElfStartingSpawn;
-    //                 }
-    //                 // Attacked by slime
-    //                 GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
-    //                 GetComponent<Animator>().SetBool("Jump", true);
-    //                 GetComponent<PartyMovement>().enabled = false;
-    //             }
-    //             else
-    //             {
-    //                 // saved
-    //                 if (initialSpawn)
-    //                 {
-    //                     // Coming from main menu (only possible when load)
-    //                     // Debug.Log("load elf");
-    //                     // Load elf position
-    //                     SaveData saveData = SaveSystem.Load();
-    //                     spawnPoint.x = saveData.saveElfPos[0];
-    //                     spawnPoint.y = saveData.saveElfPos[1];
-    //                     spawnPoint.z = saveData.saveElfPos[2];
-    //                 }
-    //                 else
-    //                 {
-    //                     // exiting from building
-    //                     // Debug.Log("saved2, going to player");
-    //                     spawnPoint = TempData.tempPlayerPos;
-    //                 }
-    //             }
-    //             break;
-    //         case 2:
-    //         case 3:
-    //             // Dungeon or village spawn
-    //             // Debug.Log("building, going to player");
-    //             spawnPoint = TempData.tempPlayerPos;
-    //             break;
-    //         default:
-    //             Debug.Log("elf cannot spawn!");
-    //             break;
-            
-    //     }
-
-    //     // Set spawn point
-    //     transform.position = spawnPoint;
-    //     prevPos = currentPos = Vector2Int.FloorToInt(transform.position);
-
-    //     // Retrieve spawn point tile
-    //     // prevGTile = currentGTile = groundMap.GetTile(currentPos.x, currentPos.y);
-    //     // prevOTile = currentOTile = overworldMap.GetTile(currentPos.x, currentPos.y);
-    // }
-
     private bool CheckPlayer()
     {
         // Calculate current distance from player
@@ -213,7 +113,6 @@ public class ElfPosition : MonoBehaviour
 
         if (distance < maxDistance)
         {
-            // Debug.Log("hi");
             return true;
         }
 

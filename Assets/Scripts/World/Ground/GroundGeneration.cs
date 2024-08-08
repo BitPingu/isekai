@@ -27,7 +27,7 @@ public class GroundGeneration : MonoBehaviour
         tileTypes = tileTypes.OrderBy(a => a.height).ToArray();
 
         // Pass along parameters to generate noise
-        var noiseMap = noise.GenerateNoiseMap(tilemap.width, tilemap.height, tilemap.seed);
+        var noiseMap = noise.GenerateNoiseMap(tilemap.width, tilemap.height);
 
         if (applyIslandGradient)
         {

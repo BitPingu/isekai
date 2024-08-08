@@ -36,9 +36,6 @@ public class PartyMovement : MonoBehaviour
         // Retrieve coordinates
         currentPos = Vector2Int.FloorToInt(transform.position);
 
-        // Get current tile
-        // currentTile = overworldMap.GetTile(currentPos.x, currentPos.y);
-
         // Get speed from current tile
         moveSpeed = maxSpeed;
 
@@ -67,6 +64,12 @@ public class PartyMovement : MonoBehaviour
             else
             {
                 sprite.flipX = false;
+            }
+
+            // Teleport to player if too far
+            if (distance > minDistance + 20)
+            {
+                transform.position = player.transform.position;
             }
         }
         if (distance < minDistance-0.3)

@@ -166,12 +166,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoint: {x: 0, y: 0, z: 0}
-  maxDistance: 3.5
+  maxDistance: 5
   currentPos: {x: 0, y: 0}
   inDanger: 0
-  dialogue:
-    sentence: 
-    options: []
   helpIcon: {fileID: 4896040726258886826, guid: 5e6d5117116a74371a0979b40584be49, type: 3}
 --- !u!114 &2873428388822090940
 MonoBehaviour:

@@ -19,6 +19,7 @@ public class WorldGeneration : MonoBehaviour
             seed = UnityEngine.Random.Range(-100000, 100000);
         }
         TempData.tempSeed = seed;
+        TempData.tempRandom = new System.Random(seed);
 
         // Init tile grid
         GetComponentInChildren<TileGrid>().Initialize(width, height, seed);
@@ -26,11 +27,11 @@ public class WorldGeneration : MonoBehaviour
 
         // Init structures
         GetComponentInChildren<VillageGeneration>().Initialize(GetComponentInChildren<TileGrid>());
-        GetComponentInChildren<DungeonGeneration>().Initialize(GetComponentInChildren<TileGrid>());
+        GetComponentInChildren<DungeonGeneration>().Initialize(this, GetComponentInChildren<TileGrid>());
         GetComponentInChildren<CampGeneration>().Initialize(GetComponentInChildren<TileGrid>());
 
         // Init vegetation
-        GetComponentInChildren<TreeGeneration>().Initialize(GetComponentInChildren<TileGrid>(), width, height, seed);
+        GetComponentInChildren<TreeGeneration>().Initialize(GetComponentInChildren<TileGrid>(), width, height);
 
         // Init time
         GetComponentInChildren<DayAndNightCycle>().Initialize();
