@@ -114,6 +114,8 @@ MonoBehaviour:
     m_Mode: 0
     m_NumColorKeys: 8
     m_NumAlphaKeys: 2
+  dayLum: 0
+  nightLum: 0.4
 --- !u!1 &6904338341474015277
 GameObject:
   m_ObjectHideFlags: 0
