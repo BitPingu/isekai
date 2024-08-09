@@ -6,8 +6,8 @@ using UnityEngine.Tilemaps;
 
 public class WorldEvents : MonoBehaviour
 {
-    public GameObject player, elf, audio;
-    private GameObject p, e;
+    public GameObject player, elf, audio, rain;
+    private GameObject p, e, r;
     public CameraController camera;
 
     private DayAndNightCycle time;
@@ -35,6 +35,9 @@ public class WorldEvents : MonoBehaviour
         // Attach dayNight delegates to villager spawner
         dayNight.DayTime += GetComponentInChildren<VillagerSpawner>().Spawn;
         dayNight.NightTime += GetComponentInChildren<VillagerSpawner>().Despawn;
+
+        // Attach dayNight delegate to rain
+        dayNight.DayTime += Rain;
 
         // Call dayNight delegates (and any methods tied to it)
         if (dayNight.isDay)
@@ -163,6 +166,20 @@ public class WorldEvents : MonoBehaviour
 
         // Attacked by slime
         elf.GetComponent<ElfPosition>().InDanger();
+    }
+
+    private void Rain()
+    {
+        if (r)
+            Destroy(r);
+            
+        // Init rain
+        var random = TempData.tempRandom;
+        if (random.Next(0,2) == 1)
+        {
+            r = Instantiate(rain, Vector3.zero, Quaternion.identity, transform);
+            r.GetComponent<RainController>().Initialize(p.transform);
+        }
     }
 
     // Change scene based on nearby building to enter (via active icon)

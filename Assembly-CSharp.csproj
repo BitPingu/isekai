@@ -130,6 +130,8 @@
     <Compile Include="Assets/Scripts/Player/PlayerController.cs" />
     <Compile Include="Assets/Scripts/Data/TempData.cs" />
     <Compile Include="Assets/Scripts/NPC/ElfPosition.cs" />
+    <Compile Include="Assets/Scripts/World/Light/Lighting.cs" />
+    <Compile Include="Assets/Scripts/World/RainController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/TextMesh Pro/Shaders/TMPro.cginc" />

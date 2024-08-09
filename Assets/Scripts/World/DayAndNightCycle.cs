@@ -1,13 +1,9 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Experimental.Rendering.Universal;
 using UnityEngine.SceneManagement;
 
 public class DayAndNightCycle : MonoBehaviour
 {
-    [SerializeField]
-    private Gradient lightColor;
-
     public int timePerDay; // default is 500
     public float ratePerDay; // default is 0.002
 
@@ -20,7 +16,7 @@ public class DayAndNightCycle : MonoBehaviour
     public delegate void OnDayChanged();
     public OnDayChanged DayTime, NightTime;
 
-    private bool init;
+    public bool init;
 
     public void Initialize()
     {
@@ -100,9 +96,6 @@ public class DayAndNightCycle : MonoBehaviour
         // Tie time to frame rate
         time += Time.deltaTime;
         TempData.tempTime = time;
-
-        // Pick color from gradient based on value from 0-1
-        GetComponent<Light2D>().color = lightColor.Evaluate(time * ratePerDay);  
     }
 
     private IEnumerator FadeMusic()
