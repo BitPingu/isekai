@@ -1,10 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static SimpleVisualizer;
-using UnityEngine.Tilemaps;
 using System;
 using System.Linq;
+
+public enum EncodingLetters
+{
+    unknown = '1',
+    save = '[',
+    load = ']',
+    draw = 'F',
+    turnRight = '+',
+    turnLeft = '-'
+}
 
 public class Village
 {

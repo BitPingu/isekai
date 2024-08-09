@@ -62,7 +62,6 @@
     <Analyzer Include="/Users/gavin/.vscode/extensions/visualstudiotoolsforunity.vstuc-1.0.2/Analyzers/Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets/Scripts/Algorithms/LSystem/Visualizer.cs" />
     <Compile Include="Assets/Scripts/UI/MainMenu.cs" />
     <Compile Include="Assets/Scripts/World/Village/VillageData.cs" />
     <Compile Include="Assets/Scripts/Algorithms/PoissonDiscSamplingGenerator.cs" />
@@ -85,14 +84,11 @@
     <Compile Include="Assets/Scripts/World/Fog/FogData.cs" />
     <Compile Include="Assets/Scripts/NPC/EnemyBattle.cs" />
     <Compile Include="Assets/Scripts/World/Structures/CampGeneration.cs" />
-    <Compile Include="Assets/Scripts/Algorithms/LSystem/RoadHelper.cs" />
     <Compile Include="Assets/Scripts/UI/Dialogue.cs" />
     <Compile Include="Assets/Scripts/UI/CameraController.cs" />
     <Compile Include="Assets/Scripts/Data/SaveSystem.cs" />
     <Compile Include="Assets/Scripts/UI/DialogueController.cs" />
     <Compile Include="Assets/Scripts/Tilemaps/AdvancedRuleTile.cs" />
-    <Compile Include="Assets/Scripts/Algorithms/LSystem/Direction.cs" />
-    <Compile Include="Assets/Scripts/Algorithms/LSystem/SimpleVisualizer.cs" />
     <Compile Include="Assets/Scripts/UI/OptionsMenu.cs" />
     <Compile Include="Assets/Scripts/NPC/PartyMovement.cs" />
     <Compile Include="Assets/Scripts/UI/MapMenu.cs" />
@@ -112,18 +108,15 @@
     <Compile Include="Assets/Scripts/World/DayAndNightCycle.cs" />
     <Compile Include="Assets/Scripts/Algorithms/LSystem/AgentParameters.cs" />
     <Compile Include="Assets/Scripts/Audio/AudioFade.cs" />
-    <Compile Include="Assets/Scripts/Algorithms/LSystem/PlacementHelper.cs" />
     <Compile Include="Assets/Scripts/World/WorldGeneration.cs" />
     <Compile Include="Assets/Scripts/Audio/Sound.cs" />
     <Compile Include="Assets/Scripts/World/Ground/LakeGeneration.cs" />
     <Compile Include="Assets/Scripts/World/Vegetation/VegetationData.cs" />
-    <Compile Include="Assets/Scripts/Algorithms/LSystem/StructureHelper.cs" />
     <Compile Include="Assets/Scripts/UI/EventIconData.cs" />
     <Compile Include="Assets/Scripts/World/ChunkLoader.cs" />
     <Compile Include="Assets/Scripts/Tilemaps/TileTypes.cs" />
     <Compile Include="Assets/Scripts/Tilemaps/TilemapStructure.cs" />
     <Compile Include="Assets/Scripts/Algorithms/CellularAutomata.cs" />
-    <Compile Include="Assets/Scripts/World/Village/HouseType.cs" />
     <Compile Include="Assets/Scripts/Algorithms/LSystem/LSystemGenerator.cs" />
     <Compile Include="Assets/Scripts/NPC/EnemyPosition.cs" />
     <Compile Include="Assets/Scripts/Tilemaps/GroundTileType.cs" />
@@ -132,6 +125,9 @@
     <Compile Include="Assets/Scripts/NPC/ElfPosition.cs" />
     <Compile Include="Assets/Scripts/World/Light/Lighting.cs" />
     <Compile Include="Assets/Scripts/World/RainController.cs" />
+    <Compile Include="Assets/Scripts/World/Dungeon/RandomWalk.cs" />
+    <Compile Include="Assets/Scripts/World/Dungeon/SimpleRandomWalkMapGenerator.cs" />
+    <Compile Include="Assets/Scripts/World/Dungeon/TilemapVisualizer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/TextMesh Pro/Shaders/TMPro.cginc" />

@@ -7,8 +7,8 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9dfc4df663e6b4b7fb90f6f6388c2f77, type: 3}
-  m_Name: GoblinAlgorithm
+  m_Script: {fileID: 11500000, guid: 5e6626592b741453eb0a8784e9064376, type: 3}
+  m_Name: RandomWalk
   m_EditorClassIdentifier: 
