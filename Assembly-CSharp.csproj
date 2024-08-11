@@ -128,6 +128,11 @@
     <Compile Include="Assets/Scripts/World/Dungeon/RandomWalk.cs" />
     <Compile Include="Assets/Scripts/World/Dungeon/SimpleRandomWalkMapGenerator.cs" />
     <Compile Include="Assets/Scripts/World/Dungeon/TilemapVisualizer.cs" />
+    <Compile Include="Assets/Scripts/World/Dungeon/WallGenerator.cs" />
+    <Compile Include="Assets/Scripts/World/Dungeon/SimpleRandomWalkSO.cs" />
+    <Compile Include="Assets/Scripts/World/Dungeon/CorridorFirstDungeonGeneration.cs" />
+    <Compile Include="Assets/Scripts/World/Dungeon/AbstractDungeonGenerator.cs" />
+    <Compile Include="Assets/Scripts/World/Dungeon/RoomFirstDungeonGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/TextMesh Pro/Shaders/TMPro.cginc" />
