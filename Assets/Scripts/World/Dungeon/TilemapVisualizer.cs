@@ -8,11 +8,16 @@ public class TilemapVisualizer : MonoBehaviour
     [SerializeField]
     private Tilemap floorTilemap, wallTilemap;
     [SerializeField]
-    private TileBase floorTile, wallTop;
+    private TileBase floorTile, floorTile2, wallTop;
 
     public void PaintFloorTiles(IEnumerable<Vector2Int> floorPositions)
     {
         PaintTiles(floorPositions, floorTilemap, floorTile);
+    }
+
+    public void PaintCorridors(IEnumerable<Vector2Int> floorPositions)
+    {
+        PaintTiles(floorPositions, floorTilemap, floorTile2);
     }
 
     private void PaintTiles(IEnumerable<Vector2Int> positions, Tilemap tilemap, TileBase tile)

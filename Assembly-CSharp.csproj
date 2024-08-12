@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets/Scripts/UI/MainMenu.cs" />
+    <Compile Include="Assets/Scripts/World/Dungeon/WallGenerator.cs" />
     <Compile Include="Assets/Scripts/World/Village/VillageData.cs" />
     <Compile Include="Assets/Scripts/Algorithms/PoissonDiscSamplingGenerator.cs" />
     <Compile Include="Assets/Scripts/Player/PlayerBattle.cs" />
@@ -77,18 +78,22 @@
     <Compile Include="Assets/Scripts/World/WorldEvents.cs" />
     <Compile Include="Assets/Scripts/UI/MenuController.cs" />
     <Compile Include="Assets/Scripts/NPC/EnemyData.cs" />
+    <Compile Include="Assets/Scripts/World/Dungeon/RandomWalk.cs" />
     <Compile Include="Assets/Scripts/World/Dungeon/DungeonGeneration.cs" />
     <Compile Include="Assets/Scripts/Tilemaps/TileGrid.cs" />
     <Compile Include="Assets/Scripts/Tilemaps/TilemapHelper.cs" />
     <Compile Include="Assets/Scripts/UI/MapController.cs" />
+    <Compile Include="Assets/Scripts/World/Light/Lighting.cs" />
     <Compile Include="Assets/Scripts/World/Fog/FogData.cs" />
     <Compile Include="Assets/Scripts/NPC/EnemyBattle.cs" />
     <Compile Include="Assets/Scripts/World/Structures/CampGeneration.cs" />
     <Compile Include="Assets/Scripts/UI/Dialogue.cs" />
     <Compile Include="Assets/Scripts/UI/CameraController.cs" />
+    <Compile Include="Assets/Scripts/World/Dungeon/TilemapVisualizer.cs" />
     <Compile Include="Assets/Scripts/Data/SaveSystem.cs" />
     <Compile Include="Assets/Scripts/UI/DialogueController.cs" />
     <Compile Include="Assets/Scripts/Tilemaps/AdvancedRuleTile.cs" />
+    <Compile Include="Assets/Scripts/World/Dungeon/AbstractDungeonGenerator.cs" />
     <Compile Include="Assets/Scripts/UI/OptionsMenu.cs" />
     <Compile Include="Assets/Scripts/NPC/PartyMovement.cs" />
     <Compile Include="Assets/Scripts/UI/MapMenu.cs" />
@@ -102,6 +107,7 @@
     <Compile Include="Assets/Scripts/World/Structures/BuildingData.cs" />
     <Compile Include="Assets/Scripts/UI/BattleHUD.cs" />
     <Compile Include="Assets/Scripts/Player/PlayerPosition.cs" />
+    <Compile Include="Assets/Scripts/World/Dungeon/SimpleRandomWalkSO.cs" />
     <Compile Include="Assets/Scripts/NPC/EnemySpawner.cs" />
     <Compile Include="Assets/Scripts/World/Vegetation/TreeGeneration.cs" />
     <Compile Include="Assets/Scripts/World/Ground/GroundGeneration.cs" />
@@ -110,8 +116,10 @@
     <Compile Include="Assets/Scripts/Audio/AudioFade.cs" />
     <Compile Include="Assets/Scripts/World/WorldGeneration.cs" />
     <Compile Include="Assets/Scripts/Audio/Sound.cs" />
+    <Compile Include="Assets/Scripts/World/Dungeon/RoomFirstDungeonGenerator.cs" />
     <Compile Include="Assets/Scripts/World/Ground/LakeGeneration.cs" />
     <Compile Include="Assets/Scripts/World/Vegetation/VegetationData.cs" />
+    <Compile Include="Assets/Scripts/World/Dungeon/SimpleRandomWalkMapGenerator.cs" />
     <Compile Include="Assets/Scripts/UI/EventIconData.cs" />
     <Compile Include="Assets/Scripts/World/ChunkLoader.cs" />
     <Compile Include="Assets/Scripts/Tilemaps/TileTypes.cs" />
@@ -122,17 +130,9 @@
     <Compile Include="Assets/Scripts/Tilemaps/GroundTileType.cs" />
     <Compile Include="Assets/Scripts/Player/PlayerController.cs" />
     <Compile Include="Assets/Scripts/Data/TempData.cs" />
-    <Compile Include="Assets/Scripts/NPC/ElfPosition.cs" />
-    <Compile Include="Assets/Scripts/World/Light/Lighting.cs" />
-    <Compile Include="Assets/Scripts/World/RainController.cs" />
-    <Compile Include="Assets/Scripts/World/Dungeon/RandomWalk.cs" />
-    <Compile Include="Assets/Scripts/World/Dungeon/SimpleRandomWalkMapGenerator.cs" />
-    <Compile Include="Assets/Scripts/World/Dungeon/TilemapVisualizer.cs" />
-    <Compile Include="Assets/Scripts/World/Dungeon/WallGenerator.cs" />
-    <Compile Include="Assets/Scripts/World/Dungeon/SimpleRandomWalkSO.cs" />
     <Compile Include="Assets/Scripts/World/Dungeon/CorridorFirstDungeonGeneration.cs" />
-    <Compile Include="Assets/Scripts/World/Dungeon/AbstractDungeonGenerator.cs" />
-    <Compile Include="Assets/Scripts/World/Dungeon/RoomFirstDungeonGenerator.cs" />
+    <Compile Include="Assets/Scripts/NPC/ElfPosition.cs" />
+    <Compile Include="Assets/Scripts/World/RainController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/TextMesh Pro/Shaders/TMPro.cginc" />

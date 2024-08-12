@@ -1,6 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
+public class Room
+{
+    public Vector2Int center;
+    public HashSet<Vector2Int> floor;
+    public string type;
+
+    public Room(Vector2Int c, HashSet<Vector2Int> f)
+    {
+        center = c;
+        floor = f;
+    }
+}
 
 public class RoomFirstDungeonGenerator : SimpleRandomWalkMapGenerator
 {
@@ -14,17 +28,28 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkMapGenerator
     [SerializeField]
     private bool randomWalkRooms = false;
 
-    protected override void RunProceduralGeneration()
+    private List<Room> rooms = new List<Room>();
+    public GameObject player, renderCanvas;
+    public Text textPrefab;
+
+    private void Awake()
+    {
+        Initialize();
+    }
+
+    public void Initialize()
     {
         CreateRooms();
     }
 
     private void CreateRooms()
     {
+        // Define room boundaries using binary space partitioning
         var roomsList = walk.BinarySpacePartitioning(new BoundsInt((Vector3Int)startPos, new Vector3Int(dungeonWidth, dungeonHeight, 0)), minRoomWidth, minRoomHeight);
 
         HashSet<Vector2Int> floor = new HashSet<Vector2Int>();
 
+        // Make rooms 
         if (randomWalkRooms)
         {
             floor = CreateRoomsRandomly(roomsList);
@@ -34,16 +59,20 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkMapGenerator
             floor = CreateSimpleRooms(roomsList);
         }
 
+        // Get room centers
         List<Vector2Int> roomCenters = new List<Vector2Int>();
         foreach (var room in roomsList)
         {
             roomCenters.Add((Vector2Int)Vector3Int.RoundToInt(room.center));
         }
 
+        // Connect rooms with corridors
         HashSet<Vector2Int> corridors = ConnectRooms(roomCenters);
-        floor.UnionWith(corridors);
 
+        // Paint dungeon
+        floor.UnionWith(corridors);
         tilemapVisualizer.PaintFloorTiles(floor);
+        tilemapVisualizer.PaintCorridors(corridors);
         wall.CreateWalls(floor, tilemapVisualizer);
     }
 
@@ -63,6 +92,9 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkMapGenerator
                     floor.Add(pos);
                 }
             }
+
+            // save room data
+            rooms.Add(new Room(roomCenter, roomFloor));
         }
 
         return floor;
@@ -70,17 +102,55 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkMapGenerator
 
     private HashSet<Vector2Int> ConnectRooms(List<Vector2Int> roomCenters)
     {
+        int maxRooms = roomCenters.Count;
         HashSet<Vector2Int> corridors = new HashSet<Vector2Int>();
+
+        // pick random room
         var currentRoomCenter = roomCenters[Random.Range(0, roomCenters.Count)];
         roomCenters.Remove(currentRoomCenter);
 
+        // spawn entry
+        Debug.Log("instant at " + currentRoomCenter);
+        Instantiate(player, new Vector3(currentRoomCenter.x, currentRoomCenter.y), Quaternion.identity);
+        rooms.Find(x => x.center == currentRoomCenter).type = "Entry";
+
+        Text tempTextBox = Instantiate(textPrefab, new Vector3(currentRoomCenter.x, currentRoomCenter.y), Quaternion.identity) as Text;
+        tempTextBox.transform.SetParent(renderCanvas.transform, false);
+        tempTextBox.fontSize = 6;
+        tempTextBox.text = currentRoomCenter.ToString() + " " + rooms.Find(x => x.center == currentRoomCenter).type;
+
+        // connect nearby rooms
         while (roomCenters.Count > 0)
         {
+            // find closest room to current room
             Vector2Int closest = FindClosestPointTo(currentRoomCenter, roomCenters);
             roomCenters.Remove(closest);
+
+            // connect corridor
             HashSet<Vector2Int> newCorridor = CreateCorridor(currentRoomCenter, closest);
-            currentRoomCenter = closest;
             corridors.UnionWith(newCorridor);
+
+            // next room
+            currentRoomCenter = closest;
+
+            // categorize room
+            if (roomCenters.Count == 0)
+            {
+                rooms.Find(x => x.center == currentRoomCenter).type = "End";
+            }
+            else if (roomCenters.Count < maxRooms/2)
+            {
+                rooms.Find(x => x.center == currentRoomCenter).type = "Near";
+            }
+            else
+            {
+                rooms.Find(x => x.center == currentRoomCenter).type = "E";
+            }
+            
+            tempTextBox = Instantiate(textPrefab, new Vector3(currentRoomCenter.x, currentRoomCenter.y), Quaternion.identity) as Text;
+            tempTextBox.transform.SetParent(renderCanvas.transform, false);
+            tempTextBox.fontSize = 6;
+            tempTextBox.text = currentRoomCenter.ToString() + " " + rooms.Find(x => x.center == currentRoomCenter).type;
         }
 
         return corridors;
@@ -136,6 +206,7 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkMapGenerator
             }
         }
 
+        // return center pos of closest room
         return closest;
     }
 

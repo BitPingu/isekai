@@ -10,11 +10,6 @@ public class SimpleRandomWalkMapGenerator : AbstractDungeonGenerator
     public RandomWalk walk;
     public WallGenerator wall;
 
-    private void Awake()
-    {
-        RunProceduralGeneration();
-    }
-
     protected override void RunProceduralGeneration()
     {
         HashSet<Vector2Int> floorPositions = RunRandomWalk(randomWalkParameters, startPos);

@@ -13,7 +13,12 @@ public class CorridorFirstDungeonGeneration : SimpleRandomWalkMapGenerator
     [Range(0.1f,1)]
     private float roomPercent = .8f;
 
-    protected override void RunProceduralGeneration()
+    private void Awake()
+    {
+        Initialize();
+    }
+
+    public void Initialize()
     {
         CorridorFirstGeneration();
     }
@@ -113,6 +118,8 @@ public class CorridorFirstDungeonGeneration : SimpleRandomWalkMapGenerator
             potentialRoomPositions.Add(currentPos);
             floorPositions.UnionWith(corridor);
         }
+
+        Debug.Log("corridor");
 
         return corridors;
     }
