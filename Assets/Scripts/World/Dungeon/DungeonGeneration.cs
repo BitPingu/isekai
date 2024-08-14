@@ -1,17 +1,53 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
+public class Dungeon
+{
+    public Vector2 dunCenter;
+    public List<Room> rooms = new List<Room>();
+
+    public Dungeon(Vector2 center)
+    {
+        dunCenter = center;
+    }
+}
+
+public class Room
+{
+    public Vector2Int center;
+    public HashSet<Vector2Int> floor;
+    public string type;
+
+    public Room(Vector2Int c, HashSet<Vector2Int> f)
+    {
+        center = c;
+        floor = f;
+    }
+}
 
 public class DungeonGeneration : MonoBehaviour
 {
     [SerializeField]
     private PoissonDiscSamplingGenerator sampling;
-    private List<Vector2> dunPoints = new List<Vector2>();
+    [SerializeField]
+    private CorridorFirstDungeonGeneration generator;
+    private List<Dungeon> dungeons = new List<Dungeon>();
 
-    public GameObject dungeon;
+    private Vector2Int dunPos;
 
-    public void Initialize(WorldGeneration world, TileGrid grid)
+    private TileGrid grid;
+    public GameObject dungeonEntrance;
+
+    public GameObject renderCanvas;
+    public Text textPrefab;
+
+    public void Initialize(WorldGeneration world, TileGrid g)
     {
+        // Get grid
+        grid = g; 
+
         if (TempData.loadGame)
         {
             // Load dungeon data
@@ -20,55 +56,83 @@ public class DungeonGeneration : MonoBehaviour
 
             for (int i=0; i<dungeonCoordsX.Count; i++)
             {
-                dunPoints.Add(new Vector2(dungeonCoordsX[i], dungeonCoordsY[i]));
+                dungeons.Add(new Dungeon(new Vector2(dungeonCoordsX[i], dungeonCoordsY[i])));
             }
         }
         else
         {
             // Generate dungeon coords
-            dunPoints = sampling.GeneratePoints(grid.GetTilemap(TilemapType.Ground));
+            List<Vector2> dunPoints = sampling.GeneratePoints(grid.GetTilemap(TilemapType.Ground));
+
+            // Generate dungeons
+            int dungeonCount = 0;
+            for (int i=0; i<dunPoints.Count; i++)
+            {
+                // Skip obstructed coords
+                if (!grid.CheckLand(dunPoints[i]) || !grid.CheckCliff(dunPoints[i]))
+                {
+                    continue;
+                }
+
+                // Add new dungeon to list
+                dungeons.Add(new Dungeon(dunPoints[i]));
+                dungeonCount++;
+
+                // if (dungeonCount == 1)
+                    // break;
+            }            
         }
 
         // Save dun data
-        TempData.tempDungeons = dunPoints;
+        TempData.tempDungeons = dungeons;
+
+        // Prep dungeon underground
+        for (int x = 0; x < grid.GetTilemap(TilemapType.DungeonUnderground).width; x++)
+        {
+            for (int y = 0; y < grid.GetTilemap(TilemapType.DungeonUnderground).height; y++)
+            {
+                grid.GetTilemap(TilemapType.DungeonUnderground).SetTile(x, y, (int)GroundTileType.Fog, setDirty: false);
+            }
+        }
 
         // Generate dungeons
-        foreach (Vector2 point in dunPoints)
+        foreach (Dungeon dun in dungeons)
         {
-            // Check if safe to spawn
-            if (!grid.CheckLand(new Vector2(point.x, point.y)) || !grid.CheckCliff(new Vector2(point.x, point.y)))
-                continue;
-
-            // Set dungeon centerpoint
-            // vilCenter = new Vector3(Mathf.FloorToInt(point.x), Mathf.FloorToInt(point.y));
-
-            // Generate procedural dungeon area here saved on another tilemap (but still in same scene)
-
             // Place dungeon entrance in overworld
-            for (int i=Mathf.FloorToInt(point.x)-2; i<=Mathf.FloorToInt(point.x)+2; i++)
-            {
-                for (int j=Mathf.FloorToInt(point.y)-2; j<=Mathf.FloorToInt(point.y)+2; j++)
-                {
-                    if (i == Mathf.FloorToInt(point.x)-2 || i == Mathf.FloorToInt(point.x)+2 || j == Mathf.FloorToInt(point.y)-2 || j == Mathf.FloorToInt(point.y)+2)
-                    {
-                        var random = TempData.tempRandom;
-                        if (random.Next(0,2) == 1)
-                        {
-                            grid.GetTilemap(TilemapType.Dungeon).SetTile(i, j, (int)GroundTileType.DungeonEntrance, setDirty : false);
-                        }
-                    }
-                    else
-                    {
-                        grid.GetTilemap(TilemapType.Dungeon).SetTile(i, j, (int)GroundTileType.DungeonEntrance, setDirty : false);
-                    }
-                }
-            }
+            SpawnDungeonEntrance(dun.dunCenter);
 
-            // Spawn dungeon
-            Instantiate(dungeon, new Vector3(point.x+.5f, point.y), Quaternion.identity, transform);
+            // Generate dungeon
+            generator.Initialize(grid, new Vector2Int((int)dun.dunCenter.x, (int)dun.dunCenter.y), dun.rooms, textPrefab, renderCanvas);
         }
 
         // Render tiles
         grid.GetTilemap(TilemapType.Dungeon).UpdateTiles();
+        grid.GetTilemap(TilemapType.DungeonUnderground).UpdateTiles();
+    }
+
+    private void SpawnDungeonEntrance(Vector2 centerPos)
+    {
+        // Entrance floor
+        for (int i=Mathf.FloorToInt(centerPos.x)-2; i<=Mathf.FloorToInt(centerPos.x)+2; i++)
+        {
+            for (int j=Mathf.FloorToInt(centerPos.y)-2; j<=Mathf.FloorToInt(centerPos.y)+2; j++)
+            {
+                if (i == Mathf.FloorToInt(centerPos.x)-2 || i == Mathf.FloorToInt(centerPos.x)+2 || j == Mathf.FloorToInt(centerPos.y)-2 || j == Mathf.FloorToInt(centerPos.y)+2)
+                {
+                    var random = TempData.tempRandom;
+                    if (random.Next(0,2) == 1)
+                    {
+                        grid.GetTilemap(TilemapType.Dungeon).SetTile(i, j, (int)GroundTileType.DungeonEntrance, setDirty : false);
+                    }
+                }
+                else
+                {
+                    grid.GetTilemap(TilemapType.Dungeon).SetTile(i, j, (int)GroundTileType.DungeonEntrance, setDirty : false);
+                }
+            }
+        }
+
+        // Spawn dungeon entrance
+        Instantiate(dungeonEntrance, new Vector3(centerPos.x+.5f, centerPos.y), Quaternion.identity, transform);
     }
 }

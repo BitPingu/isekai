@@ -31,12 +31,12 @@ public class WorldGeneration : MonoBehaviour
         GetComponentInChildren<CampGeneration>().Initialize(GetComponentInChildren<TileGrid>());
 
         // Init vegetation
-        GetComponentInChildren<TreeGeneration>().Initialize(GetComponentInChildren<TileGrid>(), width, height);
+        // GetComponentInChildren<TreeGeneration>().Initialize(GetComponentInChildren<TileGrid>(), width, height);
 
         // Init time
-        GetComponentInChildren<DayAndNightCycle>().Initialize();
+        // GetComponentInChildren<DayAndNightCycle>().Initialize();
 
         // Start world events
-        GetComponent<WorldEvents>().Initialize(this, GetComponentInChildren<TileGrid>(), GetComponentInChildren<DayAndNightCycle>());
+        // GetComponent<WorldEvents>().Initialize(this, GetComponentInChildren<TileGrid>(), GetComponentInChildren<DayAndNightCycle>());
     }
 }

@@ -64,10 +64,10 @@ public class SaveData
 
         List<int> dunsX = new List<int>();
         List<int> dunsY = new List<int>();
-        foreach (Vector2 dungeon in TempData.tempDungeons)
+        foreach (Dungeon dungeon in TempData.tempDungeons)
         {
-            dunsX.Add((int)dungeon.x);
-            dunsY.Add((int)dungeon.y);
+            dunsX.Add((int)dungeon.dunCenter.x);
+            dunsY.Add((int)dungeon.dunCenter.y);
         }
         saveDungeonCoordsX = dunsX;
         saveDungeonCoordsY = dunsY;

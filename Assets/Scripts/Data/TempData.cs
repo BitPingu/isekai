@@ -18,7 +18,7 @@ public class TempData : MonoBehaviour
     public static bool tempIsDay;
     public static FogData tempFog;
     public static List<Village> tempVillages;
-    public static List<Vector2> tempDungeons;
+    public static List<Dungeon> tempDungeons;
     public static List<Vector2> tempCamps;
     public static Vector2 tempElfStartingSpawn;
     public static Vector2 tempElfPos;

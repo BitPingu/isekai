@@ -18,7 +18,7 @@ public class MapController : MonoBehaviour
     private void Awake()
     {
         cam = GetComponent<Camera>();
-        enabled = false;
+        // enabled = false;
     }
 
     private void Update()
