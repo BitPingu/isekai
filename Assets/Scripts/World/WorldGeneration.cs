@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class WorldGeneration : MonoBehaviour
 {
@@ -16,7 +17,7 @@ public class WorldGeneration : MonoBehaviour
         else
         {
             // Generate world seed
-            seed = UnityEngine.Random.Range(-100000, 100000);
+            seed = Random.Range(-100000, 100000);
         }
         TempData.tempSeed = seed;
         TempData.tempRandom = new System.Random(seed);
@@ -28,15 +29,19 @@ public class WorldGeneration : MonoBehaviour
         // Init structures
         GetComponentInChildren<VillageGeneration>().Initialize(GetComponentInChildren<TileGrid>());
         GetComponentInChildren<DungeonGeneration>().Initialize(this, GetComponentInChildren<TileGrid>());
+        GetComponentInChildren<TileGrid>().transform.Find("DungeonUndergroundTilemap").gameObject.SetActive(false);
         GetComponentInChildren<CampGeneration>().Initialize(GetComponentInChildren<TileGrid>());
 
         // Init vegetation
-        // GetComponentInChildren<TreeGeneration>().Initialize(GetComponentInChildren<TileGrid>(), width, height);
+        GetComponentInChildren<TreeGeneration>().Initialize(GetComponentInChildren<TileGrid>(), width, height);
 
         // Init time
-        // GetComponentInChildren<DayAndNightCycle>().Initialize();
+        GetComponentInChildren<DayAndNightCycle>().Initialize();
 
         // Start world events
-        // GetComponent<WorldEvents>().Initialize(this, GetComponentInChildren<TileGrid>(), GetComponentInChildren<DayAndNightCycle>());
+        GetComponent<WorldEvents>().Initialize(this, GetComponentInChildren<TileGrid>(), GetComponentInChildren<DayAndNightCycle>());
+
+        // for testing
+        GetComponentInChildren<TileGrid>().transform.Find("FogTilemap").GetComponent<TilemapRenderer>().enabled = false;
     }
 }

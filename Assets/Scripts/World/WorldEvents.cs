@@ -182,60 +182,38 @@ public class WorldEvents : MonoBehaviour
         }
     }
 
-    // Change scene based on nearby building to enter (via active icon)
-    public void EnterBuilding()
+    public void EnterDungeon(PlayerPosition player)
     {
-        PlayerPosition position = FindObjectOfType<PlayerPosition>();
-        GameObject building;
-        string buildingToEnter;
-        if (GameObject.FindWithTag("Event"))
+        if (player.currentArea.Contains("Overworld Dungeon Entrance"))
         {
-            building = GameObject.FindWithTag("Event").transform.parent.gameObject;
-            buildingToEnter = building.name;
-            Debug.Log("enter building at " + building.transform.position);
-        }
-        else
-        {
-            buildingToEnter = "";
-        }
+            foreach (Transform tilemap in GetComponentInChildren<TileGrid>().transform)
+            {
+                tilemap.gameObject.SetActive(false);
+            }
+            GetComponentInChildren<TileGrid>().transform.Find("DungeonUndergroundTilemap").gameObject.SetActive(true);
+            GetComponentInChildren<TileGrid>().transform.Find("FogTilemap").gameObject.SetActive(true);
 
-        if (buildingToEnter.Contains("Village"))
-        {
-            // Stop current music  
-            FindObjectOfType<AudioManager>().Stop();
-            FindObjectOfType<AudioManager>().PlayFx("Enter");
-            if (SceneManager.GetActiveScene().buildIndex == 1) 
+            foreach (Transform chunk in GetComponentInChildren<TreeGeneration>().transform)
             {
-                // Enter house
-                TempData.tempPlayerBuildingSpawn = new Vector3(position.currentPos.x + .5f, position.currentPos.y + .4f); // save player position when exit
-                SceneManager.LoadScene("Village");
+                chunk.gameObject.SetActive(false);
             }
-            else
-            {
-                // Exit house
-                SceneManager.LoadScene("Overworld");
-            }
+
+            player.currentArea = "Underground Dungeon Entrance";
         }
-        else if (buildingToEnter.Contains("Dungeon"))
+        else if (player.currentArea.Contains("Underground Dungeon Entrance"))
         {
-            // Stop current music  
-            FindObjectOfType<AudioManager>().Stop();
-            FindObjectOfType<AudioManager>().PlayFx("Enter");
-            if (SceneManager.GetActiveScene().buildIndex == 1)
+            foreach (Transform tilemap in GetComponentInChildren<TileGrid>().transform)
             {
-                // Enter dungeon
-                TempData.tempPlayerBuildingSpawn = new Vector3(position.currentPos.x + .5f, position.currentPos.y + .4f); // save player position when exit
-                SceneManager.LoadScene("Dungeon");
+                tilemap.gameObject.SetActive(true);
             }
-            else
+            GetComponentInChildren<TileGrid>().transform.Find("DungeonUndergroundTilemap").gameObject.SetActive(false);
+
+            foreach (Transform chunk in GetComponentInChildren<TreeGeneration>().transform)
             {
-                // Exit dungeon
-                SceneManager.LoadScene("Overworld");
+                chunk.gameObject.SetActive(true);
             }
-        }
-        else
-        {
-            Debug.Log("No interactable tile!");
+
+            player.currentArea = "Overworld Dungeon Entrance";
         }
     }
 }

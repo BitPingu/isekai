@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4896040726258886825}
   - component: {fileID: 4896040726258886824}
   m_Layer: 0
-  m_Name: EventIcon
+  m_Name: EnterIcon
   m_TagString: Event
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -71,7 +71,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -5981355225382922843, guid: 86feac6dbb2c04fa6a8c5c816dea6b25, type: 3}
+  m_Sprite: {fileID: -8211951553303630120, guid: 86feac6dbb2c04fa6a8c5c816dea6b25, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

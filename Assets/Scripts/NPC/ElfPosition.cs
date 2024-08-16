@@ -75,7 +75,6 @@ public class ElfPosition : MonoBehaviour
     {
         Vector3 iconPos = new Vector3(transform.position.x, transform.position.y+1.5f);
         helpIconChild = Instantiate(helpIcon, iconPos, Quaternion.identity, transform);
-        helpIcon.GetComponent<EventIconData>().SetIcon("Event");
         GetComponent<Animator>().SetBool("Jump", true);
         GetComponent<PartyMovement>().enabled = false;
         inDanger = true;

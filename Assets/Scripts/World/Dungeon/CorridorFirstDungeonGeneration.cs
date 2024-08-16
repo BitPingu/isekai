@@ -23,13 +23,13 @@ public class CorridorFirstDungeonGeneration : ScriptableObject
     private Text textPrefab;
     private GameObject renderCanvas;
 
-    public void Initialize(TileGrid g, Vector2Int startPos, List<Room> roo, Text t, GameObject r)
+    public void Initialize(TileGrid g, Vector2Int startPos, List<Room> roo)
     {
         grid = g;
         rooms = roo;
 
-        textPrefab = t;
-        renderCanvas = r;
+        // textPrefab = t;
+        // renderCanvas = r;
 
         CorridorFirstGeneration(startPos);
     }
@@ -88,10 +88,10 @@ public class CorridorFirstDungeonGeneration : ScriptableObject
                 rooms[i].type = "E";
             }
 
-            Text tempTextBox = Instantiate(textPrefab, new Vector3(rooms[i].center.x, rooms[i].center.y-1), Quaternion.identity) as Text;
-            tempTextBox.transform.SetParent(renderCanvas.transform, false);
-            tempTextBox.fontSize = 2;
-            tempTextBox.text = rooms[i].center.ToString() + " " + rooms[i].type + " " + i.ToString();
+            // Text tempTextBox = Instantiate(textPrefab, new Vector3(rooms[i].center.x, rooms[i].center.y-1), Quaternion.identity) as Text;
+            // tempTextBox.transform.SetParent(renderCanvas.transform, false);
+            // tempTextBox.fontSize = 2;
+            // tempTextBox.text = rooms[i].center.ToString() + " " + rooms[i].type + " " + i.ToString();
         }
     }
 

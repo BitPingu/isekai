@@ -40,8 +40,8 @@ public class DungeonGeneration : MonoBehaviour
     private TileGrid grid;
     public GameObject dungeonEntrance;
 
-    public GameObject renderCanvas;
-    public Text textPrefab;
+    // public GameObject renderCanvas;
+    // public Text textPrefab;
 
     public void Initialize(WorldGeneration world, TileGrid g)
     {
@@ -102,7 +102,7 @@ public class DungeonGeneration : MonoBehaviour
             SpawnDungeonEntrance(dun.dunCenter);
 
             // Generate dungeon
-            generator.Initialize(grid, new Vector2Int((int)dun.dunCenter.x, (int)dun.dunCenter.y), dun.rooms, textPrefab, renderCanvas);
+            generator.Initialize(grid, new Vector2Int((int)dun.dunCenter.x, (int)dun.dunCenter.y), dun.rooms);
         }
 
         // Render tiles

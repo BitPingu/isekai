@@ -100,7 +100,6 @@
     <Compile Include="Assets/Scripts/NPC/NPCMovement.cs" />
     <Compile Include="Assets/Scripts/NPC/VillagerSpawner.cs" />
     <Compile Include="Assets/Scripts/Algorithms/LSystem/Rules/Rule.cs" />
-    <Compile Include="Assets/Scripts/World/Structures/BuildingData.cs" />
     <Compile Include="Assets/Scripts/UI/BattleHUD.cs" />
     <Compile Include="Assets/Scripts/Player/PlayerPosition.cs" />
     <Compile Include="Assets/Scripts/World/Dungeon/SimpleRandomWalkSO.cs" />
@@ -114,7 +113,6 @@
     <Compile Include="Assets/Scripts/Audio/Sound.cs" />
     <Compile Include="Assets/Scripts/World/Ground/LakeGeneration.cs" />
     <Compile Include="Assets/Scripts/World/Vegetation/VegetationData.cs" />
-    <Compile Include="Assets/Scripts/UI/EventIconData.cs" />
     <Compile Include="Assets/Scripts/World/ChunkLoader.cs" />
     <Compile Include="Assets/Scripts/Tilemaps/TileTypes.cs" />
     <Compile Include="Assets/Scripts/Tilemaps/TilemapStructure.cs" />
@@ -127,6 +125,7 @@
     <Compile Include="Assets/Scripts/World/Dungeon/CorridorFirstDungeonGeneration.cs" />
     <Compile Include="Assets/Scripts/NPC/ElfPosition.cs" />
     <Compile Include="Assets/Scripts/World/RainController.cs" />
+    <Compile Include="Assets/Scripts/World/EnterBuilding.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/TextMesh Pro/Shaders/TMPro.cginc" />

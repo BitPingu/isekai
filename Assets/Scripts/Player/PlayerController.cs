@@ -48,9 +48,10 @@ public class PlayerController : MonoBehaviour
         }
 
         // Interactable check
-        if (Input.GetKeyDown(interactKey))
+        if (Input.GetKeyDown(interactKey) && GetComponent<PlayerPosition>().currentArea.Contains("Dungeon Entrance"))
         {
-            FindObjectOfType<WorldEvents>().EnterBuilding();
+            Debug.Log("enter dun");
+            FindObjectOfType<WorldEvents>().EnterDungeon(GetComponent<PlayerPosition>());
         }
     }
 }
