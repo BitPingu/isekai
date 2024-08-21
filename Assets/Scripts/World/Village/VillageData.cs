@@ -74,7 +74,7 @@ public class VillageData : MonoBehaviour
         if (FindObjectOfType<AudioManager>().bg.name.Contains("Village"))
         {
             FindObjectOfType<AudioManager>().FadeOut(1f);
-            yield return new WaitForSeconds(2);
+            yield return new WaitForSeconds(2f);
             FindObjectOfType<AudioManager>().Stop();
             
             if (FindObjectOfType<DayAndNightCycle>().isDay)

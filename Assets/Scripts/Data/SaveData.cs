@@ -13,6 +13,8 @@ public class SaveData
     public bool saveIsDay;
     public List<int> saveClearFogCoordsX;
     public List<int> saveClearFogCoordsY;
+    public List<int> saveClearFogCoords2X;
+    public List<int> saveClearFogCoords2Y;
     public List<int> saveVillageCoordsX;
     public List<int> saveVillageCoordsY;
     public List<string> saveVillageSequences;
@@ -48,6 +50,19 @@ public class SaveData
         }
         saveClearFogCoordsX = fogX;
         saveClearFogCoordsY = fogY;
+
+        List<int> fog2X = new List<int>();
+        List<int> fog2Y = new List<int>();
+        if (TempData.tempFog2)
+        {
+            foreach (Vector2 clearFog2 in TempData.tempFog2.clearFogCoords)
+            {
+                fog2X.Add((int)clearFog2.x);
+                fog2Y.Add((int)clearFog2.y);
+            }
+        }
+        saveClearFogCoords2X = fog2X;
+        saveClearFogCoords2Y = fog2Y;
 
         List<int> vilsX = new List<int>();
         List<int> vilsY = new List<int>();

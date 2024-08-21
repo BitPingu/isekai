@@ -10,6 +10,8 @@ public class EnterBuilding : MonoBehaviour
     public GameObject enterIcon;
     private GameObject enterIconChild;
 
+    public Vector3 activePos;
+
     private void Awake()
     {
         Vector3 iconPos = new Vector3(transform.position.x, transform.position.y+1.5f);
@@ -21,6 +23,7 @@ public class EnterBuilding : MonoBehaviour
     {
         if (collision.gameObject.name.Contains("Player"))
         {
+            activePos = transform.position;
             // Player enters
             if (collision.gameObject.GetComponent<PlayerPosition>().currentArea.Contains("Overworld"))
                 collision.gameObject.GetComponent<PlayerPosition>().currentArea = "Overworld Dungeon Entrance";
@@ -34,6 +37,7 @@ public class EnterBuilding : MonoBehaviour
     {
         if (collision.gameObject.name.Contains("Player"))
         {
+            activePos = Vector3.zero;
             // Player exits
             if (collision.gameObject.GetComponent<PlayerPosition>().currentArea.Contains("Overworld Dungeon Entrance"))
                 collision.gameObject.GetComponent<PlayerPosition>().currentArea = "Overworld";

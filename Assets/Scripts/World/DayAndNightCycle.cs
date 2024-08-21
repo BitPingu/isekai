@@ -109,20 +109,18 @@ public class DayAndNightCycle : MonoBehaviour
     {
         if (!FindObjectOfType<AudioManager>().bg.source || !FindObjectOfType<AudioManager>().bg.source.isPlaying)
         {
-            switch(FindObjectOfType<PlayerPosition>().currentArea)
+            string curArea = FindObjectOfType<PlayerPosition>().currentArea;
+            if (curArea.Contains("Overworld"))
             {
-                case "Overworld":
-                    FindObjectOfType<AudioManager>().FadeIn("Overworld Day", 1f);
-                    break;
-                case "Village":
-                    FindObjectOfType<AudioManager>().FadeIn("Village Day", 1f);
-                    break;
-                case "Dungeon":
-                    FindObjectOfType<AudioManager>().FadeIn("Dungeon", 1f);
-                    break;
-                default:
-                    Debug.Log("unknown area to play day music");
-                    break;
+                FindObjectOfType<AudioManager>().FadeIn("Overworld Day", 1f);
+            }
+            else if (curArea.Contains("Village"))
+            {
+                FindObjectOfType<AudioManager>().FadeIn("Village Day", 1f);
+            }
+            else
+            {
+                Debug.Log("unknown area to play day music");
             }
         }
         else
@@ -135,20 +133,18 @@ public class DayAndNightCycle : MonoBehaviour
     {
         if (!FindObjectOfType<AudioManager>().bg.source || !FindObjectOfType<AudioManager>().bg.source.isPlaying)
         {
-            switch(FindObjectOfType<PlayerPosition>().currentArea)
+            string curArea = FindObjectOfType<PlayerPosition>().currentArea;
+            if (curArea.Contains("Overworld"))
             {
-                case "Overworld":
-                    FindObjectOfType<AudioManager>().FadeIn("Overworld Night", 1f);
-                    break;
-                case "Village":
-                    FindObjectOfType<AudioManager>().FadeIn("Village Night", 1f);
-                    break;
-                case "Dungeon":
-                    FindObjectOfType<AudioManager>().FadeIn("Dungeon", 1f);
-                    break;
-                default:
-                    Debug.Log("unknown area to play day music");
-                    break;
+                FindObjectOfType<AudioManager>().FadeIn("Overworld Night", 1f);
+            }
+            else if (curArea.Contains("Village"))
+            {
+                FindObjectOfType<AudioManager>().FadeIn("Village Night", 1f);
+            }
+            else
+            {
+                Debug.Log("unknown area to play night music");
             }
         }
         else

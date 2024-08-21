@@ -87,6 +87,7 @@
     <Compile Include="Assets/Scripts/World/Structures/CampGeneration.cs" />
     <Compile Include="Assets/Scripts/UI/Dialogue.cs" />
     <Compile Include="Assets/Scripts/UI/CameraController.cs" />
+    <Compile Include="Assets/Scripts/World/CampData.cs" />
     <Compile Include="Assets/Scripts/Data/SaveSystem.cs" />
     <Compile Include="Assets/Scripts/UI/DialogueController.cs" />
     <Compile Include="Assets/Scripts/Tilemaps/AdvancedRuleTile.cs" />
@@ -127,7 +128,6 @@
     <Compile Include="Assets/Scripts/World/Dungeon/CorridorFirstDungeonGeneration.cs" />
     <Compile Include="Assets/Scripts/NPC/ElfPosition.cs" />
     <Compile Include="Assets/Scripts/World/RainController.cs" />
-    <Compile Include="Assets/Scripts/World/CampData.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/TextMesh Pro/Shaders/TMPro.cginc" />

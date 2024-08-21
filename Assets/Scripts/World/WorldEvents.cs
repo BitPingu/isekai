@@ -92,7 +92,7 @@ public class WorldEvents : MonoBehaviour
         p.GetComponent<PlayerPosition>().currentArea = "Overworld";
 
         // Attach clearfog delegate to player movement
-        p.GetComponent<PlayerPosition>().PosChange += GetComponentInChildren<FogData>().ClearFog;
+        p.GetComponent<PlayerPosition>().PosChange += GetComponentInChildren<TileGrid>().transform.Find("FogTilemap").gameObject.GetComponent<FogData>().ClearFog;
 
         // Make camera look at player
         camera.LookAt(p.transform);
@@ -185,6 +185,20 @@ public class WorldEvents : MonoBehaviour
 
     public void EnterDungeon(PlayerPosition player)
     {
+        FindObjectOfType<AudioManager>().PlayFx("Enter");
+        FindObjectOfType<PlayerController>().walkCounter = .4f;
+        FindObjectOfType<PlayerController>().isMoving = true;
+        GameObject.Find("UI").GetComponent<Animator>().SetTrigger("FadeOut");
+
+        StartCoroutine(OnEnterDungeon(player));
+    }
+
+    private IEnumerator OnEnterDungeon(PlayerPosition player)
+    {
+        FindObjectOfType<AudioManager>().FadeOut(1f);
+        yield return new WaitForSeconds(1f);
+        FindObjectOfType<AudioManager>().Stop();
+
         if (player.currentArea.Contains("Overworld Dungeon Entrance"))
         {
             // Disable overworld tilemaps
@@ -195,7 +209,11 @@ public class WorldEvents : MonoBehaviour
 
             // Enable underground tilemap
             GetComponentInChildren<TileGrid>().transform.Find("DungeonUndergroundTilemap").gameObject.SetActive(true);
-            // GetComponentInChildren<TileGrid>().transform.Find("FogTilemap").gameObject.SetActive(true);
+            GetComponentInChildren<TileGrid>().transform.Find("FogUndergroundTilemap").gameObject.SetActive(true);
+            // Attach clearfog delegate to player movement
+            GetComponentInChildren<TileGrid>().transform.Find("FogUndergroundTilemap").gameObject.GetComponent<FogData>().ClearFog();
+            p.GetComponent<PlayerPosition>().PosChange -= GetComponentInChildren<TileGrid>().transform.Find("FogTilemap").gameObject.GetComponent<FogData>().ClearFog;
+            p.GetComponent<PlayerPosition>().PosChange += GetComponentInChildren<TileGrid>().transform.Find("FogUndergroundTilemap").gameObject.GetComponent<FogData>().ClearFog;
 
             // Disable overworld chunks
             GameObject[] chu = GameObject.FindGameObjectsWithTag("Chunk");
@@ -216,6 +234,7 @@ public class WorldEvents : MonoBehaviour
                 e.transform.position = p.transform.position;
 
             player.currentArea = "Underground Dungeon Entrance";
+            FindObjectOfType<AudioManager>().FadeIn("Dungeon", 1f);
 
             // Despawn enemies
             FindObjectOfType<EnemySpawner>().despawnEnemies();
@@ -234,6 +253,10 @@ public class WorldEvents : MonoBehaviour
 
             // Disable underground tilemap
             GetComponentInChildren<TileGrid>().transform.Find("DungeonUndergroundTilemap").gameObject.SetActive(false);
+            GetComponentInChildren<TileGrid>().transform.Find("FogUndergroundTilemap").gameObject.SetActive(false);
+            // Attach clearfog delegate to player movement
+            p.GetComponent<PlayerPosition>().PosChange += GetComponentInChildren<TileGrid>().transform.Find("FogTilemap").gameObject.GetComponent<FogData>().ClearFog;
+            p.GetComponent<PlayerPosition>().PosChange -= GetComponentInChildren<TileGrid>().transform.Find("FogUndergroundTilemap").gameObject.GetComponent<FogData>().ClearFog;
 
             // Enable overworld chunks
             GameObject[] chu = GameObject.FindGameObjectsWithTag("Chunk");
@@ -253,6 +276,14 @@ public class WorldEvents : MonoBehaviour
                 e.transform.position = p.transform.position;
 
             player.currentArea = "Overworld Dungeon Entrance";
+            if (FindObjectOfType<DayAndNightCycle>().isDay)
+            {
+                FindObjectOfType<DayAndNightCycle>().DayMusic();
+            }
+            else
+            {
+                FindObjectOfType<DayAndNightCycle>().NightMusic();
+            }
 
             // Spawn enemies
             StartCoroutine(FindObjectOfType<EnemySpawner>().Spawn());
@@ -261,5 +292,9 @@ public class WorldEvents : MonoBehaviour
             if (r)
                 r.SetActive(true);
         }
+
+        GameObject.Find("UI").GetComponent<Animator>().SetTrigger("FadeOut");
+        // FindObjectOfType<PlayerController>().enabled = true;
     }
+
 }

@@ -10,23 +10,6 @@ public class MenuController : MonoBehaviour
     [SerializeField]
     private KeyCode pauseKey, mapKey;
 
-    private static MenuController menu;
-
-    private void Awake()
-    {
-        // if (menu == null)
-        // {
-        //     menu = this;
-        // } 
-        // else 
-        // {
-        //     Destroy(gameObject.transform.parent.gameObject);
-        //     return;
-        // }
-
-        // DontDestroyOnLoad(gameObject.transform.parent.gameObject);
-    }
-
     // Update is called once per frame
     private void Update()
     {

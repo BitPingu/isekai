@@ -17,7 +17,16 @@ public class CorridorFirstDungeonGeneration : ScriptableObject
     [Range(0.1f,1)]
     private float roomPercent = .8f;
 
+    private List<Vector2Int> cardinalDirectionsList = new List<Vector2Int>
+    {
+        new Vector2Int(0,1), //UP
+        new Vector2Int(1,0), //RIGHT
+        new Vector2Int(0,-1), //DOWN
+        new Vector2Int(-1,0) //LEFT
+    };
+
     private List<Room> rooms;
+    private System.Random random;
 
     private TileGrid grid;
     private Text textPrefab;
@@ -25,12 +34,17 @@ public class CorridorFirstDungeonGeneration : ScriptableObject
 
     public void Initialize(TileGrid g, Vector2Int startPos, List<Room> roo)
     {
+        // Get grid and rooms
         grid = g;
         rooms = roo;
+
+        // Get random
+        random = TempData.tempRandom;
 
         // textPrefab = t;
         // renderCanvas = r;
 
+        // Generate dungeon from startPos
         CorridorFirstGeneration(startPos);
     }
 
@@ -108,7 +122,7 @@ public class CorridorFirstDungeonGeneration : ScriptableObject
             do
             {
                 dunCollide = false;
-                var direction = Direction2D.GetRandomCardinalDirection();
+                var direction = GetRandomCardinalDirection();
                 var newPos = prevPos + direction;
 
                 Vector2Int tempPos = newPos + (2*direction);
@@ -163,7 +177,7 @@ public class CorridorFirstDungeonGeneration : ScriptableObject
         {
             corridor = new List<Vector2Int>();
             dunCollide = false;
-            var direction = Direction2D.GetRandomCardinalDirection();
+            var direction = GetRandomCardinalDirection();
             var currentPos = startPos;
             corridor.Add(currentPos);
 
@@ -222,7 +236,7 @@ public class CorridorFirstDungeonGeneration : ScriptableObject
             var path = SimpleRandomWalk(currentPos, parameters.walkLen, grid);
             floorPos.UnionWith(path);
             if (parameters.startRandomlyEachIter)
-                currentPos = floorPos.ElementAt(UnityEngine.Random.Range(0,floorPos.Count));
+                currentPos = floorPos.ElementAt(random.Next(0,floorPos.Count));
         }
         return floorPos;
     }
@@ -233,7 +247,7 @@ public class CorridorFirstDungeonGeneration : ScriptableObject
         foreach (var pos in floorPositions)
         {
             int neighboursCount = 0;
-            foreach (var direction in Direction2D.cardinalDirectionsList)
+            foreach (var direction in cardinalDirectionsList)
             {
                 if (floorPositions.Contains(pos + direction))
                     neighboursCount++;
@@ -337,7 +351,7 @@ public class CorridorFirstDungeonGeneration : ScriptableObject
     // In future, maybe make entire tilemap full of walls, then generate corridors and rooms in between using rule tiles
     private void CreateWalls(HashSet<Vector2Int> floorPositions, TilemapStructure tilemap)
     {
-        var basicWallPositions = FindWallsInDirections(floorPositions, Direction2D.cardinalDirectionsList);
+        var basicWallPositions = FindWallsInDirections(floorPositions, cardinalDirectionsList);
         foreach (var pos in basicWallPositions)
         {
             tilemap.SetTile(pos.x, pos.y, (int)GroundTileType.Cliff);
@@ -361,20 +375,9 @@ public class CorridorFirstDungeonGeneration : ScriptableObject
         }
         return wallPositions;
     }
-}
 
-public static class Direction2D
-{
-    public static List<Vector2Int> cardinalDirectionsList = new List<Vector2Int>
+    private Vector2Int GetRandomCardinalDirection()
     {
-        new Vector2Int(0,1), //UP
-        new Vector2Int(1,0), //RIGHT
-        new Vector2Int(0,-1), //DOWN
-        new Vector2Int(-1,0) //LEFT
-    };
-
-    public static Vector2Int GetRandomCardinalDirection()
-    {
-        return cardinalDirectionsList[UnityEngine.Random.Range(0, cardinalDirectionsList.Count)];
+        return cardinalDirectionsList[random.Next(0, cardinalDirectionsList.Count)];
     }
 }

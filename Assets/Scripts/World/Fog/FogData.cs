@@ -10,30 +10,6 @@ public class FogData : MonoBehaviour
     private TilemapStructure fogMap;
     private PlayerPosition player;
 
-    private void Awake()
-    {
-        // // Retrieve tilemap and player components
-        // tilemap = GetComponent<TilemapStructure>();
-        // player = FindObjectOfType<PlayerPosition>();
-
-        // if (TempData.initFog)
-        // {
-        //     TempData.initFog = false;
-        // }
-    }
-
-    // private void OnEnable()
-    // {
-    //     // Attach delegates
-    //     player.PosChange += ClearFog;
-    // }
-
-    // private void OnDisable()
-    // {
-    //     // Detatch delegates
-    //     player.PosChange -= ClearFog;
-    // }
-
     public void Initialize(TilemapStructure tilemap)
     {
         // Get fog map
@@ -62,6 +38,9 @@ public class FogData : MonoBehaviour
             }
         }
 
-        TempData.tempFog = this;
+        if (GetComponent<TilemapStructure>().type == TilemapType.Fog)
+            TempData.tempFog = this;
+        else if (GetComponent<TilemapStructure>().type == TilemapType.FogUnderground)
+            TempData.tempFog2 = this;
     }
 }

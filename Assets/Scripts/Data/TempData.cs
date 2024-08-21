@@ -17,6 +17,7 @@ public class TempData : MonoBehaviour
     public static float tempTime;
     public static bool tempIsDay;
     public static FogData tempFog;
+    public static FogData tempFog2;
     public static List<Village> tempVillages;
     public static List<Dungeon> tempDungeons;
     public static List<Vector2> tempCamps;

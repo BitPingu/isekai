@@ -53,7 +53,7 @@ MonoBehaviour:
     group: {fileID: 24300002, guid: c4c83fb57896dcd48b875c9cb4f4709b, type: 2}
     source: {fileID: 0}
   - name: Overworld Day
-    clip: {fileID: 8300000, guid: dae47e404ba4d438da637519796914b7, type: 3}
+    clip: {fileID: 8300000, guid: da8f54119ff9f504ea1e36251df78975, type: 3}
     maxVolume: 0
     volume: 0.36
     pitch: 1

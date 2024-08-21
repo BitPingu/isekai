@@ -11,7 +11,8 @@ public enum TilemapType
     Village,
     Dungeon,
     DungeonUnderground,
-    Fog
+    Fog,
+    FogUnderground
 }
 
 public class TilemapStructure : MonoBehaviour
@@ -67,7 +68,7 @@ public class TilemapStructure : MonoBehaviour
         {
             GetComponent<CliffGeneration>().Initialize(this);
         }
-        else if (type == TilemapType.Fog)
+        else if (type == TilemapType.Fog || type == TilemapType.FogUnderground)
         {
             GetComponent<FogGeneration>().Initialize(this);
         }
