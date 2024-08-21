@@ -29,9 +29,6 @@ public class WorldEvents : MonoBehaviour
         // Init enemy spawner
         GetComponentInChildren<EnemySpawner>().Initialize(grid, dayNight, p);
 
-        // Init villager spawner
-        GetComponentInChildren<VillagerSpawner>().Initialize(grid, dayNight);
-
         // Attach dayNight delegates to villager spawner
         dayNight.DayTime += GetComponentInChildren<VillagerSpawner>().Spawn;
         dayNight.NightTime += GetComponentInChildren<VillagerSpawner>().Despawn;
@@ -48,6 +45,10 @@ public class WorldEvents : MonoBehaviour
         {
             dayNight.NightTime();
         }
+
+        // Spawn enemies
+        StartCoroutine(FindObjectOfType<EnemySpawner>().Spawn());
+        FindObjectOfType<EnemySpawner>().SpawnGoblins();
 
 
 
@@ -186,34 +187,79 @@ public class WorldEvents : MonoBehaviour
     {
         if (player.currentArea.Contains("Overworld Dungeon Entrance"))
         {
+            // Disable overworld tilemaps
             foreach (Transform tilemap in GetComponentInChildren<TileGrid>().transform)
             {
                 tilemap.gameObject.SetActive(false);
             }
-            GetComponentInChildren<TileGrid>().transform.Find("DungeonUndergroundTilemap").gameObject.SetActive(true);
-            GetComponentInChildren<TileGrid>().transform.Find("FogTilemap").gameObject.SetActive(true);
 
-            foreach (Transform chunk in GetComponentInChildren<TreeGeneration>().transform)
+            // Enable underground tilemap
+            GetComponentInChildren<TileGrid>().transform.Find("DungeonUndergroundTilemap").gameObject.SetActive(true);
+            // GetComponentInChildren<TileGrid>().transform.Find("FogTilemap").gameObject.SetActive(true);
+
+            // Disable overworld chunks
+            GameObject[] chu = GameObject.FindGameObjectsWithTag("Chunk");
+            foreach (GameObject c in chu)
             {
-                chunk.gameObject.SetActive(false);
+                if (c.GetComponent<ChunkLoader>().containsPlayer)
+                {
+                    foreach (Transform child in c.transform)
+                    {
+                        if (!child.gameObject.name.Contains("Dungeon"))
+                            child.gameObject.SetActive(false);
+                    }
+                }
             }
 
+            // elf goes to player
+            if (TempData.elfSaved)
+                e.transform.position = p.transform.position;
+
             player.currentArea = "Underground Dungeon Entrance";
+
+            // Despawn enemies
+            FindObjectOfType<EnemySpawner>().despawnEnemies();
+
+            // rain
+            if (r)
+                r.SetActive(false);
         }
         else if (player.currentArea.Contains("Underground Dungeon Entrance"))
         {
+            // Enable overworld tilemaps
             foreach (Transform tilemap in GetComponentInChildren<TileGrid>().transform)
             {
                 tilemap.gameObject.SetActive(true);
             }
+
+            // Disable underground tilemap
             GetComponentInChildren<TileGrid>().transform.Find("DungeonUndergroundTilemap").gameObject.SetActive(false);
 
-            foreach (Transform chunk in GetComponentInChildren<TreeGeneration>().transform)
+            // Enable overworld chunks
+            GameObject[] chu = GameObject.FindGameObjectsWithTag("Chunk");
+            foreach (GameObject c in chu)
             {
-                chunk.gameObject.SetActive(true);
+                if (c.GetComponent<ChunkLoader>().containsPlayer)
+                {
+                    foreach (Transform child in c.transform)
+                    {
+                        child.gameObject.SetActive(true);
+                    }
+                }
             }
 
+            // elf goes to player
+            if (TempData.elfSaved)
+                e.transform.position = p.transform.position;
+
             player.currentArea = "Overworld Dungeon Entrance";
+
+            // Spawn enemies
+            StartCoroutine(FindObjectOfType<EnemySpawner>().Spawn());
+
+            // rain
+            if (r)
+                r.SetActive(true);
         }
     }
 }

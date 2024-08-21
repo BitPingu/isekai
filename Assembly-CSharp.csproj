@@ -59,7 +59,7 @@
     <UnityVersion>2020.3.25f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Analyzer Include="/Users/gavin/.vscode/extensions/visualstudiotoolsforunity.vstuc-1.0.2/Analyzers/Microsoft.Unity.Analyzers.dll" />
+    <Analyzer Include="/Users/gavin/.vscode/extensions/visualstudiotoolsforunity.vstuc-1.0.3/Analyzers/Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets/Scripts/UI/MainMenu.cs" />
@@ -96,6 +96,7 @@
     <Compile Include="Assets/Scripts/World/Village/VillageGeneration.cs" />
     <Compile Include="Assets/Scripts/Audio/AudioManager.cs" />
     <Compile Include="Assets/Scripts/World/Fog/FogGeneration.cs" />
+    <Compile Include="Assets/Scripts/World/EnterBuilding.cs" />
     <Compile Include="Assets/Scripts/UI/PauseMenu.cs" />
     <Compile Include="Assets/Scripts/NPC/NPCMovement.cs" />
     <Compile Include="Assets/Scripts/NPC/VillagerSpawner.cs" />
@@ -111,9 +112,10 @@
     <Compile Include="Assets/Scripts/Audio/AudioFade.cs" />
     <Compile Include="Assets/Scripts/World/WorldGeneration.cs" />
     <Compile Include="Assets/Scripts/Audio/Sound.cs" />
+    <Compile Include="Assets/Scripts/World/Chunks/ChunkGeneration.cs" />
     <Compile Include="Assets/Scripts/World/Ground/LakeGeneration.cs" />
     <Compile Include="Assets/Scripts/World/Vegetation/VegetationData.cs" />
-    <Compile Include="Assets/Scripts/World/ChunkLoader.cs" />
+    <Compile Include="Assets/Scripts/World/Chunks/ChunkLoader.cs" />
     <Compile Include="Assets/Scripts/Tilemaps/TileTypes.cs" />
     <Compile Include="Assets/Scripts/Tilemaps/TilemapStructure.cs" />
     <Compile Include="Assets/Scripts/Algorithms/CellularAutomata.cs" />
@@ -125,7 +127,7 @@
     <Compile Include="Assets/Scripts/World/Dungeon/CorridorFirstDungeonGeneration.cs" />
     <Compile Include="Assets/Scripts/NPC/ElfPosition.cs" />
     <Compile Include="Assets/Scripts/World/RainController.cs" />
-    <Compile Include="Assets/Scripts/World/EnterBuilding.cs" />
+    <Compile Include="Assets/Scripts/World/CampData.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/TextMesh Pro/Shaders/TMPro.cginc" />

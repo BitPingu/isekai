@@ -35,15 +35,15 @@ public class DungeonGeneration : MonoBehaviour
     private CorridorFirstDungeonGeneration generator;
     private List<Dungeon> dungeons = new List<Dungeon>();
 
-    private Vector2Int dunPos;
-
     private TileGrid grid;
     public GameObject dungeonEntrance;
 
     // public GameObject renderCanvas;
     // public Text textPrefab;
 
-    public void Initialize(WorldGeneration world, TileGrid g)
+    private List<GameObject> structures = new List<GameObject>();
+
+    public void Initialize(TileGrid g)
     {
         // Get grid
         grid = g; 
@@ -133,6 +133,20 @@ public class DungeonGeneration : MonoBehaviour
         }
 
         // Spawn dungeon entrance
-        Instantiate(dungeonEntrance, new Vector3(centerPos.x+.5f, centerPos.y), Quaternion.identity, transform);
+        var d = Instantiate(dungeonEntrance, new Vector3(centerPos.x+.5f, centerPos.y), Quaternion.identity, transform);
+        d.SetActive(false);
+        structures.Add(d);
+    }
+
+    public void GetDungeonStructure(int x, int y, GameObject chu)
+    {
+        foreach (GameObject structure in structures)
+        {
+            if (Vector3Int.FloorToInt(structure.transform.position) == new Vector3(x,y))
+            {
+                structure.transform.parent = chu.transform;
+                break;
+            }
+        }
     }
 }

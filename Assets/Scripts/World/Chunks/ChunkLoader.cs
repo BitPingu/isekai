@@ -8,7 +8,7 @@ public class ChunkLoader : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.name.Contains("Player"))
+        if (collision.gameObject.name.Contains("Player") && !collision.GetComponent<PlayerPosition>().currentArea.Contains("Underground"))
         {
             // Player enters
             containsPlayer = true;
@@ -19,7 +19,7 @@ public class ChunkLoader : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.name.Contains("Player"))
+        if (collision.gameObject.name.Contains("Player") && !collision.GetComponent<PlayerPosition>().currentArea.Contains("Underground"))
         {
             containsPlayer = false;
             foreach (Transform child in transform)

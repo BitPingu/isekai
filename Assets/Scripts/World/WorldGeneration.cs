@@ -27,13 +27,8 @@ public class WorldGeneration : MonoBehaviour
         islandRegionSize = GetComponentInChildren<GroundGeneration>().islandRegionSize;
 
         // Init structures
-        GetComponentInChildren<VillageGeneration>().Initialize(GetComponentInChildren<TileGrid>());
-        GetComponentInChildren<DungeonGeneration>().Initialize(this, GetComponentInChildren<TileGrid>());
+        GetComponentInChildren<ChunkGeneration>().Initialize(GetComponentInChildren<TileGrid>(), width, height);
         GetComponentInChildren<TileGrid>().transform.Find("DungeonUndergroundTilemap").gameObject.SetActive(false);
-        GetComponentInChildren<CampGeneration>().Initialize(GetComponentInChildren<TileGrid>());
-
-        // Init vegetation
-        GetComponentInChildren<TreeGeneration>().Initialize(GetComponentInChildren<TileGrid>(), width, height);
 
         // Init time
         GetComponentInChildren<DayAndNightCycle>().Initialize();

@@ -4,7 +4,7 @@ using UnityEngine;
 public class MapMenu : MonoBehaviour
 {
     [SerializeField]
-    private GameObject menuManager, vege;
+    private GameObject menuManager;
 
     // Update is called once per frame
     private void Update()
@@ -33,11 +33,13 @@ public class MapMenu : MonoBehaviour
             FindObjectOfType<MapController>().enabled = true;
             FindObjectOfType<MapController>().GetComponent<CameraController>().enabled = false;
         }
-        if (vege)
+
+        GameObject[] chu = GameObject.FindGameObjectsWithTag("Chunk");
+        if (chu[0] && !FindObjectOfType<PlayerPosition>().currentArea.Contains("Underground"))
         {
-            foreach (Transform chunk in vege.transform)
+            foreach (GameObject c in chu)
             {
-                foreach (Transform child in chunk.transform)
+                foreach (Transform child in c.transform)
                 {
                      child.gameObject.SetActive(true);
                 }
@@ -52,13 +54,15 @@ public class MapMenu : MonoBehaviour
             FindObjectOfType<MapController>().enabled = false;
             FindObjectOfType<MapController>().GetComponent<CameraController>().enabled = true;
         }
-        if (vege)
+
+        GameObject[] chu = GameObject.FindGameObjectsWithTag("Chunk");
+        if (chu[0] && !FindObjectOfType<PlayerPosition>().currentArea.Contains("Underground"))
         {
-            foreach (Transform chunk in vege.transform)
+            foreach (GameObject c in chu)
             {
-                if (!chunk.GetComponent<ChunkLoader>().containsPlayer)
+                if (!c.GetComponent<ChunkLoader>().containsPlayer)
                 {
-                    foreach (Transform child in chunk.transform)
+                    foreach (Transform child in c.transform)
                     {
                         child.gameObject.SetActive(false);
                     }

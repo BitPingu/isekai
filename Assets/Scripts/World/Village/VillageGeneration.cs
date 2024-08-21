@@ -44,6 +44,8 @@ public class VillageGeneration : MonoBehaviour
     public GameObject house, fountain, townhall;
     private GameObject villageTree;
 
+    private List<GameObject> structures = new List<GameObject>();
+
     public int Length
     {
         get
@@ -131,6 +133,7 @@ public class VillageGeneration : MonoBehaviour
 
             // Spawn fountain (to be added later)
             villageTree = Instantiate(fountain, new Vector3(vilCenter.x+.5f, vilCenter.y+.5f), Quaternion.identity, transform);
+            structures.Add(villageTree);
 
             // Start heading east in 2d world space
             direction = Vector3.right;
@@ -159,7 +162,9 @@ public class VillageGeneration : MonoBehaviour
 
         // townhall
         grid.GetTilemap(TilemapType.Village).SetTile(Mathf.FloorToInt(vilCenter.x), Mathf.FloorToInt(vilCenter.y+vilSquareRad+1), (int)GroundTileType.VillagePlot, setDirty : false);
-        Instantiate(townhall, new Vector3(vilCenter.x+.5f, vilCenter.y+vilSquareRad+1.5f), Quaternion.identity, transform);
+        var hall = Instantiate(townhall, new Vector3(vilCenter.x+.5f, vilCenter.y+vilSquareRad+1.5f), Quaternion.identity, transform);
+        hall.SetActive(false);
+        structures.Add(hall);
     }
 
     private void SpawnHouse(Vector3 housePos)
@@ -171,7 +176,9 @@ public class VillageGeneration : MonoBehaviour
             villageTree.GetComponent<VillageData>().lots.Add(housePos);
 
             // Place house object
-            Instantiate(house, housePos, Quaternion.identity, transform);
+            var h = Instantiate(house, housePos, Quaternion.identity, transform);
+            h.SetActive(false);
+            structures.Add(h);
         }
     }
 
@@ -274,6 +281,19 @@ public class VillageGeneration : MonoBehaviour
                     break;
                 default:
                     break;
+            }
+        }
+    }
+
+    public void GetVillageStructure(int x, int y, GameObject chu)
+    {
+        foreach (GameObject structure in structures)
+        {
+            // Debug.Log("compare " + structure.transform.position + " and (" + x + "," + y + ")");
+            if (Vector3Int.FloorToInt(structure.transform.position) == new Vector3(x,y))
+            {
+                structure.transform.parent = chu.transform;
+                break;
             }
         }
     }

@@ -38,16 +38,12 @@ public class EnemySpawner : MonoBehaviour
         grid = g;
         time = dayNight;
         player = p;
-
-        // Spawn enemies
-        StartCoroutine(Spawn());
-        SpawnGoblins();
     }
 
     public IEnumerator Spawn()
     {
         Debug.Log("try spawn with " + FindObjectOfType<PlayerPosition>().currentArea + " " + spawnedEnemies.Count);
-        while (FindObjectOfType<PlayerPosition>().currentArea == "Overworld" && spawnedEnemies.Count <= maxSpawn)
+        while (FindObjectOfType<PlayerPosition>().currentArea.Contains("Overworld") && spawnedEnemies.Count <= maxSpawn)
         {
             // Spawn enemies
             if (time.isDay)
@@ -174,7 +170,7 @@ public class EnemySpawner : MonoBehaviour
         return null;
     }
 
-    private void SpawnGoblins()
+    public void SpawnGoblins()
     {
         foreach (EnemyTypes enemy in enemies)
         {
@@ -182,21 +178,29 @@ public class EnemySpawner : MonoBehaviour
             {
                 case "Goblin":
                     // Look for camp points
-                    foreach (Vector2 point in TempData.tempCamps)
+                    var camps = FindObjectsOfType<CampData>();
+                    foreach (CampData camp in camps)
                     {
                         // Spawn goblins
-                        GameObject goblin1 = spawnEnemy(enemy.gameObject.name, new Vector2((int)point.x+1.5f, (int)point.y+.7f));
+                        GameObject goblin1 = spawnEnemy(enemy.gameObject.name, new Vector2((int)camp.transform.position.x+1.5f, (int)camp.transform.position.y+.7f));
                         if (goblin1)
                         {
                             goblin1.GetComponent<SpriteRenderer>().flipX = true;
                             goblin1.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+                            camp.goblins.Add(goblin1);
+                            goblin1.transform.parent = camp.transform;
+                            goblin1.SetActive(false);
                         }
-                        GameObject goblin2 = spawnEnemy(enemy.gameObject.name, new Vector2((int)point.x+.5f, (int)point.y+1.2f));
+                        GameObject goblin2 = spawnEnemy(enemy.gameObject.name, new Vector2((int)camp.transform.position.x+.5f, (int)camp.transform.position.y+1.2f));
                         if (goblin2)
                         {
                             goblin2.GetComponent<SpriteRenderer>().flipX = true;
                             goblin2.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+                            camp.goblins.Add(goblin2);
+                            goblin2.transform.parent = camp.transform;
+                            goblin2.SetActive(false);
                         }
+                        camp.gameObject.SetActive(false);
                     }
                     break;
                 default:
