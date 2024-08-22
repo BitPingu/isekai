@@ -86,15 +86,6 @@ public class DungeonGeneration : MonoBehaviour
         // Save dun data
         TempData.tempDungeons = dungeons;
 
-        // Prep dungeon underground
-        for (int x = 0; x < grid.GetTilemap(TilemapType.DungeonUnderground).width; x++)
-        {
-            for (int y = 0; y < grid.GetTilemap(TilemapType.DungeonUnderground).height; y++)
-            {
-                grid.GetTilemap(TilemapType.DungeonUnderground).SetTile(x, y, (int)GroundTileType.Fog, setDirty: false);
-            }
-        }
-
         // Generate dungeons
         foreach (Dungeon dun in dungeons)
         {
@@ -105,9 +96,31 @@ public class DungeonGeneration : MonoBehaviour
             generator.Initialize(grid, new Vector2Int((int)dun.dunCenter.x, (int)dun.dunCenter.y), dun.rooms);
         }
 
+        // Fill empty spaces with walls
+        for (int x = 0; x < grid.GetTilemap(TilemapType.DungeonWall).width; x++)
+        {
+            for (int y = 0; y < grid.GetTilemap(TilemapType.DungeonWall).height; y++)
+            {
+                if (grid.GetTilemap(TilemapType.DungeonGround).GetTile(x,y) != (int)GroundTileType.DungeonFloor
+                    && grid.GetTilemap(TilemapType.DungeonWall).GetTile(x,y) != (int)GroundTileType.DungeonWall)
+                    grid.GetTilemap(TilemapType.DungeonWall).SetTile(x, y, (int)GroundTileType.DungeonWall, setDirty: false);
+            }
+        }
+
+        // Fill remaining floor (gaps)
+        for (int x = 0; x < grid.GetTilemap(TilemapType.DungeonGround).width; x++)
+        {
+            for (int y = 0; y < grid.GetTilemap(TilemapType.DungeonGround).height; y++)
+            {
+                if (grid.GetTilemap(TilemapType.DungeonGround).GetTile(x,y) != (int)GroundTileType.DungeonFloor)
+                    grid.GetTilemap(TilemapType.DungeonGround).SetTile(x, y, (int)GroundTileType.DungeonFloor, setDirty: false);
+            }
+        }
+
         // Render tiles
         grid.GetTilemap(TilemapType.Dungeon).UpdateTiles();
-        grid.GetTilemap(TilemapType.DungeonUnderground).UpdateTiles();
+        grid.GetTilemap(TilemapType.DungeonGround).UpdateTiles();
+        grid.GetTilemap(TilemapType.DungeonWall).UpdateTiles();
     }
 
     private void SpawnDungeonEntrance(Vector2 centerPos)
@@ -122,12 +135,12 @@ public class DungeonGeneration : MonoBehaviour
                     var random = TempData.tempRandom;
                     if (random.Next(0,2) == 1)
                     {
-                        grid.GetTilemap(TilemapType.Dungeon).SetTile(i, j, (int)GroundTileType.DungeonEntrance, setDirty : false);
+                        grid.GetTilemap(TilemapType.Dungeon).SetTile(i, j, (int)GroundTileType.DungeonFloor, setDirty : false);
                     }
                 }
                 else
                 {
-                    grid.GetTilemap(TilemapType.Dungeon).SetTile(i, j, (int)GroundTileType.DungeonEntrance, setDirty : false);
+                    grid.GetTilemap(TilemapType.Dungeon).SetTile(i, j, (int)GroundTileType.DungeonFloor, setDirty : false);
                 }
             }
         }

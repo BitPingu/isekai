@@ -78,7 +78,7 @@ public class CorridorFirstDungeonGeneration : ScriptableObject
         }
 
         PaintFloorTiles(floorPositions);
-        CreateWalls(floorPositions, grid.GetTilemap(TilemapType.DungeonUnderground));
+        CreateWalls(floorPositions, grid.GetTilemap(TilemapType.DungeonWall));
     }
 
     private void AssignRooms()
@@ -126,8 +126,8 @@ public class CorridorFirstDungeonGeneration : ScriptableObject
                 var newPos = prevPos + direction;
 
                 Vector2Int tempPos = newPos + (2*direction);
-                var otherDungeonNeighbors = grid.GetTilemap(TilemapType.DungeonUnderground).GetTile(tempPos.x, tempPos.y);
-                if (otherDungeonNeighbors == (int)GroundTileType.Cliff)
+                var otherDungeonNeighbors = grid.GetTilemap(TilemapType.DungeonGround).GetTile(tempPos.x, tempPos.y);
+                if (otherDungeonNeighbors == (int)GroundTileType.DungeonFloor)
                 {
                     // dunCollide = true;
                 }
@@ -186,8 +186,8 @@ public class CorridorFirstDungeonGeneration : ScriptableObject
                 currentPos += direction;
 
                 Vector2Int tempPos = currentPos + (2*direction);
-                var otherDungeonNeighbors = grid.GetTilemap(TilemapType.DungeonUnderground).GetTile(tempPos.x, tempPos.y);
-                if (otherDungeonNeighbors == ((int)GroundTileType.Cliff))
+                var otherDungeonNeighbors = grid.GetTilemap(TilemapType.DungeonGround).GetTile(tempPos.x, tempPos.y);
+                if (otherDungeonNeighbors == ((int)GroundTileType.DungeonFloor))
                 {
                     // dunCollide = true;
                     break;
@@ -344,7 +344,7 @@ public class CorridorFirstDungeonGeneration : ScriptableObject
     {
         foreach (var pos in floorPositions)
         {
-            grid.GetTilemap(TilemapType.DungeonUnderground).SetTile(pos.x, pos.y, (int)GroundTileType.DungeonEntrance);
+            grid.GetTilemap(TilemapType.DungeonGround).SetTile(pos.x, pos.y, (int)GroundTileType.DungeonFloor);
         }
     }
 
@@ -354,7 +354,7 @@ public class CorridorFirstDungeonGeneration : ScriptableObject
         var basicWallPositions = FindWallsInDirections(floorPositions, cardinalDirectionsList);
         foreach (var pos in basicWallPositions)
         {
-            tilemap.SetTile(pos.x, pos.y, (int)GroundTileType.Cliff);
+            tilemap.SetTile(pos.x, pos.y, (int)GroundTileType.DungeonWall);
         }
     }
 

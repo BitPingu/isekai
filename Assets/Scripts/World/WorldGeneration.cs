@@ -28,8 +28,9 @@ public class WorldGeneration : MonoBehaviour
 
         // Init structures
         GetComponentInChildren<ChunkGeneration>().Initialize(GetComponentInChildren<TileGrid>(), width, height);
-        GetComponentInChildren<TileGrid>().transform.Find("DungeonUndergroundTilemap").gameObject.SetActive(false);
-        GetComponentInChildren<TileGrid>().transform.Find("FogUndergroundTilemap").gameObject.SetActive(false);
+
+        // Disable underground tilemaps
+        GetComponentInChildren<TileGrid>().transform.Find("UndergroundTilemaps").gameObject.SetActive(false);
 
         // Init time
         GetComponentInChildren<DayAndNightCycle>().Initialize();
@@ -38,7 +39,6 @@ public class WorldGeneration : MonoBehaviour
         GetComponent<WorldEvents>().Initialize(this, GetComponentInChildren<TileGrid>(), GetComponentInChildren<DayAndNightCycle>());
 
         // for testing
-        // GetComponentInChildren<TileGrid>().transform.Find("FogTilemap").GetComponent<TilemapRenderer>().enabled = false;
-        // GetComponentInChildren<TileGrid>().transform.Find("FogUndergroundTilemap").GetComponent<TilemapRenderer>().enabled = false;
+        // GameObject.Find("FogTilemap").GetComponent<TilemapRenderer>().enabled = false;
     }
 }

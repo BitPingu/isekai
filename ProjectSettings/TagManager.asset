@@ -11,6 +11,7 @@ TagManager:
   - Event
   - Landmark
   - Vegetation
+  - Chunk
   layers:
   - Default
   - TransparentFX

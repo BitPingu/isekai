@@ -48,6 +48,7 @@ SpriteAtlas:
     - {fileID: 2800000, guid: d3d209e0574bb4d178408e594cdc4497, type: 3}
     - {fileID: 2800000, guid: 3c0e8d7b4e9f64e2fb40c58b4314b484, type: 3}
     - {fileID: 2800000, guid: 0eb23506bb0ca45138ff8e2444c8e41f, type: 3}
+    - {fileID: 2800000, guid: 25eb08030fa0d4e42a1a3572ab1f000b, type: 3}
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
@@ -83,6 +84,34 @@ SpriteAtlas:
   - {fileID: 7342791418302242354, guid: d3d209e0574bb4d178408e594cdc4497, type: 3}
   - {fileID: 7116219630988680313, guid: d3d209e0574bb4d178408e594cdc4497, type: 3}
   - {fileID: -3154683339202180942, guid: d3d209e0574bb4d178408e594cdc4497, type: 3}
+  - {fileID: -5919121540905696494, guid: 25eb08030fa0d4e42a1a3572ab1f000b, type: 3}
+  - {fileID: 7247718224015850980, guid: 25eb08030fa0d4e42a1a3572ab1f000b, type: 3}
+  - {fileID: 4624690106460400851, guid: 25eb08030fa0d4e42a1a3572ab1f000b, type: 3}
+  - {fileID: -180322477424577502, guid: 25eb08030fa0d4e42a1a3572ab1f000b, type: 3}
+  - {fileID: 4606725154546555209, guid: 25eb08030fa0d4e42a1a3572ab1f000b, type: 3}
+  - {fileID: 5986372169000992031, guid: 25eb08030fa0d4e42a1a3572ab1f000b, type: 3}
+  - {fileID: 2807860671466029838, guid: 25eb08030fa0d4e42a1a3572ab1f000b, type: 3}
+  - {fileID: -6529604025461114832, guid: 25eb08030fa0d4e42a1a3572ab1f000b, type: 3}
+  - {fileID: 2036109230100284037, guid: 25eb08030fa0d4e42a1a3572ab1f000b, type: 3}
+  - {fileID: -8104472084648419596, guid: 25eb08030fa0d4e42a1a3572ab1f000b, type: 3}
+  - {fileID: -8978765816094080497, guid: 25eb08030fa0d4e42a1a3572ab1f000b, type: 3}
+  - {fileID: -164091414649130122, guid: 25eb08030fa0d4e42a1a3572ab1f000b, type: 3}
+  - {fileID: 1091328599462691885, guid: 25eb08030fa0d4e42a1a3572ab1f000b, type: 3}
+  - {fileID: 4175439277627912826, guid: 25eb08030fa0d4e42a1a3572ab1f000b, type: 3}
+  - {fileID: -4371685986090562963, guid: 25eb08030fa0d4e42a1a3572ab1f000b, type: 3}
+  - {fileID: 1729843736146365719, guid: 25eb08030fa0d4e42a1a3572ab1f000b, type: 3}
+  - {fileID: -8970790516610633398, guid: 25eb08030fa0d4e42a1a3572ab1f000b, type: 3}
+  - {fileID: 3763410414103885016, guid: 25eb08030fa0d4e42a1a3572ab1f000b, type: 3}
+  - {fileID: -1203210603467902396, guid: 25eb08030fa0d4e42a1a3572ab1f000b, type: 3}
+  - {fileID: -1034054585964343371, guid: 25eb08030fa0d4e42a1a3572ab1f000b, type: 3}
+  - {fileID: 2153011928127504618, guid: 25eb08030fa0d4e42a1a3572ab1f000b, type: 3}
+  - {fileID: 5236573656162880633, guid: 25eb08030fa0d4e42a1a3572ab1f000b, type: 3}
+  - {fileID: -2319523759342379882, guid: 25eb08030fa0d4e42a1a3572ab1f000b, type: 3}
+  - {fileID: -8147652048239411931, guid: 25eb08030fa0d4e42a1a3572ab1f000b, type: 3}
+  - {fileID: 8630969334291587063, guid: 25eb08030fa0d4e42a1a3572ab1f000b, type: 3}
+  - {fileID: -7932577178510484766, guid: 25eb08030fa0d4e42a1a3572ab1f000b, type: 3}
+  - {fileID: 16022705766843676, guid: 25eb08030fa0d4e42a1a3572ab1f000b, type: 3}
+  - {fileID: 3209631490324484554, guid: 25eb08030fa0d4e42a1a3572ab1f000b, type: 3}
   - {fileID: -8784774862445392102, guid: 0eb23506bb0ca45138ff8e2444c8e41f, type: 3}
   - {fileID: 1771875438977291152, guid: 0eb23506bb0ca45138ff8e2444c8e41f, type: 3}
   - {fileID: -5475761333696317920, guid: 0eb23506bb0ca45138ff8e2444c8e41f, type: 3}
@@ -232,6 +261,34 @@ SpriteAtlas:
   - plains-lake-tileset_14
   - plains-lake-tileset_17
   - plains-lake-tileset_16
+  - dungeon-tileset_21
+  - dungeon-tileset_20
+  - dungeon-tileset_23
+  - dungeon-tileset_22
+  - dungeon-tileset_25
+  - dungeon-tileset_24
+  - dungeon-tileset_27
+  - dungeon-tileset_26
+  - dungeon-tileset_9
+  - dungeon-tileset_8
+  - dungeon-tileset_1
+  - dungeon-tileset_0
+  - dungeon-tileset_3
+  - dungeon-tileset_2
+  - dungeon-tileset_5
+  - dungeon-tileset_4
+  - dungeon-tileset_7
+  - dungeon-tileset_6
+  - dungeon-tileset_18
+  - dungeon-tileset_19
+  - dungeon-tileset_10
+  - dungeon-tileset_11
+  - dungeon-tileset_12
+  - dungeon-tileset_13
+  - dungeon-tileset_14
+  - dungeon-tileset_15
+  - dungeon-tileset_16
+  - dungeon-tileset_17
   - plains-dirt-tileset_28
   - plains-dirt-tileset_29
   - plains-dirt-tileset_26

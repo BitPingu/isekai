@@ -9,6 +9,7 @@ public enum GroundTileType
     Cliff = 5,
     VillagePath = 6,
     VillagePlot = 7,
-    DungeonEntrance = 8,
-    Fog = 9
+    DungeonFloor = 8,
+    DungeonWall = 9,
+    Fog = 10
 }

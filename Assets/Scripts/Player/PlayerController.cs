@@ -89,7 +89,7 @@ public class PlayerController : MonoBehaviour
             // Stop moving
             if (walkCounter < 0)
             {
-                isMoving = false;
+                rb.velocity = Vector2.zero;
             }
         }
     }

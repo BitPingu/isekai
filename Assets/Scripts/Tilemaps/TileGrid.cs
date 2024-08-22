@@ -23,7 +23,19 @@ public class TileGrid : MonoBehaviour
         tilemaps = new Dictionary<TilemapType, TilemapStructure>();
 
         // Add all tilemaps (in children) by name to collection for easy access
-        foreach (Transform child in transform)
+        // overworld tilemaps
+        foreach (Transform child in transform.Find("OverworldTilemaps"))
+        {
+            var tilemap = child.GetComponent<TilemapStructure>();
+            if (tilemap == null) continue;
+            if (tilemaps.ContainsKey(tilemap.type))
+            {
+                throw new Exception("Duplicate tilemap type: " + tilemap.type);
+            }
+            tilemaps.Add(tilemap.type, tilemap);
+        }
+        // underground tilemaps
+        foreach (Transform child in transform.Find("UndergroundTilemaps"))
         {
             var tilemap = child.GetComponent<TilemapStructure>();
             if (tilemap == null) continue;
@@ -50,7 +62,7 @@ public class TileGrid : MonoBehaviour
         var lakeNeighbors = lakeMap.GetNeighbors(Mathf.FloorToInt(position.x), Mathf.FloorToInt(position.y));
         var dungeonNeighbors = dungeonMap.GetNeighbors(Mathf.FloorToInt(position.x), Mathf.FloorToInt(position.y));
 
-        if (!groundNeighbors.ContainsValue((int)GroundTileType.Empty) && !lakeNeighbors.ContainsValue((int)GroundTileType.Lake) && !dungeonNeighbors.ContainsValue((int)GroundTileType.DungeonEntrance))
+        if (!groundNeighbors.ContainsValue((int)GroundTileType.Empty) && !lakeNeighbors.ContainsValue((int)GroundTileType.Lake) && !dungeonNeighbors.ContainsValue((int)GroundTileType.DungeonFloor))
         {
             return true;
         }

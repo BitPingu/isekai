@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 
@@ -92,7 +93,7 @@ public class WorldEvents : MonoBehaviour
         p.GetComponent<PlayerPosition>().currentArea = "Overworld";
 
         // Attach clearfog delegate to player movement
-        p.GetComponent<PlayerPosition>().PosChange += GetComponentInChildren<TileGrid>().transform.Find("FogTilemap").gameObject.GetComponent<FogData>().ClearFog;
+        p.GetComponent<PlayerPosition>().PosChange += GameObject.Find("FogTilemap").GetComponent<FogData>().ClearFog;
 
         // Make camera look at player
         camera.LookAt(p.transform);
@@ -202,18 +203,20 @@ public class WorldEvents : MonoBehaviour
         if (player.currentArea.Contains("Overworld Dungeon Entrance"))
         {
             // Disable overworld tilemaps
-            foreach (Transform tilemap in GetComponentInChildren<TileGrid>().transform)
-            {
-                tilemap.gameObject.SetActive(false);
-            }
+            p.GetComponent<PlayerPosition>().PosChange -= GameObject.Find("FogTilemap").GetComponent<FogData>().ClearFog;
+            GetComponentInChildren<TileGrid>().transform.Find("OverworldTilemaps").gameObject.SetActive(false);
 
-            // Enable underground tilemap
-            GetComponentInChildren<TileGrid>().transform.Find("DungeonUndergroundTilemap").gameObject.SetActive(true);
-            GetComponentInChildren<TileGrid>().transform.Find("FogUndergroundTilemap").gameObject.SetActive(true);
+            // Change lighting
+            FindObjectOfType<DayAndNightCycle>().GetComponent<Light2D>().enabled = false;
+
+            // Enable underground tilemaps
+            GetComponentInChildren<TileGrid>().transform.Find("UndergroundTilemaps").gameObject.SetActive(true);
+
             // Attach clearfog delegate to player movement
-            GetComponentInChildren<TileGrid>().transform.Find("FogUndergroundTilemap").gameObject.GetComponent<FogData>().ClearFog();
-            p.GetComponent<PlayerPosition>().PosChange -= GetComponentInChildren<TileGrid>().transform.Find("FogTilemap").gameObject.GetComponent<FogData>().ClearFog;
-            p.GetComponent<PlayerPosition>().PosChange += GetComponentInChildren<TileGrid>().transform.Find("FogUndergroundTilemap").gameObject.GetComponent<FogData>().ClearFog;
+            GameObject.Find("FogUndergroundTilemap").GetComponent<FogData>().ClearFog();
+            p.GetComponent<PlayerPosition>().PosChange += GameObject.Find("FogUndergroundTilemap").GetComponent<FogData>().ClearFog;
+            // For testing
+            // GameObject.Find("FogUndergroundTilemap").GetComponent<TilemapRenderer>().enabled = false;
 
             // Disable overworld chunks
             GameObject[] chu = GameObject.FindGameObjectsWithTag("Chunk");
@@ -230,6 +233,7 @@ public class WorldEvents : MonoBehaviour
             }
 
             // elf goes to player
+            p.transform.position = FindObjectOfType<EnterBuilding>().activePos;
             if (TempData.elfSaved)
                 e.transform.position = p.transform.position;
 
@@ -245,18 +249,18 @@ public class WorldEvents : MonoBehaviour
         }
         else if (player.currentArea.Contains("Underground Dungeon Entrance"))
         {
-            // Enable overworld tilemaps
-            foreach (Transform tilemap in GetComponentInChildren<TileGrid>().transform)
-            {
-                tilemap.gameObject.SetActive(true);
-            }
+            // Disable underground tilemaps
+            p.GetComponent<PlayerPosition>().PosChange -= GameObject.Find("FogUndergroundTilemap").GetComponent<FogData>().ClearFog;
+            GetComponentInChildren<TileGrid>().transform.Find("UndergroundTilemaps").gameObject.SetActive(false);
 
-            // Disable underground tilemap
-            GetComponentInChildren<TileGrid>().transform.Find("DungeonUndergroundTilemap").gameObject.SetActive(false);
-            GetComponentInChildren<TileGrid>().transform.Find("FogUndergroundTilemap").gameObject.SetActive(false);
+            // Change lighting
+            FindObjectOfType<DayAndNightCycle>().GetComponent<Light2D>().enabled = true;
+
+            // Enable overworld tilemaps
+            GetComponentInChildren<TileGrid>().transform.Find("OverworldTilemaps").gameObject.SetActive(true);
+
             // Attach clearfog delegate to player movement
-            p.GetComponent<PlayerPosition>().PosChange += GetComponentInChildren<TileGrid>().transform.Find("FogTilemap").gameObject.GetComponent<FogData>().ClearFog;
-            p.GetComponent<PlayerPosition>().PosChange -= GetComponentInChildren<TileGrid>().transform.Find("FogUndergroundTilemap").gameObject.GetComponent<FogData>().ClearFog;
+            p.GetComponent<PlayerPosition>().PosChange += GameObject.Find("FogTilemap").GetComponent<FogData>().ClearFog;
 
             // Enable overworld chunks
             GameObject[] chu = GameObject.FindGameObjectsWithTag("Chunk");
@@ -272,6 +276,7 @@ public class WorldEvents : MonoBehaviour
             }
 
             // elf goes to player
+            p.transform.position = FindObjectOfType<EnterBuilding>().activePos;
             if (TempData.elfSaved)
                 e.transform.position = p.transform.position;
 
@@ -294,7 +299,7 @@ public class WorldEvents : MonoBehaviour
         }
 
         GameObject.Find("UI").GetComponent<Animator>().SetTrigger("FadeOut");
-        // FindObjectOfType<PlayerController>().enabled = true;
+        FindObjectOfType<PlayerController>().isMoving = false;
     }
 
 }

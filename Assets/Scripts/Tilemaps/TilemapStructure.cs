@@ -10,8 +10,9 @@ public enum TilemapType
     Cliff,
     Village,
     Dungeon,
-    DungeonUnderground,
     Fog,
+    DungeonGround,
+    DungeonWall,
     FogUnderground
 }
 
