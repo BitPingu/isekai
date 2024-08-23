@@ -10,8 +10,6 @@ public class EnemySpawner : MonoBehaviour
     public class EnemyTypes
     {
         public GameObject gameObject;
-        public Vector3 spawnPoint;
-        public bool nightEnemy;
     }
 
     [SerializeField]
@@ -19,7 +17,7 @@ public class EnemySpawner : MonoBehaviour
 
     [SerializeField]
     private int maxSpawn;
-    private List<GameObject> spawnedEnemies = new List<GameObject>();
+    public List<GameObject> spawnedEnemies = new List<GameObject>();
 
     [SerializeField]
     private float minWaitTime; // default is 3f
@@ -42,23 +40,44 @@ public class EnemySpawner : MonoBehaviour
 
     public IEnumerator Spawn()
     {
-        Debug.Log("try spawn with " + FindObjectOfType<PlayerPosition>().currentArea + " " + spawnedEnemies.Count);
-        while (FindObjectOfType<PlayerPosition>().currentArea.Contains("Overworld") && spawnedEnemies.Count <= maxSpawn)
-        {
-            // Spawn enemies
-            if (time.isDay)
-            {
-                dayEnemies();
-            }
-            else
-            {
-                nightEnemies();
-            }
-            Debug.Log("spawn " + spawnedEnemies.Count);
+        // Choose random wait time
+        float interval = UnityEngine.Random.Range(minWaitTime, maxWaitTime);
+        yield return new WaitForSeconds(interval);
 
-            // Choose random wait time
-            float interval = UnityEngine.Random.Range(minWaitTime, maxWaitTime);
-            yield return new WaitForSeconds(interval);
+        Debug.Log("try spawn with " + FindObjectOfType<PlayerPosition>().currentArea + " " + spawnedEnemies.Count);
+        if (FindObjectOfType<PlayerPosition>().currentArea.Contains("Overworld") && !FindObjectOfType<PlayerPosition>().currentArea.Contains("Village"))
+        {
+            while (FindObjectOfType<PlayerPosition>().currentArea.Contains("Overworld") && !FindObjectOfType<PlayerPosition>().currentArea.Contains("Village") 
+                && spawnedEnemies.Count <= maxSpawn)
+            {
+                // Spawn enemies
+                if (time.isDay)
+                {
+                    dayEnemies();
+                }
+                else
+                {
+                    nightEnemies();
+                }
+                Debug.Log("spawn " + spawnedEnemies.Count);
+
+                // Choose random wait time
+                interval = UnityEngine.Random.Range(minWaitTime, maxWaitTime);
+                yield return new WaitForSeconds(interval);
+            }
+        }
+        else if (FindObjectOfType<PlayerPosition>().currentArea.Contains("Underground"))
+        {
+            while (FindObjectOfType<PlayerPosition>().currentArea.Contains("Underground") && spawnedEnemies.Count <= maxSpawn)
+            {
+                // Spawn enemies
+                dungeonEnemies();
+                Debug.Log("spawn " + spawnedEnemies.Count);
+
+                // Choose random wait time
+                interval = UnityEngine.Random.Range(minWaitTime, maxWaitTime);
+                yield return new WaitForSeconds(interval);
+            }
         }
     }
 
@@ -120,6 +139,30 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
+    private void dungeonEnemies()
+    {
+        if (UnityEngine.Random.Range(0,2) == 1)
+        {
+            foreach (EnemyTypes enemy in enemies)
+            {
+                if (enemy.gameObject.name.Contains("Golem"))
+                {
+                    spawnEnemyUnderground(enemy);
+                }
+            }
+        }
+        else
+        {
+            foreach (EnemyTypes enemy in enemies)
+            {
+                if (enemy.gameObject.name.Contains("Skeleton"))
+                {
+                    spawnEnemyUnderground(enemy);
+                }
+            }
+        }
+    }
+
     private void spawnEnemy(EnemyTypes enemy)
     {
         Vector3 spawnPoint = new Vector3();
@@ -145,6 +188,31 @@ public class EnemySpawner : MonoBehaviour
         spawnedEnemies.Add(e);
     }
 
+    private void spawnEnemyUnderground(EnemyTypes enemy)
+    {
+        Vector3 spawnPoint = new Vector3();
+
+        float xCoord, yCoord;
+
+        Vector2 playerMovement = player.GetComponent<PlayerController>().movement;
+
+        // Generate enemy spawn point
+        do
+        {
+            // Choose random spawn point around player
+            xCoord = UnityEngine.Random.Range((player.transform.position.x-20), (player.transform.position.x+20));
+            yCoord = UnityEngine.Random.Range((player.transform.position.y-20), (player.transform.position.y+20));
+        }
+        while (!grid.CheckDungeon(new Vector2(xCoord, yCoord)));
+
+        // Generate spawn point
+        spawnPoint = new Vector3(xCoord, yCoord);
+
+        // Instantiate and spawn enemy
+        GameObject e = Instantiate(enemy.gameObject, spawnPoint, Quaternion.identity, transform);
+        spawnedEnemies.Add(e);
+    }
+
     public GameObject spawnEnemy(string type, Vector3 spawnPoint)
     {
         // Check if safe to spawn
@@ -160,10 +228,8 @@ public class EnemySpawner : MonoBehaviour
             if (enemy.gameObject.name.Equals(type))
             {
                 // Instantiate and spawn enemy
-                GameObject childEnemy = Instantiate(enemy.gameObject, spawnPoint, Quaternion.identity, transform);
-
-                // Assign special values
-                return childEnemy;
+                GameObject e = Instantiate(enemy.gameObject, spawnPoint, Quaternion.identity, transform);
+                return e;
             }
         }
 

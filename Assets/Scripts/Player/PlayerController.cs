@@ -39,9 +39,6 @@ public class PlayerController : MonoBehaviour
             moveForce = movement * moveSpeed;
             rb.velocity = moveForce;
 
-            // Movement animation
-            animator.SetFloat("Speed", rb.velocity.sqrMagnitude);
-
             // Flip sprite based on horizontal movement
             if (movement.x > 0)
             {
@@ -92,5 +89,8 @@ public class PlayerController : MonoBehaviour
                 rb.velocity = Vector2.zero;
             }
         }
+
+        // Movement animation
+        animator.SetFloat("Speed", rb.velocity.sqrMagnitude);
     }
 }

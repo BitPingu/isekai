@@ -183,16 +183,26 @@ public class BattleManager : MonoBehaviour
         // DeStart battle
         FindObjectOfType<CameraController>().LookAt(player.transform);
         FindObjectOfType<AudioManager>().Stop();
-        DayAndNightCycle dayNight = FindObjectOfType<DayAndNightCycle>();
-        if (dayNight.isDay)
+
+        string curArea = player.GetComponent<PlayerPosition>().currentArea;
+        if (curArea.Contains("Overworld"))
         {
-            dayNight.DayMusic();
+            DayAndNightCycle dayNight = FindObjectOfType<DayAndNightCycle>();
+            if (dayNight.isDay)
+            {
+                dayNight.DayMusic();
+            }
+            else
+            {
+                dayNight.NightMusic();
+            }
         }
-        else
+        else if (curArea.Contains("Underground"))
         {
-            dayNight.NightMusic();
+            FindObjectOfType<AudioManager>().FadeIn("Dungeon", 1f);
         }
 
+        // elf event
         if (special)
             StartCoroutine(FindObjectOfType<ElfPosition>().SaveElf2());
 

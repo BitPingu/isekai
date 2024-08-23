@@ -83,6 +83,19 @@ public class TileGrid : MonoBehaviour
         return false;
     }
 
+    public bool CheckDungeon(Vector2 position)
+    {
+        TilemapStructure undergroundMap = GetTilemap(TilemapType.DungeonWall);
+        var cliffNeighbors = undergroundMap.GetNeighbors(Mathf.FloorToInt(position.x), Mathf.FloorToInt(position.y));
+
+        if (!cliffNeighbors.ContainsValue((int)GroundTileType.DungeonWall))
+        {
+            return true;
+        }
+
+        return false;
+    }
+
     // Returns all cached shared tiles available to be placed on tilemap
     public Dictionary<int, TileBase> GetTileCache()
     {

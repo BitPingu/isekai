@@ -110,13 +110,13 @@ public class DayAndNightCycle : MonoBehaviour
         if (!FindObjectOfType<AudioManager>().bg.source || !FindObjectOfType<AudioManager>().bg.source.isPlaying)
         {
             string curArea = FindObjectOfType<PlayerPosition>().currentArea;
-            if (curArea.Contains("Overworld"))
-            {
-                FindObjectOfType<AudioManager>().FadeIn("Overworld Day", 1f);
-            }
-            else if (curArea.Contains("Village"))
+            if (curArea.Contains("Village"))
             {
                 FindObjectOfType<AudioManager>().FadeIn("Village Day", 1f);
+            }
+            else if (curArea.Contains("Overworld"))
+            {
+                FindObjectOfType<AudioManager>().FadeIn("Overworld Day", 1f);
             }
             else
             {
@@ -134,13 +134,13 @@ public class DayAndNightCycle : MonoBehaviour
         if (!FindObjectOfType<AudioManager>().bg.source || !FindObjectOfType<AudioManager>().bg.source.isPlaying)
         {
             string curArea = FindObjectOfType<PlayerPosition>().currentArea;
-            if (curArea.Contains("Overworld"))
-            {
-                FindObjectOfType<AudioManager>().FadeIn("Overworld Night", 1f);
-            }
-            else if (curArea.Contains("Village"))
+            if (curArea.Contains("Village"))
             {
                 FindObjectOfType<AudioManager>().FadeIn("Village Night", 1f);
+            }
+            else if (curArea.Contains("Overworld"))
+            {
+                FindObjectOfType<AudioManager>().FadeIn("Overworld Night", 1f);
             }
             else
             {

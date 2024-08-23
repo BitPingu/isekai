@@ -8,7 +8,7 @@ using UnityEngine.Tilemaps;
 public class WorldEvents : MonoBehaviour
 {
     public GameObject player, elf, audio, rain;
-    private GameObject p, e, r;
+    private GameObject p, e, ee, r;
     public CameraController camera;
 
     private DayAndNightCycle time;
@@ -88,7 +88,7 @@ public class WorldEvents : MonoBehaviour
         }
 
         // Init player
-        p = Instantiate(player, spawnPoint, Quaternion.identity);
+        p = Instantiate(player, spawnPoint, Quaternion.identity, transform);
 
         p.GetComponent<PlayerPosition>().currentArea = "Overworld";
 
@@ -124,17 +124,19 @@ public class WorldEvents : MonoBehaviour
         }
 
         // Init elf
-        e = Instantiate(elf, spawnPoint, Quaternion.identity);
+        e = Instantiate(elf, spawnPoint, Quaternion.identity, transform);
     }
 
     private void Update()
     {
         // Check if elf event is ongoing
-        if (!TempData.elfSaved && e && e.GetComponent<ElfPosition>().inDanger && time.days == 0 && time.time >= 60f)
+        if (!TempData.elfSaved && e && e.GetComponent<ElfPosition>().inDanger && time.days == 0 && time.time >= 60f 
+            && p.GetComponent<PlayerPosition>().currentArea.Contains("Overworld"))
         {
             // end event and relese enemy
             GameObject enemy = GameObject.FindGameObjectWithTag("SpecialEnemy");
             enemy.tag = "Enemy";
+            FindObjectOfType<EnemySpawner>().spawnedEnemies.Add(ee);
             enemy.GetComponent<NPCMovement>().enabled = true;
             enemy.GetComponent<Animator>().SetBool("Battle", false);
             if (FindObjectOfType<DialogueController>().issuer.Equals("Helpless Elf"))
@@ -150,21 +152,20 @@ public class WorldEvents : MonoBehaviour
     {
         // Spawn enemy
         Debug.Log("start elf event");
-        GameObject elfEnemy;
         var random = TempData.tempRandom;
         if (random.Next(0,2) == 1)
         {
-            elfEnemy = spawner.spawnEnemy("Slime", new Vector3(elf.transform.position.x+1, elf.transform.position.y));
-            elfEnemy.GetComponent<SpriteRenderer>().flipX = true;
+            ee = spawner.spawnEnemy("Slime", new Vector3(elf.transform.position.x+1, elf.transform.position.y));
+            ee.GetComponent<SpriteRenderer>().flipX = true;
         }
         else
         {
-            elfEnemy = spawner.spawnEnemy("Slime", new Vector3(elf.transform.position.x-1, elf.transform.position.y));
-            elfEnemy.GetComponent<SpriteRenderer>().flipX = false;
+            ee = spawner.spawnEnemy("Slime", new Vector3(elf.transform.position.x-1, elf.transform.position.y));
+            ee.GetComponent<SpriteRenderer>().flipX = false;
         }
-        elfEnemy.tag = "SpecialEnemy";
-        elfEnemy.GetComponent<NPCMovement>().enabled = false;
-        elfEnemy.GetComponent<Animator>().SetBool("Battle", true);
+        ee.tag = "SpecialEnemy";
+        ee.GetComponent<NPCMovement>().enabled = false;
+        ee.GetComponent<Animator>().SetBool("Battle", true);
 
         // Attacked by slime
         elf.GetComponent<ElfPosition>().InDanger();
@@ -243,6 +244,17 @@ public class WorldEvents : MonoBehaviour
             // Despawn enemies
             FindObjectOfType<EnemySpawner>().despawnEnemies();
 
+            // Hide special enemies
+            if (e && !TempData.elfSaved)
+                e.SetActive(false);
+            if (ee)
+            {
+                ee.SetActive(false);
+            }
+
+            // Spawn dungeon enemies
+            StartCoroutine(FindObjectOfType<EnemySpawner>().Spawn());
+
             // rain
             if (r)
                 r.SetActive(false);
@@ -290,7 +302,18 @@ public class WorldEvents : MonoBehaviour
                 FindObjectOfType<DayAndNightCycle>().NightMusic();
             }
 
-            // Spawn enemies
+            // Despawn enemies
+            FindObjectOfType<EnemySpawner>().despawnEnemies();
+
+            // Show special enemies
+            if (e && !TempData.elfSaved)
+                e.SetActive(true);
+            if (ee)
+            {
+                ee.SetActive(true);
+            }
+
+            // Spawn overworld enemies
             StartCoroutine(FindObjectOfType<EnemySpawner>().Spawn());
 
             // rain

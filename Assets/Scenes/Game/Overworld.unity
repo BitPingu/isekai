@@ -426,7 +426,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -867365839
-  m_SortingLayer: -3
+  m_SortingLayer: -4
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -973,7 +973,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -719414119
-  m_SortingLayer: -2
+  m_SortingLayer: -3
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -1517,7 +1517,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1452054873
-  m_SortingLayer: -4
+  m_SortingLayer: -5
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -3199,7 +3199,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
   m_LightVolumeOpacity: 0
-  m_ApplyToSortingLayers: 00000000310c4dcc999c1ed5a76673a9
+  m_ApplyToSortingLayers: a76673a9310c4dcc999c1ed5fb4ca19d
   m_LightCookieSprite: {fileID: 0}
   m_UseNormalMap: 0
   m_LightOrder: 0
@@ -3636,7 +3636,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -867365839
-  m_SortingLayer: -3
+  m_SortingLayer: -4
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -3912,7 +3912,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -867365839
-  m_SortingLayer: -3
+  m_SortingLayer: -4
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -4360,15 +4360,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemies:
   - gameObject: {fileID: 7751972130982338795, guid: 4486c96cc070cd94faa4215f00d41e46, type: 3}
-    spawnPoint: {x: 0, y: 0, z: 0}
-    nightEnemy: 0
   - gameObject: {fileID: 7751972130982338795, guid: b23810bbe30eae941839d06f0b03b79f, type: 3}
-    spawnPoint: {x: 0, y: 0, z: 0}
-    nightEnemy: 1
   - gameObject: {fileID: 7751972130982338795, guid: eac8ea6a5ef214293a34ede81e08ffe8, type: 3}
-    spawnPoint: {x: 0, y: 0, z: 0}
-    nightEnemy: 0
+  - gameObject: {fileID: 7751972130982338795, guid: ec8a9238eea0d47049039df53406871e, type: 3}
+  - gameObject: {fileID: 7751972130982338795, guid: 138f7e4e3302e44dab3859b5cf0cee46, type: 3}
   maxSpawn: 3
+  spawnedEnemies: []
   minWaitTime: 3
   maxWaitTime: 5
   minDistance: 50
@@ -4600,7 +4597,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -719414119
-  m_SortingLayer: -2
+  m_SortingLayer: -3
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -4853,7 +4850,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -867365839
-  m_SortingLayer: -3
+  m_SortingLayer: -4
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -5387,7 +5384,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -867365839
-  m_SortingLayer: -3
+  m_SortingLayer: -4
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -5507,7 +5504,7 @@ MonoBehaviour:
   m_Color: {r: 0.77254903, g: 0.6745098, b: 1, a: 1}
   m_Intensity: 0.7
   m_LightVolumeOpacity: 0
-  m_ApplyToSortingLayers: 85ac4251999c1ed5
+  m_ApplyToSortingLayers: 310c4dcc999c1ed5
   m_LightCookieSprite: {fileID: 0}
   m_UseNormalMap: 0
   m_LightOrder: 0

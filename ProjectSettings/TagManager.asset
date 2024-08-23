@@ -55,6 +55,9 @@ TagManager:
   - name: Overworld
     uniqueID: 3575553177
     locked: 0
+  - name: Rain
+    uniqueID: 2644593915
+    locked: 0
   - name: Fog
     uniqueID: 1260850791
     locked: 0

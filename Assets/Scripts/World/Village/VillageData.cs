@@ -14,7 +14,7 @@ public class VillageData : MonoBehaviour
         {
             containsPlayer = true;
             // Player enters
-            collision.gameObject.GetComponent<PlayerPosition>().currentArea = "Village";
+            collision.gameObject.GetComponent<PlayerPosition>().currentArea = "Overworld Village";
 
             // Despawn enemies (or make enemies run away?)
             FindObjectOfType<EnemySpawner>().despawnEnemies();

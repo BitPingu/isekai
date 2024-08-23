@@ -35,13 +35,24 @@ public class MapMenu : MonoBehaviour
         }
 
         GameObject[] chu = GameObject.FindGameObjectsWithTag("Chunk");
-        if (chu[0] && !FindObjectOfType<PlayerPosition>().currentArea.Contains("Underground"))
+        if (chu[0] && FindObjectOfType<PlayerPosition>().currentArea.Contains("Overworld"))
         {
             foreach (GameObject c in chu)
             {
                 foreach (Transform child in c.transform)
                 {
                      child.gameObject.SetActive(true);
+                }
+            }
+        }
+        else if (chu[0] && FindObjectOfType<PlayerPosition>().currentArea.Contains("Underground"))
+        {
+            foreach (GameObject c in chu)
+            {
+                foreach (Transform child in c.transform)
+                {
+                    if (child.gameObject.name.Contains("Dungeon"))
+                        child.gameObject.SetActive(true);
                 }
             }
         }
@@ -56,7 +67,7 @@ public class MapMenu : MonoBehaviour
         }
 
         GameObject[] chu = GameObject.FindGameObjectsWithTag("Chunk");
-        if (chu[0] && !FindObjectOfType<PlayerPosition>().currentArea.Contains("Underground"))
+        if (chu[0] && FindObjectOfType<PlayerPosition>().currentArea.Contains("Overworld"))
         {
             foreach (GameObject c in chu)
             {
@@ -65,6 +76,20 @@ public class MapMenu : MonoBehaviour
                     foreach (Transform child in c.transform)
                     {
                         child.gameObject.SetActive(false);
+                    }
+                }
+            }
+        }
+        else if (chu[0] && FindObjectOfType<PlayerPosition>().currentArea.Contains("Underground"))
+        {
+            foreach (GameObject c in chu)
+            {
+                foreach (Transform child in c.transform)
+                {
+                    if (!c.GetComponent<ChunkLoader>().containsPlayer)
+                    {
+                        if (child.gameObject.name.Contains("Dungeon"))
+                            child.gameObject.SetActive(false);
                     }
                 }
             }
