@@ -20,7 +20,6 @@ public class VillagerSpawner : MonoBehaviour
                 if (!village.containsPlayer)
                     v.SetActive(false);
             }
-            village.gameObject.SetActive(false);
         }
     }
 
