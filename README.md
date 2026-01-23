@@ -1,10 +1,16 @@
 # Isekai
 
-**Version 1.1**
+_Isekai ~ meaning 'different world'_
 
-An open world game developed in Unity. Features procedurally generated top down 2D worlds for the player to freely explore. Spiritual successor of [Genshin Chronicles.](https://github.com/BitPingu/genshin-chronicles)
+<img src="/Demo/title.png" width="50%" height="50%"/>
 
-**Currently a work-in-progress.**
+**Version 1.2**
+
+This is an experimental game that features procedurally generated top down 2D worlds for the player to freely explore. 
+
+I mainly use this project to get creative and explore ideas that I would implement in my dream game. There is not much yet in terms of actual gameplay or content, as I would add ideas overtime that I come up with.
+
+**Currently on hold to focus on [another game.](https://github.com/BitPingu/jrpg)**
 
 ## Overview
 
@@ -36,40 +42,21 @@ Day and night cycle (with overworld music)
 2. Extract the files
 3. Run the executable
 
-Game Controls:
+## Controls
 - [ASWD] Move Player
 - [M] Use Map
 - [Esc] Pause Game
 
-## Development
+## History
 
-After making Genshin Chronicles, I've wanted to start learning how to use a game engine to bring my dream game to fruition which was limited by being text based. I was initially going to build off of what my previous game had, but because of Unity's capabilities, my vision for this game is on a much bigger scale, so much so that it has become a lifelong project of mine. My goal is to encapsulate all the elements of an rpg game in order to create an immersive fantasy experience that feels as though you are transported or "isekai'd" into the game. 
+I consider this project to be the spiritual successor of [another game](https://github.com/BitPingu/genshin-chronicles) which I made with a friend back in high school. I wanted to continue off from where the project left from, take the ideas from that game into one that would encapsulate what I want in my dream game. 
 
-The main focus during development was procedural world generation. Not only did this allow for replayability, but it made it so that I didn't need to meticulously handcraft every section of the world, saving a lot of development time. I used a mix of algorithms to get this to work including; perlin noise for generating the island, cellular automata for generating the forests, and poisson disc sampling for generating the dungeon entrances (also the same algorithm used for enemy spawning). 
-
-I planned to make the game top down 2D like Genshin Chronicles so I used 16x16 sprites and tilemaps for the graphics of the game. Unity's Rule Tiles helped to make the coastlines and village outlines look more natural. The sprites were personally made by myself using Aseprite.
-
-As for the gameplay, the player does not have a lot of options at the moment other than movement since most of the code right now is focused on building the world. Eventually I plan to add a combat system as well as interaction with villagers and overworld objects.
-
-**Name Origin:** "Isekai" is a genre in Japanese fiction where the protagonist is transported into another world.
-
-## Future Considerations
-
-Obviously this game is still in very early stage and I plan to add much more content to the game once I have the knowledge and/or motivation to. Here is some of the content you could potentially see in a future update:
-- Character creation
-- Combat system
-- Interaction with villagers
-- Interaction with overworld (ie. houses, dungeons)
-- More overworld structures (ie. Goblin campsites)
-- Crafting system
-- Quest system
-- A storyline
-- and more...
+It was mainly limited by nature of being a text-based game, so I decided to use a game engine like Unity in order to 'upscale' and make it possible to achieve what I envision in an ideal rpg game.
 
 ## Acknowledgements
 
 - [Brackeys](https://www.youtube.com/channel/UCYbK_tjZ2OrIZFBvU6CCMiA) for general game development tutorials
 - [Code 2D](https://code2d.wordpress.com/) for tilemap procedural generation tutorials
-- [nextProgram](https://www.youtube.com/channel/UC-MGHRKbmkden1SjxdL8UzA) for inspiration (and having a similar game)
+- [nextProgram](https://www.youtube.com/channel/UC-MGHRKbmkden1SjxdL8UzA) for inspiration (and having a slightly similar game)
 - [Pixel Pete](https://www.youtube.com/channel/UC7OO80qJzGTLOj_6-0dmOiA) for pixel art guides
-- [Sebastian Lague](https://www.youtube.com/c/SebastianLague) for all the algorithms used in my game
+- [Sebastian Lague](https://www.youtube.com/c/SebastianLague) for algorithm implementation

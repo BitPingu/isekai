@@ -12,7 +12,7 @@ public class SaveSystem
         BinaryFormatter formatter = new BinaryFormatter();
         string path = Application.persistentDataPath + "/saveData.isekai";
         FileStream stream = new FileStream(path, FileMode.Create);
-        Debug.Log("saving...");
+        Debug.Log("saving to " + path);
 
         // Combine game data
         SaveData saveData = new SaveData();
@@ -32,6 +32,7 @@ public class SaveSystem
             // Save file exists (read data from file)
             BinaryFormatter formatter = new BinaryFormatter();
             FileStream stream = new FileStream(path, FileMode.Open);
+            Debug.Log("loaded " + path);
 
             // Extract game data
             SaveData saveData = formatter.Deserialize(stream) as SaveData;

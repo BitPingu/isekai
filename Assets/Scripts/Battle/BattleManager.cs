@@ -45,7 +45,7 @@ public class BattleManager : MonoBehaviour
         // enemyHUD.transform.parent = enemy.transform;
         // enemyHUD.GetComponent<BattleHUD>().SetHUD(enemyData);
 
-        FindObjectOfType<DialogueController>().StartDialogue("battlesystem");
+        FindObjectOfType<DialogueController>().StartDialogue("");
         FindObjectOfType<DialogueController>().AddPrompt(new Dialogue("A wild " + enemyData.name + " approaches!", new string[2]{"Attack", "Run"}));
         FindObjectOfType<DialogueController>().DisplayNextSentence();
 
