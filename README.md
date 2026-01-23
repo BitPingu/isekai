@@ -16,7 +16,7 @@ Right now I'm working on a [game](https://github.com/BitPingu/jrpg) which incorp
 
 World generation
 
-<img src="/Demo/isekai.gif" width="50%" height="50%"/>
+<img src="/Demo/generation.gif" width="50%" height="50%"/>
 
 Exploration
 
@@ -40,14 +40,15 @@ Night exploration
 
 ## Installation
 
-1. [Download the latest version for Windows (v1.1)](https://github.com/BitPingu/isekai/releases/download/v1.1/Isekai-1.1-windows.zip)
+1. [Download the latest version for Windows (v1.2)](https://github.com/BitPingu/isekai/releases/download/v1.2/Isekai-1.2-windows.zip)
 2. Extract the files
 3. Run the executable
 
 ## Controls
-- [ASWD] Move Player
-- [M] Use Map
-- [Esc] Pause Game
+- [WASD] Move player
+- [M] Use map (scroll to zoom)
+- [E] Interact (e.g. enter building)
+- [Esc] Pause game
 
 ## History
 
