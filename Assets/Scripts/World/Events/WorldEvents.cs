@@ -175,7 +175,7 @@ public class WorldEvents : MonoBehaviour
             
         // Init rain
         var random = TempData.tempRandom;
-        if (random.Next(0,2) == 1)
+        if (random.Next(0,3) == 1)
         {
             r = Instantiate(rain, Vector3.zero, Quaternion.identity, transform);
             r.GetComponent<RainController>().Initialize(p.transform);

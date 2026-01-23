@@ -8,33 +8,35 @@ _Isekai ~ meaning 'different world'_
 
 This is an experimental game that features procedurally generated top down 2D worlds for the player to freely explore. 
 
-I mainly use this project to get creative and explore ideas that I would implement in my dream game. There is not much yet in terms of actual gameplay or content, as I would add ideas overtime that I come up with.
+I mainly treat this project as a sandbox to get creative and explore ideas that I would eventually implement in my dream game. There is currently no end goal in mind as I continuously add ideas whenever I feel like it.
 
-**Currently on hold to focus on [another game.](https://github.com/BitPingu/jrpg)**
+Right now I'm working on a [game](https://github.com/BitPingu/jrpg) which incorporates these ideas but is much more focused.
 
 ## Overview
 
-The player moving around possible generated worlds:
+World generation
 
 <img src="/Demo/isekai.gif" width="50%" height="50%"/>
 
-**New in Version 1.1:**
+Exploration
 
-Sprite update with new foliage 
+<img src="/Demo/explore.gif" width="50%" height="50%"/>
 
-<img src="/Demo/v1.1.png" width="50%" height="50%"/>
+Enemy encounters
 
-Title screen, menus, and save system
+<img src="/Demo/battle.gif" width="50%" height="50%"/>
 
-<img src="/Demo/title.gif" width="50%" height="50%"/>
+Villages
 
-NPC spawning, villages, and usable world map with fog (for discovery)
+<img src="/Demo/village.gif" width="50%" height="50%"/>
 
-<img src="/Demo/map.gif" width="50%" height="50%"/>
+Dungeons
 
-Day and night cycle (with overworld music)
+<img src="/Demo/dungeon.gif" width="50%" height="50%"/>
 
-<img src="/Demo/day.gif" width="50%" height="50%"/>
+Night exploration
+
+<img src="/Demo/nighttime.gif" width="50%" height="50%"/>
 
 ## Installation
 
@@ -49,9 +51,23 @@ Day and night cycle (with overworld music)
 
 ## History
 
-I consider this project to be the spiritual successor of [another game](https://github.com/BitPingu/genshin-chronicles) which I made with a friend back in high school. I wanted to continue off from where the project left from, take the ideas from that game into one that would encapsulate what I want in my dream game. 
+I consider this project to be the spiritual successor of [another game](https://github.com/BitPingu/genshin-chronicles) which I made with a friend back in high school. I wanted to continue from where the project left off, and take the ideas from that game as inspiration for my dream game. 
 
-It was mainly limited by nature of being a text-based game, so I decided to use a game engine like Unity in order to 'upscale' and make it possible to achieve what I envision in an ideal rpg game.
+Because of the limitations of it being a text-based game, I decided to learn how to use a game engine like Unity in order to 'upscale' the project. This makes it possible to achieve what I envision in my ideal rpg game, with having no restrictions.
+
+### Version History
+
+Version 1.2:
+
+<img src="/Demo/v1.2.png" width="50%" height="50%"/>
+
+Version 1.1:
+
+<img src="/Demo/v1.1.png" width="50%" height="50%"/>
+
+Version 1.0:
+
+<img src="/Demo/v1.0.png" width="50%" height="50%"/>
 
 ## Acknowledgements
 

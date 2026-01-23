@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class FogData : MonoBehaviour
 {
+    public int clearRadius = 12;
     public List<Vector2> clearFogCoords = new List<Vector2>();
 
     private BoundsInt fogBounds;
@@ -21,8 +22,8 @@ public class FogData : MonoBehaviour
         player = FindObjectOfType<PlayerPosition>();
 
         // Set bounds
-        fogBounds.min = new Vector3Int(player.currentPos.x - 10, player.currentPos.y - 10, 0);
-        fogBounds.max = new Vector3Int(player.currentPos.x + 10, player.currentPos.y + 10, 0);
+        fogBounds.min = new Vector3Int(player.currentPos.x - clearRadius, player.currentPos.y - clearRadius, 0);
+        fogBounds.max = new Vector3Int(player.currentPos.x + clearRadius, player.currentPos.y + clearRadius, 0);
 
         // Update fog
         for (int x = fogBounds.min.x; x < fogBounds.max.x; x++)
