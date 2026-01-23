@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public enum BattleState { START, PLAYERTURN, ENEMYTURN, WON, LOST }
@@ -27,7 +26,7 @@ public class BattleManager : MonoBehaviour
         player.GetComponent<PlayerBattle>().enabled = true;
         player.GetComponent<PlayerBattle>().Stance();
 
-        enemy.GetComponent<NPCMovement>().enabled = false;
+        enemy.GetComponent<EnemyMovement>().enabled = false;
         enemy.GetComponent<EnemyBattle>().enabled = true;
         enemy.GetComponent<Animator>().SetBool("Battle", false);
         enemy.GetComponent<Animator>().SetFloat("Speed", 0);
@@ -176,7 +175,7 @@ public class BattleManager : MonoBehaviour
         player.GetComponent<PlayerBattle>().enabled = false;
         if (enemy)
         {
-            enemy.GetComponent<NPCMovement>().enabled = true;
+            enemy.GetComponent<EnemyMovement>().enabled = true;
             enemy.GetComponent<EnemyBattle>().enabled = false;
         }
 

@@ -426,7 +426,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -867365839
-  m_SortingLayer: -4
+  m_SortingLayer: -5
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -673,7 +673,7 @@ GameObject:
   - component: {fileID: 228300425}
   - component: {fileID: 228300424}
   m_Layer: 0
-  m_Name: TileGrid
+  m_Name: Tiles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -973,7 +973,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -719414119
-  m_SortingLayer: -3
+  m_SortingLayer: -4
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -1517,7 +1517,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1452054873
-  m_SortingLayer: -5
+  m_SortingLayer: -6
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -1834,8 +1834,8 @@ MonoBehaviour:
   maxVillages: 3
   minHousesPerVillage: 0
   house: {fileID: 6904338341474015277, guid: 525d004159cea4606a752e3f4e71b05b, type: 3}
-  fountain: {fileID: 6904338341474015277, guid: cabe75b1e7ebf44e7a60beb62ea00a34, type: 3}
-  townhall: {fileID: 6904338341474015277, guid: 525d004159cea4606a752e3f4e71b05b, type: 3}
+  villageTree: {fileID: 6904338341474015277, guid: cabe75b1e7ebf44e7a60beb62ea00a34, type: 3}
+  villageHall: {fileID: 6904338341474015277, guid: 525d004159cea4606a752e3f4e71b05b, type: 3}
 --- !u!114 &694022771
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1865,23 +1865,23 @@ MonoBehaviour:
   treeNoiseHeight: 0.47
   spawnChance: 80
   tree: {fileID: 6904338341474015277, guid: 228ec15cfae5b4d548837d337d8feb02, type: 3}
-  extras:
+  otherVegetation:
   - height: 0.5
-    spawnChance: 5
-    extra: 1002
-    extraObj: {fileID: 6904338341474015277, guid: f4151ab9eb63f42118f2fdd39b0e9bd7, type: 3}
-  - height: 0.53
     spawnChance: 80
-    extra: 1003
-    extraObj: {fileID: 6904338341474015277, guid: 7f246c06248dc44b09e11aaad94c5832, type: 3}
+    vegetation: 1003
+    vegetationObject: {fileID: 6904338341474015277, guid: 7f246c06248dc44b09e11aaad94c5832, type: 3}
+  - height: 0.53
+    spawnChance: 5
+    vegetation: 1004
+    vegetationObject: {fileID: 6904338341474015277, guid: bc244c1c8413c49cdb1f37bed788dba1, type: 3}
   - height: 0.56
     spawnChance: 5
-    extra: 1004
-    extraObj: {fileID: 6904338341474015277, guid: bc244c1c8413c49cdb1f37bed788dba1, type: 3}
+    vegetation: 1002
+    vegetationObject: {fileID: 6904338341474015277, guid: f4151ab9eb63f42118f2fdd39b0e9bd7, type: 3}
   - height: 0.59
     spawnChance: 5
-    extra: 1005
-    extraObj: {fileID: 6904338341474015277, guid: bba68533cefc84575bdaa56ec9df9a0e, type: 3}
+    vegetation: 1005
+    vegetationObject: {fileID: 6904338341474015277, guid: bba68533cefc84575bdaa56ec9df9a0e, type: 3}
 --- !u!1 &755825310
 GameObject:
   m_ObjectHideFlags: 0
@@ -3143,7 +3143,7 @@ GameObject:
   - component: {fileID: 1267955393}
   - component: {fileID: 1267955394}
   m_Layer: 0
-  m_Name: Time
+  m_Name: DayNight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3636,7 +3636,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -867365839
-  m_SortingLayer: -4
+  m_SortingLayer: -5
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -3912,7 +3912,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -867365839
-  m_SortingLayer: -4
+  m_SortingLayer: -5
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -4313,7 +4313,7 @@ GameObject:
   - component: {fileID: 1679262714}
   - component: {fileID: 1679262715}
   m_Layer: 0
-  m_Name: NPC
+  m_Name: NPCs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4597,7 +4597,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -719414119
-  m_SortingLayer: -3
+  m_SortingLayer: -4
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -4850,7 +4850,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -867365839
-  m_SortingLayer: -4
+  m_SortingLayer: -5
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -5130,7 +5130,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1260850791
-  m_SortingLayer: -1
+  m_SortingLayer: -2
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -5384,7 +5384,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -867365839
-  m_SortingLayer: -4
+  m_SortingLayer: -5
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -5903,7 +5903,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1260850791
-  m_SortingLayer: -1
+  m_SortingLayer: -2
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}

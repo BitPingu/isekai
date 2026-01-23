@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ChunkGeneration : MonoBehaviour
@@ -13,7 +11,9 @@ public class ChunkGeneration : MonoBehaviour
         GetComponent<VillageGeneration>().Initialize(grid);
         GetComponent<DungeonGeneration>().Initialize(grid);
         GetComponent<CampGeneration>().Initialize(grid);
-        GetComponent<TreeGeneration>().Initialize(grid, width, height);
+
+        // init vegetation
+        GetComponent<VegetationGeneration>().Initialize(grid, width, height);
 
         Vector2Int currentPoint = new Vector2Int();
         int chunkSize = 16, pivotPoint = 0;
@@ -54,7 +54,9 @@ public class ChunkGeneration : MonoBehaviour
                     GetComponent<VillageGeneration>().GetVillageStructure(currentPoint.x, currentPoint.y, chu);
                     GetComponent<DungeonGeneration>().GetDungeonStructure(currentPoint.x, currentPoint.y, chu);
                     GetComponent<CampGeneration>().GetCampStructure(currentPoint.x, currentPoint.y, chu);
-                    GetComponent<TreeGeneration>().GetTree(currentPoint.x, currentPoint.y, chu);
+
+                    // Place vegetation
+                    GetComponent<VegetationGeneration>().GetVegetation(currentPoint.x, currentPoint.y, chu);
 
                     currentPoint.y++;
                 }
